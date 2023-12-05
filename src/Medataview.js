@@ -125,16 +125,15 @@ const ManagerPortal = () => {
   useEffect(() => {
     // Fetch employee details
     fetch(`${BASE_URL}/api/emp_all_data`)
-      .then((response) => response.json())
-      .then((data) => {
-        const employeesWithPractices = data.employees;
-        localStorage.setItem('practices', JSON.stringify(employeesWithPractices));
+    .then((response) => response.json())
+    .then((data) => {
+      const employeesWithPractices = data.employees;
+      localStorage.setItem('practices', JSON.stringify(employeesWithPractices));
 
-        // Set the state with the employee data
-        setEmployeesData(employeesWithPractices);
-        console.log(employeesWithPractices, 'employeesWithPractices');
-      })
-      .catch((error) => console.error('Error fetching data:', error));
+      // Set the state with the employee data
+      setEmployeesData(employeesWithPractices);
+    })
+    .catch((error) => console.error('Error fetching data:', error));
 
     // Fetch reporting manager details
     fetch(`${BASE_URL}/api/emp_data`)
@@ -152,9 +151,6 @@ const ManagerPortal = () => {
 
 
   const handleLogout = () => {
-
-    // localStorage.removeItem('token');
-    // Redirect to the login page (replace '/login' with your login route)
     window.location.href = '/mview';
   };
 
@@ -299,7 +295,7 @@ const ManagerPortal = () => {
                       console.log(empReportingManager, 'empReportingManager');
                       console.log(username, 'username');
                       console.log(employeeData, 'employeeData');
-                      console.log(employee.Empid, '316')
+                      console.log(employee, '316')
                       if (empReportingManager === username) {
                         return (
                           <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333', paddingLeft: '10%' }}>
@@ -307,7 +303,7 @@ const ManagerPortal = () => {
 
                             {employeesData.map((employees) => {
                               // Find the corresponding employee data based on EmpId
-                              console.log(employees.Empid, '318');
+                              console.log(employees, '318');
                               console.log(employee.Empid, '319');
                               if (employees.Empid === employee.Empid) {
                                 return (
@@ -321,6 +317,7 @@ const ManagerPortal = () => {
                             })}
                             <TableCell style={{ color: '#333', paddingLeft: '18%' }}>
                               {employee.Status === 'Decline' && (
+                                
                                 <span style={{ paddingLeft: '0%', fontSize: '20px', color: 'red' }}><b>Declined</b></span>
                               )}
                               {employee.Status !== 'Decline' && (

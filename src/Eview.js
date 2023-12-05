@@ -407,10 +407,12 @@ const ButtonCenter = () => {
               >
                 Fill KPI Form
               </Button>
-              <Button style={{ backgroundColor: isHovering1 ? '#db764f' : '#d95623', marginLeft: '20px' }} className="view-details" variant="contained"
+              <Button style={{ backgroundColor: isHovering1 ? '#db764f' : '#d95623', marginLeft: '20px' }}
+                className="view-details" variant="contained"
                 onClick={handleViewDetailsClick}
                 onMouseEnter={handleMouseEnter1}
-                onMouseLeave={handleMouseLeave1}>
+                onMouseLeave={handleMouseLeave1}
+              >
                 View Details
               </Button>
               <Button
@@ -420,7 +422,7 @@ const ButtonCenter = () => {
                 onClick={handleUpdateDetailsClick}
                 onMouseEnter={handleMouseEnter1}
                 onMouseLeave={handleMouseLeave1}
-                disabled={isButtonDisabled} // Disable the button based on the state
+                disabled={isButtonDisabled}
               >
                 Update Details
               </Button>
@@ -445,19 +447,20 @@ const ButtonCenter = () => {
             </Dialog>
           </div>
 
-          <div style={{ flex: 1 }}>
+          <div className="image-container" style={{ flex: 1 }}>
             <img
               src="https://empxtrack.com/wp-content/uploads/2021/03/employee-performance-appraisal-software.png"
               alt="Your Image Alt Text"
               style={{ height: '50%', width: '100%' }}
             />
           </div>
+
         </div>
 
 
 
       )}
-     <Dialog
+      <Dialog
         open={isProfileCardOpen}
         onClose={handleCloseProfileCard}
         fullWidth // Makes the dialog take up the full width of its container
@@ -469,22 +472,22 @@ const ButtonCenter = () => {
               <div onClick={handleToggleImagePreview}>
                 {registration.Image && (
                   <img
-                  src={registration.Image}
-                  alt="Profile"
-                  style={{
-                    borderRadius: "50%",
-                    cursor: 'pointer',
-                    height: '120px',
-                    width: '120px'
-                  }}
-                />
+                    src={registration.Image}
+                    alt="Profile"
+                    style={{
+                      borderRadius: "50%",
+                      cursor: 'pointer',
+                      height: '120px',
+                      width: '120px'
+                    }}
+                  />
                 )}
               </div>
             )
           ))}<br />
-{userData && (
+          {userData && (
             <>
-              <div style={{ display: 'flex', flexDirection: 'row'  }}>
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div>
                   <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
                     <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
@@ -515,11 +518,11 @@ const ButtonCenter = () => {
                   <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
                     <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
                   </p>
-                
+
                 </div>
               </div>
 
-              
+
             </>
           )}
         </DialogContent>

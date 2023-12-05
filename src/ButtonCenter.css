@@ -3,17 +3,9 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
- 
+
 
 }
-.manager-NavBar{
-  background-color: #00aaee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-height: 80px
-}
-
 
 .kpi-form {
   padding: 15px 30px;
@@ -24,11 +16,12 @@ height: 80px
   height: 7vh;
   font-size: 16px;
 }
-.managerbutton-center-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+
+.managerbutton-center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .view-details {
@@ -42,12 +35,12 @@ height: 80px
   font-size: 16px;
 }
 
-.navigation-header{
+.navigation-header {
   background-color: #0d4167;
   display: flex;
   justify-content: space-between;
   align-items: center;
-/* height: 60px */
+  /* height: 60px */
 }
 
 .navigation-header.MuiButton-root {
@@ -78,32 +71,40 @@ height: 80px
   padding: 2px;
   font-family: sans-serif
 }
-.gradient-button{
+
+.gradient-button {
   height: 55px;
-   width: 230px;
+  width: 230px;
 }
-.images{
+
+.images {
   width: 60px;
   border-radius: 50%;
 }
-.logout{
+
+.logout {
   font-size: 14px;
 }
-.logout-icon{
-  font-size: 24px; 
+
+.logout-icon {
+  font-size: 24px;
   padding: 2px;
 }
-.logout-button{
-  width: 8vw; 
-  color: White; 
+
+.logout-button {
+  width: 8vw;
+  color: White;
 }
-.main-Heading{
+
+.main-Heading {
   font-size: 30px;
 }
-.sub-Heading{
+
+.sub-Heading {
   font-size: 20px;
 }
-.Paragraph-division{
+
+.Paragraph-division {
   margin-top: 40vh;
 }
 
@@ -112,8 +113,9 @@ height: 80px
   .gobackbutton {
     font-size: 14px;
     padding: 5px;
-    
+
   }
+
   .kpi-form {
     height: 80px;
   }
@@ -122,77 +124,112 @@ height: 80px
     height: 80px;
     font-size: 12px;
   }
-  .images{
+
+  .images {
     width: 40px;
     border-radius: 50%;
   }
-  .logout-icon{
-    font-size: 14px; 
-  }
-  .logout{
-   font-size: 10px;
-  }
-  .logout-button{
-    width:45vw
-  }
-  .main-Heading{
-    font-size: 16px;
-  }
-  .sub-Heading{
+
+  .logout-icon {
     font-size: 14px;
   }
-  .Paragraph-division{
+
+  .logout {
+    font-size: 10px;
+  }
+
+  .logout-button {
+    width: 45vw
+  }
+
+  .main-Heading {
+    font-size: 16px;
+  }
+
+  .sub-Heading {
+    font-size: 14px;
+  }
+
+  .Paragraph-division {
     margin-top: 30vh;
   }
 }
 
 @media screen and (max-width: 425px) {
-  .kpi-form{
+  .kpi-form {
     font-size: 10px;
     height: 80px;
   }
-  .view-details{
+
+  .view-details {
     height: 80px;
   }
-  .manager-username{
+
+  .manager-username {
     font-size: 20px;
   }
-  .logout{
+
+  .logout {
     font-size: 12px;
-   }
-   .logout-icon{
-    font-size: 14px; 
   }
-  .logout-button{
-    width:30vw
+
+  .logout-icon {
+    font-size: 14px;
   }
-  .main-Heading{
+
+  .logout-button {
+    width: 30vw
+  }
+
+  .main-Heading {
     font-size: 18px;
   }
-  .sub-Heading{
+
+  .sub-Heading {
     font-size: 16px;
   }
-  .Paragraph-division{
+
+  .Paragraph-division {
     margin-top: 30vh;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .logout-button{
-    width:30vw
+  .logout-button {
+    width: 30vw
   }
-  .paragraphs p{
+
+  .paragraphs p {
     font-size: 18px;
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .logout-button{
-    width:30vw
+  .logout-button {
+    width: 30vw
   }
-  .images{
+
+  .images {
     width: 70px;
     border-radius: 50%;
   }
- 
+
+}
+
+@media (min-width: 426px) {
+  .image-container {
+    display: flex;
+  }
+
+  .image-container img {
+    height: 50%;
+    width: 100%;
+  }
+}
+
+/* Styles for screens 425px and smaller */
+@media (max-width: 425px) {
+  .image-container {
+    display: none; /* Hide the entire image container */
+  }
 }

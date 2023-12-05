@@ -150,6 +150,7 @@ const DirectorViewEmpDetails = () => {
       .then((data) => {
         const employeesWithPractices = data.employees;
         localStorage.setItem('practice', JSON.stringify(employeesWithPractices));
+        console.log(employeesWithPractices,"employeesWithPractices");
 
         // Set the state with the employee data
         setEmployeesData(employeesWithPractices);
