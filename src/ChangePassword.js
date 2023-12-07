@@ -121,7 +121,7 @@ const ChangePasswordForm = () => {
 
 
                 try {
-                    const response = await fetch(`${BASE_URL}/UpdatePassword`, {
+                    const response = await fetch(`${BASE_URL}/api/emp_password_upd`, {
                         method: 'put',
                         headers: {
                             'Content-Type': 'application/json',
