@@ -300,7 +300,6 @@ const PasswordResetForm = () => {
                             </div>
                         </>
                     )}
-
                 </div>
             </div>
         </div>

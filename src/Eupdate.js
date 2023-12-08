@@ -690,8 +690,6 @@ const Sidebar = () => {
                                 ))}<br />
                                 {userData && (
                                     <>
-
-
                                         <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
                                             <div style={{ marginRight: '20px' }}>
                                                 <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
