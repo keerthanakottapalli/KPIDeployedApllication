@@ -378,9 +378,6 @@ const DirectorViewMangerDetails = () => {
                                 >
                                   Manager KPI's Details
                                 </Button>
-
-
-
                               )}
                               {employeesData.map((employees) => {
                                 // Find the corresponding employee data based on EmpId

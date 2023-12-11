@@ -227,10 +227,11 @@ const ButtonCenter = () => {
   const firstname = localStorage.getItem('firstname');
   const lastname = localStorage.getItem('lastname');
   const username = firstname + " " + lastname
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   useEffect(() => {
     // Make a GET request to the specified URL
-    fetch(`${BASE_URL}/api/manager_all_status_data`)
+    fetch(`${BASE_URL}/api/manager_all_status_data/${empid}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.status === true) {
@@ -258,7 +259,7 @@ const ButtonCenter = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
 
 
 
@@ -443,7 +444,7 @@ const ButtonCenter = () => {
 
         </div>
       )}
-       <Dialog
+      <Dialog
         open={isProfileCardOpen}
         onClose={handleCloseProfileCard}
         fullWidth // Makes the dialog take up the full width of its container

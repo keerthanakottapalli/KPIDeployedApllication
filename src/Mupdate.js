@@ -288,7 +288,7 @@ const Sidebar = () => {
         
           // Send a PUT request to the API endpoint
           axios
-            .put(`${BASE_URL}/api/manager_status_upd/${empid}/`, requestData)
+            .put(`${BASE_URL}/api/manager_status_upd/${empid}`, requestData)
             .then((response) => {
               // Handle a successful response here
               console.log('API response:', response.data);
@@ -650,7 +650,7 @@ const Sidebar = () => {
                                     <div style={{ marginLeft: '40%' }} onClick={handleToggleImagePreview}>
                                         {registration.Image && (
                                             <img
-                                                src={`${BASE_URL}/uploads/${registration.Image}`}
+                                                src={registration.Image}
                                                 alt="Profile"
                                                 style={{
                                                     maxWidth: '120px',
@@ -719,7 +719,7 @@ const Sidebar = () => {
                                     <div>
                                         {registration.Image && (
                                             <img
-                                                src={`${BASE_URL}/uploads/${registration.Image}`}
+                                                src={registration.Image}
                                                 alt="Profile Preview"
                                                 style={{
                                                     maxWidth: '100%',
