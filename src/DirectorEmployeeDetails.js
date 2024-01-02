@@ -150,7 +150,7 @@ const DirectorViewEmpDetails = () => {
       .then((data) => {
         const employeesWithPractices = data.employees;
         localStorage.setItem('practice', JSON.stringify(employeesWithPractices));
-        console.log(employeesWithPractices,"employeesWithPractices");
+        console.log(employeesWithPractices, "employeesWithPractices");
 
         // Set the state with the employee data
         setEmployeesData(employeesWithPractices);
@@ -402,101 +402,101 @@ const DirectorViewEmpDetails = () => {
 
         </div>
         <Dialog
-                            open={isProfileCardOpen}
-                            onClose={handleCloseProfileCard}
-                            fullWidth // Makes the dialog take up the full width of its container
-                            maxWidth="sm" // Sets the maximum width of the dialog
-                        >
-                            <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
-                            <DialogContent style={{ height: '400px' }}>
-                                {/* Display user profile information */}
-                                {registrations.map((registration) => (
-                                    registration.Firstname === firstname && (
-                                        <div onClick={handleToggleImagePreview}>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile"
-                                                    style={{
-                                                        borderRadius: "50%",
-                                                        cursor: 'pointer',
-                                                        height: '120px',
-                                                        width: '120px'
-                                                      }}
-                                                />
-                                            )}
-                                        </div>
-                                    )
-                                ))}<br />
-                                {userData && (
-                                    <>
+          open={isProfileCardOpen}
+          onClose={handleCloseProfileCard}
+          fullWidth // Makes the dialog take up the full width of its container
+          maxWidth="sm" // Sets the maximum width of the dialog
+        >
+          <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
+          <DialogContent style={{ height: '400px' }}>
+            {/* Display user profile information */}
+            {registrations.map((registration) => (
+              registration.Firstname === firstname && (
+                <div onClick={handleToggleImagePreview}>
+                  {registration.Image && (
+                    <img
+                      src={registration.Image}
+                      alt="Profile"
+                      style={{
+                        borderRadius: "50%",
+                        cursor: 'pointer',
+                        height: '120px',
+                        width: '120px'
+                      }}
+                    />
+                  )}
+                </div>
+              )
+            ))}<br />
+            {userData && (
+              <>
 
 
-                                        <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
-                                            <div style={{ marginRight: '20px' }}>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
-                                                </p>
+                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
+                  <div style={{ marginRight: '20px' }}>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
+                    </p>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
+                    </p>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
+                    </p>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
+                    </p>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
+                    </p>
+                  </div>
+                  <div>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
+                    </p>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
+                    </p>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
+                    </p>
+                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
+                    </p>
 
-                                            </div>
-                                        </div>
+                  </div>
+                </div>
 
 
-                                    </>
-                                )}
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleCloseProfileCard} color="primary">
-                                    Close
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-                        <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
-                            <DialogContent>
-                                {registrations.map((registration) => (
-                                    registration.Firstname === firstname && (
-                                        <div>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile Preview"
-                                                    style={{
-                                                        maxWidth: '100%',
-                                                        maxHeight: '100%',
-                                                    }}
-                                                />
-                                            )}
-                                        </div>
-                                    )
-                                ))}
-                            </DialogContent>
-                        </Dialog>
+              </>
+            )}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
+          <DialogContent>
+            {registrations.map((registration) => (
+              registration.Firstname === firstname && (
+                <div>
+                  {registration.Image && (
+                    <img
+                      src={registration.Image}
+                      alt="Profile Preview"
+                      style={{
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                      }}
+                    />
+                  )}
+                </div>
+              )
+            ))}
+          </DialogContent>
+        </Dialog>
       </div>
     </>
   );

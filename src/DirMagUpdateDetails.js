@@ -774,7 +774,7 @@ function DirectorUpdateManagerData() {
                     ) : (selectedTitle && tableData.length > 0 ? ( // Check if data is available
                         <>
                             <div style={{ height: '50vh', overflow: 'auto' }}>
-                                <table className="dmanager-metric-table" >
+                                <table className="dmanager-metric-table" style={{width:'70vw'}} >
                                     <thead>
                                         <tr>
                                             <th>Metric</th>
@@ -905,7 +905,9 @@ function DirectorUpdateManagerData() {
                                         <DialogContentText>
                                             Your form has been successfully submitted!
                                         </DialogContentText>
+                                        
                                     </DialogContent>
+                                    
                                     <DialogActions>
                                         <Button onClick={closeSuccessDialog} color="primary">
                                             OK
@@ -1009,7 +1011,7 @@ function DirectorUpdateManagerData() {
                         )}
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleCloseProfileCard} color="primary">
+                        <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
                             Close
                         </Button>
                     </DialogActions>

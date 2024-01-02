@@ -158,38 +158,53 @@ const VicePresidentView = () => {
         fetchRegistrations();
     }, []);
 
-    const handleImageChange = async (event) => {
+    const handleImageChange = (event) => {
         const file = event.target.files[0];
         setSelectedImage(file);
-
+    
+        const getBase64 = (file, callback) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => callback(reader.result);
+          reader.onerror = (error) => console.error('Error converting file to base64:', error);
+        };
+    
         if (file) {
-            // Create a FormData object to send the file and Empmail
-            const formData = new FormData();
-            formData.append('Empmail', Empmail); // Use the key 'Empmail'
-            formData.append('Image', file); // Use the key 'Image'
-
-            try {
-                const response = await fetch(`${BASE_URL}/api/emp_image_upd/${firstname}/${lastname}`, {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    // Image uploaded successfully, you can show a success message
-                    console.log('Image uploaded successfully');
-                    window.location.reload();
-                    // You may want to refresh the user's profile image
+          getBase64(file, (base64Image) => {
+            const formData = {
+              firstname,
+              lastname,
+              Image: base64Image,
+            };
+    
+            fetch(`${BASE_URL}/api/emp_image_upd/${firstname}/${lastname}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(formData),
+    
+            })
+              .then((response) => {
+                console.log('Raw Response:', response);
+                window.location.reload();
+                return response.json();
+              })
+              .then((data) => {
+                console.log('Parsed Response:', data.message);
+                if (data && data.message === 'Image updated successfully') {
+                  console.log('Image uploaded successfully');
+    
                 } else {
-                    // Handle the error (show an error message, etc.)
-                    console.error('Image upload failed');
+                  console.error('Image upload failed');
                 }
-            } catch (error) {
+              })
+              .catch((error) => {
                 console.error('Error uploading image:', error);
-            }
+              });
+          });
         }
-    };
-
-
+      };
 
 
     const empid = localStorage.getItem('Empid');
@@ -449,7 +464,7 @@ const VicePresidentView = () => {
                     )}
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseProfileCard} color="primary">
+                    <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
                         Close
                     </Button>
                 </DialogActions>

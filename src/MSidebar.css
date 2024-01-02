@@ -129,7 +129,7 @@
 
 .managertable {
   width: 70%;
-  margin-left: 25%;
+  margin-left: 22.5%;
   margin-top: 1.5%;
   height: 90%;
 }
@@ -137,6 +137,9 @@
 @media screen and (max-width: 768px) {
   .manager-subtabs {
     margin-left: 30vw;
+  }
+  .managertable {
+    margin-left: 200px;
   }
 }
 

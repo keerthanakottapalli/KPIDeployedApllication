@@ -137,6 +137,7 @@ const ManagerPortal = () => {
 
     // Fetch reporting manager details
     fetch(`${BASE_URL}/api/emp_data`)
+   
       .then((response) => response.json())
       .then((data) => {
         const reportingData = data.message.reduce((acc, manager) => {
@@ -174,6 +175,7 @@ const ManagerPortal = () => {
   const [employeeData, setEmployeeData] = useState([]);
 
   useEffect(() => {
+   
     // Replace this with your actual API call
     fetch(`${BASE_URL}/api/emp_all_status_data`)
       .then((response) => response.json())
@@ -261,7 +263,7 @@ const ManagerPortal = () => {
 
         </Toolbar>
 
-      </AppBar><br /><br /><br /><br />
+      </AppBar><br /><br /> 
       <div className='bg-container'
       >
 
@@ -318,7 +320,7 @@ const ManagerPortal = () => {
                             <TableCell style={{ color: '#333', paddingLeft: '18%' }}>
                               {employee.Status === 'Decline' && (
                                 
-                                <span style={{ paddingLeft: '0%', fontSize: '20px', color: 'red' }}><b>Declined</b></span>
+                                <Button  variant="contained" style={{backgroundColor:'#d12a2a',width: "65%", height: '40px', fontWeight:'bold' }}>Declined</Button>
                               )}
                               {employee.Status !== 'Decline' && (
                                 <div>
@@ -336,15 +338,7 @@ const ManagerPortal = () => {
                                     View Details
                                   </Button>
                                   &nbsp;&nbsp;&nbsp;
-                                  {/* <Button
-        variant="contained"
-        color="primary"
-        component={Link}
-        to={`/mViewEmpDetails/${employee.Empid}`}
-        style={{ fontWeight: 'bold', textDecoration: 'none', backgroundColor: '#00aaee', width: "35%" }}
-      >
-        Update Details
-      </Button> */}
+
                                 </div>
                               )}
                             </TableCell>
@@ -452,7 +446,7 @@ const ManagerPortal = () => {
             )}
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseProfileCard} color="primary">
+            <Button onClick={handleCloseProfileCard} style={{backgroundColor:"#00aaee",color:"white ", marginBottom:'15px', marginRight:'15px'}}>
               Close
             </Button>
           </DialogActions>

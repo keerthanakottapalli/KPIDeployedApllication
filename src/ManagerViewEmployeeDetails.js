@@ -592,7 +592,7 @@ function ManagerUpdateEmpData() {
                     ) : (selectedItem && tableData.length > 0 ? (
                         <>
                             <TableContainer style={{ height: '60vh', overflow: 'auto' }}>
-                                <Table className="metric-table" style={{ width: '60vw' }}>
+                                <Table className="metric-table" style={{ width: '65vw' }}>
                                     <TableHead>
                                         <TableRow>
                                             <TableCell>Metric</TableCell>

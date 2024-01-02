@@ -229,9 +229,39 @@ const ButtonCenter = () => {
   const username = firstname + " " + lastname
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
+  // useEffect(() => {
+  //   // Make a GET request to the specified URL
+  //   fetch(`${BASE_URL}/api/manager_all_status_data/${empid}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.status === true) {
+  //         // Filter out employees with non-null Status
+  //         const filteredEmployees = data.employees.filter((employee) => employee.Status !== null);
+  //         console.log(filteredEmployees, "filteredEmployees");
+  //         localStorage.setItem('employeeData', JSON.stringify(filteredEmployees));
+
+  //         // Loop through filteredEmployees and check the condition
+  //         filteredEmployees.forEach((employee) => {
+  //           console.log(employee.Empid.toString(), "Empid", empid.toString());
+  //           if (employee.Empid.toString() === empid) {
+  //             const employeeDecline = employee.Status;
+  //             console.log('Matching Employee Status:', employeeDecline);
+
+  //             // Update the state to enable the button if status is "Decline"
+  //             if (employeeDecline === "Decline") {
+  //               setIsButtonDisabled(false);
+  //             }
+  //           }
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error fetching data:', error);
+  //     });
+  // }, []);
   useEffect(() => {
     // Make a GET request to the specified URL
-    fetch(`${BASE_URL}/api/manager_all_status_data/${empid}`)
+    fetch(`${BASE_URL}/api/manager_all_status_data`)
       .then((response) => response.json())
       .then((data) => {
         if (data.status === true) {
@@ -243,12 +273,14 @@ const ButtonCenter = () => {
           // Loop through filteredEmployees and check the condition
           filteredEmployees.forEach((employee) => {
             console.log(employee.Empid.toString(), "Empid", empid.toString());
+            
             if (employee.Empid.toString() === empid) {
               const employeeDecline = employee.Status;
               console.log('Matching Employee Status:', employeeDecline);
 
               // Update the state to enable the button if status is "Decline"
               if (employeeDecline === "Decline") {
+                console.log(employeeDecline === "Decline",'271');
                 setIsButtonDisabled(false);
               }
             }
@@ -257,9 +289,8 @@ const ButtonCenter = () => {
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-      });
+      }); 
   }, []);
-
 
 
 
@@ -382,7 +413,7 @@ const ButtonCenter = () => {
           <div className="button-center-container" style={{ flex: 1 }}>
             <div className='Paragraph-division'>
               <p className=" main-Heading" style={{ color: '#0d4166', marginBottom: '-10px' }}>Fill KPI Form and View Submitted Details.</p>
-              <p className='sub-Heading' style={{ marginBottom: '-10px' }}>Click the Fill KPI form button to provide the ratings on your performance.</p>
+              <p className='sub-Heading' style={{ marginBottom: '-10px' , marginLeft:'18px'  }}>Click the Fill KPI form button to provide the ratings on your performance.</p>
               <p className='sub-Heading' style={{ marginBottom: '30px' }}>Click the view details button to review the previously submitted details.</p>
 
             </div>
@@ -391,7 +422,7 @@ const ButtonCenter = () => {
                 className="gradient-button"
                 variant="contained"
                 onClick={handleFillFormClick}
-                style={{ backgroundColor: '#0d416b' }}
+                style={{ backgroundColor: '#0d416b', marginLeft: '20px' }}
 
               >
                 <b>Fill KPI Form</b>
@@ -404,7 +435,7 @@ const ButtonCenter = () => {
               </Button>
               <Button
                 style={{ backgroundColor: '#1dbb99', marginLeft: '20px' }}
-                className="view-details"
+                className="gradient-button"
                 variant="contained"
                 onClick={handleFormUpdateDetailsClick}
                 disabled={isButtonDisabled} // Disable the button based on the state
@@ -431,12 +462,12 @@ const ButtonCenter = () => {
                 alt="Your Image Alt Text"
                 style={{ maxWidth: '100%', maxHeight: '200px', marginLeft: '23%' }} // Adjust the styles as needed
               />
-              <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'red' }}>
+              <DialogContentText style={{ fontSize: '18px', textAlign:'center', fontWeight: 'bold', color: 'red' }}>
                 You have already submitted the form.
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={() => setOpenDialog(false)} color="primary" style={{ color: 'Black', backgroundColor: '#d8d6d6', fontWeight: 'bolder' }}>
+              <Button onClick={() => setOpenDialog(false)} color="primary" style={{ color: 'white', backgroundColor: '#00aaee', fontWeight: 'bolder',  marginBottom:'15px', marginRight:'15px' }}>
                 OK
               </Button>
             </DialogActions>
@@ -453,7 +484,7 @@ const ButtonCenter = () => {
         <DialogContent style={{ height: '400px' }}>
           {registrations.map((registration) => (
             registration.Firstname === firstname && (
-              <div onClick={handleToggleImagePreview}>
+              <span onClick={handleToggleImagePreview}>
                 {registration.Image && (
                   <img
                     src={registration.Image}
@@ -466,7 +497,7 @@ const ButtonCenter = () => {
                     }}
                   />
                 )}
-              </div>
+              </span>
             )
           ))}<br />
           {userData && (
@@ -511,7 +542,7 @@ const ButtonCenter = () => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseProfileCard} color="primary">
+          <Button onClick={handleCloseProfileCard} style={{backgroundColor:"#00aaee",color:"white ",fontWeight:'bolder', marginBottom:'15px', marginRight:'15px'}}>
             Close
           </Button>
         </DialogActions>

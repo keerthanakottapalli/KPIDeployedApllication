@@ -438,22 +438,22 @@ function ManagerUpdateEmpData() {
                                     to={`/mViewEmpDetails/${empId}`}
                                     style={{ backgroundColor: '#1dbb99' }}
                                 >
-                                    Update Details
+                                    Manager Ratings
                                 </Button>
 
                             </div>
                             <Dialog open={openDialog} onClose={handleCloseDialog}>
                                 <DialogTitle>Confirm Decline</DialogTitle>
                                 <DialogContent>
-                                    <DialogContentText>
+                                    <DialogContentText style={{color:'black'}}>
                                         Are you sure you want to Decline?
                                     </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={handleCloseDialog} color="primary">
+                                    <Button onClick={handleCloseDialog} color="primary" variant="contained">
                                         Cancel
                                     </Button>
-                                    <Button onClick={handleDeclineClick} color="primary">
+                                    <Button onClick={handleDeclineClick} color="primary" variant="contained">
                                         Confirm
                                     </Button>
                                 </DialogActions>

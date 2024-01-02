@@ -120,7 +120,7 @@ const DirectorViewMangerDetails = () => {
       fetchUserProfile();
     }
   }, [isProfileCardOpen]);
-  
+
   const handleFillFormClick = async () => {
 
     try {
@@ -349,45 +349,42 @@ const DirectorViewMangerDetails = () => {
                           <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333', paddingLeft: "20%" }}>
                             <TableCell style={{ fontSize: '16px', color: '#333', paddingLeft: "5%" }}>{employee.Empid}</TableCell>
 
-
                             {employeesData.map((employees) => {
-                              // Find the corresponding employee data based on EmpId
-                              console.log(employees, '318');
-                              console.log(employee, '319');
                               if (employees.Empid === employee.Empid) {
                                 return (
-
                                   <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', paddingLeft: '15%' }}>
                                     {employees.Empname}
                                   </TableCell>
-
                                 );
                               }
                             })}
-                            <TableCell style={{ color: '#333' }}>
-                              {employee.Status === 'Decline' && (
-                                <span style={{ paddingLeft: '45%', marginRight: '68px', fontSize: '20px', color: 'red' }}><b>Declined</b></span>
-                              )}
-                              {employee.Status !== 'Decline' && (
 
+                            <TableCell style={{ color: '#333', paddingLeft: "5%", textAlign: "center",  }}>
+                              {/* Render the "Declined" button */}
+                              {employee.Status === 'Decline' && (
+                                <Button variant="contained" style={{ backgroundColor: '#d12a2a', fontWeight: 'bold' , width: '20%', }}>Declined</Button>
+                              )}
+
+                              {/* Render the "Manager KPI's Details" button */}
+                              {employee.Status !== 'Decline' && (
                                 <Button
                                   className="manager-details-button"
                                   variant="contained"
                                   onClick={() => handleManagerViewDetailsClick(employee.Empid)}
-                                  style={{ backgroundColor: '#0d416b', marginLeft: '400px', fontWeight: 'bolder', width: '20%' }}
+                                  style={{ backgroundColor: '#0d416b', fontWeight: 'bolder', width: '20%' }}
                                 >
                                   Manager KPI's Details
                                 </Button>
                               )}
+
+                              {/* Render the "Employees Under Manager Details" button */}
                               {employeesData.map((employees) => {
-                                // Find the corresponding employee data based on EmpId
-                                console.log(employees.Empid, '318');
-                                console.log(employee.Empid, '319');
                                 if (employees.Empid === employee.Empid) {
                                   return (
-                                    <Button className="employee-details-button" variant="contained"
+                                    <Button
+                                      className="employee-details-button"
+                                      variant="contained"
                                       onClick={() => handleEmpViewDetailsClick(employees.Empname)}
-
                                       style={{ backgroundColor: '#1dbb99', fontWeight: 'bolder', marginLeft: '20px', width: '28%' }}
                                     >
                                       Employees Under Manager Details
@@ -396,7 +393,9 @@ const DirectorViewMangerDetails = () => {
                                 }
                               })}
                             </TableCell>
+
                           </TableRow>
+
                         );
                       } else {
                         return null;
@@ -492,7 +491,7 @@ const DirectorViewMangerDetails = () => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseProfileCard} color="primary">
+          <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
             Close
           </Button>
         </DialogActions>

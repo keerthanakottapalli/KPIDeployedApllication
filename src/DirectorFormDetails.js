@@ -628,7 +628,7 @@ const DirectorFormDetails = () => {
                                 )}
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleCloseProfileCard} color="primary">
+                                <Button onClick={handleCloseProfileCard} style={{backgroundColor:"#00aaee",color:"white ", marginBottom:'15px', marginRight:'15px'}}>
                                     Close
                                 </Button>
                             </DialogActions>

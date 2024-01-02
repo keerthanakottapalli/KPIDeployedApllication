@@ -46,6 +46,7 @@ function ManagerUpdateEmpData() {
     const [loading, setLoading] = useState(true);
 
     const { empId } = useParams();
+   
 
 
     const [selectedSectionIndex, setSelectedSectionIndex] = useState(0); // Initialize with the first section
@@ -80,7 +81,6 @@ function ManagerUpdateEmpData() {
             }));
 
             formattedData[0].isExpanded = true;
-
             setSections(formattedData);
         } catch (error) {
             console.error(error);
@@ -90,7 +90,7 @@ function ManagerUpdateEmpData() {
 
 
 
-
+    
     // Use useEffect to validate incomplete items when moving to the next title section
     const [incompleteItems, setIncompleteItems] = useState([]);
     const [incompleteItemsDialogOpen, setIncompleteItemsDialogOpen] = useState(false);
@@ -144,7 +144,7 @@ function ManagerUpdateEmpData() {
     const lastname = localStorage.getItem('lastname');
     const username = firstname + " " + lastname
     const handleLogout = () => {
-        window.location.href = '/VPView';
+        window.location.href = `/VPComments/${empId}`;
     };
 
 
@@ -199,7 +199,7 @@ function ManagerUpdateEmpData() {
         setLoading(true);
         setSelectedItem(item);
         try {
-            const response = await axios.get(`${BASE_URL}/VicePresidentDataKPIGet/${empId}/${selectedTitle}/${item}`);
+            const response = await axios.get(`${BASE_URL}/api/director_manager_data/${empId}/${selectedTitle}/${item}`);
             const responseData = response.data.data[0]; // Assuming there's only one item in the array
 
 
@@ -230,7 +230,7 @@ function ManagerUpdateEmpData() {
             } else {
                 // Data doesn't exist in EmployeeManagerDataKPIGet, fetch from EmployeeDataKPIGet
                 try {
-                    const newDataResponse = await axios.get(`${BASE_URL}/DirectorDataKPIGet/${empId}/${selectedTitle}/${item}`);
+                    const newDataResponse = await axios.get(`${BASE_URL}/api/director_data/${empId}/${selectedTitle}/${item}`);
                     const newData = newDataResponse.data.data[0]; // Assuming there's only one item in the array
 
                     if (newData) {
@@ -311,7 +311,7 @@ function ManagerUpdateEmpData() {
 
 
 
-
+    
     const fetchData = async () => {
         if (!empId) return;
 
@@ -320,18 +320,21 @@ function ManagerUpdateEmpData() {
             let responseData;
 
             try {
-                response = await axios.get(`${BASE_URL}/VicePresidentDataKPIGet/${empId}/${selectedTitle}/${selectedItem}`);
+               
+                response = await axios.get(`${BASE_URL}/api/director_manager_data/${empId}/${selectedTitle}/${selectedItem}`);
                 responseData = response.data.data[0];
+               
             } catch (error) {
 
                 try {
-                    response = await axios.get(`${BASE_URL}/DirectorDataKPIGet/${empId}/${selectedTitle}/${selectedItem}`);
+                    response = await axios.get(`${BASE_URL}/api/director_data/${empId}/${selectedTitle}/${selectedItem}`);
                     responseData = response.data.data[0];
+                    console.log(responseData,'333');
                 } catch (error) {
                     responseData = null;
                 }
             }
-            console.log(responseData, "325");
+            console.log(responseData, "3256");
             if (responseData) {
                 const newItemMetricInputData = { ...itemMetricInputData };
                 if (!newItemMetricInputData[selectedItem]) {
@@ -466,7 +469,7 @@ function ManagerUpdateEmpData() {
             }];
 
             try {
-                const response = await axios.post(`${BASE_URL}/VicePresidentDataKPIPost`, JSON.stringify(postData), {
+                const response = await axios.post(`${BASE_URL}/api/director_manager_insrt`, JSON.stringify(postData), {
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -489,7 +492,7 @@ function ManagerUpdateEmpData() {
     const updateApiData = async (newData) => {
         try {
             const response = await axios.put(
-                `${BASE_URL}/VicePresidentDataKPIUpdate/${empId}/${selectedTitle}/${selectedItem}`,
+                `${BASE_URL}/api/director_manager_upd/${empId}/${selectedTitle}/${selectedItem}`,
                 {
                     Data: newData,
                 }

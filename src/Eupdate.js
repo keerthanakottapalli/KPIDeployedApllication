@@ -159,7 +159,6 @@ const Sidebar = () => {
     useEffect(() => {
         const fetchData = async () => {
             const token = localStorage.getItem('token');
-
             const parseJWT = (token) => {
                 const base64Url = token.split('.')[1];
                 const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -170,7 +169,8 @@ const Sidebar = () => {
             if (token) {
                 const tokenData = parseJWT(token);
                 const empId = tokenData.Empid;
-
+               localStorage.setItem("Empid", empId);
+              
                 try {
                     const response = await fetch(`${BASE_URL}/api/emp_userdata/${empId}/${activeTab}`);
                     const data = await response.json();
@@ -223,31 +223,33 @@ const Sidebar = () => {
 
 
     const navigate = useNavigate();
-    const handleClose = () => {
+    const handleClose = async () => {
         setOpenDialog(false);
-        const empid = localStorage.getItem('Empid');
+    
         // Navigate to the login page when the dialog is closed
         navigate('/eview');
-
+    
+        const empid = localStorage.getItem('Empid');
+        console.log(empid,"233");
         const requestData = {
-            Status: "Pass", // Use the relatedEmpmail value obtained from the useEffect
+            Status: "Pass",
         };
-
-        // Send a PUT request to the API endpoint
-        axios
-            .put(`${BASE_URL}/api/emp_status_upd/${empid}/`, requestData)
-            .then((response) => {
-                // Handle a successful response here
-                console.log('API response:', response.data);
-                // Close the dialog on success
-            })
-            .catch((error) => {
-                // Handle errors here
-                console.error('API request error:', error);
-            });
-        window.location.reload();
-
+    
+        try {
+            // Send a PUT request to the API endpoint
+            const response = await axios.put(`${BASE_URL}/api/emp_status_upd/${empid}/`, requestData);
+    
+            // Handle a successful response here
+            console.log('API response:', response.data);
+        } catch (error) {
+            // Handle errors here
+            console.error('API request error:', error);
+        } finally {
+            // Ensure that the page is reloaded after the API call completes (whether it succeeds or fails)
+            window.location.reload();
+        }
     };
+    
 
 
 
@@ -730,7 +732,7 @@ const Sidebar = () => {
                                 )}
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleCloseProfileCard} color="primary">
+                                <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
                                     Close
                                 </Button>
                             </DialogActions>
@@ -767,7 +769,7 @@ const Sidebar = () => {
                                     </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={handleClose} color="primary">
+                                    <Button onClick={handleClose} color="primary" variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'10px', marginRight:'10px'}}>
                                         OK
                                     </Button>
                                 </DialogActions>

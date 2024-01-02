@@ -796,7 +796,7 @@ function DirectorUpdateManagerData() {
                                     to={`/directorManagerUpdateDetails/${empId}`}
                                     style={{ backgroundColor: '#1dbb99' }}
                                 >
-                                    Update Details
+                                    Director Ratings
                                 </Button>
 
                             </div>
@@ -900,7 +900,7 @@ function DirectorUpdateManagerData() {
                                 )}
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleCloseProfileCard} color="primary">
+                                <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
                                     Close
                                 </Button>
                             </DialogActions>

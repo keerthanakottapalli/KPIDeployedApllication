@@ -21,14 +21,14 @@ const Main = () => {
 
   return (
     <div className="card-container">
-      <Container maxWidth="md">
-        <Card className="card">
+      <Container maxWidth="sm">
+        <Typography variant="h5" component="h5" gutterBottom style={{ color: 'white', textAlign: 'center', marginBottom: '20px' }}>
+          WELCOME TO EMPLOYEE KPI REVIEWS!
+        </Typography>
+        <Card className="card" style={{ minHeight: '400px', paddingTop: '20px' }}>
           <CardContent>
-            <Typography variant="h5" component="h5" gutterBottom>
-              WELCOME TO EMPLOYEE KPI REVIEWS!
-            </Typography>
             <div className="button-container">
-              <Button variant="contained" color="primary" onClick={handleLogin} className="button" style={{paddingLeft:'28px',paddingRight:'28px'}}>
+              <Button variant="contained" color="primary" onClick={handleLogin} className="button" style={{ paddingLeft: '28px', paddingRight: '28px' }}>
                 Login
               </Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -36,7 +36,7 @@ const Main = () => {
                 Register
               </Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button variant="contained" color="secondary" onClick={handleAdmin} className="button" style={{paddingLeft:'28px',paddingRight:'28px'}}>
+              <Button variant="contained" color="secondary" onClick={handleAdmin} className="button" style={{ paddingLeft: '28px', paddingRight: '28px' }}>
                 Administrator
               </Button>
             </div>
@@ -45,6 +45,7 @@ const Main = () => {
       </Container>
     </div>
   );
+  
 };
 
 export default Main;

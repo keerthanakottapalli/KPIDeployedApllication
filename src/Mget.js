@@ -439,7 +439,7 @@ const Sidebar = () => {
                                 onClose={handleCloseUserMenu}
                             >
 
-                                <MenuItem key="Profile" onClick={handleOpenProfileCard}>
+                                <MenuItem key="Profile" onClick={handleOpenProfileCard} >
                                     <ListItemIcon>
                                         <AccountCircleIcon />
                                     </ListItemIcon>
@@ -550,7 +550,7 @@ const Sidebar = () => {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => setError(false)} color="primary">
+                            <Button onClick={() => setError(false)} style={{backgroundColor:"#00aaee",color:"white "}}>
                                 OK
                             </Button>
                         </DialogActions>
@@ -623,7 +623,7 @@ const Sidebar = () => {
                             )}
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleCloseProfileCard} color="primary">
+                            <Button onClick={handleCloseProfileCard} style={{backgroundColor:"#00aaee",color:"white ", marginBottom:'15px', marginRight:'15px'}}>
                                 Close
                             </Button>
                         </DialogActions>
@@ -660,7 +660,7 @@ const Sidebar = () => {
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose} color="primary">
+                                <Button onClick={handleClose} style={{backgroundColor:"#00aaee",color:"white "}}>
                                     OK
                                 </Button>
                             </DialogActions>

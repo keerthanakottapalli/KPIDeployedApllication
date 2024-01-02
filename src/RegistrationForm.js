@@ -7,12 +7,11 @@ import MenuItem from '@mui/material/MenuItem';
 import InputAdornment from '@mui/material/InputAdornment';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import EmailIcon from '@mui/icons-material/Email';
 import PersonIcon from '@mui/icons-material/Person';
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import GroupsIcon from '@mui/icons-material/Groups';
-import Person3Icon from '@mui/icons-material/Person3';
+
 import PasswordIcon from '@mui/icons-material/Password';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import IconButton from '@mui/material/IconButton';
@@ -90,10 +89,10 @@ const RegistrationForm = () => {
     }
 
     if (name === 'Empmail') {
-      if (!/^[a-zA-Z]{3,}[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value)) {
+      if (!/^[a-zA-Z][\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value)) {
         setValidationErrors((prevErrors) => ({
           ...prevErrors,
-          [name]: 'Please enter a valid email address.',
+          [name]: 'Please enter a valid email address. Ex: Abc@miraclesoft.com',
         }));
       } else if (!value.endsWith('@miraclesoft.com')) {
         setValidationErrors((prevErrors) => ({
@@ -213,7 +212,7 @@ const RegistrationForm = () => {
         Image: formData.Image, // Make sure this is a base64 string
       };
 
-      
+
 
       const response = await axios.post(`${BASE_URL}/api/emp_register`, displayPayload);
       if (response.status === 200) {
@@ -244,7 +243,7 @@ const RegistrationForm = () => {
     <div className="login-form">
       <fieldset style={{ backgroundColor: 'white' }}>
         <center>
-          <h2 style={{ marginLeft: "45px" }}>Registration Form</h2>
+          <h2 style={{ textAlign: 'center', textTransform: 'uppercase' }}>Registration Form</h2>
         </center>
         <form onSubmit={handleSubmit}>
           <div className="form-row">
@@ -253,6 +252,8 @@ const RegistrationForm = () => {
               variant="outlined"
               type="text"
               name="Empid"
+              required
+              // placeholder='Enter Your ID'
               value={formData.Empid}
               onChange={handleInputChange}
               error={!!validationErrors.Empid}
@@ -262,7 +263,7 @@ const RegistrationForm = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PermIdentityIcon />
+                    <PersonIcon />
                   </InputAdornment>
                 ),
               }}
@@ -273,6 +274,7 @@ const RegistrationForm = () => {
               variant="outlined"
               type="email"
               name="Empmail"
+              required
               value={formData.Empmail}
               onChange={handleInputChange}
               style={{ width: inputWidth, height: inputHeight }}
@@ -286,21 +288,27 @@ const RegistrationForm = () => {
                   </InputAdornment>
                 ),
               }}
+              InputLabelProps={{
+                style: { whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' },
+              }}
             />
+
           </div>
-          <div style={{ marginBottom: '20px' }}></div>
+          <div style={{ marginBottom: '30px' }}></div>
           <div className="form-row">
             <TextField
               label="First Name"
               variant="outlined"
               type="text"
+              // placeholder='Enter Your Firstname'
               name="Firstname"
-              value={formData.Firstname}
-              onChange={handleInputChange}
-              style={{ width: inputWidth, height: inputHeight }}
               error={!!validationErrors.Firstname}
               helperText={validationErrors.Firstname}
+              value={formData.Firstname}
+              onChange={handleInputChange}
+              required
               className="form-field-custom-input"
+              style={{ width: inputWidth, height: inputHeight }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -309,12 +317,12 @@ const RegistrationForm = () => {
                 ),
               }}
             />
-
             <TextField
               label="Last Name"
               variant="outlined"
               type="text"
               name="Lastname"
+              required
               value={formData.Lastname}
               onChange={handleInputChange}
               style={{ width: inputWidth, height: inputHeight }}
@@ -330,14 +338,14 @@ const RegistrationForm = () => {
               }}
             />
           </div>
-          <div style={{ marginBottom: '20px' }}></div>
+          <div style={{ marginBottom: '30px' }}></div>
           <div className="form-row">
             <TextField
               select
               label="Role"
               variant="outlined"
-
               name="Role"
+              // placeholder='Select Your Role'
               value={formData.Role || ''}
               onChange={handleInputChange}
               style={{ width: inputWidth, height: inputHeight }}
@@ -353,9 +361,9 @@ const RegistrationForm = () => {
                 ),
               }}
             >
-              <MenuItem value="" disabled>
+              {/* <MenuItem value="" disabled>
                 Select a role
-              </MenuItem>
+              </MenuItem> */}
               {roles.map((role) => (
                 <MenuItem key={role} value={role}>
                   {role}
@@ -364,16 +372,18 @@ const RegistrationForm = () => {
             </TextField>
 
             <TextField
+              select
               label="Practices"
               variant="outlined"
-              select
+
               name="Practies"
               value={formData.Practies || ''}
               onChange={handleInputChange}
-              style={{ width: inputWidth, height: inputHeight }}
+              required
               error={!!validationErrors.Practies}
               helperText={validationErrors.Practies}
-              required
+              style={{ width: inputWidth, height: inputHeight }}
+
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -382,9 +392,9 @@ const RegistrationForm = () => {
                 ),
               }}
             >
-              <MenuItem value="" disabled>
+              {/* <MenuItem value="" disabled>
                 Select a practice
-              </MenuItem>
+              </MenuItem> */}
               {practices.map((practice) => (
                 <MenuItem key={practice} value={practice}>
                   {practice}
@@ -392,7 +402,7 @@ const RegistrationForm = () => {
               ))}
             </TextField>
           </div>
-          <div style={{ marginBottom: '20px' }}></div>
+          <div style={{ marginBottom: '30px' }}></div>
           <div className="form-row">
             <TextField
               label="Reporting Manager"
@@ -414,9 +424,9 @@ const RegistrationForm = () => {
                 ),
               }}
             >
-              <MenuItem value="" disabled>
+              {/* <MenuItem value="" disabled>
                 Select a manager
-              </MenuItem>
+              </MenuItem> */}
               {managers.map((manager) => (
                 <MenuItem key={manager} value={manager}>
                   {manager}
@@ -429,6 +439,7 @@ const RegistrationForm = () => {
               variant="outlined"
               type={showPassword ? "text" : "password"}
               name="Password"
+              // placeholder='Enter Your Password'
               value={formData.Password}
               onChange={handleInputChange}
               style={{ width: inputWidth, height: inputHeight }}
@@ -447,7 +458,7 @@ const RegistrationForm = () => {
                     <IconButton
                       onClick={handleTogglePasswordVisibility}
                       edge="end"
-                      style={{ width: '1px', height: '1px', background: '#a9a7a7', marginRight: '0px' }}
+                      style={{ width: '1px', height: '1px', background: '#a9a7a7', marginRight: '0px', marginBottom: '15px' }}
                     >
                       {showPassword ? <VisibilityIcon style={{ color: 'black' }} /> : <VisibilityOffIcon style={{ color: 'black' }} />}
                     </IconButton>
@@ -456,7 +467,7 @@ const RegistrationForm = () => {
               }}
             />
           </div>
-          <div style={{ marginBottom: '20px' }}></div>
+          <div style={{ marginBottom: '30px' }}></div>
           <div className="form-row">
             <TextField
               label="Reporting HR"
@@ -473,14 +484,14 @@ const RegistrationForm = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Person3Icon />
+                    <PersonIcon />
                   </InputAdornment>
                 ),
               }}
             >
-              <MenuItem value="" disabled>
+              {/* <MenuItem value="" disabled>
                 Select Hr
-              </MenuItem>
+              </MenuItem> */}
               {hr.map((hr) => (
                 <MenuItem key={hr} value={hr}>
                   {hr}
@@ -508,20 +519,20 @@ const RegistrationForm = () => {
                 ),
               }}
             >
-              <MenuItem value="" disabled>
+              {/* <MenuItem value="" disabled>
                 Select Location
-              </MenuItem>
+              </MenuItem> */}
               {location.map((location) => (
                 <MenuItem key={location} value={location}>
                   {location}
                 </MenuItem>
               ))}
-              </TextField>
+            </TextField>
           </div>
-          <div style={{ marginBottom: '20px' }}></div>
+          <div></div>
           <div>
+            <p><b >Choose your Profile :</b></p>
             <TextField
-
               variant="outlined"
               type="file"
               name="Image"
@@ -536,14 +547,15 @@ const RegistrationForm = () => {
               <img
                 src="https://badge-exam.miraclesoft.com/assets/ecert/Completed-test.svg"
                 alt="Your Image Alt Text"
-                style={{ maxWidth: '100%', maxHeight: '200px', marginLeft: '23%' }}
+                style={{ maxWidth: '100%', maxHeight: '200px', display: 'block', margin: 'auto' }}
               />
-              <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: '#1dbb99' }}>
+
+              <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: '#1dbb99' }}>
                 Successfully Registered. Click OK to Login
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} color="primary" style={{ color: 'black', backgroundColor: '#d8d6d6', fontWeight: 'bolder' }}>
+              <Button onClick={handleClose} color="primary" style={{ color: 'black', backgroundColor: '#00aaee', fontWeight: 'bolder', marginBottom: '15px', marginRight: '15px' }}>
                 OK
               </Button>
             </DialogActions>
@@ -562,7 +574,6 @@ export default RegistrationForm;
 
 
 
-// import React, { useState, useEffect } from 'react';
 
 // const EmployeeDetails = () => {
 //   const [employeeData, setEmployeeData] = useState(null);

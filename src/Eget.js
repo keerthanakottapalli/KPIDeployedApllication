@@ -484,6 +484,7 @@ const Sidebar = () => {
 
 
                     <div className="sub-tabs" >
+                         
                         <Tabs className='subtabs-adjust'
                             value={activeSubTab}
                             onChange={(event, newValue) => handleSubTabClick(newValue)} centered
@@ -500,7 +501,6 @@ const Sidebar = () => {
                                 )
                             ))}
                         </Tabs>
-
                         <div className='employeetable'>
                             {loading ? (
                                 <div className="loading-container">
@@ -620,7 +620,7 @@ const Sidebar = () => {
                                 )}
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleCloseProfileCard} color="primary">
+                                <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
                                     Close
                                 </Button>
                             </DialogActions>

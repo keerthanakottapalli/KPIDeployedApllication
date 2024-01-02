@@ -4,6 +4,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import { TextField, Button, Container, Typography, Grid } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import './AdminloginForm.css'
 import { BASE_URL } from './config';
 
@@ -81,53 +83,73 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="admin-login">
-      <fieldset className='adminlogin-form'>
+    <div className="login-form">
+      <fieldset className='login-fieldset'>
         <div>
           <img
             className="miracleLogo"
             src={'https://hubble.miraclesoft.com/assets/img/miracle-logo-white.svg'}
             alt="Image Description"
           />
-          <p className="adminText">Enter Your Details to Continue</p>
+          <p className="loginText">Enter Your Details to Continue</p>
         </div>
         <form onSubmit={handleLogin}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id="email"
-                label="Email"
-                variant="outlined"
-                style={{backgroundColor:'white', borderRadius:'5px',}}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id="password"
-                label="Password"
-                style={{backgroundColor:'white',borderRadius:'5px'}}
-                type={showPassword ? 'text' : 'password'} 
-                variant="outlined"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={handleTogglePasswordVisibility} edge="end">
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Grid>
-          </Grid>
+          <div className="loginform-group">
+            <TextField
+              className="textfield"
+              placeholder="Enter your email"
+              variant="outlined"
+              style={{ width: '100%', maxWidth: '355px', height: '45px' }}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <span className="material-icons" style={{ color: 'black' }}>email</span>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+          <br />
+          <div className="loginform-group">
+
+          <TextField
+            className="textfield"
+            placeholder="Enter your password"
+            variant="outlined"
+            type={showPassword ? 'text' : 'password'}
+          
+            style={{ width: '100%', maxWidth: '355px', height: '45px' }}
+             
+             
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <span className="material-icons" style={{ color: 'black' }}>lock</span>
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleTogglePasswordVisibility}
+                      edge="end"
+                      style={{ width: '1px', height: '1px', background: '#a9a7a7', marginRight: '0px', marginBottom:'15px' }}
+                    >
+                      {showPassword ? <VisibilityIcon style={{ color: 'black' }} /> : <VisibilityOffIcon style={{ color: 'black' }} />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+
+
+
           <Button type="submit" variant="contained" color="primary" fullWidth style={{ marginTop: '20px' }}>
             Login
           </Button>
@@ -136,7 +158,7 @@ const AdminLogin = () => {
           <p className="footer-stmt">&copy; 2023 Miracle Software Systems, Inc.</p>
         </footer>
       </fieldset>
-   
+
     </div>
   );
 };

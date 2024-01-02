@@ -56,7 +56,7 @@
 }
 
 .loginText {
-  margin-left: 13%;
+  text-align: center;
   color: white;
   font-size: 24px;
 }
@@ -64,7 +64,8 @@
 .miracleLogo {
   width: 30%;
   height: 30%;
-  margin-left: 35%;
+  display: block; 
+  margin: auto ;
   margin-top: 2%;
 }
 
@@ -82,8 +83,9 @@
 
 .text-center {
   color: #a9a7a7;
-  margin-left: 7vw;
+  margin-left: 8vw;
   font-size: 13px;
+  /* margin-bottom: 15px; */
 
 }
 

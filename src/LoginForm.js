@@ -68,7 +68,6 @@ const LoginForm = () => {
     const encodedPassword = btoa(Password);
   
     try {
-      // Create a payload with Base64-encoded values for display
       const displayPayload = {
         Empmail: encodedEmail,
         Password: encodedPassword,
@@ -88,7 +87,6 @@ const LoginForm = () => {
           const { token } = data;
           localStorage.setItem('token', token);
     
-          // Extract the role from the token and store it in localStorage
           const decodedToken = parseJwt(token);
           const role = decodedToken.Role;
           const firstname = decodedToken.Firstname;
@@ -104,7 +102,6 @@ const LoginForm = () => {
           localStorage.setItem('Empmail', Empmail);
           localStorage.setItem('Password', Password);
   
-          // Use getRoleBasedRoute() to determine the appropriate route based on the role
           const route = getRoleBasedRoute();
           navigate(route); // Navigate to the appropriate component based on the role
         } else {
@@ -128,7 +125,11 @@ const LoginForm = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleRegisterClick = () => {
+  
+    navigate('/register');
 
+    window.location.reload();  };
 
 
 return (
@@ -154,7 +155,9 @@ return (
             required
             InputProps={{
               startAdornment: (
-                <span className="material-icons">email</span>
+                <InputAdornment position="start">
+                  <span className="material-icons" style={{ color: 'black' }}>email</span>
+                </InputAdornment>
               ),
             }}
           />
@@ -181,7 +184,7 @@ return (
                   <IconButton
                     onClick={handleTogglePasswordVisibility}
                     edge="end"
-                    style={{ width: '1px', height: '1px', background: '#a9a7a7', marginRight: '0px' }}
+                    style={{ width: '1px', height: '1px', background: '#a9a7a7', marginRight: '0px', marginBottom:'15px' }}
                   >
                     {showPassword ? <VisibilityIcon style={{ color: 'black' }} /> : <VisibilityOffIcon style={{ color: 'black' }} />}
                   </IconButton>
@@ -190,19 +193,31 @@ return (
             }}
           />
         </div>
-        <Link to='/resetpwd' className='ForgotPwd' style={{  }}>Forgot Password?</Link>
+        
+        <Link to='/resetpwd' className='ForgotPwd' style={{marginTop:"2%"  }}>Forgot Password?</Link>
         <Button type="submit" variant="contained" >
           Login
         </Button>
         {error && <div className="error">{error}</div>}
-        <p style={{ color: 'white' }} className="registering">
+        {/* <p style={{ color: 'white' }} className="registering">
           Don't have an account please <Link to="/register" style={{ color: 'white' }}>REGISTER!</Link>
+        </p> */}
+
+<p style={{ color: 'white' }} className="registering">
+          Don't have an account please{' '}
+          <span
+            role="button"
+            style={{ color: 'white', cursor: 'pointer' }}
+            onClick={handleRegisterClick}
+          >
+            REGISTER!
+          </span>
         </p>
-        <br />
+       
       </form>
 
       <footer>
-        <p className="text-center">&copy; 2023 Miracle Software Systems, Inc.</p>
+        <p  className="text-center">&copy; 2023 Miracle Software Systems, Inc.</p>
       </footer>
     </fieldset>
   </div>

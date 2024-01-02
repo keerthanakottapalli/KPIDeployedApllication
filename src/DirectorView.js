@@ -385,12 +385,12 @@ const Dview = () => {
                 style={{ height: '50%', alignItems: 'center', marginLeft: '70px', marginTop: '20%' }}
               />
 
-              <div>
+              <div style={{marginLeft:'80px'}}>
                 <Button
                   className="gradient-button"
                   variant="contained"
                   onClick={handleFillFormClick}
-                  style={{ backgroundColor: '#0d416b', marginRight: '40px', flex: 1, width: '40%' }}
+                  style={{ backgroundColor: '#0d416b', marginRight: '50px', flex: 1, width: '40%' }}
                 >
                   <b>Fill KPI Form</b>
                 </Button>
@@ -403,24 +403,24 @@ const Dview = () => {
                   <b>Form Details</b>
                 </Button>
               </div>
-              <div style={{ marginBottom: '20px' }}></div>
-              <div>
+              <div style={{ marginBottom: '25px' }}></div>
+              <div style={{marginLeft:'80px'}}>
                 <Button
-                  style={{ backgroundColor: '#0d416b', marginRight: '40px', flex: 1, width: '40%' }}
+                  style={{ backgroundColor: '#1dbb99', marginRight: '50px', flex: 1, width: '40%' }}
                   className="view-details"
                   variant="contained"
                   onClick={handleFormUpdateDetailsClick}
                   disabled={isButtonDisabled}
                 >
-                  Update Details
+                  <b>Update Details</b>
                 </Button>
                 <Button
-                  style={{ backgroundColor: '#1dbb99', marginRight: '20px', flex: 1, width: '40%' }}
+                  style={{ backgroundColor: '#0d416b', flex: 1, width: '40%' }}
                   className="view-details"
                   variant="contained"
                   onClick={handleFormViewDetailsClick}
                 >
-                  Manager Details
+                  <b>Manager Details</b>
                 </Button>
               </div>
 
@@ -439,7 +439,7 @@ const Dview = () => {
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={() => setOpenDialog(false)} color="primary">
+                <Button onClick={() => setOpenDialog(false)} style={{backgroundColor:"#00aaee",color:"white ", marginBottom:'10px', marginRight:'10px'}}>
                   OK
                 </Button>
               </DialogActions>
@@ -458,7 +458,7 @@ const Dview = () => {
           {/* Display user profile information */}
           {registrations.map((registration) => (
             registration.Firstname === firstname && (
-              <div onClick={handleToggleImagePreview}>
+              <span onClick={handleToggleImagePreview}>
                 {registration.Image && (
                   <img
                     src={registration.Image}
@@ -471,7 +471,7 @@ const Dview = () => {
                     }}
                   />
                 )}
-              </div>
+              </span>
             )
           ))}<br />
           {userData && (
@@ -518,7 +518,7 @@ const Dview = () => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseProfileCard} color="primary">
+          <Button onClick={handleCloseProfileCard} style={{backgroundColor:"#00aaee",color:"white ", marginBottom:'15px', marginRight:'15px'}}>
             Close
           </Button>
         </DialogActions>

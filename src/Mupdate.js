@@ -249,7 +249,7 @@ const Sidebar = () => {
         if (token) {
             const tokenData = parseJWT(token);
             const empId = tokenData.Empid;
-
+                  localStorage.setItem("Empid", empId);
             try {
                 const response = await fetch(`${BASE_URL}/api/manager_data/${empId}/${activeTab}/${subTab}`);
                 const data = await response.json();
@@ -276,29 +276,32 @@ const Sidebar = () => {
 
 
     const navigate = useNavigate();
-    const handleClose = () => {
+    const handleClose = async () => {
         setOpenDialog(false);
-        const empid = localStorage.getItem('Empid');
+        
+       
         navigate('/mview');
+     
 
+        const empid = localStorage.getItem('Empid');
         
         const requestData = {
             Status: "Pass", // Use the relatedEmpmail value obtained from the useEffect
           };
         
-          // Send a PUT request to the API endpoint
-          axios
-            .put(`${BASE_URL}/api/manager_status_upd/${empid}`, requestData)
-            .then((response) => {
-              // Handle a successful response here
-              console.log('API response:', response.data);
-              // Close the dialog on success
-            })
-            .catch((error) => {
-              // Handle errors here
-              console.error('API request error:', error);
-            });
+          try {
+            // Send a PUT request to the API endpoint
+            const response = await axios.put(`${BASE_URL}/api/manager_status_upd/${empid}/`, requestData);
+    
+            // Handle a successful response here
+            console.log('API response:', response.data);
+        } catch (error) {
+            // Handle errors here
+            console.error('API request error:', error);
+        } finally {
+            // Ensure that the page is reloaded after the API call completes (whether it succeeds or fails)
             window.location.reload();
+        }
 
     };
 
@@ -707,7 +710,7 @@ const Sidebar = () => {
                             )}
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleCloseProfileCard} color="primary">
+                            <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
                                 Close
                             </Button>
                         </DialogActions>
@@ -744,7 +747,7 @@ const Sidebar = () => {
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose} color="primary">
+                                <Button onClick={handleClose} variant='contained' style={{backgroundColor:'#00aaee'}}>
                                     OK
                                 </Button>
                             </DialogActions>

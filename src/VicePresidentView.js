@@ -75,7 +75,7 @@ const ManagerPortal = () => {
 
 
 
-  const handleCloseProfileCard = () => {
+   const handleCloseProfileCard = () => {
     setIsProfileCardOpen(false); // Close the profile card
   };
   const fetchUserProfile = async () => {
@@ -96,12 +96,10 @@ const ManagerPortal = () => {
       console.error('Error fetching user data:', error);
     }
   };
-
   const handleToggleImagePreview = () => {
     setShowImagePreview(!showImagePreview);
   };
 
-  const [empIdExists, setEmpIdExists] = useState(true);
   useEffect(() => {
     if (isProfileCardOpen) {
       fetchUserProfile();
@@ -192,6 +190,8 @@ const ManagerPortal = () => {
       .catch((error) => console.error(error));
   }, []);
 
+  
+
 
   return (
     <>
@@ -215,7 +215,6 @@ const ManagerPortal = () => {
               color="inherit"
             >
               <Tooltip title="Open settings">
-
                 {registrations.map((registration) => (
                   registration.Firstname === firstname && (
                     <td>
@@ -224,8 +223,8 @@ const ManagerPortal = () => {
                           src={registration.Image}
                           alt="Profile"
                           style={{
-                            width: '60px', // Set the desired width
-                            height: '60px', // Set the desired height
+                            width: '60px',
+                            height: '60px',
                             borderRadius: '50%',
                             marginRight: '8px',
                           }}
@@ -332,7 +331,7 @@ const ManagerPortal = () => {
 
                             <TableCell style={{ color: '#333', paddingLeft: '10%' }}>
                               {employee.Status === 'Decline' && (
-                                <span style={{ paddingLeft: '0%', fontSize: '20px', color: 'red' }}><b>Declined</b></span>
+                                <Button style={{ backgroundColor: '#d12a2a', width: "65%", height: '40px', fontWeight: 'bold', color: 'white' }}>Declined</Button>
                               )}
                               {employee.Status !== 'Decline' && (
                                 <div>
@@ -384,10 +383,9 @@ const ManagerPortal = () => {
         >
           <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
           <DialogContent style={{ height: '400px' }}>
-            {/* Display user profile information */}
             {registrations.map((registration) => (
               registration.Firstname === firstname && (
-                <div onClick={handleToggleImagePreview}>
+                <span onClick={handleToggleImagePreview}>
                   {registration.Image && (
                     <img
                       src={registration.Image}
@@ -400,7 +398,7 @@ const ManagerPortal = () => {
                       }}
                     />
                   )}
-                </div>
+                </span>
               )
             ))}<br />
             {userData && (
@@ -447,7 +445,7 @@ const ManagerPortal = () => {
             )}
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseProfileCard} color="primary">
+            <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", fontWeight: 'bold', marginBottom: '15px', marginRight: '15px' }}>
               Close
             </Button>
           </DialogActions>

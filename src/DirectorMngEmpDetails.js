@@ -834,7 +834,7 @@ function DirectorUpdateEmpData() {
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions>
-                                                <Button onClick={() => setError(false)} color="primary">
+                                                <Button onClick={() => setError(false)} variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'10px', marginRight:'10px'}}>
                                                     OK
                                                 </Button>
                                             </DialogActions>
@@ -847,7 +847,7 @@ function DirectorUpdateEmpData() {
                                             </DialogContentText>
                                         </DialogContent>
                                         <DialogActions>
-                                            <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
+                                            <Button onClick={() => setIncompleteItemsDialogOpen(false)} variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'10px', marginRight:'10px'}}>
                                                 OK
                                             </Button>
                                         </DialogActions>
@@ -858,7 +858,7 @@ function DirectorUpdateEmpData() {
                                 <Button
 
                                     variant="contained"
-                                    style={{ marginRight: '10px', backgroundColor: '#1dbb99' }}
+                                    style={{ marginRight: '30px', backgroundColor: '#1dbb99' }}
                                     onClick={handleUpdateButtonClick}
 
                                 >
@@ -868,7 +868,7 @@ function DirectorUpdateEmpData() {
                                     variant="contained"
                                     color="primary"
                                     onClick={openConfirmationDialog}
-                                    style={{ marginLeft: '20px' }}
+                                    style={{ marginRight: '70px' }}
                                     disabled={!isSubmitEnabled || isFetchingData}
                                 >
                                     Submit
@@ -886,10 +886,10 @@ function DirectorUpdateEmpData() {
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={closeConfirmationDialog} color="primary">
+                                        <Button onClick={closeConfirmationDialog} variant='contained' style={{backgroundColor:'#00aaee',}}>
                                             Cancel
                                         </Button>
-                                        <Button onClick={handleSubmit} color="primary" autoFocus>
+                                        <Button onClick={handleSubmit} variant='contained' style={{backgroundColor:'#00aaee',}} autoFocus>
                                             Confirm
                                         </Button>
                                     </DialogActions>
@@ -904,7 +904,7 @@ function DirectorUpdateEmpData() {
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={closeSuccessDialog} color="primary">
+                                        <Button onClick={closeSuccessDialog} variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'10px', marginRight:'10px'}}>
                                             OK
                                         </Button>
                                     </DialogActions>
@@ -993,7 +993,7 @@ function DirectorUpdateEmpData() {
                                 )}
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleCloseProfileCard} color="primary">
+                                <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
                                     Close
                                 </Button>
                             </DialogActions>

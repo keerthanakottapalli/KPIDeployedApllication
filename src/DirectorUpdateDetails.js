@@ -249,7 +249,7 @@ const DirectorUpdateDetails = () => {
         if (token) {
             const tokenData = parseJWT(token);
             const empId = tokenData.Empid;
-
+            localStorage.setItem("Empid", empId);
             try {
                 const response = await fetch(`${BASE_URL}/api/director_data/${empId}/${activeTab}/${subTab}`);
                 const data = await response.json();
@@ -276,29 +276,29 @@ const DirectorUpdateDetails = () => {
 
 
     const navigate = useNavigate();
-    const handleClose = () => {
+    const handleClose = async() => {
         setOpenDialog(false);
-        const empid = localStorage.getItem('Empid');
+       
         navigate('/directorview');
-
+        const empid = localStorage.getItem('Empid');
 
         const requestData = {
             Status: "Pass", // Use the relatedEmpmail value obtained from the useEffect
         };
 
-        // Send a PUT request to the API endpoint
-        axios
-            .put(`${BASE_URL}/api/director_status_upd/${empid}/`, requestData)
-            .then((response) => {
-                // Handle a successful response here
-                console.log('API response:', response.data);
-                // Close the dialog on success
-            })
-            .catch((error) => {
-                // Handle errors here
-                console.error('API request error:', error);
-            });
-        window.location.reload();
+        try {
+            // Send a PUT request to the API endpoint
+            const response = await axios.put(`${BASE_URL}/api/director_status_upd/${empid}/`, requestData);
+    
+            // Handle a successful response here
+            console.log('API response:', response.data);
+        } catch (error) {
+            // Handle errors here
+            console.error('API request error:', error);
+        } finally {
+            // Ensure that the page is reloaded after the API call completes (whether it succeeds or fails)
+            window.location.reload();
+        }
 
     };
 
@@ -531,7 +531,7 @@ const DirectorUpdateDetails = () => {
                             (activeSubTab && tabsData.length > 0 ? ( // Check if data is available
                                 <>
                                     <TableContainer component={Paper} style={{ height: '45vh', overflow: "auto" }}>
-                                        <Table style={{ overflow: "scroll", }}>
+                                        <Table style={{ overflow: "scroll" }}>
                                             <TableHead>
                                                 <TableRow>
                                                     <TableCell className='tablecell-style' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
@@ -631,7 +631,7 @@ const DirectorUpdateDetails = () => {
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => setError(false)} color="primary">
+                            <Button onClick={() => setError(false)} variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'15px', marginRight:'15px'}}>
                                 OK
                             </Button>
                         </DialogActions>
@@ -707,7 +707,7 @@ const DirectorUpdateDetails = () => {
                                 )}
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleCloseProfileCard} color="primary">
+                                <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
                                     Close
                                 </Button>
                             </DialogActions>
@@ -744,7 +744,7 @@ const DirectorUpdateDetails = () => {
                                     </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={handleClose} color="primary">
+                                    <Button onClick={handleClose}  style={{backgroundColor:'#00aaee', color:'white', marginBottom:'10px', marginRight:'10px'}}>
                                         OK
                                     </Button>
                                 </DialogActions>

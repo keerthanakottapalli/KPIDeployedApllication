@@ -785,7 +785,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                     color="inherit"
                                     onClick={() => setShowErrorDialog(false)}
                                     aria-label="close"
-                                    style={{ position: 'absolute', right: '8px', top: '8px' }}
+                                    style={{ position: 'absolute', right: '15px', top: '8px' }}
                                 >
                                     <CloseIcon />
                                 </IconButton>
@@ -815,7 +815,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose} color="primary">
+                            <Button onClick={handleClose} style={{backgroundColor:"#00aaee",color:"white "}}>
                                 OK
                             </Button>
                         </DialogActions>
@@ -837,7 +837,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={closeConfirmationDialog} color="primary">
+                            <Button onClick={closeConfirmationDialog} style={{backgroundColor:"#00aaee",color:"white "}}>
                                 Cancel
                             </Button>
                             <Button onClick={() => {
@@ -845,7 +845,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 exportToExcel();
                                 closeConfirmationDialog();
                                 openSuccessDialog();
-                            }} color="primary">
+                            }} style={{backgroundColor:"#00aaee",color:"white "}}>
                                 OK
                             </Button>
                         </DialogActions>
