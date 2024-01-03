@@ -19,6 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 
+
 const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, tabLabels, subTabsData }) => {
     const token = localStorage.getItem('token');
 
@@ -1134,7 +1135,6 @@ const TabsView = () => {
     );
 
     const handleLogout = () => {
-
         window.location.href = '/eview';
     };
 

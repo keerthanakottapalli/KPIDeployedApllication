@@ -18,6 +18,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 import './Medataview.css';
 import { BASE_URL } from './config';
+import { Logout } from '@mui/icons-material';
 
 const ManagerPortal = () => {
   const [employeesData, setEmployeesData] = useState([]);
@@ -162,7 +163,7 @@ const ManagerPortal = () => {
 
     // localStorage.removeItem('token');
     // Redirect to the login page (replace '/login' with your login route)
-    window.location.href = '/VPPortal';
+    window.location.href = '/login';
   };
 
 
@@ -263,9 +264,9 @@ const ManagerPortal = () => {
 
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
-                  <ArrowBackIcon />
+                  <Logout />
                 </ListItemIcon>
-                GoBack
+                Logout
               </MenuItem>
             </Menu>
           </Box>
