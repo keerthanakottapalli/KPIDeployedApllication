@@ -56,6 +56,8 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
+    const [isDownloadDialogOpen, setDownloadDialogOpen] = useState(false);
+
 
     const openConfirmationDialog = () => {
         setConfirmationDialogOpen(true);
@@ -69,7 +71,13 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
         setSuccessDialogOpen(true);
     };
 
+    const openDownloadDialog = () => {
+        setDownloadDialogOpen(true);
+    };
 
+    const closeDownloadDialog = () => {
+        setDownloadDialogOpen(false);
+    };
 
 
     const selectedTabData = subTabsData[tabLabels[selectedTab]];
@@ -288,8 +296,6 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                 {
                     Data: [],
                 }
-
-
                 // Iterate through your data and populate the 'updatedData' array
                 for (const tabIdx in mainTabRatings) {
                     const subTabRatings = mainTabRatings[tabIdx];
@@ -530,7 +536,11 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
 
+
+
     const exportToExcel = () => {
+        const firstname = localStorage.getItem('firstname');
+        const id = localStorage.getItem('Empid');
         const formattedData = [
             ['', 'Metric', 'Quantity Target', 'Quantity Achieved', 'Comments', 'Index KPI'],
         ];
@@ -575,9 +585,11 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
         XLSX.utils.book_append_sheet(wb, ws, 'KPI Data');
 
 
+        const fileName = `${id}_${firstname}_KPI_Data.xlsx`;
+
         const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
         const blob = new Blob([wbout], { type: 'application/octet-stream' });
-        saveAs(blob, 'KPI_Data.xlsx');
+        saveAs(blob, fileName);
     };
 
 
@@ -826,6 +838,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </Button>
                         </DialogActions>
                     </Dialog>
+
                     {isFormComplete && selectedTab === tabLabels.length - 1 && selectedSubTab === subTabsData[tabLabels[selectedTab]].length - 1 && (
                         <button
                             className={`submit - button ${isFormComplete ? '' : 'disabled-button'}`}
@@ -835,6 +848,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             Submit
                         </button>
                     )}
+
                     <Dialog open={isConfirmationDialogOpen} onClose={closeConfirmationDialog}>
                         <DialogTitle>Confirmation</DialogTitle>
                         <DialogContent>
@@ -848,7 +862,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </Button>
                             <Button onClick={() => {
                                 handleSubmit();
-                                exportToExcel();
+                                // exportToExcel();
                                 closeConfirmationDialog();
                                 openSuccessDialog();
                             }} style={{ backgroundColor: "#00aaee", color: "white " }}>
@@ -856,6 +870,33 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </Button>
                         </DialogActions>
                     </Dialog>
+
+
+
+                    <Button onClick={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                        Download
+                    </Button>
+                    <Dialog open={isDownloadDialogOpen} onClose={closeDownloadDialog}>
+                        <DialogTitle>Confirmation</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Are you sure you want to Download this form to Excel Sheet?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={closeDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                Cancel
+                            </Button>
+                            <Button onClick={() => {
+                                exportToExcel(); // Call exportToExcel directly when the download button is clicked
+                                closeDownloadDialog();
+                            }} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                OK
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+
+
 
                 </div>
 

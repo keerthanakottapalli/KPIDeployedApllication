@@ -52,6 +52,7 @@ const [incompleteFields, setIncompleteFields] = useState([]);
 
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
+    const [isDownloadDialogOpen, setDownloadDialogOpen] = useState(false);
 
     const openConfirmationDialog = () => {
         setConfirmationDialogOpen(true);
@@ -63,6 +64,14 @@ const [incompleteFields, setIncompleteFields] = useState([]);
 
     const openSuccessDialog = () => {
         setSuccessDialogOpen(true);
+    };
+
+    const openDownloadDialog = () => {
+        setDownloadDialogOpen(true);
+    };
+
+    const closeDownloadDialog = () => {
+        setDownloadDialogOpen(false);
     };
 
 
@@ -539,6 +548,8 @@ const [incompleteFields, setIncompleteFields] = useState([]);
 
 
     const exportToExcel = () => {
+        const firstname = localStorage.getItem('firstname');
+        const id = localStorage.getItem('Empid');
         const formattedData = [
             ['', 'Metric', 'Quantity Target', 'Quantity Achieved', 'Comments', 'Index KPI'],
         ];
@@ -583,14 +594,35 @@ const [incompleteFields, setIncompleteFields] = useState([]);
         XLSX.utils.book_append_sheet(wb, ws, 'KPI Data');
 
 
+        const fileName = `${id}_${firstname}_KPI_Data.xlsx`;
+
         const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
         const blob = new Blob([wbout], { type: 'application/octet-stream' });
-        saveAs(blob, 'KPI_Data.xlsx');
+        saveAs(blob, fileName);
     };
+
     const [selectedTabs, setSelectedTabs] = useState(0);
 
     return (
         <div>
+             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Button
+                    className='getSaveButton'
+                    variant="contained"
+                    style={{ backgroundColor: '#1dbb99' }}
+                    onClick={handleSave}
+                >
+                    Save
+                </Button>&nbsp;
+                <Button
+                    className='getClearButton'
+                    variant="contained"
+                    style={{ backgroundColor: '#1dbb99' }}
+                    onClick={handleOpenClearConfirmationDialog}
+                >
+                    Clear
+                </Button>
+            </div>
           <Tabs
                 value={selectedSubTab}
                 onChange={handleChange}
@@ -711,14 +743,7 @@ const [incompleteFields, setIncompleteFields] = useState([]);
                         </DialogActions>
                     </Dialog>
 
-                    <Button
-                        className='getSaveButton'
-                        variant="contained"
-                        style={{ backgroundColor: '#1dbb99' }}
-                        onClick={handleSave}
-                    >
-                        Save
-                    </Button>&nbsp;&nbsp;&nbsp;
+                   
                     <Dialog
                         open={isClearConfirmationDialogOpen}
                         onClose={handleCloseClearConfirmationDialog}
@@ -739,14 +764,7 @@ const [incompleteFields, setIncompleteFields] = useState([]);
                         </DialogActions>
                     </Dialog>
 
-                    <Button
-                        className='getClearButton'
-                        variant="contained"
-                        style={{ backgroundColor: '#1dbb99' }}
-                        onClick={handleOpenClearConfirmationDialog}
-                    >
-                        Clear
-                    </Button>&nbsp;
+                   
 
                     <button
                         className="navigation-button"
@@ -869,7 +887,7 @@ const [incompleteFields, setIncompleteFields] = useState([]);
                             </Button>
                             <Button onClick={() => {
                                 handleSubmit();
-                                exportToExcel();
+                                // exportToExcel();
                                 closeConfirmationDialog();
                                 openSuccessDialog();
                             }} color="primary">
@@ -878,6 +896,30 @@ const [incompleteFields, setIncompleteFields] = useState([]);
                         </DialogActions>
                     </Dialog>
                     
+
+                    <Button onClick={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                        Download
+                    </Button>
+                    <Dialog open={isDownloadDialogOpen} onClose={closeDownloadDialog}>
+                        <DialogTitle>Confirmation</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Are you sure you want to Download this form to Excel Sheet?
+                            </DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={closeDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                Cancel
+                            </Button>
+                            <Button onClick={() => {
+                                exportToExcel(); // Call exportToExcel directly when the download button is clicked
+                                closeDownloadDialog();
+                            }} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                OK
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
+
 
                 </div>
 
