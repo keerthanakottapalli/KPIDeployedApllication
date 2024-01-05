@@ -38,6 +38,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     const [showErrorDialog, setShowErrorDialog] = useState(false);
     const [incompleteFields, setIncompleteFields] = useState([]);
 
+
     // Function to check if there are incomplete fields in the current subtab
     const checkSubTabCompletion = () => {
         const subTabData = subTabsData[tabLabels[selectedTab]][selectedSubTab];
@@ -50,6 +51,8 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                 incompleteFields.push(question);
             }
         });
+
+        setIncompleteFields(incompleteFields);
 
         return incompleteFields;
     };
@@ -597,7 +600,9 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     // const [selectedTabs, setSelectedTabs] = useState(0);
 
     return (
+
         <div>
+
             <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                     className='getSaveButton'
@@ -660,6 +665,14 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'quantityAchieved')}
                                             sx={{ minWidth: '120px' }}
+                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            MenuProps={{
+                                                PaperProps: {
+                                                    style: {
+                                                        maxHeight: 200, // Set the maximum height for the dropdown
+                                                    },
+                                                },
+                                            }}
                                         >
                                             <MenuItem value={null}> </MenuItem>
                                             {Array.from({ length: 11 }, (_, i) => (
@@ -669,14 +682,15 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                     </TableCell>
 
                                     <TableCell>
-                                        <Tooltip title={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments || ''} classes={{ tooltip: 'custom-tooltip' }}>
-                                            <TextField
-                                                value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments || ''}
-                                                multiline
-                                                rows={1}
-                                                onChange={(event) => handleCommentChange(event, questionIndex)}
-                                                label="Comments"
-                                            />
+                                        <Tooltip title={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments} classes={{ tooltip: 'custom-tooltip' }}>
+                                        <TextField
+                                            value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments}
+                                            multiline
+                                            rows={1}
+                                            onChange={(event) => handleCommentChange(event, questionIndex)}
+                                            label="Comments"
+                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                        />
                                         </Tooltip>
                                     </TableCell>
                                     <TableCell>
@@ -684,6 +698,14 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'indexKpi')}
                                             sx={{ minWidth: '120px' }}
+                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            MenuProps={{
+                                                PaperProps: {
+                                                    style: {
+                                                        maxHeight: 200, // Set the maximum height for the dropdown
+                                                    },
+                                                },
+                                            }}
                                         >
                                             {Array.from({ length: 11 }, (_, i) => i).map((rating) => (
                                                 <MenuItem key={rating} value={rating}>{rating}</MenuItem>
@@ -693,6 +715,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 </TableRow>
                             ))}
                         </TableBody>
+
                     </Table>
                 </TableContainer>
                 <div className="navigationbuttons">
@@ -781,7 +804,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 setIncompleteFields(incompleteFields);
 
                                 // Show the error dialog for 3 seconds
-                                setShowErrorDialog(true);
+                                // setShowErrorDialog(true);
 
                             }
                         }}
@@ -794,7 +817,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                     </button>
 
 
-                    {incompleteFields.length > 0 && (
+                    {/* {incompleteFields.length > 0 && (
 
                         <Dialog open={showErrorDialog} onClose={() => setShowErrorDialog(false)}>
                             <DialogTitle>
@@ -818,7 +841,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
                     )}
-                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp; */}
 
 
                     <Dialog open={isSuccessDialogOpen} onClose={handleClose}>
@@ -1261,7 +1284,7 @@ const TabsView = () => {
 
             ) : (
                 <>
-                    <br /><br /><br /><br /><br />
+                    <br /><br /><br />
                     <div className="tabs-view">
                         <div className="main-tabs-container">
                             <Tabs value={selectedTab} onChange={handleChange} centered variant="scrollable" scrollButtons="auto">

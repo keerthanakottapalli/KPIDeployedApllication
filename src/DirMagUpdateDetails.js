@@ -802,6 +802,13 @@ function DirectorUpdateManagerData() {
                                                             handleMRatingChange(selectedItem, row.Metric, e.target.value);
                                                         }}
                                                         style={{ width: '100px' }}
+                                                        MenuProps={{
+                                                            PaperProps: {
+                                                                style: {
+                                                                    maxHeight: 200, // Set the maximum height for the dropdown
+                                                                },
+                                                            },
+                                                        }}
                                                     >
                                                         {Array.from({ length: 11 }, (_, i) => i).map((number) => (
                                                             <MenuItem key={number} value={number}>

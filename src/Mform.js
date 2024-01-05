@@ -651,38 +651,54 @@ const [incompleteFields, setIncompleteFields] = useState([]);
                         <TableBody>
                             {subTabData[selectedSubTab]?.questions.map((question, questionIndex) => (
                                 <TableRow key={questionIndex}>
-                                    <TableCell style={{textAlign:'center'}}>{question}</TableCell>
-                                    <TableCell style={{textAlign:'center'}}>{subTabData[selectedSubTab]?.quantityTargets[questionIndex]}</TableCell>
-                                    <TableCell style={{textAlign:'center'}}>
+                                    <TableCell>{question}</TableCell>
+                                    <TableCell>{subTabData[selectedSubTab]?.quantityTargets[questionIndex]}</TableCell>
+                                    <TableCell>
                                         <Select
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'quantityAchieved')}
                                             sx={{ minWidth: '120px' }}
+                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            MenuProps={{
+                                                PaperProps: {
+                                                    style: {
+                                                        maxHeight: 200, // Set the maximum height for the dropdown
+                                                    },
+                                                },
+                                            }}
                                         >
                                             <MenuItem value={null}> </MenuItem>
                                             {Array.from({ length: 11 }, (_, i) => (
                                                 <MenuItem key={i} value={i}>{i}</MenuItem>
                                             ))}
                                         </Select>
-
                                     </TableCell>
-                                    <TableCell style={{textAlign:'center'}}>
-                                    <Tooltip title={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments || ''} classes={{ tooltip: 'custom-tooltip' }}>
-                                       
-                                    <TextField
-                                            value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments || ''}
+
+                                    <TableCell>
+                                        <Tooltip title={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments} classes={{ tooltip: 'custom-tooltip' }}>
+                                        <TextField
+                                            value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments}
                                             multiline
                                             rows={1}
                                             onChange={(event) => handleCommentChange(event, questionIndex)}
-                                            label="Comments"                                          
+                                            label="Comments"
+                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                         />
-                                           </Tooltip>
+                                        </Tooltip>
                                     </TableCell>
-                                    <TableCell style={{textAlign:'center'}}>
+                                    <TableCell>
                                         <Select
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'indexKpi')}
                                             sx={{ minWidth: '120px' }}
+                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            MenuProps={{
+                                                PaperProps: {
+                                                    style: {
+                                                        maxHeight: 200, // Set the maximum height for the dropdown
+                                                    },
+                                                },
+                                            }}
                                         >
                                             {Array.from({ length: 11 }, (_, i) => i).map((rating) => (
                                                 <MenuItem key={rating} value={rating}>{rating}</MenuItem>
@@ -695,25 +711,7 @@ const [incompleteFields, setIncompleteFields] = useState([]);
                     </Table>
                 </TableContainer>
                 <div className="navigationbuttons">
-                    {/* <Dialog open={openDialog} onClose={handleClose}>
-                        <DialogContent style={{ width: '420px' }}>
-                          
-                            <img
-                                src="https://badge-exam.miraclesoft.com/assets/ecert/Completed-test.svg"
-                                alt="not found"
-                                style={{ maxWidth: '100%', maxHeight: '200px', marginLeft: '23%' }}
-                            />
-                            <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
-                                You saved the Data.
-                            </DialogContentText>
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleClose} color="primary" style={{ color: 'Black', backgroundColor: '#d8d6d6', fontWeight: 'bolder' }}>
-                                OK
-                            </Button>
-                        </DialogActions>
-                    </Dialog> */}
-
+                 
                     <Dialog
                         open={isSaveDialogOpen}
                         onClose={() => setSaveDialogOpen(false)} // Close the dialog when needed
@@ -813,7 +811,7 @@ const [incompleteFields, setIncompleteFields] = useState([]);
 
 
 
-                    {incompleteFields.length > 0 && (
+                    {/* {incompleteFields.length > 0 && (
 
                         <Dialog open={showErrorDialog} onClose={() => setShowErrorDialog(false)}>
                             <DialogTitle>
@@ -836,7 +834,7 @@ const [incompleteFields, setIncompleteFields] = useState([]);
                         </Dialog>
 
 
-                    )}&nbsp;&nbsp;&nbsp;
+                    )}&nbsp;&nbsp;&nbsp; */}
 
 
                     <Dialog open={openDialog} onClose={handleClose}>
@@ -1275,7 +1273,7 @@ const TabsView = () => {
 
             ) : (
                 <>
-                    <br /><br /><br /><br /><br />
+                    <br /><br /><br />
             <div className="tabs-view">
                 <div className="main-tabs-container">
                     <Tabs value={selectedTab} onChange={handleChange} centered variant="scrollable" scrollButtons="auto">

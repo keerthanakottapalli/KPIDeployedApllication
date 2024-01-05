@@ -263,7 +263,7 @@ const ManagerPortal = () => {
 
         </Toolbar>
 
-      </AppBar><br /><br /> 
+      </AppBar>
       <div className='bg-container'
       >
 

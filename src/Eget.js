@@ -484,7 +484,7 @@ const Sidebar = () => {
 
 
                     <div className="sub-tabs" >
-                         
+                        <br />
                         <Tabs className='subtabs-adjust'
                             value={activeSubTab}
                             onChange={(event, newValue) => handleSubTabClick(newValue)} centered
@@ -496,11 +496,11 @@ const Sidebar = () => {
                                         key={index}
                                         label={subTab}
                                         value={subTab}
-                                        style={{ fontWeight: 'bold', fontSize: '100%' }} variant="scrollable" scrollButtons="auto"
+                                        style={{ fontWeight: 'bold', fontSize: '100%', marginLeft: '20px' }} variant="scrollable" scrollButtons="auto"
                                     />
                                 )
                             ))}
-                        </Tabs>
+                        </Tabs><br />
                         <div className='employeetable'>
                             {loading ? (
                                 <div className="loading-container">
@@ -509,7 +509,7 @@ const Sidebar = () => {
                                 </div>
 
                             ) : activeSubTab && tabsData.length > 0 ? (
-                                <TableContainer component={Paper} style={{ width: '1150px', height: '35vh', overflow: 'auto' }} >
+                                <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto' }} >
                                     <Table>
                                         <TableHead>
                                             <TableRow>
@@ -531,9 +531,7 @@ const Sidebar = () => {
                                                 </TableRow>
                                             ))}
                                         </TableBody>
-                                        <div className='employeeupdatebutton'>
-
-                                        </div>
+                                        
                                     </Table>
 
                                 </TableContainer>
@@ -549,6 +547,18 @@ const Sidebar = () => {
 
 
                         </div>
+                        <Dialog open={error} onClose={() => setError(false)}>
+                            <DialogContent style={{ width: '420px' }}>
+                                <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
+                                    Empty fields can't be updated.
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={() => setError(false)} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                    OK
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
                         <Dialog
                             open={isProfileCardOpen}
                             onClose={handleCloseProfileCard}
@@ -570,7 +580,7 @@ const Sidebar = () => {
                                                         cursor: 'pointer',
                                                         height: '120px',
                                                         width: '120px'
-                                                      }}
+                                                    }}
                                                 />
                                             )}
                                         </div>

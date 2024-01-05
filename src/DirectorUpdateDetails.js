@@ -555,6 +555,13 @@ const DirectorUpdateDetails = () => {
                                                                         handleQuantityAchievedChange(index, e.target.value);
                                                                         handleFieldChange();
                                                                     }}
+                                                                    MenuProps={{
+                                                                        PaperProps: {
+                                                                            style: {
+                                                                                maxHeight: 200, // Set the maximum height for the dropdown
+                                                                            },
+                                                                        },
+                                                                    }}
                                                                 >
                                                                     {Array.from({ length: 11 }, (_, i) => i).map((number) => (
                                                                         <MenuItem key={number} value={number}>
@@ -588,6 +595,13 @@ const DirectorUpdateDetails = () => {
                                                                     onChange={(e) => {
                                                                         handleIndexKpiChange(index, e.target.value);
                                                                         handleFieldChange();
+                                                                    }}
+                                                                    MenuProps={{
+                                                                        PaperProps: {
+                                                                            style: {
+                                                                                maxHeight: 200, // Set the maximum height for the dropdown
+                                                                            },
+                                                                        },
                                                                     }}
                                                                 >
                                                                     {Array.from({ length: 11 }, (_, i) => i).map((number) => (

@@ -11,6 +11,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useParams } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { BASE_URL } from './config';
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
 // import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -441,7 +442,7 @@ function DirectorUpdateEmpData() {
             try {
                 response = await axios.get(`${BASE_URL}/api/emp_director_data/${empId}/${selectedTitle}/${selectedItem}`);
                 responseData = response.data.data[0]; // Assuming there's only one item in the array
-                console.log(response,"444");
+                console.log(response, "444");
             } catch (error) {
                 // If employee data doesn't exist in EmployeeManagerDataKPIGet, fetch from EmployeeDataKPIGet
                 try {
@@ -770,35 +771,42 @@ function DirectorUpdateEmpData() {
                     (selectedItem && tableData.length > 0 ? (
                         <div className="dmanager-table-container">
                             <div style={{ height: '50vh', overflow: 'auto' }}>
-                                <table className="dmanager-metric-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Metric</th>
-                                            <th>Quantity Target</th>
-                                            <th>Quantity Achieved</th>
-                                            <th>Index KPI</th>
-                                            <th>Comments</th>
-                                            <th>Manager-Rating</th>
-                                            <th>Manager-Comments</th>
-                                            <th>Director-Rating</th>
-                                            <th>Director-Comments</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                <Table className="dmanager-metric-table">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell><b>Metric</b></TableCell>
+                                            <TableCell><b>Quantity Target</b></TableCell>
+                                            <TableCell><b>Quantity Achieved</b></TableCell>
+                                            <TableCell><b>Index KPI</b></TableCell>
+                                            <TableCell><b>Comments</b></TableCell>
+                                            <TableCell><b>Manager-Rating</b></TableCell>
+                                            <TableCell><b>Manager-Comments</b></TableCell>
+                                            <TableCell><b>Director-Rating</b></TableCell>
+                                            <TableCell><b>Director-Comments</b></TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
                                         {tableData.map((row, index) => (
-                                            <tr key={index}>
-                                                <td>{row.Metric}</td>
-                                                <td>{row.QuantityTarget}</td>
-                                                <td>{row.QuantityAchieved}</td>
-                                                <td>{row.IndexKpi}</td>
-                                                <td>{row.Comments}</td>
-                                                <td>{row.ManagerRating}</td>
-                                                <td>{row.ManagerComments}</td>
-                                                <td>
+                                            <TableRow key={index}>
+                                                <TableCell>{row.Metric}</TableCell>
+                                                <TableCell>{row.QuantityTarget}</TableCell>
+                                                <TableCell>{row.QuantityAchieved}</TableCell>
+                                                <TableCell>{row.IndexKpi}</TableCell>
+                                                <TableCell>{row.Comments}</TableCell>
+                                                <TableCell>{row.ManagerRating}</TableCell>
+                                                <TableCell>{row.ManagerComments}</TableCell>
+                                                <TableCell>
                                                     <Select
                                                         value={itemMetricInputData[selectedItem]?.[row.Metric]?.DRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.DRating}
                                                         onChange={(e) => handleMRatingChange(selectedItem, row.Metric, e.target.value)}
                                                         style={{ width: '100px' }}
+                                                        MenuProps={{
+                                                            PaperProps: {
+                                                                style: {
+                                                                    maxHeight: 200, // Set the maximum height for the dropdown
+                                                                },
+                                                            },
+                                                        }}
                                                     >
                                                         {Array.from({ length: 11 }, (_, i) => i).map((number) => (
                                                             <MenuItem key={number} value={number}>
@@ -806,10 +814,8 @@ function DirectorUpdateEmpData() {
                                                             </MenuItem>
                                                         ))}
                                                     </Select>
-                                                </td>
-                                                <td>
-
-
+                                                </TableCell>
+                                                <TableCell>
                                                     <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.PrasadKComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
                                                         <TextField
                                                             id="outlined-multiline-static"
@@ -821,11 +827,10 @@ function DirectorUpdateEmpData() {
                                                             }}
                                                         />
                                                     </Tooltip>
-
-                                                </td>
-                                            </tr>
+                                                </TableCell>
+                                            </TableRow>
                                         ))}
-                                    </tbody>
+                                    </TableBody>
                                     {error && (
                                         <Dialog open={error} onClose={() => setError(false)}>
                                             <DialogContent style={{ width: '420px' }}>
@@ -834,7 +839,7 @@ function DirectorUpdateEmpData() {
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions>
-                                                <Button onClick={() => setError(false)} variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'10px', marginRight:'10px'}}>
+                                                <Button onClick={() => setError(false)} variant="contained" style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
                                                     OK
                                                 </Button>
                                             </DialogActions>
@@ -847,12 +852,12 @@ function DirectorUpdateEmpData() {
                                             </DialogContentText>
                                         </DialogContent>
                                         <DialogActions>
-                                            <Button onClick={() => setIncompleteItemsDialogOpen(false)} variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'10px', marginRight:'10px'}}>
+                                            <Button onClick={() => setIncompleteItemsDialogOpen(false)} variant="contained" style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
                                                 OK
                                             </Button>
                                         </DialogActions>
                                     </Dialog>
-                                </table>
+                                </Table>
                             </div>
                             <div className="Dmanager-button">
                                 <Button
@@ -868,7 +873,7 @@ function DirectorUpdateEmpData() {
                                     variant="contained"
                                     color="primary"
                                     onClick={openConfirmationDialog}
-                                    style={{ marginRight: '70px' }}
+                                    style={{ marginRight: '80px' }}
                                     disabled={!isSubmitEnabled || isFetchingData}
                                 >
                                     Submit
@@ -886,10 +891,10 @@ function DirectorUpdateEmpData() {
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={closeConfirmationDialog} variant='contained' style={{backgroundColor:'#00aaee',}}>
+                                        <Button onClick={closeConfirmationDialog} variant='contained' style={{ backgroundColor: '#00aaee', }}>
                                             Cancel
                                         </Button>
-                                        <Button onClick={handleSubmit} variant='contained' style={{backgroundColor:'#00aaee',}} autoFocus>
+                                        <Button onClick={handleSubmit} variant='contained' style={{ backgroundColor: '#00aaee', }} autoFocus>
                                             Confirm
                                         </Button>
                                     </DialogActions>
@@ -904,7 +909,7 @@ function DirectorUpdateEmpData() {
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={closeSuccessDialog} variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'10px', marginRight:'10px'}}>
+                                        <Button onClick={closeSuccessDialog} variant='contained' style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
                                             OK
                                         </Button>
                                     </DialogActions>
@@ -923,118 +928,118 @@ function DirectorUpdateEmpData() {
                     )}
             </div>
             <Dialog
-                            open={isProfileCardOpen}
-                            onClose={handleCloseProfileCard}
-                            fullWidth // Makes the dialog take up the full width of its container
-                            maxWidth="sm" // Sets the maximum width of the dialog
-                        >
-                            <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
-                            <DialogContent style={{ height: '400px' }}>
-                                {/* Display user profile information */}
-                                {registrations.map((registration) => (
-                                    registration.Firstname === firstname && (
-                                        <div onClick={handleToggleImagePreview}>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile"
-                                                    style={{
-                                                        borderRadius: "50%",
-                                                        cursor: 'pointer',
-                                                        height: '120px',
-                                                        width: '120px'
-                                                      }}
-                                                />
-                                            )}
-                                        </div>
-                                    )
-                                ))}<br />
-                                {userData && (
-                                    <>
-
-
-                                        <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
-                                            <div style={{ marginRight: '20px' }}>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
-                                                </p>
-                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
-                                                </p>
-
-                                            </div>
-                                        </div>
-
-
-                                    </>
+                open={isProfileCardOpen}
+                onClose={handleCloseProfileCard}
+                fullWidth // Makes the dialog take up the full width of its container
+                maxWidth="sm" // Sets the maximum width of the dialog
+            >
+                <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
+                <DialogContent style={{ height: '400px' }}>
+                    {/* Display user profile information */}
+                    {registrations.map((registration) => (
+                        registration.Firstname === firstname && (
+                            <div onClick={handleToggleImagePreview}>
+                                {registration.Image && (
+                                    <img
+                                        src={registration.Image}
+                                        alt="Profile"
+                                        style={{
+                                            borderRadius: "50%",
+                                            cursor: 'pointer',
+                                            height: '120px',
+                                            width: '120px'
+                                        }}
+                                    />
                                 )}
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                                    Close
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-                        <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
-                            <DialogContent>
-                                {registrations.map((registration) => (
-                                    registration.Firstname === firstname && (
-                                        <div>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile Preview"
-                                                    style={{
-                                                        maxWidth: '100%',
-                                                        maxHeight: '100%',
-                                                    }}
-                                                />
-                                            )}
-                                        </div>
-                                    )
-                                ))}
-                            </DialogContent>
-                        </Dialog>
-                        <div style={{ marginLeft: "114%", }}>
-                            <Dialog open={openDialog} onClose={handleClose}>
-                                <DialogContent style={{ width: '420px' }}>
-                                    <div style={{ textAlign: 'center' }}>
-                                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQei9oRhpKFTpI-R1V4z01fnLWzuZRA58w2Xw&usqp=CAU' alt='not found' />
-                                    </div>
+                            </div>
+                        )
+                    ))}<br />
+                    {userData && (
+                        <>
 
-                                    <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: 'black' }}>
-                                        Fields Updated Successfully.
-                                    </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={handleClose} color="primary">
-                                        OK
-                                    </Button>
-                                </DialogActions>
-                            </Dialog>
+
+                            <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
+                                <div style={{ marginRight: '20px' }}>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
+                                    </p>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
+                                    </p>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
+                                    </p>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
+                                    </p>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
+                                    </p>
+                                </div>
+                                <div>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
+                                    </p>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
+                                    </p>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
+                                    </p>
+                                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                        <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+                        </>
+                    )}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
+                <DialogContent>
+                    {registrations.map((registration) => (
+                        registration.Firstname === firstname && (
+                            <div>
+                                {registration.Image && (
+                                    <img
+                                        src={registration.Image}
+                                        alt="Profile Preview"
+                                        style={{
+                                            maxWidth: '100%',
+                                            maxHeight: '100%',
+                                        }}
+                                    />
+                                )}
+                            </div>
+                        )
+                    ))}
+                </DialogContent>
+            </Dialog>
+            <div style={{ marginLeft: "114%", }}>
+                <Dialog open={openDialog} onClose={handleClose}>
+                    <DialogContent style={{ width: '420px' }}>
+                        <div style={{ textAlign: 'center' }}>
+                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQei9oRhpKFTpI-R1V4z01fnLWzuZRA58w2Xw&usqp=CAU' alt='not found' />
+                        </div>
+
+                        <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: 'black' }}>
+                            Fields Updated Successfully.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            OK
+                        </Button>
+                    </DialogActions>
+                </Dialog>
 
 
             </div>

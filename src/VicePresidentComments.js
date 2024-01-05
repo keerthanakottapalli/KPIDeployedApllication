@@ -787,7 +787,7 @@ function ManagerUpdateEmpData() {
                                         to={`/VpDComments/${empId}`}
                                         style={{ backgroundColor: '#1dbb99' }}
                                     >
-                                        Update Details
+                                        Director Ratings
                                     </Button>
 
                                 </div>

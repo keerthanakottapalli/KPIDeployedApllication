@@ -63,6 +63,10 @@ border-radius: 5px;
   font-weight: bold;
  
 }
+.incomplete-field {
+  border: 2px solid red; /* or any other red color */
+  border-radius: 5px; /* adjust as needed */
+}
 
 .userInfo {
   display: flex;

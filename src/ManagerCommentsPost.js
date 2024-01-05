@@ -14,6 +14,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import { BASE_URL } from './config';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { Paper } from '@material-ui/core';
 
 
 function CollapsibleSection({ icon, title, items, isExpanded, onItemClick, redItems, toggleExpanded }) {
@@ -373,56 +374,56 @@ function ManagerUpdateEmpData() {
                 </Toolbar>
             </AppBar>
 
-            <div className="full-height-container">
-                <div className="manager-sidenav" style={{ position: 'fixed', height: '100%', overflowY: 'auto' }}>
-                    {sections.map((section, index) => (
-                        <CollapsibleSection
-                            key={index}
-                            title={section.title}
-                            items={section.items}
-                            isExpanded={section.isExpanded}
-                            onItemClick={section.isExpanded ? handleItemClick : () => handleSectionClick(index)}
-                            style={{ color: 'white', fontWeight: 'bolder', fontSize: '40px' }}
-                        />
-                    ))}
-                </div>
 
-                <div className="table-container">
-                    {loading ? (
-                        <div className="loading-container">
-                            <div className="loading-text">Loading...</div>
-                            <div className="loading-spinner"></div>
-                        </div>
+            <div className="manager-sidenav" style={{ position: 'fixed', height: '100%', overflowY: 'auto' }}>
+                {sections.map((section, index) => (
+                    <CollapsibleSection
+                        key={index}
+                        title={section.title}
+                        items={section.items}
+                        isExpanded={section.isExpanded}
+                        onItemClick={section.isExpanded ? handleItemClick : () => handleSectionClick(index)}
+                        style={{ color: 'white', fontWeight: 'bolder', fontSize: '40px' }}
+                    />
+                ))}
+            </div>
+            <br /><br /><br /><br /><br /><br />
+            <div className='employeetable'>
+                {loading ? (
+                    <div className="loading-container">
+                        <div className="loading-text">Loading...</div>
+                        <div className="loading-spinner"></div>
+                    </div>
 
-                    ) : (selectedItem && tableData.length > 0 ? (
-                        <>
-                            <TableContainer style={{ height: '60vh', overflow: 'auto' }}>
-                                <Table className="metric-table" style={{ width: '60vw' }}>
+                ) : (selectedItem && tableData.length > 0 ? (
+                    <>
+                        <div>
+                            <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto', marginLeft: '50px' }}>
+                                <Table >
                                     <TableHead>
                                         <TableRow>
-                                            <TableCell>Metric</TableCell>
-                                            <TableCell>Quantity Target</TableCell>
-                                            <TableCell>Quantity Achieved</TableCell>
-                                            <TableCell>Index KPI</TableCell>
-                                            <TableCell>Comments</TableCell>
-
+                                            <TableCell style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
+                                            <TableCell style={{ fontSize: "100%",textAlign:'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
+                                            <TableCell style={{ fontSize: "100%",textAlign:'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
+                                            <TableCell style={{ fontSize: "100%",textAlign:'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Index KPI</TableCell>
+                                            <TableCell style={{ fontSize: "100%",textAlign:'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Comments</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {tableData.map((row, index) => (
                                             <TableRow key={index}>
-                                                <TableCell>{row.Metric}</TableCell>
-                                                <TableCell>{row.QuantityTarget}</TableCell>
-                                                <TableCell>{row.QuantityAchieved}</TableCell>
-                                                <TableCell>{row.IndexKpi}</TableCell>
-                                                <TableCell>{row.Comments}</TableCell>
+                                                <TableCell >{row.Metric}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>{row.QuantityTarget}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>{row.QuantityAchieved}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>{row.IndexKpi}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>{row.Comments}</TableCell>
 
                                             </TableRow>
                                         ))}
                                     </TableBody>
                                 </Table>
                             </TableContainer>
-                            <div className="button-container">
+                            <div className="button-container" style={{ textAlign: 'left' }}>
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -440,36 +441,37 @@ function ManagerUpdateEmpData() {
                                 >
                                     Manager Ratings
                                 </Button>
-
                             </div>
-                            <Dialog open={openDialog} onClose={handleCloseDialog}>
-                                <DialogTitle>Confirm Decline</DialogTitle>
-                                <DialogContent>
-                                    <DialogContentText style={{color:'black'}}>
-                                        Are you sure you want to Decline?
-                                    </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={handleCloseDialog} color="primary" variant="contained">
-                                        Cancel
-                                    </Button>
-                                    <Button onClick={handleDeclineClick} color="primary" variant="contained">
-                                        Confirm
-                                    </Button>
-                                </DialogActions>
-                            </Dialog>
 
-                        </>
-
-                    ) : (
-                        <div className="no-data-messages" style={{ color: '#0d4166' }}>
-                            No data available for the selected User.
                         </div>
-                    )
-                    )}
-                </div>
+                        <Dialog open={openDialog} onClose={handleCloseDialog}>
+                            <DialogTitle>Confirm Decline</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText style={{ color: 'black' }}>
+                                    Are you sure you want to Decline?
+                                </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                                <Button onClick={handleCloseDialog} color="primary" variant="contained">
+                                    Cancel
+                                </Button>
+                                <Button onClick={handleDeclineClick} color="primary" variant="contained">
+                                    Confirm
+                                </Button>
+                            </DialogActions>
+                        </Dialog>
 
+                    </>
+
+                ) : (
+                    <div className="no-data-messages" style={{ color: '#0d4166' }}>
+                        No data available for the selected User.
+                    </div>
+                )
+                )}
             </div>
+
+
         </>
     );
 }

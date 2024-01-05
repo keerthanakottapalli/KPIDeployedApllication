@@ -17,10 +17,10 @@
 }
 
 .dmanager-table-container {
-    width: 80%;
+    width: 75%;
     padding: 0px;
     overflow-x: auto;
-    margin-left: 25vw;
+    margin-left: 20vw;
     margin-top: 20vh;
 
 }
@@ -55,9 +55,9 @@
 }
 
 .Dmanager-button{
-    margin-top: 10px;
+    margin-top: -20px;
     text-align: right;
-    margin-right: 10vw;
+    /* margin-right: 5vw; */
 }
 .nav-toggle-icon {
     display: none; 

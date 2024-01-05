@@ -668,6 +668,13 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'quantityAchieved')}
                                             sx={{ minWidth: '120px' }}
+                                            MenuProps={{
+                                                PaperProps: {
+                                                    style: {
+                                                        maxHeight: 200, // Set the maximum height for the dropdown
+                                                    },
+                                                },
+                                            }}
                                         >
                                             <MenuItem value={null}> </MenuItem>
                                             {Array.from({ length: 11 }, (_, i) => (
@@ -693,6 +700,13 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'indexKpi')}
                                             sx={{ minWidth: '120px' }}
+                                            MenuProps={{
+                                                PaperProps: {
+                                                    style: {
+                                                        maxHeight: 200, // Set the maximum height for the dropdown
+                                                    },
+                                                },
+                                            }}
                                         >
                                             {Array.from({ length: 11 }, (_, i) => i).map((rating) => (
                                                 <MenuItem key={rating} value={rating}>{rating}</MenuItem>
