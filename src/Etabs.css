@@ -76,6 +76,12 @@ border-radius: 5px;
   width: 100%;
 }
 
+.navigation-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed; 
+}
+
+
 .username-style {
   font-size: 1.5rem;
   margin: 0;

@@ -18,6 +18,7 @@ import { BASE_URL } from './config';
 import CloseIcon from '@mui/icons-material/Close';
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
+import { Logout } from '@mui/icons-material';
 
 
 const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, tabLabels, subTabsData }) => {
@@ -683,14 +684,14 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
                                     <TableCell>
                                         <Tooltip title={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments} classes={{ tooltip: 'custom-tooltip' }}>
-                                        <TextField
-                                            value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments}
-                                            multiline
-                                            rows={1}
-                                            onChange={(event) => handleCommentChange(event, questionIndex)}
-                                            label="Comments"
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
-                                        />
+                                            <TextField
+                                                value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments}
+                                                multiline
+                                                rows={1}
+                                                onChange={(event) => handleCommentChange(event, questionIndex)}
+                                                label="Comments"
+                                                className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            />
                                         </Tooltip>
                                     </TableCell>
                                     <TableCell>
@@ -765,7 +766,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
                     <button
-                        className="navigation-button"
+                        className={`navigation-button${selectedTab === 0 && selectedSubTab === 0 ? ' disabled' : ''}`}
                         onClick={() => {
                             if (selectedSubTab > 0) {
                                 // If there's a previous subtab, go to it
@@ -783,8 +784,11 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                     >
                         &lt; Previous
                     </button>
+
+
+
                     <button
-                        className="navigation-button"
+                        className={`navigation-button${selectedTab === tabLabels.length - 1 && selectedSubTab === subTabData.length - 1 ? ' disabled' : ''}`}
                         style={{ width: '100px', height: '50px' }}
                         onClick={() => {
                             const incompleteFields = checkSubTabCompletion();
@@ -802,19 +806,15 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 }
                             } else {
                                 setIncompleteFields(incompleteFields);
-
-                                // Show the error dialog for 3 seconds
+                                // Show the error dialog or take other actions
                                 // setShowErrorDialog(true);
-
                             }
                         }}
-                        disabled={
-                            selectedTab === tabLabels.length - 1 &&
-                            selectedSubTab === subTabData.length - 1
-                        }
+                        disabled={selectedTab === tabLabels.length - 1 && selectedSubTab === subTabData.length - 1}
                     >
                         Next &gt;
                     </button>
+
 
 
                     {/* {incompleteFields.length > 0 && (
@@ -1158,7 +1158,7 @@ const TabsView = () => {
     );
 
     const handleLogout = () => {
-        window.location.href = '/eview';
+        window.location.href = '/login';
     };
 
     const [mainTabRatings, setMainTabRatings] = useState(initialMainTabRatings);
@@ -1261,9 +1261,9 @@ const TabsView = () => {
                             </MenuItem>
                             <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
-                                    <ExitToApp />
+                                    <Logout />
                                 </ListItemIcon>
-                                Goback
+                                Logout
                             </MenuItem>
                         </Menu>
                     </Box>

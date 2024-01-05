@@ -863,7 +863,7 @@ function DirectorUpdateEmpData() {
                                 <Button
 
                                     variant="contained"
-                                    style={{ marginRight: '30px', backgroundColor: '#1dbb99' }}
+                                    style={{ marginRight: '20px', backgroundColor: '#1dbb99' }}
                                     onClick={handleUpdateButtonClick}
 
                                 >

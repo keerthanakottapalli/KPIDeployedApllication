@@ -59,7 +59,7 @@ function ManagerUpdateEmpData() {
     const [showImagePreview, setShowImagePreview] = useState(false);
 
     const { empId } = useParams();
-   
+
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -250,7 +250,7 @@ function ManagerUpdateEmpData() {
 
 
 
-    
+
     // Use useEffect to validate incomplete items when moving to the next title section
     const [incompleteItems, setIncompleteItems] = useState([]);
     const [incompleteItemsDialogOpen, setIncompleteItemsDialogOpen] = useState(false);
@@ -441,9 +441,9 @@ function ManagerUpdateEmpData() {
         if (!itemData) {
             return true; // If data for this item doesn't exist, it's missing
         }
-    
+
         const missingItems = [];
-    
+
         for (const metricKey of Object.keys(itemData)) {
             const metricData = itemData[metricKey];
             if (metricData.MRating === null || metricData.JohnVesliChComments.trim() === '') {
@@ -454,15 +454,15 @@ function ManagerUpdateEmpData() {
                 });
             }
         }
-    
+
         if (missingItems.length > 0) {
             console.log(missingItems, "Items with missing data");
             return true; // If any item has missing data, return true
         }
-    
+
         return false; // All values are filled for this item
     };
-    
+
 
     useEffect(() => {
         fetchData();
@@ -471,7 +471,7 @@ function ManagerUpdateEmpData() {
 
 
 
-    
+
     const fetchData = async () => {
         if (!empId) return;
 
@@ -480,16 +480,16 @@ function ManagerUpdateEmpData() {
             let responseData;
 
             try {
-               
+
                 response = await axios.get(`${BASE_URL}/api/director_manager_data/${empId}/${selectedTitle}/${selectedItem}`);
                 responseData = response.data.data[0];
-               
+
             } catch (error) {
 
                 try {
                     response = await axios.get(`${BASE_URL}/api/director_data/${empId}/${selectedTitle}/${selectedItem}`);
                     responseData = response.data.data[0];
-                    console.log(responseData,'333');
+                    console.log(responseData, '333');
                 } catch (error) {
                     responseData = null;
                 }
@@ -814,8 +814,8 @@ function ManagerUpdateEmpData() {
                 </Toolbar>
             </AppBar>
 
-            <div className="full-height-container">
-                <div className="manager-sidenav" style={{ position: 'fixed', height: '100%', overflowY: 'auto' }}>
+            <div className="page-container">
+                <div className="Dmanager-sidenav">
                     {sections.map((section, index) => (
                         <CollapsibleSection
                             key={index}
@@ -823,196 +823,199 @@ function ManagerUpdateEmpData() {
                             items={section.items}
                             isExpanded={section.isExpanded}
                             onItemClick={section.isExpanded ? handleItemClick : () => handleSectionClick(index)}
-                            style={{ color: 'white', fontWeight: 'bolder', fontSize: '40px' }}
                         />
                     ))}
                 </div>
 
-                <div className="table-container">
-                    {loading ? (
-                        <div className="loading-container">
-                            <div className="loading-text">Loading...</div>
-                            <div className="loading-spinner"></div>
-                        </div>
 
-                    ) : (selectedItem && tableData.length > 0 ? (
-                        <>
-                            <TableContainer style={{ height: '60vh', overflow: 'auto' }}>
-                                <Table className="metric-table" style={{ width: '60vw' }}>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell>Metric</TableCell>
-                                            <TableCell>Quantity Target</TableCell>
-                                            <TableCell>Quantity Achieved</TableCell>
-                                            <TableCell>Index KPI</TableCell>
-                                            <TableCell>Comments</TableCell>
-                                            <TableCell>Vice President-Rating</TableCell>
-                                            <TableCell>Vice President-Comments</TableCell>
-                                        </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {tableData.map((row, index) => (
-                                            <TableRow key={index}>
-                                                <TableCell>{row.Metric}</TableCell>
-                                                <TableCell>{row.QuantityTarget}</TableCell>
-                                                <TableCell>{row.QuantityAchieved}</TableCell>
-                                                <TableCell>{row.IndexKpi}</TableCell>
-                                                <TableCell>{row.Comments}</TableCell>
-                                                <TableCell>
-                                                    <Select
-                                                        value={itemMetricInputData[selectedItem]?.[row.Metric]?.MRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.MRating}
+                {loading ? (
+                    <div className="loading-container">
+                        <div className="loading-text">Loading...</div>
+                        <div className="loading-spinner"></div>
+                    </div>
 
-                                                        // value={
-                                                        //     itemMetricInputData[selectedItem]?.[row.Metric]?.MRating || ''}
-                                                        onChange={(e) => {
-                                                            handleMRatingChange(selectedItem, row.Metric, e.target.value);
 
-                                                        }
+                ) : (selectedItem && tableData.length > 0 ? (
+                    <div className="dmanager-table-container">
+                        <div style={{ height: '50vh', overflow: 'auto' }}>
 
-                                                        }
-                                                        style={{ width: '100px' }}
-                                                        MenuProps={{
-                                                            PaperProps: {
-                                                                style: {
-                                                                    maxHeight: 200, // Set the maximum height for the dropdown
-                                                                },
+                            <Table className="dmanager-metric-table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell><b>Metric</b></TableCell>
+                                        <TableCell><b>Quantity Target</b></TableCell>
+                                        <TableCell><b>Quantity Achieved</b></TableCell>
+                                        <TableCell><b>Index KPI</b></TableCell>
+                                        <TableCell><b>Comments</b></TableCell>
+                                        <TableCell><b>Vice President-Rating</b></TableCell>
+                                        <TableCell><b>Vice President-Comments</b></TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {tableData.map((row, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>{row.Metric}</TableCell>
+                                            <TableCell>{row.QuantityTarget}</TableCell>
+                                            <TableCell>{row.QuantityAchieved}</TableCell>
+                                            <TableCell>{row.IndexKpi}</TableCell>
+                                            <TableCell>{row.Comments}</TableCell>
+                                            <TableCell>
+                                                <Select
+                                                    value={itemMetricInputData[selectedItem]?.[row.Metric]?.MRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.MRating}
+
+                                                    // value={
+                                                    //     itemMetricInputData[selectedItem]?.[row.Metric]?.MRating || ''}
+                                                    onChange={(e) => {
+                                                        handleMRatingChange(selectedItem, row.Metric, e.target.value);
+
+                                                    }
+
+                                                    }
+                                                    style={{ width: '100px' }}
+                                                    MenuProps={{
+                                                        PaperProps: {
+                                                            style: {
+                                                                maxHeight: 200, // Set the maximum height for the dropdown
                                                             },
+                                                        },
+                                                    }}
+                                                >
+                                                    {Array.from({ length: 11 }, (_, i) => i).map((number) => (
+                                                        <MenuItem key={number} value={number}>
+                                                            {number}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
+                                                    <TextField
+                                                        id="outlined-multiline-static"
+                                                        multiline
+                                                        rows={1}
+                                                        value={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''}
+                                                        onChange={(e) => {
+                                                            handleCommentsChange(selectedItem, row.Metric, e.target.value);
                                                         }}
-                                                    >
-                                                        {Array.from({ length: 11 }, (_, i) => i).map((number) => (
-                                                            <MenuItem key={number} value={number}>
-                                                                {number}
-                                                            </MenuItem>
-                                                        ))}
-                                                    </Select>
-                                                </TableCell>
-                                                <TableCell>
-                                                    <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
-                                                        <TextField
-                                                            id="outlined-multiline-static"
-                                                            multiline
-                                                            rows={1}
-                                                            value={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''}
-                                                            onChange={(e) => {
-                                                                handleCommentsChange(selectedItem, row.Metric, e.target.value);
-                                                            }}
-                                                        />
-                                                    </Tooltip>
+                                                    />
+                                                </Tooltip>
 
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                    {error && (
-                                        <Dialog open={error} onClose={() => setError(false)}>
-                                            <DialogContent style={{ width: '420px' }}>
-                                                <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
-                                                    {error}
-                                                </DialogContentText>
-                                            </DialogContent>
-                                            <DialogActions>
-                                                <Button onClick={() => setError(false)} color="primary">
-                                                    OK
-                                                </Button>
-                                            </DialogActions>
-                                        </Dialog>
-                                    )}
-
-
-                                    <Dialog open={incompleteItemsDialogOpen} onClose={() => setIncompleteItemsDialogOpen(false)}>
-                                        <DialogContent>
-                                            <DialogContentText>
-                                                Please fill in Manager Rating and Manager Comments for the following items: {incompleteItems.join(', ')}
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                                {error && (
+                                    <Dialog open={error} onClose={() => setError(false)}>
+                                        <DialogContent style={{ width: '420px' }}>
+                                            <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
+                                                {error}
                                             </DialogContentText>
                                         </DialogContent>
                                         <DialogActions>
-                                            <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
+                                            <Button onClick={() => setError(false)} color="primary">
                                                 OK
                                             </Button>
                                         </DialogActions>
                                     </Dialog>
+                                )}
 
-                                </Table>
-                            </TableContainer>
-                            <div className="mcomments-buttons">
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={handleUpdateButtonClick}
 
-                                >
-                                    Update
-                                </Button>
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={openConfirmationDialog}
-                                    style={{ marginLeft: '20px' }}
-                                    disabled={!isSubmitEnabled || isFetchingData}
-                                >
-                                    Submit
-                                </Button>
-                                <Dialog
-                                    open={isConfirmationDialogOpen}
-                                    onClose={closeConfirmationDialog}
-                                    aria-labelledby="alert-dialog-title"
-                                    aria-describedby="alert-dialog-description"
-                                >
-                                    <DialogTitle id="alert-dialog-title">Confirm Submission</DialogTitle>
-                                    <DialogContent>
-                                        <DialogContentText id="alert-dialog-description">
-                                            Are you sure you want to submit the form?
-                                        </DialogContentText>
-                                    </DialogContent>
-                                    <DialogActions>
-                                        <Button onClick={closeConfirmationDialog} color="primary">
-                                            Cancel
-                                        </Button>
-                                        <Button onClick={handleSubmit} color="primary" autoFocus>
-                                            Confirm
-                                        </Button>
-                                    </DialogActions>
-                                </Dialog>
-                                <Dialog
-                                    open={isSuccessDialogOpen}
-                                    onClose={closeSuccessDialog}
-                                >
+                                <Dialog open={incompleteItemsDialogOpen} onClose={() => setIncompleteItemsDialogOpen(false)}>
                                     <DialogContent>
                                         <DialogContentText>
-                                            Your form has been successfully submitted!
+                                            Please fill in Manager Rating and Manager Comments for the following items: {incompleteItems.join(', ')}
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={closeSuccessDialog} color="primary">
+                                        <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
                                             OK
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
 
-                                <Dialog open={openDialog} onClose={handleClose}>
-                                    <DialogContent style={{ width: '420px' }}>
+                            </Table>
 
-                                        <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: 'black' }}>
-                                            Fields Updated Successfully.
-                                        </DialogContentText>
-                                    </DialogContent>
-                                    <DialogActions>
-                                        <Button onClick={handleClose} color="primary">
-                                            OK
-                                        </Button>
-                                    </DialogActions>
-                                </Dialog>
+                        </div>
+                        <div className="Dmanager-button">
+                            <Button
+
+                                variant="contained"
+                                style={{ marginRight: '20px', backgroundColor: '#1dbb99' }}
+                                onClick={handleUpdateButtonClick}
+
+                            >
+                                Update
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={openConfirmationDialog}
+                                style={{ marginRight: '80px' }}
+                                disabled={!isSubmitEnabled || isFetchingData}
+                            >
+                                Submit
+                            </Button>
+                            <Dialog
+                                open={isConfirmationDialogOpen}
+                                onClose={closeConfirmationDialog}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                                <DialogTitle id="alert-dialog-title">Confirm Submission</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText id="alert-dialog-description">
+                                        Are you sure you want to submit the form?
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={closeConfirmationDialog} color="primary">
+                                        Cancel
+                                    </Button>
+                                    <Button onClick={handleSubmit} color="primary" autoFocus>
+                                        Confirm
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+                            <Dialog
+                                open={isSuccessDialogOpen}
+                                onClose={closeSuccessDialog}
+                            >
+                                <DialogContent>
+                                    <DialogContentText>
+                                        Your form has been successfully submitted!
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={closeSuccessDialog} color="primary">
+                                        OK
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+
+                            <Dialog open={openDialog} onClose={handleClose}>
+                                <DialogContent style={{ width: '420px' }}>
+
+                                    <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: 'black' }}>
+                                        Fields Updated Successfully.
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleClose} color="primary">
+                                        OK
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
 
 
-                            </div>
-                        </>
-                    ) : (
-                        <div style={{color:'#0d4166'}}>
-                              No Data Found Here.
-                        </div> 
-                    )
-                    )}
-                </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div style={{ color: '#0d4166' }}>
+                        No Data Found Here.
+                    </div>
+                )
+                )}
+
 
             </div>
         </>

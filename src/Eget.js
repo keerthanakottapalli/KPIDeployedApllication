@@ -12,6 +12,7 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from './config';
+import { Logout } from '@mui/icons-material';
 
 
 const Sidebar = () => {
@@ -347,7 +348,7 @@ const Sidebar = () => {
 
 
     const handleLogout = () => {
-        window.location.href = '/eview';
+        window.location.href = '/login';
     };
 
 
@@ -455,9 +456,9 @@ const Sidebar = () => {
 
                                 <MenuItem onClick={handleLogout}>
                                     <ListItemIcon>
-                                        <ArrowBackIcon />
+                                        <Logout />
                                     </ListItemIcon>
-                                    GoBack
+                                    Logout
                                 </MenuItem>
                             </Menu>
                         </Box>

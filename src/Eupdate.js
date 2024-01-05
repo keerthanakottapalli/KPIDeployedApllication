@@ -13,6 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from './config';
 import axios from 'axios';
+import { Logout } from '@mui/icons-material';
 
 
 const Sidebar = () => {
@@ -383,10 +384,7 @@ const Sidebar = () => {
 
 
     const handleLogout = () => {
-        // localStorage.removeItem('form_data');
-        // localStorage.removeItem('token');
-        // Redirect to the login page (replace '/login' with your login route)
-        window.location.href = '/eview';
+        window.location.href = '/login';
     };
 
 
@@ -494,9 +492,9 @@ const Sidebar = () => {
 
                                 <MenuItem onClick={handleLogout}>
                                     <ListItemIcon>
-                                        <ArrowBackIcon />
+                                        <Logout />
                                     </ListItemIcon>
-                                    GoBack
+                                    Logout
                                 </MenuItem>
                             </Menu>
                         </Box>

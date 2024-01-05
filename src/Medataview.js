@@ -19,6 +19,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 import './Medataview.css';
 import { BASE_URL } from './config';
+import { Logout } from '@mui/icons-material';
 
 const ManagerPortal = () => {
   const [employeesData, setEmployeesData] = useState([]);
@@ -152,7 +153,7 @@ const ManagerPortal = () => {
 
 
   const handleLogout = () => {
-    window.location.href = '/mview';
+    window.location.href = '/logout';
   };
 
 
@@ -254,9 +255,9 @@ const ManagerPortal = () => {
 
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
-                  <ArrowBackIcon />
+                  <Logout />
                 </ListItemIcon>
-                GoBack
+                Logout
               </MenuItem>
             </Menu>
           </Box>

@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
-import { Box, IconButton, ListItem, ListItemIcon, Menu } from '@material-ui/core';
+import { Box, IconButton, ListItem, ListItemIcon, Menu, Paper } from '@material-ui/core';
 
 
 function CollapsibleSection({ icon, title, items, isExpanded, onItemClick, redItems, toggleExpanded }) {
@@ -51,9 +51,7 @@ function ManagerUpdateEmpData() {
     const [loading, setLoading] = useState(true);
     const [registrations, setRegistrations] = useState([]);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
     const [anchorElNav, setAnchorElNav] = React.useState(null);
-
     const [isProfileCardOpen, setIsProfileCardOpen] = useState(false);
     const [userData, setUserData] = useState(null); // State to store user data
     const [selectedImage, setSelectedImage] = useState(null);
@@ -252,12 +250,6 @@ function ManagerUpdateEmpData() {
     };
 
 
-
-
-
-
-
-
     const handleSectionClick = async (index) => {
         // Validate incomplete items when moving to the next title section
 
@@ -306,17 +298,8 @@ function ManagerUpdateEmpData() {
 
 
 
-
-    const [metricInputData, setMetricInputData] = useState({});
-    const [itemInputData, setItemInputData] = useState({});
-
     const [itemMetricInputData, setItemMetricInputData] = useState({});
     const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
-
-
-
-
-
 
 
     const areAllItemsFilled = () => {
@@ -516,15 +499,6 @@ function ManagerUpdateEmpData() {
     };
 
 
-
-
-
-    const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
-    const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
-
-
-
-
     const [relatedEmpmail, setRelatedEmpmail] = useState('');
 
     useEffect(() => {
@@ -721,7 +695,7 @@ function ManagerUpdateEmpData() {
                 <ChangePassword />
 
             ) : (
-                <div className="full-height-container">
+                <div >
                     <div className="manager-sidenav" style={{ position: 'fixed', height: '100%', overflowY: 'auto' }}>
                         {sections.map((section, index) => (
                             <CollapsibleSection
@@ -734,8 +708,8 @@ function ManagerUpdateEmpData() {
                             />
                         ))}
                     </div>
-
-                    <div className="table-container">
+                    <br /><br /><br /><br /><br /><br />
+                    <div className='employeetable'>
                         {loading ? (
                             <div className="loading-container">
                                 <div className="loading-text">Loading...</div>
@@ -744,31 +718,29 @@ function ManagerUpdateEmpData() {
 
                         ) : (selectedItem && tableData.length > 0 ? (
                             <>
-                                <TableContainer style={{ height: '60vh', overflow: 'auto' }}>
-                                    <Table className="metric-table" style={{ width: '60vw' }}>
+                                <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto', marginLeft: '50px' }}>
+                                    <Table >
                                         <TableHead>
                                             <TableRow>
-                                                <TableCell>Metric</TableCell>
-                                                <TableCell>Quantity Target</TableCell>
-                                                <TableCell>Quantity Achieved</TableCell>
-                                                <TableCell>Index KPI</TableCell>
-                                                <TableCell>Comments</TableCell>
-
+                                                <TableCell style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
+                                                <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
+                                                <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
+                                                <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Index KPI</TableCell>
+                                                <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Comments</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {tableData.map((row, index) => (
                                                 <TableRow key={index}>
-                                                    <TableCell>{row.Metric}</TableCell>
-                                                    <TableCell>{row.QuantityTarget}</TableCell>
-                                                    <TableCell>{row.QuantityAchieved}</TableCell>
-                                                    <TableCell>{row.IndexKpi}</TableCell>
-                                                    <TableCell>{row.Comments}</TableCell>
+                                                    <TableCell >{row.Metric}</TableCell>
+                                                    <TableCell style={{ textAlign: 'center' }}>{row.QuantityTarget}</TableCell>
+                                                    <TableCell style={{ textAlign: 'center' }}>{row.QuantityAchieved}</TableCell>
+                                                    <TableCell style={{ textAlign: 'center' }}>{row.IndexKpi}</TableCell>
+                                                    <TableCell style={{ textAlign: 'center' }}>{row.Comments}</TableCell>
 
                                                 </TableRow>
                                             ))}
                                         </TableBody>
-
                                     </Table>
                                 </TableContainer>
                                 <div className="button-container">

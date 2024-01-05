@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { BASE_URL } from './config';
+import { Logout } from '@mui/icons-material';
 
 const Sidebar = () => {
     // const tabs = [
@@ -343,7 +344,7 @@ const Sidebar = () => {
 
     const handleLogout = () => {
 
-        window.location.href = '/mview';
+        window.location.href = '/login';
     };
 
     const firstname = localStorage.getItem('firstname');
@@ -447,9 +448,9 @@ const Sidebar = () => {
 
                                 <MenuItem onClick={handleLogout}>
                                     <ListItemIcon>
-                                        <ArrowBackIcon />
+                                        <Logout />
                                     </ListItemIcon>
-                                    GoBack
+                                    Logout
                                 </MenuItem>
                             </Menu>
                         </Box>
