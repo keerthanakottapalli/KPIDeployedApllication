@@ -56,6 +56,8 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
     const [isDownloadDialogOpen, setDownloadDialogOpen] = useState(false);
+    const [isDownloadButtonVisible, setDownloadButtonVisible] = useState(false);
+    const [isSubmitButtonVisible, setSubmitButtonVisible] = useState(true); // Initially visible
 
     const openConfirmationDialog = () => {
         setConfirmationDialogOpen(true);
@@ -75,6 +77,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
     const closeDownloadDialog = () => {
         setDownloadDialogOpen(false);
+        navigate('/mview')
     };
 
     const selectedTabData = subTabsData[tabLabels[selectedTab]];
@@ -106,8 +109,9 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     const navigate = useNavigate();
     const handleClose = () => {
         setOpenDialog(false);
-        // Navigate to the login page when the dialog is closed
-        navigate('/mview');
+        setSuccessDialogOpen(false);
+        setDownloadButtonVisible(true);
+        setSubmitButtonVisible(false);
     };
 
 
@@ -850,12 +854,12 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose} color="primary">
+                            <Button onClick={handleClose} open={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 OK
                             </Button>
                         </DialogActions>
                     </Dialog>
-                    {isFormComplete && selectedTab === tabLabels.length - 1 && selectedSubTab === subTabsData[tabLabels[selectedTab]].length - 1 && (
+                    {isSubmitButtonVisible && isFormComplete && selectedTab === tabLabels.length - 1 && selectedSubTab === subTabsData[tabLabels[selectedTab]].length - 1 && (
                         <button
                             className={`submit - button ${isFormComplete ? '' : 'disabled-button'}`}
                             onClick={openConfirmationDialog} // Open the confirmation dialog
@@ -887,9 +891,11 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                     </Dialog>
 
 
-                    <Button onClick={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                        Download
-                    </Button>
+                    {isDownloadButtonVisible && (
+                        <Button onClick={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                            Download To Excel
+                        </Button>
+                    )}
                     <Dialog open={isDownloadDialogOpen} onClose={closeDownloadDialog}>
                         <DialogTitle>Confirmation</DialogTitle>
                         <DialogContent>

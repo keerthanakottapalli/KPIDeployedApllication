@@ -55,6 +55,8 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
     const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
     const [isDownloadDialogOpen, setDownloadDialogOpen] = useState(false);
+    const [isDownloadButtonVisible, setDownloadButtonVisible] = useState(false);
+    const [isSubmitButtonVisible, setSubmitButtonVisible] = useState(true);
 
     const openConfirmationDialog = () => {
         setConfirmationDialogOpen(true);
@@ -74,6 +76,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
     const closeDownloadDialog = () => {
         setDownloadDialogOpen(false);
+        navigate('/directorview')
     };
 
 
@@ -107,8 +110,9 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     const navigate = useNavigate();
     const handleClose = () => {
         setOpenDialog(false);
-        // Navigate to the login page when the dialog is closed
-        navigate('/mview');
+        setSuccessDialogOpen(false);
+        setDownloadButtonVisible(true);
+        setSubmitButtonVisible(false);
     };
 
 
@@ -668,6 +672,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'quantityAchieved')}
                                             sx={{ minWidth: '120px' }}
+                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -681,17 +686,17 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                                 <MenuItem key={i} value={i}>{i}</MenuItem>
                                             ))}
                                         </Select>
-
                                     </TableCell>
-                                    <TableCell>
-                                        <Tooltip title={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments || ''} classes={{ tooltip: 'custom-tooltip' }}>
 
+                                    <TableCell>
+                                        <Tooltip title={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments} classes={{ tooltip: 'custom-tooltip' }}>
                                             <TextField
-                                                value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments || ''}
+                                                value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.comments}
                                                 multiline
                                                 rows={1}
                                                 onChange={(event) => handleCommentChange(event, questionIndex)}
                                                 label="Comments"
+                                                className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             />
                                         </Tooltip>
                                     </TableCell>
@@ -700,6 +705,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'indexKpi')}
                                             sx={{ minWidth: '120px' }}
+                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -783,7 +789,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
                     <button
-                        className="navigation-button"
+                        className={`navigation-button${selectedTab === 0 && selectedSubTab === 0 ? ' disabled' : ''}`}
                         onClick={() => {
                             if (selectedSubTab > 0) {
                                 // If there's a previous subtab, go to it
@@ -801,8 +807,9 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                     >
                         &lt; Previous
                     </button>
+
                     <button
-                        className="navigation-button"
+                        className={`navigation-button${selectedTab === tabLabels.length - 1 && selectedSubTab === subTabData.length - 1 ? ' disabled' : ''}`}
                         style={{ width: '100px', height: '50px' }}
                         onClick={() => {
                             const incompleteFields = checkSubTabCompletion();
@@ -820,16 +827,11 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 }
                             } else {
                                 setIncompleteFields(incompleteFields);
-
-                                // Show the error dialog for 3 seconds
-                                setShowErrorDialog(true);
-
+                                // Show the error dialog or take other actions
+                                // setShowErrorDialog(true);
                             }
                         }}
-                        disabled={
-                            selectedTab === tabLabels.length - 1 &&
-                            selectedSubTab === subTabData.length - 1
-                        }
+                        disabled={selectedTab === tabLabels.length - 1 && selectedSubTab === subTabData.length - 1}
                     >
                         Next &gt;
                     </button>
@@ -837,7 +839,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
 
-                    {incompleteFields.length > 0 && (
+                    {/* {incompleteFields.length > 0 && (
 
                         <Dialog open={showErrorDialog} onClose={() => setShowErrorDialog(false)}>
                             <DialogTitle>
@@ -860,7 +862,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </Dialog>
 
 
-                    )}&nbsp;&nbsp;&nbsp;
+                    )}&nbsp;&nbsp;&nbsp; */}
 
 
                     <Dialog open={isSuccessDialogOpen} onClose={handleClose}>
@@ -868,7 +870,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             {/* Include the <img> element for your image here */}
                             <img
                                 src="https://badge-exam.miraclesoft.com/assets/ecert/Completed-test.svg"
-                                alt="Your Image Alt Text"
+                                alt="not found"
                                 style={{ maxWidth: '100%', maxHeight: '200px', marginLeft: '23%' }}
                             />
                             <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
@@ -876,12 +878,13 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose} color="primary">
+                            <Button onClick={handleClose} open={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 OK
                             </Button>
                         </DialogActions>
                     </Dialog>
-                    {isFormComplete && selectedTab === tabLabels.length - 1 && selectedSubTab === subTabsData[tabLabels[selectedTab]].length - 1 && (
+
+                    {isSubmitButtonVisible && isFormComplete && selectedTab === tabLabels.length - 1 && selectedSubTab === subTabsData[tabLabels[selectedTab]].length - 1 && (
                         <button
                             className={`submit - button ${isFormComplete ? '' : 'disabled-button'}`}
                             onClick={openConfirmationDialog} // Open the confirmation dialog
@@ -890,6 +893,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             Submit
                         </button>
                     )}
+
                     <Dialog open={isConfirmationDialogOpen} onClose={closeConfirmationDialog}>
                         <DialogTitle>Confirmation</DialogTitle>
                         <DialogContent>
@@ -898,7 +902,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={closeConfirmationDialog} color="primary">
+                            <Button onClick={closeConfirmationDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 Cancel
                             </Button>
                             <Button onClick={() => {
@@ -906,16 +910,18 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 // exportToExcel();
                                 closeConfirmationDialog();
                                 openSuccessDialog();
-                            }} color="primary">
+                            }} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 OK
                             </Button>
                         </DialogActions>
                     </Dialog>
 
 
-                    <Button onClick={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                        Download
-                    </Button>
+                    {isDownloadButtonVisible && (
+                        <Button onClick={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                            Download To Excel
+                        </Button>
+                    )}
                     <Dialog open={isDownloadDialogOpen} onClose={closeDownloadDialog}>
                         <DialogTitle>Confirmation</DialogTitle>
                         <DialogContent>
@@ -1297,7 +1303,7 @@ const TabsView = () => {
 
             ) : (
                 <>
-                    <br /><br /><br /><br /><br />
+                    <br /><br /><br />
                     <div className="tabs-view">
                         <div className="main-tabs-container">
                             <Tabs value={selectedTab} onChange={handleChange} centered variant="scrollable" scrollButtons="auto">
