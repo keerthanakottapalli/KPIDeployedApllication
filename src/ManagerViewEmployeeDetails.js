@@ -857,12 +857,12 @@ function ManagerUpdateEmpData() {
                                         <TableBody>
                                             {tableData.map((row, index) => (
                                                 <TableRow key={index}>
-                                                    <TableCell>{row.Metric}</TableCell>
-                                                    <TableCell>{row.QuantityTarget}</TableCell>
-                                                    <TableCell>{row.QuantityAchieved}</TableCell>
-                                                    <TableCell>{row.IndexKpi}</TableCell>
-                                                    <TableCell>{row.Comments}</TableCell>
-                                                    <TableCell>
+                                                    <TableCell >{row.Metric}</TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>{row.QuantityTarget}</TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>{row.QuantityAchieved}</TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>{row.IndexKpi}</TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>{row.Comments}</TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>
                                                         <Select
                                                             value={itemMetricInputData[selectedItem]?.[row.Metric]?.MRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.MRating}
 
@@ -875,6 +875,13 @@ function ManagerUpdateEmpData() {
 
                                                             }
                                                             style={{ width: '100px' }}
+                                                            MenuProps={{
+                                                                PaperProps: {
+                                                                    style: {
+                                                                        maxHeight: 200, // Set the maximum height for the dropdown
+                                                                    },
+                                                                },
+                                                            }}
                                                         >
                                                             {Array.from({ length: 11 }, (_, i) => i).map((number) => (
                                                                 <MenuItem key={number} value={number}>
@@ -883,7 +890,7 @@ function ManagerUpdateEmpData() {
                                                             ))}
                                                         </Select>
                                                     </TableCell>
-                                                    <TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>
                                                         <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
                                                             <TextField
                                                                 id="outlined-multiline-static"
@@ -934,17 +941,17 @@ function ManagerUpdateEmpData() {
                                 <div className="mcomments-buttons">
                                     <Button
                                         variant="contained"
-                                        color="primary"
-                                        onClick={handleUpdateButtonClick}
 
+                                        onClick={handleUpdateButtonClick}
+                                        style={{ backgroundColor: '#1dbb99' }}
                                     >
                                         Update
                                     </Button>
                                     <Button
                                         variant="contained"
-                                        color="primary"
+
                                         onClick={openConfirmationDialog}
-                                        style={{ marginLeft: '20px' }}
+                                        style={{ marginLeft: '20px',  color: 'white' }}
                                         disabled={!isSubmitEnabled || isFetchingData}
                                     >
                                         Submit

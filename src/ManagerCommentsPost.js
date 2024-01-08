@@ -367,7 +367,7 @@ function ManagerUpdateEmpData() {
             // Delay setting loading to false by 3 seconds
             setTimeout(() => {
                 setLoading(false);
-            }, 1000);
+            });
         }
     };
 
@@ -675,9 +675,9 @@ function ManagerUpdateEmpData() {
                                     <div className="button-container" style={{ textAlign: 'left' }}>
                                         <Button
                                             variant="contained"
-                                            color="primary"
+                                            // color="primary"
                                             onClick={handleDeclineWithConfirmation}
-                                            style={{ marginRight: '10px' }}
+                                            style={{ marginRight: '10px',backgroundColor: '#1dbb99' }}
                                         >
                                             Decline
                                         </Button>
