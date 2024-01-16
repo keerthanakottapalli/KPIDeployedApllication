@@ -10,7 +10,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import PasswordIcon from '@mui/icons-material/Password';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from './config';
-import {  InputAdornment,  IconButton } from '@material-ui/core';
+import { InputAdornment, IconButton } from '@material-ui/core';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import './ChangePassword.css'
@@ -53,20 +53,20 @@ const ChangePasswordForm = () => {
 
     const handleEmailChange = (e) => {
         const value = e.target.value;
-      
+
         // Use a case-insensitive regular expression for the format check
         const emailPattern = /^[a-zA-Z]{3,}[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/i;
-      
+
         if (!emailPattern.test(value)) {
-          setEmailError('Please enter a valid email address.');
+            setEmailError('Please enter a valid email address.');
         } else if (!value.toLowerCase().endsWith('@miraclesoft.com')) {
-          setEmailError('Email must end with @miraclesoft.com');
+            setEmailError('Email must end with @miraclesoft.com');
         } else {
-          setEmailError('');
+            setEmailError('');
         }
-      
+
         setEmail(value);
-      };
+    };
 
     const handleOldPasswordChange = (e) => {
         setOldPassword(e.target.value);
@@ -170,10 +170,10 @@ const ChangePasswordForm = () => {
                             required
                             error={emailError !== ''}
                             helperText={emailError}
-                            style={{ marginTop: '2%',  borderRadius: '5px' }}
+                            style={{ marginTop: '2%', borderRadius: '5px' }}
                             InputProps={{
                                 startAdornment: (
-                                    <EmailIcon style={{ color: 'black', paddingRight:'5px' }} />
+                                    <EmailIcon style={{ color: 'black', paddingRight: '5px' }} />
                                 ),
 
                             }}
@@ -187,10 +187,10 @@ const ChangePasswordForm = () => {
                             value={oldPassword}
                             onChange={handleOldPasswordChange}
                             required
-                            style={{ marginTop: '2%',  borderRadius: '5px' }}
+                            style={{ marginTop: '2%', borderRadius: '5px' }}
                             InputProps={{
                                 startAdornment: (
-                                    <PasswordIcon style={{ color: 'black', paddingRight:'5px' }} />
+                                    <PasswordIcon style={{ color: 'black', paddingRight: '5px' }} />
                                 ),
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -211,10 +211,10 @@ const ChangePasswordForm = () => {
                             onChange={handleNewPasswordChange}
                             error={newPasswordError !== ''}
                             helperText={newPasswordError}
-                            style={{ marginTop: '2%',  borderRadius: '5px' }}
+                            style={{ marginTop: '2%', borderRadius: '5px' }}
                             InputProps={{
                                 startAdornment: (
-                                    <PasswordIcon style={{ color: 'black', paddingRight:'5px' }} />
+                                    <PasswordIcon style={{ color: 'black', paddingRight: '5px' }} />
                                 ),
                                 endAdornment: (
                                     <InputAdornment position="end">
@@ -235,10 +235,10 @@ const ChangePasswordForm = () => {
                             onChange={handleConfirmPasswordChange}
                             error={confirmPasswordError !== ''}
                             helperText={confirmPasswordError}
-                            style={{ marginTop: '2%',  borderRadius: '5px' }}
+                            style={{ marginTop: '2%', borderRadius: '5px' }}
                             InputProps={{
                                 startAdornment: (
-                                    <PasswordIcon style={{ color: 'black', paddingRight:'5px' }} />
+                                    <PasswordIcon style={{ color: 'black', paddingRight: '5px' }} />
                                 ),
                                 endAdornment: (
                                     <InputAdornment position="end">

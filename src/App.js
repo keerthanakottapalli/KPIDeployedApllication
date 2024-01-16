@@ -72,6 +72,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/resetpwd" element={<PasswordResetForm />} />
+          <Route path="/changepwd" element={<ChangePasswordForm />} />
           <Route path='/resetPasswordDialog' element={<ResetPasswordDialog/>}/>
 
 
@@ -147,7 +148,7 @@ function App() {
           
              {/* needs to adjust the sidebar and buttons */}
 
-         <Route path="/changepwd" element={<ChangePasswordForm />} />
+         
     
         </Routes>
       </Router>

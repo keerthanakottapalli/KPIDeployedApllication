@@ -507,20 +507,20 @@ const Sidebar = () => {
                                         <TableHead>
                                             <TableRow>
                                                 <TableCell className='tablecell-style' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
-                                                <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
-                                                <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
-                                                <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Comments</TableCell>
-                                                <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Index KPI</TableCell>
+                                                <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center'  }}>Quantity Target</TableCell>
+                                                <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center' }}>Quantity Achieved</TableCell>
+                                                <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center'  }}>Comments</TableCell>
+                                                <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center' }}>Index KPI</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {tabsData.map((item, index) => (
                                                 <TableRow key={index}>
                                                     <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important' }}>{item.Metric}</TableCell>
-                                                    <TableCell>{item.QuantityTarget}</TableCell>
-                                                    <TableCell> {item.QuantityAchieved}</TableCell>
-                                                    <TableCell> {item.Comments} </TableCell>
-                                                    <TableCell>{item.IndexKpi} </TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>{item.QuantityTarget}</TableCell>
+                                                    <TableCell style={{textAlign:'center'}}> {item.QuantityAchieved}</TableCell>
+                                                    <TableCell style={{textAlign:'center'}}> {item.Comments} </TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>{item.IndexKpi} </TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>

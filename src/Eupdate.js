@@ -170,8 +170,8 @@ const Sidebar = () => {
             if (token) {
                 const tokenData = parseJWT(token);
                 const empId = tokenData.Empid;
-               localStorage.setItem("Empid", empId);
-              
+                localStorage.setItem("Empid", empId);
+
                 try {
                     const response = await fetch(`${BASE_URL}/api/emp_userdata/${empId}/${activeTab}`);
                     const data = await response.json();
@@ -226,20 +226,20 @@ const Sidebar = () => {
     const navigate = useNavigate();
     const handleClose = async () => {
         setOpenDialog(false);
-    
+
         // Navigate to the login page when the dialog is closed
         navigate('/eview');
-    
+
         const empid = localStorage.getItem('Empid');
-        console.log(empid,"233");
+        console.log(empid, "233");
         const requestData = {
             Status: "Pass",
         };
-    
+
         try {
             // Send a PUT request to the API endpoint
             const response = await axios.put(`${BASE_URL}/api/emp_status_upd/${empid}/`, requestData);
-    
+
             // Handle a successful response here
             console.log('API response:', response.data);
         } catch (error) {
@@ -250,7 +250,7 @@ const Sidebar = () => {
             window.location.reload();
         }
     };
-    
+
 
 
 
@@ -537,7 +537,7 @@ const Sidebar = () => {
                                 )
                             ))}
                         </Tabs>
-
+                        <br />
                         <div className='employeetable'>
                             {loading ? (
                                 <div className="loading-container">
@@ -547,23 +547,23 @@ const Sidebar = () => {
 
                             ) : activeSubTab && tabsData.length > 0 ? (
                                 <>
-                                    <TableContainer component={Paper} style={{ width: '1150px', height: '43vh', overflow: 'auto' }} >
+                                    <TableContainer component={Paper} style={{ width: '1150px', height: '60vh', overflow: 'auto' }} >
                                         <Table>
                                             <TableHead>
-                                                <TableRow>
-                                                    <TableCell className='tablecell-style' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
-                                                    <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
-                                                    <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
-                                                    <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Comments</TableCell>
-                                                    <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Index KPI</TableCell>
+                                                <TableRow style={{ backgroundColor: '#d0e6f5' }}>
+                                                    <TableCell className='tablecell-style' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',  }}>Metric</TableCell>
+                                                    <TableCell className='tablecell-style1' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign:'center' }}>Quantity Target</TableCell>
+                                                    <TableCell className='tablecell-style2' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px' }}>Quantity Achieved</TableCell>
+                                                    <TableCell className='tablecell-style3' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px' }}>Comments</TableCell>
+                                                    <TableCell className='tablecell-style4' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px' }}>Index KPI</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
                                                 {tabsData.map((item, index) => (
                                                     <TableRow key={index}>
                                                         <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important' }}>{item.Metric}</TableCell>
-                                                        <TableCell>{item.QuantityTarget}</TableCell>
-                                                        <TableCell>
+                                                        <TableCell style={{textAlign:'center'}}>{item.QuantityTarget}</TableCell>
+                                                        <TableCell style={{textAlign:'center'}}>
                                                             <FormControl style={{ width: '70%' }}>
 
                                                                 <Select
@@ -571,6 +571,13 @@ const Sidebar = () => {
                                                                     onChange={(e) => {
                                                                         handleQuantityAchievedChange(index, e.target.value);
                                                                         handleFieldChange();
+                                                                    }}
+                                                                    MenuProps={{
+                                                                        PaperProps: {
+                                                                            style: {
+                                                                                maxHeight: 200, // Set the maximum height for the dropdown
+                                                                            },
+                                                                        },
                                                                     }}
                                                                 >
                                                                     {Array.from({ length: 11 }, (_, i) => i).map((number) => (
@@ -581,12 +588,12 @@ const Sidebar = () => {
                                                                 </Select>
                                                             </FormControl>
                                                         </TableCell>
-                                                        <TableCell>
+                                                        <TableCell style={{textAlign:'center'}}>
                                                             <Tooltip title={item.Comments} classes={{ tooltip: 'custom-tooltip' }}>
                                                                 <TextField
                                                                     value={item.Comments}
                                                                     multiline
-                                                                    rows={2}
+                                                                    rows={1}
                                                                     onChange={(e) => {
                                                                         handleCommentsChange(index, e.target.value);
                                                                         handleFieldChange();
@@ -594,7 +601,7 @@ const Sidebar = () => {
                                                                 />
                                                             </Tooltip>
                                                         </TableCell>
-                                                        <TableCell>
+                                                        <TableCell style={{textAlign:'center'}}>
                                                             <FormControl style={{ width: '110%' }}>
                                                                 {/* <InputLabel>Index KPI</InputLabel> */}
                                                                 <Select
@@ -602,6 +609,13 @@ const Sidebar = () => {
                                                                     onChange={(e) => {
                                                                         handleIndexKpiChange(index, e.target.value);
                                                                         handleFieldChange();
+                                                                    }}
+                                                                    MenuProps={{
+                                                                        PaperProps: {
+                                                                            style: {
+                                                                                maxHeight: 200, // Set the maximum height for the dropdown
+                                                                            },
+                                                                        },
                                                                     }}
                                                                 >
                                                                     {Array.from({ length: 11 }, (_, i) => i).map((number) => (
@@ -767,7 +781,7 @@ const Sidebar = () => {
                                     </DialogContentText>
                                 </DialogContent>
                                 <DialogActions>
-                                    <Button onClick={handleClose} color="primary" variant='contained' style={{backgroundColor:'#00aaee', marginBottom:'10px', marginRight:'10px'}}>
+                                    <Button onClick={handleClose} color="primary" variant='contained' style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
                                         OK
                                     </Button>
                                 </DialogActions>
