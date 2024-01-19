@@ -1007,6 +1007,7 @@ const TabsView = () => {
 
     const handleChangePassword = () => {
         setShowChangePassword(true);
+        handleCloseUserMenu();
     };
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);

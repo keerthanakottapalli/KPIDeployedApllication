@@ -15,7 +15,7 @@ import {
 import { IconButton, Box, DialogTitle, Dialog, DialogContentText, DialogContent, DialogActions, Menu, Tooltip, MenuItem, ListItemIcon, } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Medataview.css';
 import { BASE_URL } from './config';
 import { Logout } from '@mui/icons-material';
@@ -76,7 +76,7 @@ const ManagerPortal = () => {
 
 
 
-   const handleCloseProfileCard = () => {
+  const handleCloseProfileCard = () => {
     setIsProfileCardOpen(false); // Close the profile card
   };
   const fetchUserProfile = async () => {
@@ -191,8 +191,11 @@ const ManagerPortal = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  
 
+  const navigate = useNavigate()
+  const goBack = () => {
+    navigate('/VPPortal')
+  }
 
   return (
     <>
@@ -273,10 +276,14 @@ const ManagerPortal = () => {
 
         </Toolbar>
 
-      </AppBar><br /><br /><br /><br />
+      </AppBar><br /><br /><br />
+      <ListItemIcon style={{ marginLeft: '10vw', marginTop: '35px' }} onClick={goBack}>
+        <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
+      </ListItemIcon>
+      
       <div className='bg-container'
       >
-
+<br />
         <div style={{ width: '80%', margin: '0 auto' }}>
           {loading ? (
             <div className="loading-container" style={{
@@ -290,11 +297,11 @@ const ManagerPortal = () => {
               <div className="loading-spinner"></div>
             </div>
           ) : (
-            <TableContainer component={Paper} style={{ marginTop: '120px' }}>
+            <TableContainer component={Paper}>
               {employeesData.some((employee) => reportingManagers[employee.Empid] === username) ? (
                 <Table style={{ minWidth: 850 }}>
-                  <TableHead style={{ backgroundColor: 'voilet' }}>
-                    <TableRow>
+                  <TableHead>
+                    <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', paddingLeft: "10%" }}>Employee ID</TableCell>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "10%" }}>Employee Name</TableCell>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "10%" }}>Action</TableCell>

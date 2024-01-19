@@ -16,7 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Paper } from '@material-ui/core';
 import CloseIcon from '@mui/icons-material/Close';
-import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
+import { AccountCircle, ArrowBack, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 import { Box, IconButton, ListItem, ListItemIcon, Menu } from '@material-ui/core';
 import { Logout } from '@mui/icons-material';
@@ -104,6 +104,7 @@ function ManagerUpdateEmpData() {
 
     const handleChangePassword = () => {
         setShowChangePassword(true);
+        handleCloseUserMenu()
     };
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
@@ -135,6 +136,7 @@ function ManagerUpdateEmpData() {
 
     const handleCloseProfileCard = () => {
         setIsProfileCardOpen(false); // Close the profile card
+       
     };
     const fetchUserProfile = async () => {
         try {
@@ -456,7 +458,9 @@ function ManagerUpdateEmpData() {
     }
 
 
-
+const goBack = ()=>{
+    navigate('/meview')
+}
 
 
     const fetchData = async () => {
@@ -636,7 +640,10 @@ function ManagerUpdateEmpData() {
                             />
                         ))}
                     </div>
-                    <br /><br /><br /><br /><br /><br />
+                   
+                    <ListItemIcon style={{marginLeft:'16vw', marginTop:'14vh'}} onClick={goBack}>
+                                    <ArrowBack />&nbsp; <span><b>Go Back</b></span>   
+                                </ListItemIcon><br /><br />
                     <div className='employeetable'>
                         {loading ? (
                             <div className="loading-container">
@@ -650,7 +657,7 @@ function ManagerUpdateEmpData() {
                                     <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto', marginLeft: '50px' }}>
                                         <Table >
                                             <TableHead>
-                                                <TableRow>
+                                                <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                                                     <TableCell style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
                                                     <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
                                                     <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>

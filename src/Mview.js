@@ -446,7 +446,7 @@ const ButtonCenter = () => {
                 onClick={handleViewDetailsClick}
                 style={{ backgroundColor: '#00aaee', marginLeft: '20px' }}
               >
-                <b>Employees Details</b>
+                <b>Team KPIs</b>
               </Button>
 
             </div>

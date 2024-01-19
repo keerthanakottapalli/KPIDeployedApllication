@@ -721,7 +721,7 @@ function ManagerUpdateEmpData() {
                                 <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto', marginLeft: '50px' }}>
                                     <Table >
                                         <TableHead>
-                                            <TableRow>
+                                            <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                                                 <TableCell style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
                                                 <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
                                                 <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
@@ -746,15 +746,15 @@ function ManagerUpdateEmpData() {
                                 <div className="button-container">
                                     <Button
                                         variant="contained"
-                                        color="primary"
+                                        
                                         onClick={handleDeclineWithConfirmation}
-                                        style={{ marginRight: '10px' }}
+                                        style={{ marginRight: '10px', backgroundColor: '#1dbb99'  }}
                                     >
                                         Decline
                                     </Button>
                                     <Button
                                         variant="contained"
-                                        color="primary"
+                                     
                                         component={Link}
                                         to={`/VpDComments/${empId}`}
                                         style={{ backgroundColor: '#1dbb99' }}

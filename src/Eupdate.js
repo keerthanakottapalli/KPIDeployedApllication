@@ -381,7 +381,10 @@ const Sidebar = () => {
 
     };
 
-
+    const goBack = ()=>{
+        navigate('/eview')
+    }
+    
 
     const handleLogout = () => {
         window.location.href = '/login';
@@ -521,6 +524,10 @@ const Sidebar = () => {
 
 
                     <div className="sub-tabs" >
+                    <ListItemIcon style={{marginLeft:'15vw', marginTop:'35px'}} onClick={goBack}>
+                                    <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>   
+                                </ListItemIcon>
+                                GoBack
                         <Tabs className='subtabs-adjust'
                             value={activeSubTab}
                             onChange={(event, newValue) => handleSubTabClick(newValue)} centered
@@ -537,8 +544,8 @@ const Sidebar = () => {
                                 )
                             ))}
                         </Tabs>
-                        <br />
-                        <div className='employeetable'>
+                     
+                        <div className='employeetable' style={{marginTop:'60px'}}>
                             {loading ? (
                                 <div className="loading-container">
                                     <div className="loading-text">Loading...</div>
@@ -547,15 +554,15 @@ const Sidebar = () => {
 
                             ) : activeSubTab && tabsData.length > 0 ? (
                                 <>
-                                    <TableContainer component={Paper} style={{ width: '1150px', height: '60vh', overflow: 'auto' }} >
+                                    <TableContainer component={Paper} style={{ width: '1250px',  overflow: 'auto' }} >
                                         <Table>
                                             <TableHead>
                                                 <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                                                     <TableCell className='tablecell-style' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',  }}>Metric</TableCell>
                                                     <TableCell className='tablecell-style1' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign:'center' }}>Quantity Target</TableCell>
-                                                    <TableCell className='tablecell-style2' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px' }}>Quantity Achieved</TableCell>
-                                                    <TableCell className='tablecell-style3' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px' }}>Comments</TableCell>
-                                                    <TableCell className='tablecell-style4' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px' }}>Index KPI</TableCell>
+                                                    <TableCell className='tablecell-style2' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign:'center' }}>Quantity Achieved</TableCell>
+                                                    <TableCell className='tablecell-style3' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',textAlign:'center' }}>Comments</TableCell>
+                                                    <TableCell className='tablecell-style4' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',textAlign:'center' }}>Index KPI</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
@@ -601,10 +608,11 @@ const Sidebar = () => {
                                                                 />
                                                             </Tooltip>
                                                         </TableCell>
-                                                        <TableCell style={{textAlign:'center'}}>
+                                                        <TableCell style={{textAlign:'center', paddingLeft:'20px'}}>
                                                             <FormControl style={{ width: '110%' }}>
                                                                 {/* <InputLabel>Index KPI</InputLabel> */}
                                                                 <Select
+                                                                
                                                                     value={item.IndexKpi}
                                                                     onChange={(e) => {
                                                                         handleIndexKpiChange(index, e.target.value);

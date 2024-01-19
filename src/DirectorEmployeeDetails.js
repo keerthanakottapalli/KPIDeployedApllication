@@ -15,9 +15,10 @@ import {
 import { IconButton, Box, DialogTitle, Dialog, DialogContentText, DialogContent, DialogActions, Menu, Tooltip, MenuItem, ListItemIcon, } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Medataview.css';
 import { BASE_URL } from './config';
+import { Login, Logout } from '@mui/icons-material';
 
 const DirectorViewEmpDetails = () => {
   const [employeesData, setEmployeesData] = useState([]);
@@ -191,7 +192,7 @@ const DirectorViewEmpDetails = () => {
     localStorage.removeItem('practices');
     localStorage.removeItem('managerempname');
     // Redirect to the login page (replace '/login' with your login route)
-    window.location.href = '/directorportal';
+    window.location.href = '/login';
   };
 
   const firstname = localStorage.getItem('firstname');
@@ -199,6 +200,10 @@ const DirectorViewEmpDetails = () => {
   const username = firstname + "" + " " + lastname
   console.log(username);
 
+  const navigate = useNavigate()
+  const goBack = () => {
+    navigate('/directorportal')
+  }
 
   const selectedEmployeeName = localStorage.getItem('selectedEmployeeName')
 
@@ -315,9 +320,9 @@ const DirectorViewEmpDetails = () => {
 
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
-                  <ArrowBackIcon />
+                  <Logout />
                 </ListItemIcon>
-                GoBack
+                Logout
               </MenuItem>
             </Menu>
           </Box>
@@ -325,6 +330,10 @@ const DirectorViewEmpDetails = () => {
       </AppBar>
       <div className='login-background'>
         <div style={{ width: '80%', height: '100vh', marginLeft: '10vw' }}>
+          <ListItemIcon style={{ marginTop:'13vh',}} onClick={goBack}>
+            <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
+          </ListItemIcon>
+          <br />
           {loading ? (
             <div className="loading-container" style={{
               position: "absolute",
@@ -337,11 +346,11 @@ const DirectorViewEmpDetails = () => {
               <div className="loading-spinner"></div>
             </div>
           ) : (
-            <TableContainer component={Paper} style={{ marginTop: '120px' }}>
+            <TableContainer component={Paper}>
               {employeesData.some((employee) => selectedEmployeeName === reportingManagers[employee.Empid]) ? (
                 <Table style={{ minWidth: 850 }}>
-                  <TableHead style={{ backgroundColor: 'voilet' }}>
-                    <TableRow>
+                  <TableHead >
+                    <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', paddingLeft: "10%" }}>Employee ID</TableCell>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "10%" }}>Employee Name</TableCell>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "18%" }}>Action</TableCell>

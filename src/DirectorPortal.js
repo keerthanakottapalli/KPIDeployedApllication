@@ -336,9 +336,9 @@ const DirectorViewMangerDetails = () => {
                 <Table style={{ minWidth: 850 }}>
                   <TableHead style={{ backgroundColor: 'voilet' }}>
                     <TableRow>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', paddingLeft: "5%" }}>Employee ID</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "15%" }}>Employee Name</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "33%" }}>Action</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign:'center' }}>Employee ID</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign:'center'}}>Employee Name</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign:'center'}}>Action</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody style={{ marginLeft: '40%' }}>
@@ -346,13 +346,13 @@ const DirectorViewMangerDetails = () => {
                       const empReportingManager = reportingManagers[employee.Empid] || "";
                       if (empReportingManager === username) {
                         return (
-                          <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333', paddingLeft: "20%" }}>
-                            <TableCell style={{ fontSize: '16px', color: '#333', paddingLeft: "5%" }}>{employee.Empid}</TableCell>
+                          <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333'}}>
+                            <TableCell style={{ fontSize: '16px', color: '#333', textAlign:'center' }}>{employee.Empid}</TableCell>
 
                             {employeesData.map((employees) => {
                               if (employees.Empid === employee.Empid) {
                                 return (
-                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', paddingLeft: '15%' }}>
+                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', textAlign:'center'}}>
                                     {employees.Empname}
                                   </TableCell>
                                 );

@@ -20,6 +20,7 @@ import { Link } from 'react-router-dom';
 import './Medataview.css';
 import { BASE_URL } from './config';
 import { Logout } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const ManagerPortal = () => {
   const [employeesData, setEmployeesData] = useState([]);
@@ -126,19 +127,19 @@ const ManagerPortal = () => {
   useEffect(() => {
     // Fetch employee details
     fetch(`${BASE_URL}/api/emp_all_data`)
-    .then((response) => response.json())
-    .then((data) => {
-      const employeesWithPractices = data.employees;
-      localStorage.setItem('practices', JSON.stringify(employeesWithPractices));
+      .then((response) => response.json())
+      .then((data) => {
+        const employeesWithPractices = data.employees;
+        localStorage.setItem('practices', JSON.stringify(employeesWithPractices));
 
-      // Set the state with the employee data
-      setEmployeesData(employeesWithPractices);
-    })
-    .catch((error) => console.error('Error fetching data:', error));
+        // Set the state with the employee data
+        setEmployeesData(employeesWithPractices);
+      })
+      .catch((error) => console.error('Error fetching data:', error));
 
     // Fetch reporting manager details
     fetch(`${BASE_URL}/api/emp_data`)
-   
+
       .then((response) => response.json())
       .then((data) => {
         const reportingData = data.message.reduce((acc, manager) => {
@@ -156,8 +157,10 @@ const ManagerPortal = () => {
     window.location.href = '/login';
   };
 
-
-
+const navigate = useNavigate();
+  const goBack = ()=>{
+    navigate('/mview')
+}
 
 
   const firstname = localStorage.getItem('firstname');
@@ -176,7 +179,7 @@ const ManagerPortal = () => {
   const [employeeData, setEmployeeData] = useState([]);
 
   useEffect(() => {
-   
+
     // Replace this with your actual API call
     fetch(`${BASE_URL}/api/emp_all_status_data`)
       .then((response) => response.json())
@@ -216,7 +219,7 @@ const ManagerPortal = () => {
                           alt="Profile"
                           style={{
                             width: '60px',
-                            height: '60px', 
+                            height: '60px',
                             borderRadius: '50%',
                             marginRight: '8px',
                           }}
@@ -266,7 +269,10 @@ const ManagerPortal = () => {
 
       </AppBar>
       <div className='bg-container'>
-
+        <ListItemIcon style={{ marginLeft: '10vw', marginTop: '90px' }} onClick={goBack}>
+          <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
+        </ListItemIcon>
+        
         <div style={{ width: '80%', margin: '0 auto' }}>
           {loading ? (
             <div className="loading-container" style={{
@@ -280,14 +286,14 @@ const ManagerPortal = () => {
               <div className="loading-spinner"></div>
             </div>
           ) : (
-            <TableContainer component={Paper} style={{ marginTop: '120px' }}>
+            <TableContainer component={Paper} style={{ marginTop: '20px' }}>
               {employeesData.some((employee) => reportingManagers[employee.Empid] === username) ? (
-                <Table style={{ minWidth: 850 }}>
-                  <TableHead style={{ backgroundColor: 'voilet' }}>
-                    <TableRow>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign:'center' }}>Employee ID</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign:'center'}}>Employee Name</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign:'center'}}>Action</TableCell>
+                <Table>
+                  <TableHead >
+                    <TableRow style={{ backgroundColor: '#d0e6f5' }}>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign: 'center' }}>Employee ID</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Employee Name</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Action</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody style={{ marginLeft: '40%' }}>
@@ -300,7 +306,7 @@ const ManagerPortal = () => {
                       if (empReportingManager === username) {
                         return (
                           <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333', paddingLeft: '10%' }}>
-                            <TableCell style={{ fontSize: '16px', color: '#333', textAlign:'center' }}>{employee.Empid}</TableCell>
+                            <TableCell style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>{employee.Empid}</TableCell>
 
                             {employeesData.map((employees) => {
                               // Find the corresponding employee data based on EmpId
@@ -309,17 +315,17 @@ const ManagerPortal = () => {
                               if (employees.Empid === employee.Empid) {
                                 return (
 
-                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', textAlign:'center' }}>
+                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>
                                     {employees.Empname}
                                   </TableCell>
 
                                 );
                               }
                             })}
-                            <TableCell style={{ color: '#333', textAlign:'center',  }}>
+                            <TableCell style={{ color: '#333', textAlign: 'center', }}>
                               {employee.Status === 'Decline' && (
-                                
-                                <Button  variant="contained" style={{backgroundColor:'#d12a2a',width: "35%", height: '50px', fontWeight:'bold' }}>Declined</Button>
+
+                                <Button variant="contained" style={{ backgroundColor: '#d12a2a', width: "35%", height: '50px', fontWeight: 'bold' }}>Declined</Button>
                               )}
                               {employee.Status !== 'Decline' && (
                                 <div>
@@ -439,7 +445,7 @@ const ManagerPortal = () => {
             )}
           </DialogContent>
           <DialogActions>
-            <Button onClick={handleCloseProfileCard} style={{backgroundColor:"#00aaee",color:"white ", marginBottom:'15px', marginRight:'15px'}}>
+            <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
               Close
             </Button>
           </DialogActions>

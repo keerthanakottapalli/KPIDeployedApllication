@@ -7,6 +7,11 @@
   justify-content: center;
 
 }
+.background{
+  background-image: url('/src/bg-login.jpg');
+}
+  
+
 
 .card {
   display: flex;
@@ -24,4 +29,5 @@
 
 .button {
   margin: 0 10px;
+
 }

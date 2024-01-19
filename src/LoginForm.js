@@ -58,22 +58,22 @@ const LoginForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    // Encode the email and password as Base64
-      // Normalize the email to lowercase
-  const normalizedEmail = Empmail.toLowerCase();
 
-  // Encode the normalized email and password as Base64
-  const encodedEmail = btoa(normalizedEmail);
+    // Encode the email and password as Base64
+    // Normalize the email to lowercase
+    const normalizedEmail = Empmail.toLowerCase();
+
+    // Encode the normalized email and password as Base64
+    const encodedEmail = btoa(normalizedEmail);
     const encodedPassword = btoa(Password);
-  
+
     try {
       const displayPayload = {
         Empmail: encodedEmail,
         Password: encodedPassword,
       };
-  
-     
+
+
       const response = await fetch(`${BASE_URL}/api/emp_login`, {
         method: 'POST',
         headers: {
@@ -81,37 +81,37 @@ const LoginForm = () => {
         },
         body: JSON.stringify(displayPayload), // Send the payload with original values to the server
       });
-    
-        if (response.ok) {
-          const data = await response.json();
-          const { token } = data;
-          localStorage.setItem('token', token);
-    
-          const decodedToken = parseJwt(token);
-          const role = decodedToken.Role;
-          const firstname = decodedToken.Firstname;
-          const Empid = decodedToken.Empid;
-          const lastname = decodedToken.Lastname;
-          const Image = decodedToken.Image;
-  
-          localStorage.setItem('role', role);
-          localStorage.setItem('firstname', firstname);
-          localStorage.setItem('Empid', Empid);
-          localStorage.setItem('lastname', lastname);
-          localStorage.setItem('Image', Image);
-          localStorage.setItem('Empmail', Empmail);
-          localStorage.setItem('Password', Password);
-  
-          const route = getRoleBasedRoute();
-          navigate(route); // Navigate to the appropriate component based on the role
-        } else {
-          setError('Please enter correct email and password.');
-        }
-      } catch (error) {
-        console.error(error);
-        setError('An error occurred while logging in.');
+
+      if (response.ok) {
+        const data = await response.json();
+        const { token } = data;
+        localStorage.setItem('token', token);
+
+        const decodedToken = parseJwt(token);
+        const role = decodedToken.Role;
+        const firstname = decodedToken.Firstname;
+        const Empid = decodedToken.Empid;
+        const lastname = decodedToken.Lastname;
+        const Image = decodedToken.Image;
+
+        localStorage.setItem('role', role);
+        localStorage.setItem('firstname', firstname);
+        localStorage.setItem('Empid', Empid);
+        localStorage.setItem('lastname', lastname);
+        localStorage.setItem('Image', Image);
+        localStorage.setItem('Empmail', Empmail);
+        localStorage.setItem('Password', Password);
+
+        const route = getRoleBasedRoute();
+        navigate(route); // Navigate to the appropriate component based on the role
+      } else {
+        setError('Please enter correct email and password.');
       }
-    };
+    } catch (error) {
+      console.error(error);
+      setError('An error occurred while logging in.');
+    }
+  };
 
 
 
@@ -126,102 +126,103 @@ const LoginForm = () => {
   };
 
   const handleRegisterClick = () => {
-  
+
     navigate('/register');
 
-    window.location.reload();  };
+    window.location.reload();
+  };
 
 
-return (
-  <div className="login-form">
-    <fieldset className="login-fieldset">
-      <div>
-        <img
-          className="miracleLogo"
-          src={'https://hubble.miraclesoft.com/assets/img/miracle-logo-white.svg'}
-          alt="Image Description"
-        />
-        <p className="loginText">Enter Your Details to Continue</p>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="loginform-group">
-          <TextField
-            className="textfield"
-            placeholder="Enter your email"
-            variant="outlined"
-            style={{ width: '100%', maxWidth: '355px', height: '45px' }}
-            value={Empmail}
-            onChange={handleChangeEmail}
-            required
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <span className="material-icons" style={{ color: 'black' }}>email</span>
-                </InputAdornment>
-              ),
-            }}
+  return (
+    <div className="login-form">
+      <fieldset className="login-fieldset">
+        <div>
+          <img
+            className="miracleLogo"
+            src={'https://hubble.miraclesoft.com/assets/img/miracle-logo-white.svg'}
+            alt="Image Description"
           />
+          <p className="loginText">Enter Your Details to Continue</p>
         </div>
-        <br />
-        <div className="loginform-group">
-          <TextField
-            className="textfield"
-            placeholder="Enter your password"
-            variant="outlined"
-            type={showPassword ? 'text' : 'password'}
-            value={Password}
-            onChange={handleChangePassword}
-            required
-            style={{ width: '100%', maxWidth: '355px', height: '45px' }}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <span className="material-icons" style={{ color: 'black' }}>lock</span>
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={handleTogglePasswordVisibility}
-                    edge="end"
-                    style={{ width: '1px', height: '1px', background: '#a9a7a7', marginRight: '0px', marginBottom:'15px' }}
-                  >
-                    {showPassword ? <VisibilityIcon style={{ color: 'black' }} /> : <VisibilityOffIcon style={{ color: 'black' }} />}
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </div>
-        
-        <Link to='/resetpwd' className='ForgotPwd' style={{marginTop:"2%"  }}>Forgot Password?</Link>
-        <Button type="submit" variant="contained" >
-          Login
-        </Button>
-        {error && <div className="error">{error}</div>}
-        {/* <p style={{ color: 'white' }} className="registering">
+        <form onSubmit={handleSubmit}>
+          <div className="loginform-group">
+            <TextField
+              className="textfield"
+              placeholder="Enter your email"
+              variant="outlined"
+              style={{ width: '100%', maxWidth: '355px', height: '45px' }}
+              value={Empmail}
+              onChange={handleChangeEmail}
+              required
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <span className="material-icons" style={{ color: 'black' }}>email</span>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+          <br />
+          <div className="loginform-group">
+            <TextField
+              className="textfield"
+              placeholder="Enter your password"
+              variant="outlined"
+              type={showPassword ? 'text' : 'password'}
+              value={Password}
+              onChange={handleChangePassword}
+              required
+              style={{ width: '100%', maxWidth: '355px', height: '45px' }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <span className="material-icons" style={{ color: 'black' }}>lock</span>
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={handleTogglePasswordVisibility}
+                      edge="end"
+                      style={{ width: '1px', height: '1px', background: '#a9a7a7', marginRight: '0px', marginBottom: '15px' }}
+                    >
+                      {showPassword ? <VisibilityIcon style={{ color: 'black' }} /> : <VisibilityOffIcon style={{ color: 'black' }} />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </div>
+
+          <Link to='/resetpwd' className='ForgotPwd' style={{ marginTop: "2%" }}>Forgot Password?</Link>
+          <Button type="submit" variant="contained" >
+            Login
+          </Button>
+          {error && <div className="error">{error}</div>}
+          {/* <p style={{ color: 'white' }} className="registering">
           Don't have an account please <Link to="/register" style={{ color: 'white' }}>REGISTER!</Link>
         </p> */}
 
-<p style={{ color: 'white' }} className="registering">
-          Don't have an account please{' '}
-          <span
-            role="button"
-            style={{ color: 'white', cursor: 'pointer' }}
-            onClick={handleRegisterClick}
-          >
-            REGISTER!
-          </span>
-        </p>
+          <p style={{ color: 'white' }} className="registering">
+            Don't have an account please{' '}
        
-      </form>
+        
+             
+             
 
-      <footer>
-        <p  className="text-center">&copy; 2023 Miracle Software Systems, Inc.</p>
-      </footer>
-    </fieldset>
-  </div>
-);
+              <Link  style={{ color: 'white', cursor: 'pointer' }} to="/register"  onClick={handleRegisterClick}>  REGISTER!</Link>
+       
+          </p>
+
+        </form>
+
+        <footer>
+          <p className="text-center">&copy; 2023 Miracle Software Systems, Inc.</p>
+        </footer>
+      </fieldset>
+    </div>
+  );
 
 };
 

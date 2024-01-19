@@ -344,7 +344,9 @@ const Sidebar = () => {
             }
         }
     };
-
+const goBack = ()=>{
+    navigate('/eview')
+}
 
 
     const handleLogout = () => {
@@ -486,6 +488,10 @@ const Sidebar = () => {
 
                     <div className="sub-tabs" >
                         <br />
+                        <ListItemIcon style={{marginLeft:'15vw', marginTop:'20px'}} onClick={goBack}>
+                                    <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>   
+                                </ListItemIcon>
+                                GoBack
                         <Tabs className='subtabs-adjust'
                             value={activeSubTab}
                             onChange={(event, newValue) => handleSubTabClick(newValue)} centered
@@ -497,12 +503,13 @@ const Sidebar = () => {
                                         key={index}
                                         label={subTab}
                                         value={subTab}
-                                        style={{ fontWeight: 'bold', fontSize: '100%', marginLeft: '20px' }} variant="scrollable" scrollButtons="auto"
+                                        style={{ fontWeight: 'bold', fontSize: '100%', marginRight: '10px' }} variant="scrollable" scrollButtons="auto"
                                     />
                                 )
                             ))}
-                        </Tabs><br />
-                        <div className='employeetable'>
+                        </Tabs> 
+                       <br/><br />
+                       <div className='employeetable'>
                             {loading ? (
                                 <div className="loading-container">
                                     <div className="loading-text">Loading...</div>
@@ -510,25 +517,25 @@ const Sidebar = () => {
                                 </div>
 
                             ) : activeSubTab && tabsData.length > 0 ? (
-                                <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto' }} >
+                                <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto'  }} >
                                     <Table>
                                         <TableHead>
-                                            <TableRow>
+                                            <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                                                 <TableCell className='tablecell-style' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
-                                                <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
-                                                <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
-                                                <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Comments</TableCell>
-                                                <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Index KPI</TableCell>
+                                                <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center' }}>Quantity Target</TableCell>
+                                                <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign:'center'  }}>Quantity Achieved</TableCell>
+                                                <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center'  }}>Comments</TableCell>
+                                                <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign:'center' }}>Index KPI</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {tabsData.map((item, index) => (
                                                 <TableRow key={index}>
                                                     <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important' }}>{item.Metric}</TableCell>
-                                                    <TableCell>{item.QuantityTarget}</TableCell>
-                                                    <TableCell> {item.QuantityAchieved}</TableCell>
-                                                    <TableCell> {item.Comments} </TableCell>
-                                                    <TableCell>{item.IndexKpi} </TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>{item.QuantityTarget}</TableCell>
+                                                    <TableCell style={{textAlign:'center' }}> {item.QuantityAchieved}</TableCell>
+                                                    <TableCell style={{textAlign:'center' }}> {item.Comments} </TableCell>
+                                                    <TableCell style={{textAlign:'center'}}>{item.IndexKpi} </TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>
@@ -544,8 +551,6 @@ const Sidebar = () => {
                                     </div>
                                 </div>
                             )}
-
-
 
                         </div>
                         <Dialog open={error} onClose={() => setError(false)}>

@@ -12,6 +12,7 @@ import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { BASE_URL } from './config';
 import { Logout } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
     // const tabs = [
@@ -124,7 +125,10 @@ const Sidebar = () => {
         setShowChangePassword(!showChangePassword);
     };
 
-
+    const navigate = useNavigate()
+const goBack = ()=>{
+    navigate('/mview')
+}
 
 
     const handleCloseProfileCard = () => {
@@ -477,7 +481,11 @@ const Sidebar = () => {
 
 
                     <div className="sub-tabs" >
-                        <br />
+                        
+                    <ListItemIcon style={{marginLeft:'15vw', marginTop:'35px'}} onClick={goBack}>
+                                    <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>   
+                                </ListItemIcon>
+                                GoBack
                         <Tabs className='subtabs-adjust'
                             value={activeSubTab}
                             onChange={(event, newValue) => handleSubTabClick(newValue)} centered
@@ -489,42 +497,47 @@ const Sidebar = () => {
                                         key={index}
                                         label={subTab}
                                         value={subTab}
-                                        style={{ fontWeight: 'bold', fontSize: '100%', marginLeft: '20px' }} variant="scrollable" scrollButtons="auto"
+                                        style={{ fontWeight: 'bold', fontSize: '100%', marginRight: '20px' }} variant="scrollable" scrollButtons="auto"
                                     />
                                 )
                             ))}
-                        </Tabs><br />
-                        <div className='employeetable'>
+                        </Tabs>
+                       
+                            
+                          
+                        <div className='employeetable' style={{marginTop:'60px'}}>
                             {loading ? (
                                 <div className="loading-container">
                                     <div className="loading-text">Loading...</div>
                                     <div className="loading-spinner"></div>
                                 </div>
 
+
                             ) : activeSubTab && tabsData.length > 0 ? (
+
                                 <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto' }} >
                                     <Table>
                                         <TableHead>
-                                            <TableRow>
+                                            <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                                                 <TableCell className='tablecell-style' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
-                                                <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center'  }}>Quantity Target</TableCell>
-                                                <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center' }}>Quantity Achieved</TableCell>
-                                                <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center'  }}>Comments</TableCell>
-                                                <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important',textAlign:'center' }}>Index KPI</TableCell>
+                                                <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Quantity Target</TableCell>
+                                                <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Quantity Achieved</TableCell>
+                                                <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Comments</TableCell>
+                                                <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Index KPI</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
                                             {tabsData.map((item, index) => (
                                                 <TableRow key={index}>
                                                     <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important' }}>{item.Metric}</TableCell>
-                                                    <TableCell style={{textAlign:'center'}}>{item.QuantityTarget}</TableCell>
-                                                    <TableCell style={{textAlign:'center'}}> {item.QuantityAchieved}</TableCell>
-                                                    <TableCell style={{textAlign:'center'}}> {item.Comments} </TableCell>
-                                                    <TableCell style={{textAlign:'center'}}>{item.IndexKpi} </TableCell>
+                                                    <TableCell style={{ textAlign: 'center' }}>{item.QuantityTarget}</TableCell>
+                                                    <TableCell style={{ textAlign: 'center' }}> {item.QuantityAchieved}</TableCell>
+                                                    <TableCell style={{ textAlign: 'center' }}> {item.Comments} </TableCell>
+                                                    <TableCell style={{ textAlign: 'center' }}>{item.IndexKpi} </TableCell>
                                                 </TableRow>
                                             ))}
                                         </TableBody>
-                                        
+
                                     </Table>
 
                                 </TableContainer>

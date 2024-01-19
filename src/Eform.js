@@ -810,10 +810,12 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 }
                             } else {
                                 setIncompleteFields(incompleteFields);
+                                console.log(tabLabels,"subTabData");
                                 // Show the error dialog or take other actions
                                 // setShowErrorDialog(true);
                             }
                         }}
+                        
                         disabled={selectedTab === tabLabels.length - 1 && selectedSubTab === subTabData.length - 1}
                     >
                         Next &gt;
@@ -994,6 +996,7 @@ const TabsView = () => {
 
     const handleChangePassword = () => {
         setShowChangePassword(true);
+        handleCloseUserMenu();
     };
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);

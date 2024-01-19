@@ -49,6 +49,7 @@ const VicePresidentView = () => {
     };
     const handleChangePassword = () => {
         setShowChangePassword(true);
+        handleCloseUserMenu();
     };
 
     const handleCloseNavMenu = () => {
@@ -327,7 +328,7 @@ const VicePresidentView = () => {
                 <IconButton
                     aria-label="close"
                     onClick={toggleChangePassword}
-                    style={{ marginLeft: '56%', marginBottom: '-17%' }}
+                    style={{ marginLeft: '54%', marginBottom: '-21%' }}
                 >
                     <CloseIcon style={{ color: 'red', width: '10%', height: '40%' }} />
                 </IconButton>
