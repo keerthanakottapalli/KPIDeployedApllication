@@ -173,12 +173,11 @@ function ManagerUpdateEmpData() {
         if (file) {
             getBase64(file, (base64Image) => {
                 const formData = {
-                    firstname,
-                    lastname,
+                    empId,
                     Image: base64Image,
                 };
 
-                fetch(`${BASE_URL}/api/emp_image_upd/${firstname}/${lastname}`, {
+                fetch(`${BASE_URL}/api/emp_image_upd/${empId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -700,7 +699,7 @@ function ManagerUpdateEmpData() {
     };
 
     const navigate = useNavigate()
-    const goBack = ()=>{
+    const goBack = () => {
         navigate(`/VPComments/${empId}`)
     }
 
@@ -742,7 +741,7 @@ function ManagerUpdateEmpData() {
                             <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
-                                    registration.Firstname === firstname && (
+                                    registration.Empid === empId && (
                                         <td>
                                             {registration.Image && (
                                                 <img
@@ -847,23 +846,23 @@ function ManagerUpdateEmpData() {
                                 <TableHead>
                                     <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                                         <TableCell><b>Metric</b></TableCell>
-                                        <TableCell style={{textAlign:'center'}}><b>Quantity Target</b></TableCell>
-                                        <TableCell style={{textAlign:'center'}}><b>Quantity Achieved</b></TableCell>
-                                        <TableCell style={{textAlign:'center'}}><b>Index KPI</b></TableCell>
-                                        <TableCell style={{textAlign:'center'}}><b>Comments</b></TableCell>
-                                        <TableCell style={{textAlign:'center'}}><b>Vice President-Rating</b></TableCell>
-                                        <TableCell style={{textAlign:'center'}}><b>Vice President-Comments</b></TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}><b>Quantity Target</b></TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}><b>Quantity Achieved</b></TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}><b>Index KPI</b></TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}><b>Comments</b></TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}><b>Vice President-Rating</b></TableCell>
+                                        <TableCell style={{ textAlign: 'center' }}><b>Vice President-Comments</b></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {tableData.map((row, index) => (
                                         <TableRow key={index}>
                                             <TableCell>{row.Metric}</TableCell>
-                                            <TableCell style={{textAlign:'center'}}>{row.QuantityTarget}</TableCell>
-                                            <TableCell style={{textAlign:'center'}}>{row.QuantityAchieved}</TableCell>
-                                            <TableCell style={{textAlign:'center'}}>{row.IndexKpi}</TableCell>
-                                            <TableCell style={{textAlign:'center'}}>{row.Comments}</TableCell>
-                                            <TableCell style={{textAlign:'center'}}>
+                                            <TableCell style={{ textAlign: 'center' }}>{row.QuantityTarget}</TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}>{row.QuantityAchieved}</TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}>{row.IndexKpi}</TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}>{row.Comments}</TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}>
                                                 <Select
                                                     value={itemMetricInputData[selectedItem]?.[row.Metric]?.MRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.MRating}
 
@@ -891,7 +890,7 @@ function ManagerUpdateEmpData() {
                                                     ))}
                                                 </Select>
                                             </TableCell>
-                                            <TableCell style={{textAlign:'center'}}>
+                                            <TableCell style={{ textAlign: 'center' }}>
                                                 <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
                                                     <TextField
                                                         id="outlined-multiline-static"
@@ -1019,7 +1018,101 @@ function ManagerUpdateEmpData() {
                     </div>
                 )
                 )}
+                <Dialog
+                    open={isProfileCardOpen}
+                    onClose={handleCloseProfileCard}
+                    fullWidth // Makes the dialog take up the full width of its container
+                    maxWidth="sm" // Sets the maximum width of the dialog
+                >
+                    <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
+                    <DialogContent style={{ height: '400px' }}>
+                        {registrations.map((registration) => (
+                            registration.Empid === empId && (
+                                <span onClick={handleToggleImagePreview}>
+                                    {registration.Image && (
+                                        <img
+                                            src={registration.Image}
+                                            alt="Profile"
+                                            style={{
+                                                borderRadius: "50%",
+                                                cursor: 'pointer',
+                                                height: '120px',
+                                                width: '120px'
+                                            }}
+                                        />
+                                    )}
+                                </span>
+                            )
+                        ))}<br />
+                        {userData && (
+                            <>
 
+
+                                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
+                                    <div style={{ marginRight: '20px' }}>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
+                                        </p>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
+                                        </p>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
+                                        </p>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
+                                        </p>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
+                                        </p>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
+                                        </p>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
+                                        </p>
+                                        <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                            <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
+                                        </p>
+
+                                    </div>
+                                </div>
+
+
+                            </>
+                        )}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", fontWeight: 'bold', marginBottom: '15px', marginRight: '15px' }}>
+                            Close
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
+                    <DialogContent>
+                        {registrations.map((registration) => (
+                            registration.Empid === empId && (
+                                <div>
+                                    {registration.Image && (
+                                        <img
+                                            src={registration.Image}
+                                            alt="Profile Preview"
+                                            style={{
+                                                maxWidth: '100%',
+                                                maxHeight: '100%',
+                                            }}
+                                        />
+                                    )}
+                                </div>
+                            )
+                        ))}
+                    </DialogContent>
+                </Dialog>
 
             </div>
         </>

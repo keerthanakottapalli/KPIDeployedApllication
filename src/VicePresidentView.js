@@ -169,7 +169,7 @@ const ManagerPortal = () => {
 
 
 
-
+  const empId = localStorage.getItem('Empid');
   const firstname = localStorage.getItem('firstname');
   const lastname = localStorage.getItem('lastname');
   const username = firstname + "" + " " + lastname
@@ -220,7 +220,7 @@ const ManagerPortal = () => {
             >
               <Tooltip title="Open settings">
                 {registrations.map((registration) => (
-                  registration.Firstname === firstname && (
+                  registration.Empid === empId && (
                     <td>
                       {registration.Image && (
                         <img
@@ -392,7 +392,7 @@ const ManagerPortal = () => {
           <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
           <DialogContent style={{ height: '400px' }}>
             {registrations.map((registration) => (
-              registration.Firstname === firstname && (
+              registration.Empid === empId && (
                 <span onClick={handleToggleImagePreview}>
                   {registration.Image && (
                     <img
@@ -461,7 +461,7 @@ const ManagerPortal = () => {
         <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
           <DialogContent>
             {registrations.map((registration) => (
-              registration.Firstname === firstname && (
+              registration.Empid === empId && (
                 <div>
                   {registration.Image && (
                     <img

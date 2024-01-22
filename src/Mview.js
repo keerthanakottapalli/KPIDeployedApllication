@@ -21,7 +21,7 @@ const handleLogout = () => {
 
 
 
-const empid = localStorage.getItem('Empid');
+const empId = localStorage.getItem('Empid');
 
 const ButtonCenter = () => {
 
@@ -170,12 +170,11 @@ const ButtonCenter = () => {
     if (file) {
       getBase64(file, (base64Image) => {
         const formData = {
-          firstname,
-          lastname,
+          empId,
           Image: base64Image,
         };
 
-        fetch(`${BASE_URL}/api/emp_image_upd/${firstname}/${lastname}`, {
+        fetch(`${BASE_URL}/api/emp_image_upd/${empId}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -321,7 +320,7 @@ const ButtonCenter = () => {
             >
               <Tooltip title="Open settings">
                 {registrations.map((registration) => (
-                  registration.Firstname === firstname && (
+                  registration.Empid === empId && (
                     <td>
                       {registration.Image && (
                         <img
@@ -483,7 +482,7 @@ const ButtonCenter = () => {
         <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
         <DialogContent style={{ height: '400px' }}>
           {registrations.map((registration) => (
-            registration.Firstname === firstname && (
+            registration.Empid === empId && (
               <span onClick={handleToggleImagePreview}>
                 {registration.Image && (
                   <img
@@ -550,7 +549,7 @@ const ButtonCenter = () => {
       <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
         <DialogContent>
           {registrations.map((registration) => (
-            registration.Firstname === firstname && (
+            registration.Empid === empId && (
               <div>
                 {registration.Image && (
                   <img

@@ -195,6 +195,7 @@ const DirectorViewEmpDetails = () => {
     window.location.href = '/login';
   };
 
+  const empId = localStorage.getItem('Empid');
   const firstname = localStorage.getItem('firstname');
   const lastname = localStorage.getItem('lastname');
   const username = firstname + "" + " " + lastname
@@ -273,7 +274,7 @@ const DirectorViewEmpDetails = () => {
               <Tooltip title="Open settings">
 
                 {registrations.map((registration) => (
-                  registration.Firstname === firstname && (
+                  registration.Empid === empId && (
                     <td>
                       {registration.Image && (
                         <img
@@ -330,7 +331,7 @@ const DirectorViewEmpDetails = () => {
       </AppBar>
       <div className='login-background'>
         <div style={{ width: '80%', height: '100vh', marginLeft: '10vw' }}>
-          <ListItemIcon style={{ marginTop:'13vh',}} onClick={goBack}>
+          <ListItemIcon style={{ marginTop: '13vh', }} onClick={goBack}>
             <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
           </ListItemIcon>
           <br />
@@ -420,7 +421,7 @@ const DirectorViewEmpDetails = () => {
           <DialogContent style={{ height: '400px' }}>
             {/* Display user profile information */}
             {registrations.map((registration) => (
-              registration.Firstname === firstname && (
+              registration.Empid === empId && (
                 <div onClick={handleToggleImagePreview}>
                   {registration.Image && (
                     <img
@@ -489,7 +490,7 @@ const DirectorViewEmpDetails = () => {
         <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
           <DialogContent>
             {registrations.map((registration) => (
-              registration.Firstname === firstname && (
+              registration.Empid === empId && (
                 <div>
                   {registration.Image && (
                     <img

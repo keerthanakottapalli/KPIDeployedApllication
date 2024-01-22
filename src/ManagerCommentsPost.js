@@ -182,12 +182,11 @@ function ManagerUpdateEmpData() {
         if (file) {
             getBase64(file, (base64Image) => {
                 const formData = {
-                    firstname,
-                    lastname,
+                    empId,
                     Image: base64Image,
                 };
 
-                fetch(`${BASE_URL}/api/emp_image_upd/${firstname}/${lastname}`, {
+                fetch(`${BASE_URL}/api/emp_image_upd/${empId}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -538,7 +537,7 @@ const goBack = ()=>{
                             <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
-                                    registration.Firstname === firstname && (
+                                    registration.Empid === empId && (
                                         <td>
                                             {registration.Image && (
                                                 <img
@@ -736,7 +735,7 @@ const goBack = ()=>{
                 <DialogTitle style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
                 <DialogContent style={{ height: '400px', }}>
                     {registrations.map((registration) => (
-                        registration.Firstname === firstname && (
+                        registration.Empid === empId && (
                             <span onClick={handleToggleImagePreview}>
                                 {registration.Image && (
                                     <img
@@ -803,7 +802,7 @@ const goBack = ()=>{
             <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                 <DialogContent>
                     {registrations.map((registration) => (
-                        registration.Firstname === firstname && (
+                        registration.Empid === empId && (
                             <div>
                                 {registration.Image && (
                                     <img

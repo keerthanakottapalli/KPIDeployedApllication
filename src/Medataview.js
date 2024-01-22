@@ -162,7 +162,7 @@ const navigate = useNavigate();
     navigate('/mview')
 }
 
-
+const empId = localStorage.getItem('Empid');
   const firstname = localStorage.getItem('firstname');
   const lastname = localStorage.getItem('lastname');
   const username = firstname + "" + " " + lastname
@@ -211,7 +211,7 @@ const navigate = useNavigate();
               <Tooltip title="Open settings">
 
                 {registrations.map((registration) => (
-                  registration.Firstname === firstname && (
+                  registration.Empid === empId && (
                     <td>
                       {registration.Image && (
                         <img
@@ -384,7 +384,7 @@ const navigate = useNavigate();
           <DialogContent style={{ height: '400px' }}>
             {/* Display user profile information */}
             {registrations.map((registration) => (
-              registration.Firstname === firstname && (
+              registration.Empid === empId && (
                 <div onClick={handleToggleImagePreview}>
                   {registration.Image && (
                     <img
@@ -453,7 +453,7 @@ const navigate = useNavigate();
         <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
           <DialogContent>
             {registrations.map((registration) => (
-              registration.Firstname === firstname && (
+              registration.Empid === empId && (
                 <div>
                   {registration.Image && (
                     <img

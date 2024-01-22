@@ -745,7 +745,7 @@ function DirectorUpdateManagerData() {
                             <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
-                                    registration.Firstname === firstname && (
+                                    registration.Empid === empId && (
                                         <td>
                                             {registration.Image && (
                                                 <img
@@ -912,7 +912,7 @@ function DirectorUpdateManagerData() {
                 <DialogContent style={{ height: '400px' }}>
                     {/* Display user profile information */}
                     {registrations.map((registration) => (
-                        registration.Firstname === firstname && (
+                        registration.Empid === empId && (
                             <div onClick={handleToggleImagePreview}>
                                 {registration.Image && (
                                     <img
@@ -981,7 +981,7 @@ function DirectorUpdateManagerData() {
             <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                 <DialogContent>
                     {registrations.map((registration) => (
-                        registration.Firstname === firstname && (
+                        registration.Empid === empId && (
                             <div>
                                 {registration.Image && (
                                     <img
