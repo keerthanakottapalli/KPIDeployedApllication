@@ -218,14 +218,14 @@ const MainTabs = () => {
             closeAddKpiModal();
 
             fetch(`${BASE_URL}/admin/emp_data`)
-            .then((response) => response.json())
-            .then((data) => {
-              setApiData(data);
-              setTabNames(Object.keys(data));
-            })
-            .catch((error) => {
-              console.error('Error fetching data:', error);
-            });
+              .then((response) => response.json())
+              .then((data) => {
+                setApiData(data);
+                setTabNames(Object.keys(data));
+              })
+              .catch((error) => {
+                console.error('Error fetching data:', error);
+              });
           } else {
             // Handle error response for delete
             console.error('Error deleting data');
@@ -345,7 +345,7 @@ const MainTabs = () => {
                       style={{ backgroundColor: '#1dbb99' }}
                       fullWidth
                     >
-                      Add KPI to Existing
+                      <b>Add KPI to Existing</b>
                     </Button>
                   </Grid>
                   <Grid item xs={4}>
@@ -356,7 +356,7 @@ const MainTabs = () => {
                       style={{ backgroundColor: '#1dbb99' }}
                       fullWidth
                     >
-                      Add New KPI Metric
+                      <b>Add New KPI Metric</b>
                     </Button>
                   </Grid>
                   <Grid item xs={4}>
@@ -367,7 +367,7 @@ const MainTabs = () => {
                       style={{ backgroundColor: '#1dbb99' }}
                       fullWidth
                     >
-                      Delete KPI
+                      <b>Delete KPI</b>
                     </Button>
                   </Grid>
                 </Grid>
@@ -470,7 +470,7 @@ const MainTabs = () => {
                   </FormControl>
                 </div>
                 <Button type="submit" variant="contained" color="primary" style={{ backgroundColor: '#1dbb99' }}>
-                  Submit
+                  <b>Submit</b>
                 </Button>
 
               </form>
@@ -547,7 +547,7 @@ const MainTabs = () => {
 
 
                 <Button type="submit" variant="contained" color="primary" style={{ backgroundColor: '#1dbb99' }}>
-                  Submit
+                  <b>Submit</b>
                 </Button>
               </form>
             )}
@@ -623,7 +623,7 @@ const MainTabs = () => {
                   style={{ backgroundColor: '#FF5722' }} // Red color to indicate deletion
                   onClick={handleDeleteKPI} // Call the delete function
                 >
-                  Delete
+                  <b>Delete</b>
                 </Button>
               </form>
             )}

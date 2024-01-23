@@ -120,7 +120,7 @@ const DirectorViewManagerAndEmpDetails = () => {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => setOpenDialog(false)} color="primary">
-              OK
+             <b>OK</b> 
             </Button>
           </DialogActions>
         </Dialog>

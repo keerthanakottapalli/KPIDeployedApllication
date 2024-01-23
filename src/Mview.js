@@ -320,7 +320,7 @@ const ButtonCenter = () => {
             >
               <Tooltip title="Open settings">
                 {registrations.map((registration) => (
-                  registration.Empid === empId && (
+                  registration.Empid == empId && (
                     <td>
                       {registration.Image && (
                         <img
@@ -467,7 +467,7 @@ const ButtonCenter = () => {
             </DialogContent>
             <DialogActions>
               <Button onClick={() => setOpenDialog(false)} color="primary" style={{ color: 'white', backgroundColor: '#00aaee', fontWeight: 'bolder',  marginBottom:'15px', marginRight:'15px' }}>
-                OK
+               <b>OK</b> 
               </Button>
             </DialogActions>
           </Dialog>
@@ -482,7 +482,7 @@ const ButtonCenter = () => {
         <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
         <DialogContent style={{ height: '400px' }}>
           {registrations.map((registration) => (
-            registration.Empid === empId && (
+            registration.Empid == empId && (
               <span onClick={handleToggleImagePreview}>
                 {registration.Image && (
                   <img
@@ -542,14 +542,14 @@ const ButtonCenter = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseProfileCard} style={{backgroundColor:"#00aaee",color:"white ",fontWeight:'bolder', marginBottom:'15px', marginRight:'15px'}}>
-            Close
+            <b>Close</b>
           </Button>
         </DialogActions>
       </Dialog>
       <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
         <DialogContent>
           {registrations.map((registration) => (
-            registration.Empid === empId && (
+            registration.Empid == empId && (
               <div>
                 {registration.Image && (
                   <img

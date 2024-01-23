@@ -449,7 +449,7 @@ const Sidebar = () => {
                                 <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
-                                        registration.Empid === empId && (
+                                        registration.Empid == empId && (
                                             <td>
                                                 {registration.Image && (
                                                     <img
@@ -566,13 +566,13 @@ const Sidebar = () => {
                                                     <TableCell className='tablecell-style4' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',textAlign:'center' }}>Index KPI</TableCell>
                                                 </TableRow>
                                             </TableHead>
-                                            <TableBody>
+                                            <TableBody style={{paddingTop:'-10px'}}>
                                                 {tabsData.map((item, index) => (
                                                     <TableRow key={index}>
-                                                        <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important' }}>{item.Metric}</TableCell>
+                                                        <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important',  }}>{item.Metric}</TableCell>
                                                         <TableCell style={{textAlign:'center'}}>{item.QuantityTarget}</TableCell>
                                                         <TableCell style={{textAlign:'center'}}>
-                                                            <FormControl style={{ width: '70%' }}>
+                                                            <FormControl style={{ width: '70%' ,paddingTop:'5px',paddingBottom:'5px'}}>
 
                                                                 <Select
                                                                     value={item.QuantityAchieved}
@@ -580,6 +580,7 @@ const Sidebar = () => {
                                                                         handleQuantityAchievedChange(index, e.target.value);
                                                                         handleFieldChange();
                                                                     }}
+                                                                    
                                                                     MenuProps={{
                                                                         PaperProps: {
                                                                             style: {
@@ -589,7 +590,7 @@ const Sidebar = () => {
                                                                     }}
                                                                 >
                                                                     {Array.from({ length: 11 }, (_, i) => i).map((number) => (
-                                                                        <MenuItem key={number} value={number}>
+                                                                        <MenuItem key={number} value={number} >
                                                                             {number}
                                                                         </MenuItem>
                                                                     ))}
@@ -599,6 +600,7 @@ const Sidebar = () => {
                                                         <TableCell style={{textAlign:'center'}}>
                                                             <Tooltip title={item.Comments} classes={{ tooltip: 'custom-tooltip' }}>
                                                                 <TextField
+                                                                style={{paddingTop:'5px',paddingBottom:'5px'}}
                                                                     value={item.Comments}
                                                                     multiline
                                                                     rows={1}
@@ -606,6 +608,7 @@ const Sidebar = () => {
                                                                         handleCommentsChange(index, e.target.value);
                                                                         handleFieldChange();
                                                                     }}
+
                                                                 />
                                                             </Tooltip>
                                                         </TableCell>
@@ -655,7 +658,7 @@ const Sidebar = () => {
                                                 onClick={handleSubTabUpdate}
                                                 disabled={updateClicked}
                                             >
-                                                Update
+                                               <b>Update</b> 
                                             </Button>
                                         )}
                                     </div>
@@ -678,7 +681,7 @@ const Sidebar = () => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={() => setError(false)} color="primary">
-                                        OK
+                                       <b>OK</b> 
                                     </Button>
                                 </DialogActions>
                             </Dialog>
@@ -694,7 +697,7 @@ const Sidebar = () => {
                             <DialogContent style={{ height: '400px' }}>
                                 {/* Display user profile information */}
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <div onClick={handleToggleImagePreview}>
                                             {registration.Image && (
                                                 <img
@@ -754,14 +757,14 @@ const Sidebar = () => {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                                    Close
+                                   <b>Close</b> 
                                 </Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                             <DialogContent>
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <div>
                                             {registration.Image && (
                                                 <img
@@ -791,7 +794,7 @@ const Sidebar = () => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary" variant='contained' style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
-                                        OK
+                                        <b>OK</b>
                                     </Button>
                                 </DialogActions>
                             </Dialog>

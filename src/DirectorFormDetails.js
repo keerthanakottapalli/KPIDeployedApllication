@@ -414,7 +414,7 @@ const DirectorFormDetails = () => {
                                 <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
-                                        registration.Empid === empId && (
+                                        registration.Empid == empId && (
                                             <td>
                                                 {registration.Image && (
                                                     <img
@@ -565,7 +565,7 @@ const DirectorFormDetails = () => {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setError(false)} color="primary">
-                                    OK
+                                  <b>OK</b>  
                                 </Button>
                             </DialogActions>
                         </Dialog>
@@ -579,7 +579,7 @@ const DirectorFormDetails = () => {
                             <DialogContent style={{ height: '400px' }}>
                                 {/* Display user profile information */}
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <div onClick={handleToggleImagePreview}>
                                             {registration.Image && (
                                                 <img
@@ -648,7 +648,7 @@ const DirectorFormDetails = () => {
                         <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                             <DialogContent>
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <div>
                                             {registration.Image && (
                                                 <img
@@ -678,7 +678,7 @@ const DirectorFormDetails = () => {
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary">
-                                        OK
+                                       <b>OK</b> 
                                     </Button>
                                 </DialogActions>
                             </Dialog>

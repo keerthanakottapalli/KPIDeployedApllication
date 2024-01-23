@@ -846,7 +846,7 @@ function DirectorUpdateManagerData() {
                                             </DialogContent>
                                             <DialogActions>
                                                 <Button onClick={() => setError(false)} color="primary">
-                                                    OK
+                                                   <b>OK</b> 
                                                 </Button>
                                             </DialogActions>
                                         </Dialog>
@@ -859,7 +859,7 @@ function DirectorUpdateManagerData() {
                                         </DialogContent>
                                         <DialogActions>
                                             <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
-                                                OK
+                                                <b>OK</b>
                                             </Button>
                                         </DialogActions>
                                     </Dialog>
@@ -872,7 +872,7 @@ function DirectorUpdateManagerData() {
                                     onClick={handleUpdateButtonClick}
                                     style={{ marginRight: '10px', backgroundColor: '#1dbb99' }}
                                 >
-                                    Update
+                                   <b>Update</b> 
                                 </Button>
                                 <Button
                                     variant="contained"
@@ -881,7 +881,7 @@ function DirectorUpdateManagerData() {
                                     style={{ marginLeft: '20px' }}
                                     disabled={!isSubmitEnabled || isFetchingData}
                                 >
-                                    Submit
+                                   <b>Submit</b> 
                                 </Button>
                                 <Dialog
                                     open={isConfirmationDialogOpen}
@@ -897,10 +897,10 @@ function DirectorUpdateManagerData() {
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={closeConfirmationDialog} color="primary">
-                                            Cancel
+                                           <b>Cancel</b> 
                                         </Button>
                                         <Button onClick={handleSubmit} color="primary" autoFocus>
-                                            Confirm
+                                           <b>Confirm</b> 
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -917,7 +917,7 @@ function DirectorUpdateManagerData() {
                                     
                                     <DialogActions>
                                         <Button onClick={closeSuccessDialog} color="primary">
-                                            OK
+                                           <b>OK</b> 
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -934,7 +934,7 @@ function DirectorUpdateManagerData() {
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleClose} color="primary">
-                                            OK
+                                          <b>OK</b>  
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -1019,7 +1019,7 @@ function DirectorUpdateManagerData() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                            Close
+                           <b>Close</b> 
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -1058,7 +1058,7 @@ function DirectorUpdateManagerData() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
-                            OK
+                           <b>OK</b> 
                         </Button>
                     </DialogActions>
                 </Dialog>

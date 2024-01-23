@@ -259,12 +259,12 @@ const ChangePasswordForm = () => {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={closeDialog} color="primary">
-                                Close
+                               <b>Close</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
                     <Button type="submit" variant="contained" fullWidth style={{ marginBottom: '5%', textAlign: 'center' }}>
-                        Reset Password
+                       <b>Reset Password</b> 
                     </Button>
                 </form>
 

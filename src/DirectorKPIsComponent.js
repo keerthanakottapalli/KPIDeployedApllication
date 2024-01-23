@@ -352,7 +352,7 @@ export default function DirectorKPIsComponent() {
                         style={{ backgroundColor: '#1dbb99' }}
                         fullWidth
                       >
-                        Add KPI to Existing Metric
+                       <b>Add KPI to Existing Metric</b> 
                       </Button>
                     </Grid>
                     <Grid item xs={4}>
@@ -363,7 +363,7 @@ export default function DirectorKPIsComponent() {
                         style={{ backgroundColor: '#1dbb99' }}
                         fullWidth
                       >
-                        Add New KPI Metric
+                       <b> Add New KPI Metric</b>
                       </Button>
                     </Grid>
                     <Grid item xs={4}>
@@ -374,7 +374,7 @@ export default function DirectorKPIsComponent() {
                         style={{ backgroundColor: '#1dbb99' }}
                         fullWidth
                       >
-                        Delete KPI from existing
+                        <b>Delete KPI from existing</b>
                       </Button>
                     </Grid>
                   </Grid>
@@ -477,7 +477,7 @@ export default function DirectorKPIsComponent() {
                     </FormControl>
                   </div>
                   <Button type="submit" variant="contained" color="primary" style={{ backgroundColor: '#1dbb99' }}>
-                    Submit
+                   <b>Submit</b> 
                   </Button>
 
                 </form>
@@ -554,7 +554,7 @@ export default function DirectorKPIsComponent() {
 
 
                   <Button type="submit" variant="contained" color="primary" style={{ backgroundColor: '#1dbb99' }}>
-                    Submit
+                   <b>Submit</b> 
                   </Button>
                 </form>
               )}
@@ -629,7 +629,7 @@ export default function DirectorKPIsComponent() {
                     style={{ backgroundColor: '#FF5722' }} // Red color to indicate deletion
                     onClick={handleDeleteKPI} // Call the delete function
                   >
-                    Delete
+                    <b>Delete</b>
                   </Button>
                 </form>
               )}

@@ -745,7 +745,7 @@ function DirectorUpdateManagerData() {
                             <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <td>
                                             {registration.Image && (
                                                 <img
@@ -861,7 +861,7 @@ function DirectorUpdateManagerData() {
                                     onClick={handleDeclineWithConfirmation}
                                     style={{ marginRight: '10px', backgroundColor: '#1dbb99' }}
                                 >
-                                    Decline
+                                   <b>Decline</b> 
                                 </Button>
                                 <Button
                                     variant="contained"
@@ -870,7 +870,7 @@ function DirectorUpdateManagerData() {
                                     to={`/mViewEmpDetails/${empId}`}
                                     style={{ backgroundColor: '#1dbb99' }}
                                 >
-                                    Manager Ratings
+                                   <b>Manager Ratings</b> 
                                 </Button>
                             </div>
 
@@ -884,10 +884,10 @@ function DirectorUpdateManagerData() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleCloseDialog} color="primary" variant="contained">
-                                    Cancel
+                                   <b>Cancel</b> 
                                 </Button>
                                 <Button onClick={handleDeclineClick} color="primary" variant="contained">
-                                    Confirm
+                                   <b>Confirm</b> 
                                 </Button>
                             </DialogActions>
                         </Dialog>
@@ -912,7 +912,7 @@ function DirectorUpdateManagerData() {
                 <DialogContent style={{ height: '400px' }}>
                     {/* Display user profile information */}
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <div onClick={handleToggleImagePreview}>
                                 {registration.Image && (
                                     <img
@@ -974,14 +974,14 @@ function DirectorUpdateManagerData() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                        Close
+                       <b>Close</b> 
                     </Button>
                 </DialogActions>
             </Dialog>
             <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                 <DialogContent>
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <div>
                                 {registration.Image && (
                                     <img

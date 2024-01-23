@@ -76,7 +76,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
     const closeDownloadDialog = () => {
         setDownloadDialogOpen(false);
-        navigate('/directorview')
+        // navigate('/directorview')
     };
 
 
@@ -618,7 +618,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                     style={{ backgroundColor: '#1dbb99' }}
                     onClick={handleSave}
                 >
-                    Save
+                   <b>Save</b> 
                 </Button>&nbsp;
                 <Button
                     className='getClearButton'
@@ -626,7 +626,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                     style={{ backgroundColor: '#1dbb99' }}
                     onClick={handleOpenClearConfirmationDialog}
                 >
-                    Clear
+                   <b>Clear</b> 
                 </Button>
             </div>
             <Tabs
@@ -757,10 +757,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={() => setSaveDialogOpen(false)} color="primary">
-                                Cancel
+                               <b>Cancel</b> 
                             </Button>
                             <Button onClick={handleSaveData} color="primary">
-                                Save
+                               <b>Save</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -778,10 +778,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleCloseClearConfirmationDialog} color="primary">
-                                Cancel
+                               <b>Cancel</b> 
                             </Button>
                             <Button onClick={clearDataAndCloseDialog} color="primary">
-                                Clear
+                               <b>Clear</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -879,7 +879,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose} open={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                                OK
+                               <b>OK</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -903,7 +903,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={closeConfirmationDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                                Cancel
+                               <b>Cancel</b> 
                             </Button>
                             <Button onClick={() => {
                                 handleSubmit();
@@ -911,7 +911,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 closeConfirmationDialog();
                                 openSuccessDialog();
                             }} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                                OK
+                               <b>OK</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -931,13 +931,13 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={closeDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                                Cancel
+                               <b>Cancel</b> 
                             </Button>
                             <Button onClick={() => {
                                 exportToExcel(); // Call exportToExcel directly when the download button is clicked
                                 closeDownloadDialog();
                             }} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                                OK
+                               <b>OK</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -1214,7 +1214,7 @@ const TabsView = () => {
                             <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <td>
                                             {registration.Image && (
                                                 <img
@@ -1345,7 +1345,7 @@ const TabsView = () => {
                 <DialogTitle style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
                 <DialogContent style={{ height: '400px', }}>
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <span onClick={handleToggleImagePreview}>
                                 {registration.Image && (
                                     <img
@@ -1412,7 +1412,7 @@ const TabsView = () => {
             <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                 <DialogContent>
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <div>
                                 {registration.Image && (
                                     <img

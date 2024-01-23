@@ -41,6 +41,8 @@ const ButtonCenter = () => {
   const [isHovering1, setIsHovering1] = useState(false);
   const [isHovering2, setIsHovering2] = useState(false);
   const empId = localStorage.getItem('Empid');
+  console.log(empId, "44");
+
 
   const handleMouseEnter = () => {
     setIsHovering(true);
@@ -85,7 +87,6 @@ const ButtonCenter = () => {
   };
 
   const handleOpenProfileCard = async () => {
-    const empid = localStorage.getItem('Empid'); // Make sure this contains the correct Empid
     try {
       // Fetch the user data based on empid
       const response = await fetch(`${BASE_URL}/api/emp_data/${empid}`);
@@ -112,7 +113,6 @@ const ButtonCenter = () => {
   };
   const fetchUserProfile = async () => {
     try {
-      const empid = localStorage.getItem('Empid');
       const response = await fetch(`${BASE_URL}/api/emp_data?Empid=${empid}`);
       const data = await response.json();
 
@@ -173,7 +173,7 @@ const ButtonCenter = () => {
         setRegistrations(data.message);
 
         // Extract Firstname from the API response
-        const firstnames = data.message.map(item => item.Firstname);
+        const firstnames = data.message.map(item => item.Empid);
 
       } catch (error) {
         console.error('Error:', error.message);
@@ -197,6 +197,7 @@ const ButtonCenter = () => {
     if (file) {
       getBase64(file, (base64Image) => {
         const formData = {
+          empId,
           Image: base64Image,
         };
 
@@ -242,10 +243,8 @@ const ButtonCenter = () => {
   const firstname = localStorage.getItem('firstname');
   const lastname = localStorage.getItem('lastname');
   const username = firstname + " " + lastname
-
-
-  const [employeeData, setEmployeeData] = useState([]);
   const empid = localStorage.getItem('Empid');
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
 
@@ -310,25 +309,32 @@ const ButtonCenter = () => {
             >
               <Tooltip title="Open settings">
 
-                {registrations.map((registration) => (
-                  registration.Empid === empId && (
-                    <td>
-                      {registration.Image && (
-                        <img
-                          src={registration.Image}
-                          alt="Profile"
-                          style={{
-                            width: '60px',
-                            height: '60px',
-                            borderRadius: '50%',
-                            marginRight: '8px',
-                          }}
+                {registrations.map((registration) => {
+                  if (registration.Empid == empId) {
+                    console.log(registrations,"registrations");
+                    console.log('Registration found for Empid:', empId);
+                    return (
+                      <td key={registration.Empid}>
+                        {registration.Image && (
+                          <img
+                            src={registration.Image}
+                            alt="Profile"
+                            style={{
+                              width: '60px',
+                              height: '60px',
+                              borderRadius: '50%',
+                              marginRight: '8px',
+                            }}
+                          />
+                        )}
+                      </td>
+                    );
+                  } else {
+                    console.log('No registration found for Empid:', empId);
+                    return null;
+                  }
+                })}
 
-                        />
-                      )}
-                    </td>
-                  )
-                ))}
               </Tooltip>
             </IconButton>
             <Menu
@@ -417,7 +423,7 @@ const ButtonCenter = () => {
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
-                Fill KPI Form
+                <b>Fill KPI Form</b>
               </Button>
               <Button style={{ backgroundColor: isHovering1 ? '#db764f' : '#d95623', marginLeft: '20px' }}
                 className="view-details" variant="contained"
@@ -425,7 +431,7 @@ const ButtonCenter = () => {
                 onMouseEnter={handleMouseEnter1}
                 onMouseLeave={handleMouseLeave1}
               >
-                View Details
+                <b>View Details</b>
               </Button>
               <Button
                 style={{ backgroundColor: isHovering2 ? '#db764f' : '#d95623', marginLeft: '20px' }}
@@ -436,7 +442,7 @@ const ButtonCenter = () => {
                 onMouseLeave={handleMouseLeave2}
                 disabled={isButtonDisabled}
               >
-                Update Details
+                <b>Update Details</b>
               </Button>
 
             </div>
@@ -453,7 +459,7 @@ const ButtonCenter = () => {
               </DialogContent>
               <DialogActions>
                 <Button variant='contained' onClick={() => setOpenDialog(false)} style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
-                  OK
+                 <b>OK</b> 
                 </Button>
               </DialogActions>
             </Dialog>
@@ -477,7 +483,7 @@ const ButtonCenter = () => {
         <DialogTitle style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
         <DialogContent style={{ height: '400px', }}>
           {registrations.map((registration) => (
-            registration.Empid === empId && (
+            registration.Empid == empId && (
               <span onClick={handleToggleImagePreview}>
                 {registration.Image && (
                   <img
@@ -537,14 +543,14 @@ const ButtonCenter = () => {
         </DialogContent>
         <DialogActions>
           <Button variant='contained' onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white", marginBottom: '15px', marginRight: '15px' }}>
-            Close
+            <b>Close</b>
           </Button>
         </DialogActions>
       </Dialog>
       <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
         <DialogContent>
           {registrations.map((registration) => (
-            registration.Empid === empId && (
+            registration.Empid == empId && (
               <div>
                 {registration.Image && (
                   <img

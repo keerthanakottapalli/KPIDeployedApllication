@@ -406,7 +406,7 @@ const goBack = ()=>{
                                 <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
-                                        registration.Empid === empId && (
+                                        registration.Empid == empId && (
                                             <td>
                                                 {registration.Image && (
                                                     <img
@@ -562,7 +562,7 @@ const goBack = ()=>{
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={() => setError(false)} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                                    OK
+                                  <b>OK</b>  
                                 </Button>
                             </DialogActions>
                         </Dialog>
@@ -576,7 +576,7 @@ const goBack = ()=>{
                             <DialogContent style={{ height: '400px' }}>
                                 {/* Display user profile information */}
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <div onClick={handleToggleImagePreview}>
                                             {registration.Image && (
                                                 <img
@@ -638,14 +638,14 @@ const goBack = ()=>{
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                                    Close
+                                   <b>Close</b> 
                                 </Button>
                             </DialogActions>
                         </Dialog>
                         <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                             <DialogContent>
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <div>
                                             {registration.Image && (
                                                 <img
@@ -675,7 +675,7 @@ const goBack = ()=>{
                                 </DialogContent>
                                 <DialogActions>
                                     <Button onClick={handleClose} color="primary">
-                                        OK
+                                       <b>OK</b> 
                                     </Button>
                                 </DialogActions>
                             </Dialog>

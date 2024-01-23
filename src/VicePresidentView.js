@@ -220,7 +220,7 @@ const ManagerPortal = () => {
             >
               <Tooltip title="Open settings">
                 {registrations.map((registration) => (
-                  registration.Empid === empId && (
+                  registration.Empid == empId && (
                     <td>
                       {registration.Image && (
                         <img
@@ -392,7 +392,7 @@ const ManagerPortal = () => {
           <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
           <DialogContent style={{ height: '400px' }}>
             {registrations.map((registration) => (
-              registration.Empid === empId && (
+              registration.Empid == empId && (
                 <span onClick={handleToggleImagePreview}>
                   {registration.Image && (
                     <img
@@ -461,7 +461,7 @@ const ManagerPortal = () => {
         <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
           <DialogContent>
             {registrations.map((registration) => (
-              registration.Empid === empId && (
+              registration.Empid == empId && (
                 <div>
                   {registration.Image && (
                     <img

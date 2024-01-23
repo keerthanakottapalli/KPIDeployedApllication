@@ -251,7 +251,7 @@ const VicePresidentView = () => {
                             <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <td>
                                             {registration.Image && (
                                                 <img
@@ -371,7 +371,7 @@ const VicePresidentView = () => {
                             style={{ backgroundColor: '#0d4166', marginLeft: '10vw', alignItems: 'center', display: 'flex' }}
 
                         >
-                            Director Details
+                           <b>Director Details</b> 
                         </Button>
 
                     </div>
@@ -388,7 +388,7 @@ const VicePresidentView = () => {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={() => setOpenDialog(false)} color="primary">
-                                OK
+                               <b>OK</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -405,7 +405,7 @@ const VicePresidentView = () => {
                 <DialogContent style={{ height: '400px' }}>
                     {/* Display user profile information */}
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid== empId && (
                             <div onClick={handleToggleImagePreview}>
                                 {registration.Image && (
                                     <img
@@ -467,14 +467,14 @@ const VicePresidentView = () => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                        Close
+                       <b>Close</b> 
                     </Button>
                 </DialogActions>
             </Dialog>
             <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                 <DialogContent>
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <div>
                                 {registration.Image && (
                                     <img

@@ -605,7 +605,7 @@ function ManagerUpdateEmpData() {
                             <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <td>
                                             {registration.Image && (
                                                 <img
@@ -749,7 +749,7 @@ function ManagerUpdateEmpData() {
                                         onClick={handleDeclineWithConfirmation}
                                         style={{ marginRight: '10px', backgroundColor: '#1dbb99'  }}
                                     >
-                                        Decline
+                                        <b>Decline</b>
                                     </Button>
                                     <Button
                                         variant="contained"
@@ -758,7 +758,7 @@ function ManagerUpdateEmpData() {
                                         to={`/VpDComments/${empId}`}
                                         style={{ backgroundColor: '#1dbb99' }}
                                     >
-                                        Director Ratings
+                                        <b>Director Ratings</b>
                                     </Button>
 
                                 </div>
@@ -771,10 +771,10 @@ function ManagerUpdateEmpData() {
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleCloseDialog} color="primary" variant='contained'>
-                                            Cancel
+                                           <b>Cancel</b> 
                                         </Button>
                                         <Button onClick={handleDeclineClick} color="primary" variant='contained'>
-                                            Confirm
+                                           <b>Confirm</b> 
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -797,7 +797,7 @@ function ManagerUpdateEmpData() {
                 <DialogTitle style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
                 <DialogContent style={{ height: '400px', }}>
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <span onClick={handleToggleImagePreview}>
                                 {registration.Image && (
                                     <img
@@ -857,14 +857,14 @@ function ManagerUpdateEmpData() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white", marginBottom: '15px', marginRight: '15px' }}>
-                        Close
+                       <b>Close</b> 
                     </Button>
                 </DialogActions>
             </Dialog>
             <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                 <DialogContent>
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <div>
                                 {registration.Image && (
                                     <img

@@ -274,7 +274,7 @@ const DirectorViewEmpDetails = () => {
               <Tooltip title="Open settings">
 
                 {registrations.map((registration) => (
-                  registration.Empid === empId && (
+                  registration.Empid == empId && (
                     <td>
                       {registration.Image && (
                         <img
@@ -421,7 +421,7 @@ const DirectorViewEmpDetails = () => {
           <DialogContent style={{ height: '400px' }}>
             {/* Display user profile information */}
             {registrations.map((registration) => (
-              registration.Empid === empId && (
+              registration.Empid == empId && (
                 <div onClick={handleToggleImagePreview}>
                   {registration.Image && (
                     <img
@@ -483,14 +483,14 @@ const DirectorViewEmpDetails = () => {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-              Close
+             <b>Close</b> Close
             </Button>
           </DialogActions>
         </Dialog>
         <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
           <DialogContent>
             {registrations.map((registration) => (
-              registration.Empid === empId && (
+              registration.Empid == empId && (
                 <div>
                   {registration.Image && (
                     <img

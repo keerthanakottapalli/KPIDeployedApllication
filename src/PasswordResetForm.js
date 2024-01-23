@@ -221,7 +221,7 @@ const PasswordResetForm = () => {
                                     type="submit"
                                     style={{ backgroundColor: '#272773', marginLeft: 'auto', display: 'block', padding: ' 10px 30px', borderRadius: '15px' }}
                                 >
-                                    Next
+                                  <b>Next</b>  
                                 </Button>
 
                             </form>
@@ -288,13 +288,13 @@ const PasswordResetForm = () => {
                                         </DialogContent>
                                         <DialogActions>
                                             <Button onClick={handleCloseDialogAndNavigate} color="primary">
-                                                OK
+                                               <b>OK</b> 
                                             </Button>
                                         </DialogActions>
                                     </Dialog>
 
                                     <Button variant="contained" color="primary" type="submit" style={{ marginLeft: 'auto', display: 'block', borderRadius: '5px', backgroundColor: '#272773' }}>
-                                        Reset Password
+                                        <b>Reset Password</b>
                                     </Button>
                                 </form>
                             </div>

@@ -697,7 +697,7 @@ function DirectorUpdateEmpData() {
                             <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
-                                    registration.Empid === empId && (
+                                    registration.Empid == empId && (
                                         <td>
                                             {registration.Image && (
                                                 <img
@@ -845,7 +845,7 @@ function DirectorUpdateEmpData() {
                                             </DialogContent>
                                             <DialogActions>
                                                 <Button onClick={() => setError(false)} variant="contained" style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
-                                                    OK
+                                                   <b>OK</b> 
                                                 </Button>
                                             </DialogActions>
                                         </Dialog>
@@ -858,7 +858,7 @@ function DirectorUpdateEmpData() {
                                         </DialogContent>
                                         <DialogActions>
                                             <Button onClick={() => setIncompleteItemsDialogOpen(false)} variant="contained" style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
-                                                OK
+                                               <b>OK</b> 
                                             </Button>
                                         </DialogActions>
                                     </Dialog>
@@ -872,7 +872,7 @@ function DirectorUpdateEmpData() {
                                     onClick={handleUpdateButtonClick}
 
                                 >
-                                    Update
+                                  <b>Update</b>  
                                 </Button>
                                 <Button
                                     variant="contained"
@@ -880,7 +880,7 @@ function DirectorUpdateEmpData() {
                                     style={{ marginLeft: '20px',  color: 'white' }}
                                     disabled={!isSubmitEnabled || isFetchingData}
                                 >
-                                    Submit
+                                   <b>Submit</b> 
                                 </Button>
                                 <Dialog
                                     open={isConfirmationDialogOpen}
@@ -896,10 +896,10 @@ function DirectorUpdateEmpData() {
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={closeConfirmationDialog} variant='contained' style={{ backgroundColor: '#00aaee', }}>
-                                            Cancel
+                                           <b>Cancel</b> 
                                         </Button>
                                         <Button onClick={handleSubmit} variant='contained' style={{ backgroundColor: '#00aaee', }} autoFocus>
-                                            Confirm
+                                           <b>Confirm</b> 
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -914,7 +914,7 @@ function DirectorUpdateEmpData() {
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={closeSuccessDialog} variant='contained' style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
-                                            OK
+                                           <b>OK</b> 
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -941,7 +941,7 @@ function DirectorUpdateEmpData() {
                 <DialogContent style={{ height: '400px' }}>
                     {/* Display user profile information */}
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <div onClick={handleToggleImagePreview}>
                                 {registration.Image && (
                                     <img
@@ -1003,14 +1003,14 @@ function DirectorUpdateEmpData() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                        Close
+                       <b>Close</b> 
                     </Button>
                 </DialogActions>
             </Dialog>
             <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                 <DialogContent>
                     {registrations.map((registration) => (
-                        registration.Empid === empId && (
+                        registration.Empid == empId && (
                             <div>
                                 {registration.Image && (
                                     <img
@@ -1040,7 +1040,7 @@ function DirectorUpdateEmpData() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
-                            OK
+                           <b>OK</b> 
                         </Button>
                     </DialogActions>
                 </Dialog>

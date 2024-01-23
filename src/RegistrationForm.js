@@ -51,6 +51,7 @@ const RegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
+  const [apiError, setApiError] =useState('');
 
   const handleClose = () => {
     setOpenDialog(false);
@@ -235,8 +236,20 @@ const RegistrationForm = () => {
       }
     } catch (error) {
       console.error('Error registering employee:', error);
-      // Handle error response, display a message, etc.
+
+      if (error.response && error.response.data && error.response.data.error) {
+        // Set the specific API error message
+        setApiError(error.response.data.error);
+      } else {
+        // Set a generic error message
+        setApiError('An error occurred while communicating with the server.');
+      }
     }
+    {apiError && (
+      <div style={{ color: 'red', marginTop: '10px' }}>
+      {apiError}
+      </div>
+      )} 
   };
 
   return (
@@ -561,7 +574,7 @@ const RegistrationForm = () => {
             </DialogActions>
           </Dialog>
           <Button type="submit" className='register-button' variant="contained" color="primary" style={{ width: inputWidth, height: inputHeight }}>
-            Register
+            <b>Register</b>
           </Button>
           <h5>Already have an account? Please <Link to="/login">LOGIN!</Link></h5>
         </form>

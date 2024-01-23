@@ -431,7 +431,7 @@ const Sidebar = () => {
                                 <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
-                                        registration.Empid === empId && (
+                                        registration.Empid == empId && (
                                             <td>
                                                 {registration.Image && (
                                                     <img
@@ -628,7 +628,7 @@ const Sidebar = () => {
                                             color="primary"
                                             onClick={handleSubTabUpdate}
                                         >
-                                            Update
+                                          <b>Update</b>  
                                         </Button>
                                     </div>
                                 </>
@@ -650,7 +650,7 @@ const Sidebar = () => {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={() => setError(false)} color="primary">
-                                OK
+                               <b>OK</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -664,7 +664,7 @@ const Sidebar = () => {
                         <DialogContent style={{ height: '370px' }}>
                             {/* Display user profile information */}
                             {registrations.map((registration) => (
-                                registration.Empid === empId && (
+                                registration.Empid == empId && (
                                     <div style={{ marginLeft: '40%' }} onClick={handleToggleImagePreview}>
                                         {registration.Image && (
                                             <img
@@ -726,14 +726,14 @@ const Sidebar = () => {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                                Close
+                               <b>Close</b> 
                             </Button>
                         </DialogActions>
                     </Dialog>
                     <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                         <DialogContent>
                             {registrations.map((registration) => (
-                                registration.Empid === empId && (
+                                registration.Empid== empId && (
                                     <div>
                                         {registration.Image && (
                                             <img
@@ -763,7 +763,7 @@ const Sidebar = () => {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleClose} variant='contained' style={{backgroundColor:'#00aaee'}}>
-                                    OK
+                                   <b>OK</b> 
                                 </Button>
                             </DialogActions>
                         </Dialog>
