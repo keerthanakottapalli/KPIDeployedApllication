@@ -302,7 +302,7 @@ const Sidebar = () => {
                 // Delay setting loading to false by 3 seconds
                 setTimeout(() => {
                     setLoading(false);
-                }, 1000);
+                });
             }
         }
     };
@@ -446,7 +446,6 @@ const Sidebar = () => {
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -467,7 +466,6 @@ const Sidebar = () => {
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -516,7 +514,8 @@ const Sidebar = () => {
                                     className={`tab ${activeTab === tab ? 'active' : ''}`}
                                     onClick={() => handleTabClick(tab)}
                                 >
-                                    <br /><span className="star-icon">&#9733;</span>
+                                    <br />
+                                    {/* <span className="star-icon">&#9733;</span> */}
                                     {tab}
                                 </div>
                             ))}
@@ -566,15 +565,16 @@ const Sidebar = () => {
                                                     <TableCell className='tablecell-style4' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',textAlign:'center' }}>Index KPI</TableCell>
                                                 </TableRow>
                                             </TableHead>
-                                            <TableBody style={{paddingTop:'-10px'}}>
+                                            <TableBody >
                                                 {tabsData.map((item, index) => (
                                                     <TableRow key={index}>
                                                         <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important',  }}>{item.Metric}</TableCell>
                                                         <TableCell style={{textAlign:'center'}}>{item.QuantityTarget}</TableCell>
                                                         <TableCell style={{textAlign:'center'}}>
-                                                            <FormControl style={{ width: '70%' ,paddingTop:'5px',paddingBottom:'5px'}}>
+                                                            <FormControl style={{ width: '70%' }}>
 
                                                                 <Select
+                                                              
                                                                     value={item.QuantityAchieved}
                                                                     onChange={(e) => {
                                                                         handleQuantityAchievedChange(index, e.target.value);
@@ -600,7 +600,7 @@ const Sidebar = () => {
                                                         <TableCell style={{textAlign:'center'}}>
                                                             <Tooltip title={item.Comments} classes={{ tooltip: 'custom-tooltip' }}>
                                                                 <TextField
-                                                                style={{paddingTop:'5px',paddingBottom:'5px'}}
+                                                               
                                                                     value={item.Comments}
                                                                     multiline
                                                                     rows={1}
@@ -612,7 +612,7 @@ const Sidebar = () => {
                                                                 />
                                                             </Tooltip>
                                                         </TableCell>
-                                                        <TableCell style={{textAlign:'center', paddingLeft:'20px'}}>
+                                                        <TableCell style={{textAlign:'center', }}>
                                                             <FormControl style={{ width: '110%' }}>
                                                                 {/* <InputLabel>Index KPI</InputLabel> */}
                                                                 <Select

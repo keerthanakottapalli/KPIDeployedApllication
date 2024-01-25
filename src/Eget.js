@@ -276,9 +276,9 @@ const Sidebar = () => {
             }
             finally {
                 // Delay setting loading to false by 3 seconds
-                setTimeout(() => {
+                
                     setLoading(false);
-                }, 1000);
+                
             }
         }
     };
@@ -408,7 +408,7 @@ const goBack = ()=>{
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
+                               
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -429,7 +429,7 @@ const goBack = ()=>{
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
+                               
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -479,7 +479,7 @@ const goBack = ()=>{
                                     onClick={() => handleTabClick(tab)}
                                 >
                                     <br />
-                                    <span className="star-icon">&#9733;</span>
+                                    {/* <span className="star-icon">&#9733;</span> */}
                                     {tab}
                                 </div>
                             ))}

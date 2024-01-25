@@ -428,7 +428,6 @@ const Sidebar = () => {
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -449,7 +448,6 @@ const Sidebar = () => {
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
                             </IconButton>
                             <Menu
                                 id="user-menu"

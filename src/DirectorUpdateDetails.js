@@ -425,7 +425,6 @@ const DirectorUpdateDetails = () => {
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -446,7 +445,6 @@ const DirectorUpdateDetails = () => {
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
                             </IconButton>
                             <Menu
                                 id="user-menu"

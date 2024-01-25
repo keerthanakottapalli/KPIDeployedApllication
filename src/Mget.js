@@ -127,7 +127,7 @@ const Sidebar = () => {
 
     const navigate = useNavigate()
 const goBack = ()=>{
-    navigate('/mview')
+    navigate('/EmployeeMainView')
 }
 
 
@@ -270,9 +270,9 @@ const goBack = ()=>{
                 console.error('Error fetching data:', error);
             } finally {
                 // Delay setting loading to false by 3 seconds
-                setTimeout(() => {
+                
                     setLoading(false);
-                }, 1000);
+               
             }
         }
     };
@@ -403,7 +403,6 @@ const goBack = ()=>{
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -424,7 +423,6 @@ const goBack = ()=>{
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -473,7 +471,8 @@ const goBack = ()=>{
                                     className={`tab ${activeTab === tab ? 'active' : ''}`}
                                     onClick={() => handleTabClick(tab)}
                                 >
-                                    <br /><span className="star-icon">&#9733;</span>
+                                    <br />
+                                    {/* <span className="star-icon">&#9733;</span> */}
                                     {tab}
                                 </div>
                             ))}

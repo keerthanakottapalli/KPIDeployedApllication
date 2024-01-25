@@ -307,7 +307,7 @@ const ButtonCenter = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              <Tooltip title="Open settings">
+              
 
                 {registrations.map((registration) => {
                   if (registration.Empid == empId) {
@@ -335,7 +335,7 @@ const ButtonCenter = () => {
                   }
                 })}
 
-              </Tooltip>
+              
             </IconButton>
             <Menu
               id="user-menu"

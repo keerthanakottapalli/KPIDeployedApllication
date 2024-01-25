@@ -111,6 +111,7 @@ const Dview = () => {
   };
   const handleChangePassword = () => {
     setShowChangePassword(true);
+    handleCloseUserMenu();
   };
 
   const handleCloseNavMenu = () => {
@@ -274,7 +275,6 @@ const Dview = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              <Tooltip title="Open settings">
 
                 {registrations.map((registration) => (
                   registration.Empid == empId && (
@@ -295,7 +295,6 @@ const Dview = () => {
                     </td>
                   )
                 ))}
-              </Tooltip>
             </IconButton>
             <Menu
               id="user-menu"
@@ -351,16 +350,20 @@ const Dview = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      {showChangePassword ? (
-        <IconButton
-          aria-label="close"
-          onClick={toggleChangePassword}
-          style={{ marginLeft: '56%', marginBottom: '-17%' }}
-        >
-          <CloseIcon style={{ color: 'red', width: '10%', height: '40%' }} />
-        </IconButton>
-      )
-        : (
+      {showChangePassword && (
+                <IconButton
+                    aria-label="close"
+                    onClick={toggleChangePassword}
+                    style={{ marginLeft: '63%', marginBottom: '-22%', }}
+                >
+                    <CloseIcon style={{ color: 'red', }} />
+                </IconButton>
+            )}
+            {showChangePassword ? (
+
+                <ChangePassword />
+
+            ) : (
           <div style={{ display: 'flex' }}>
             <div style={{
               flex: '70%',

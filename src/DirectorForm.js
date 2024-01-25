@@ -756,10 +756,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => setSaveDialogOpen(false)} color="primary">
+                            <Button onClick={() => setSaveDialogOpen(false)} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Cancel</b> 
                             </Button>
-                            <Button onClick={handleSaveData} color="primary">
+                            <Button onClick={handleSaveData} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Save</b> 
                             </Button>
                         </DialogActions>
@@ -777,10 +777,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleCloseClearConfirmationDialog} color="primary">
+                            <Button onClick={handleCloseClearConfirmationDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Cancel</b> 
                             </Button>
-                            <Button onClick={clearDataAndCloseDialog} color="primary">
+                            <Button onClick={clearDataAndCloseDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Clear</b> 
                             </Button>
                         </DialogActions>
@@ -1211,7 +1211,7 @@ const TabsView = () => {
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
+                            
 
                                 {registrations.map((registration) => (
                                     registration.Empid == empId && (
@@ -1232,7 +1232,6 @@ const TabsView = () => {
                                         </td>
                                     )
                                 ))}
-                            </Tooltip>
                         </IconButton>
                         <Menu
                             id="user-menu"

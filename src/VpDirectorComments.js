@@ -738,7 +738,6 @@ function ManagerUpdateEmpData() {
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
                                     registration.Empid == empId && (
@@ -759,7 +758,6 @@ function ManagerUpdateEmpData() {
                                         </td>
                                     )
                                 ))}
-                            </Tooltip>
                         </IconButton>
                         <Menu
                             id="user-menu"
