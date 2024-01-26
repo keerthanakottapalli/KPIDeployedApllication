@@ -352,7 +352,7 @@ export default function DirectorKPIsComponent() {
                         style={{ backgroundColor: '#1dbb99' }}
                         fullWidth
                       >
-                       <b>Add KPI to Existing Metric</b> 
+                       <b>Add to Existing Process KPI</b> 
                       </Button>
                     </Grid>
                     <Grid item xs={4}>
@@ -363,7 +363,7 @@ export default function DirectorKPIsComponent() {
                         style={{ backgroundColor: '#1dbb99' }}
                         fullWidth
                       >
-                       <b> Add New KPI Metric</b>
+                       <b>Add New Process KPI</b>
                       </Button>
                     </Grid>
                     <Grid item xs={4}>

@@ -12,6 +12,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { BASE_URL } from './config';
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@material-ui/core';
+import { Logout } from '@mui/icons-material';
 // import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -205,8 +206,6 @@ function DirectorUpdateEmpData() {
     };
 
 
-
-
     // Use useEffect to validate incomplete items when moving to the next title section
     const [incompleteItems, setIncompleteItems] = useState([]);
     const [incompleteItemsDialogOpen, setIncompleteItemsDialogOpen] = useState(false);
@@ -265,7 +264,7 @@ function DirectorUpdateEmpData() {
         // localStorage.removeItem('form_data');
         localStorage.removeItem('token');
         // Redirect to the login page (replace '/login' with your login route)
-        window.location.href = '/directoremployeedetails';
+        window.location.href = '/login';
     };
 
 
@@ -742,9 +741,9 @@ function DirectorUpdateEmpData() {
 
                             <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
-                                    <ArrowBackIcon />
+                                    <Logout />
                                 </ListItemIcon>
-                                GoBack
+                                Logout
                             </MenuItem>
                         </Menu>
                     </Box>

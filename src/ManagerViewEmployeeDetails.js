@@ -693,7 +693,7 @@ function ManagerUpdateEmpData() {
 
     const navigate = useNavigate()
     const goBack = ()=>{
-        navigate(`/mcomments/${empId}`)
+        navigate(`/directormanagerdetails/${empId}`)
     }
 
     // Function to reset the error message

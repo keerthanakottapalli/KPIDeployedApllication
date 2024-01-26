@@ -14,6 +14,7 @@ import { BASE_URL } from './config';
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 import { Box, IconButton, ListItemIcon, Menu } from '@material-ui/core';
+import { Logout } from '@mui/icons-material';
 
 
 function CollapsibleSection({ icon, title, items, isExpanded, onItemClick, redItems, toggleExpanded }) {
@@ -206,8 +207,6 @@ function ManagerUpdateEmpData() {
         }
     };
 
-
-
     const [selectedSectionIndex, setSelectedSectionIndex] = useState(0); // Initialize with the first section
 
     useEffect(() => {
@@ -303,7 +302,7 @@ function ManagerUpdateEmpData() {
     const lastname = localStorage.getItem('lastname');
     const username = firstname + " " + lastname
     const handleLogout = () => {
-        window.location.href = `/VPComments/${empId}`;
+        window.location.href = `/login`;
     };
 
 
@@ -806,9 +805,9 @@ function ManagerUpdateEmpData() {
                             </MenuItem>
                             <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
-                                    <ExitToApp />
+                                    <Logout />
                                 </ListItemIcon>
-                                Goback
+                                Logout
                             </MenuItem>
                         </Menu>
                     </Box>

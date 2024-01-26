@@ -130,10 +130,10 @@ padding-top: 50px;
 }
 
 
-.navBar-style .MuiButton-root {
+/* .navBar-style .MuiButton-root {
   color: white;
   background-color: #3f3c3c;
-}
+} */
 
 .userInfo {
   display: flex;

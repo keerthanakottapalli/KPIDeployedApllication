@@ -670,7 +670,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'quantityAchieved')}
                                             sx={{ minWidth: '120px' }}
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -694,7 +694,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                                 rows={1}
                                                 onChange={(event) => handleCommentChange(event, questionIndex)}
                                                 label="Comments"
-                                                className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                                // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             />
                                         </Tooltip>
                                     </TableCell>
@@ -703,7 +703,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'indexKpi')}
                                             sx={{ minWidth: '120px' }}
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -812,7 +812,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 setIncompleteFields(incompleteFields);
                                 console.log(tabLabels,"subTabData");
                                 // Show the error dialog or take other actions
-                                // setShowErrorDialog(true);
+                                setShowErrorDialog(true);
                             }
                         }}
                         
@@ -823,7 +823,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
 
-                    {/* {incompleteFields.length > 0 && (
+                    {incompleteFields.length > 0 && (
 
                         <Dialog open={showErrorDialog} onClose={() => setShowErrorDialog(false)}>
                             <DialogTitle>
@@ -847,7 +847,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
                     )}
-                    &nbsp;&nbsp;&nbsp; */}
+                    &nbsp;&nbsp;&nbsp;
 
 
                     <Dialog open={isSuccessDialogOpen} onClose={handleClose}>

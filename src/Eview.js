@@ -307,35 +307,35 @@ const ButtonCenter = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              
 
-                {registrations.map((registration) => {
-                  if (registration.Empid == empId) {
-                    console.log(registrations,"registrations");
-                    console.log('Registration found for Empid:', empId);
-                    return (
-                      <td key={registration.Empid}>
-                        {registration.Image && (
-                          <img
-                            src={registration.Image}
-                            alt="Profile"
-                            style={{
-                              width: '60px',
-                              height: '60px',
-                              borderRadius: '50%',
-                              marginRight: '8px',
-                            }}
-                          />
-                        )}
-                      </td>
-                    );
-                  } else {
-                    console.log('No registration found for Empid:', empId);
-                    return null;
-                  }
-                })}
 
-              
+              {registrations.map((registration) => {
+                if (registration.Empid == empId) {
+                  console.log(registrations, "registrations");
+                  console.log('Registration found for Empid:', empId);
+                  return (
+                    <td key={registration.Empid}>
+                      {registration.Image && (
+                        <img
+                          src={registration.Image}
+                          alt="Profile"
+                          style={{
+                            width: '60px',
+                            height: '60px',
+                            borderRadius: '50%',
+                            marginRight: '8px',
+                          }}
+                        />
+                      )}
+                    </td>
+                  );
+                } else {
+                  console.log('No registration found for Empid:', empId);
+                  return null;
+                }
+              })}
+
+
             </IconButton>
             <Menu
               id="user-menu"
@@ -434,7 +434,11 @@ const ButtonCenter = () => {
                 <b>View Details</b>
               </Button>
               <Button
-                style={{ backgroundColor: isHovering2 ? '#db764f' : '#d95623', marginLeft: '20px' }}
+                style={{
+                  backgroundColor: isHovering2 ? '#db764f' : '#d95623',
+                  marginLeft: '20px',
+                  ...(isButtonDisabled && { backgroundColor: '#e8a287' }),
+                }}
                 className="view-details"
                 variant="contained"
                 onClick={handleUpdateDetailsClick}
@@ -444,6 +448,7 @@ const ButtonCenter = () => {
               >
                 <b>Update Details</b>
               </Button>
+
 
             </div>
             <Dialog open={openDialog} onClose={() => setOpenDialog(false)} >
@@ -459,7 +464,7 @@ const ButtonCenter = () => {
               </DialogContent>
               <DialogActions>
                 <Button variant='contained' onClick={() => setOpenDialog(false)} style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
-                 <b>OK</b> 
+                  <b>OK</b>
                 </Button>
               </DialogActions>
             </Dialog>

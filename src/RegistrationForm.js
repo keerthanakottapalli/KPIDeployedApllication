@@ -568,7 +568,7 @@ const RegistrationForm = () => {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} color="primary" style={{ color: 'black', backgroundColor: '#00aaee', fontWeight: 'bolder', marginBottom: '15px', marginRight: '15px' }}>
+              <Button onClick={handleClose} color="primary" style={{ color: 'white', backgroundColor: '#00aaee', fontWeight: 'bolder', marginBottom: '15px', marginRight: '15px' }}>
                 OK
               </Button>
             </DialogActions>
