@@ -127,7 +127,7 @@ const Sidebar = () => {
 
     const navigate = useNavigate()
 const goBack = ()=>{
-    navigate('/EmployeeMainView')
+    navigate('/mview')
 }
 
 
@@ -482,7 +482,7 @@ const goBack = ()=>{
 
                     <div className="sub-tabs" >
                         
-                    <ListItemIcon style={{marginLeft:'15vw', marginTop:'35px'}} onClick={goBack}>
+                    <ListItemIcon style={{marginLeft:'15vw', marginTop:'35px', cursor:'pointer'}} onClick={goBack}>
                                     <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>   
                                 </ListItemIcon>
                                 GoBack

@@ -693,7 +693,7 @@ function ManagerUpdateEmpData() {
 
     const navigate = useNavigate()
     const goBack = ()=>{
-        navigate(`/directormanagerdetails/${empId}`)
+        navigate(`/mcomments/${empId}`)
     }
 
     // Function to reset the error message
@@ -801,7 +801,7 @@ function ManagerUpdateEmpData() {
                             />
                         ))}
                     </div>
-                    <ListItemIcon style={{marginLeft:'18vw', marginTop:'14vh', }} onClick={goBack}>
+                    <ListItemIcon style={{marginLeft:'18vw', marginTop:'14vh', cursor:'pointer' }} onClick={goBack}>
                                     <ArrowBack />&nbsp; <span><b>Go Back</b></span>   
                                 </ListItemIcon>
                     <div className="employeetable">
@@ -887,7 +887,7 @@ function ManagerUpdateEmpData() {
                                                     </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
-                                                    <Button onClick={() => setError(false)} color="primary">
+                                                    <Button onClick={() => setError(false)} style={{backgroundColor:'#00aaee', color:'white'}}>
                                                       <b>OK</b>  
                                                     </Button>
                                                 </DialogActions>
@@ -902,7 +902,7 @@ function ManagerUpdateEmpData() {
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions>
-                                                <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
+                                                <Button onClick={() => setIncompleteItemsDialogOpen(false)} style={{backgroundColor:'#00aaee', color:'white'}}>
                                                   <b>OK</b>  
                                                 </Button>
                                             </DialogActions>
@@ -923,7 +923,7 @@ function ManagerUpdateEmpData() {
                                         variant="contained"
 
                                         onClick={openConfirmationDialog}
-                                        style={{ marginLeft: '20px',  color: 'white' }}
+                                        style={{ marginLeft: '20px',  color: 'white', backgroundColor:'#00aaee' }}
                                         disabled={!isSubmitEnabled || isFetchingData}
                                     >
                                        <b>Submit</b> 

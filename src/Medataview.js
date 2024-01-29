@@ -267,7 +267,7 @@ const ManagerPortal = () => {
 
       </AppBar>
       <div className='bg-container'>
-        <ListItemIcon style={{ marginLeft: '10vw', marginTop: '90px' }} onClick={goBack}>
+        <ListItemIcon style={{ marginLeft: '10vw', marginTop: '90px', cursor:'pointer' }} onClick={goBack}>
           <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
         </ListItemIcon>
 

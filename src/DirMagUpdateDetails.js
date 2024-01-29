@@ -737,13 +737,13 @@ function DirectorUpdateManagerData() {
 
                         <h3 className="username-style">{username.toUpperCase()}</h3>
                     </div>
-                    <Button className='logout-button' onClick={handleLogout} >
+                    <Button className='logout-button' style={{color:'white'}} onClick={handleLogout} >
                         <span className='logout-icon'
                             style={{ fontFamily: 'Material Icons' }}
                         >
                             &#8629;
                         </span>&nbsp;
-                        <b className='logout'> Goback</b>
+                        <b className='logout' > Goback</b>
 
                     </Button>
                 </Toolbar>

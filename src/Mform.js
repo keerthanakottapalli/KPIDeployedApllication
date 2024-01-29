@@ -79,6 +79,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
         setDownloadDialogOpen(false);
 
     };
+    const cancelDownloadToExcel = () =>
+    {
+        setDownloadDialogOpen(false);
+    }
 
     const selectedTabData = subTabsData[tabLabels[selectedTab]];
     console.log('selectedTab:', selectedTab);
@@ -904,7 +908,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={closeDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                            <Button onClick={cancelDownloadToExcel} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 <b>Cancel</b>
                             </Button>
                             <Button onClick={() => {

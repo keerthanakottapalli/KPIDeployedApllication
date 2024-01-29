@@ -64,7 +64,7 @@ const RegistrationForm = () => {
   };
 
   const validateEmpEmail = (empEmail) => {
-    const emailPattern = /^[a-zA-Z]{3,}[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+    const emailPattern = /^[a-zA-Z][\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
     return emailPattern.test(empEmail) && empEmail.endsWith('miraclesoft.com');
   };
 

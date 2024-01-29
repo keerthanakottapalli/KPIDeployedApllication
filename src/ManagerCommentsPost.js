@@ -638,7 +638,7 @@ const goBack = ()=>{
                         ))}
                     </div>
                    
-                    <ListItemIcon style={{marginLeft:'16vw', marginTop:'14vh'}} onClick={goBack}>
+                    <ListItemIcon style={{marginLeft:'16vw', marginTop:'14vh', cursor:'pointer'}} onClick={goBack}>
                                     <ArrowBack />&nbsp; <span><b>Go Back</b></span>   
                                 </ListItemIcon><br /><br />
                     <div className='employeetable'>

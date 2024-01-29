@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './DirectorPortal.css';
 import { BASE_URL } from './config';
+import { Logout } from '@mui/icons-material';
 
 
 
@@ -193,10 +194,12 @@ const DirectorViewMangerDetails = () => {
       .catch((error) => console.error('Error fetching reporting managers:', error));
   }, []);
 
-
+  const goBack = () => {
+    navigate('/directorview')
+}
 
   const handleLogout = () => {
-    window.location.href = '/directorview';
+    window.location.href = '/login';
   };
 
   const ViewDetails = (employee) => {
@@ -305,9 +308,9 @@ const DirectorViewMangerDetails = () => {
 
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
-                  <ArrowBackIcon />
+                  <Logout />
                 </ListItemIcon>
-                GoBack
+                Logout
               </MenuItem>
             </Menu>
           </Box>
@@ -315,8 +318,12 @@ const DirectorViewMangerDetails = () => {
         </Toolbar>
 
       </AppBar>
+      <br />
+      <ListItemIcon style={{  marginTop: '10vh', marginLeft:'10vw', cursor:'pointer' }} onClick={goBack}>
+                <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
+            </ListItemIcon><br />
       <div style={{ position: 'relative' }}>
-        <div style={{ width: '80%', marginLeft: '10%', height: '100vh', overflow: 'auto' }}>
+        <div style={{ width: '80%', marginLeft: '10%', height: '83vh', overflow: 'auto' }}>
 
           {loading ? (
             <div className="loading-container" style={{
@@ -330,7 +337,7 @@ const DirectorViewMangerDetails = () => {
               <div className="loading-spinner"></div>
             </div>
           ) : (
-            <TableContainer component={Paper} style={{ marginTop: '120px' }}>
+            <TableContainer component={Paper} >
               {employeesData.some((employee) => reportingManagers[employee.Empid] === username) ? (
                 <Table style={{ minWidth: 850 }}>
                   <TableHead style={{ backgroundColor: 'voilet' }}>
