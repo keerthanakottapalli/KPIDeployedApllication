@@ -30,6 +30,7 @@ const ManagerPortal = () => {
   const [registrations, setRegistrations] = useState([]);
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showImagePreview, setShowImagePreview] = useState(false);
+  const [noDataErrorMessage, setNoDataErrorMessage] = useState();
   const [loading, setLoading] = useState(true);
 
   const handleOpenNavMenu = (event) => {
@@ -194,6 +195,11 @@ const ManagerPortal = () => {
   const goBack = () => {
     navigate('/VPPortal')
   }
+
+  setTimeout(() => 
+{
+    setNoDataErrorMessage("No data available for the selected User.")
+},3000 );
 
   return (
     <>
@@ -372,7 +378,9 @@ const ManagerPortal = () => {
                     textAlign: "center",
                   }}
                 >
-                  No Employee Found Here.
+                    <div className="no-data-messages"  style={{ color: '#0d4166' }}>
+                                <h4>{noDataErrorMessage}</h4>
+                            </div>
                 </Typography>
               )}
             </TableContainer>)}

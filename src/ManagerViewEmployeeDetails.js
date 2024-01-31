@@ -58,6 +58,7 @@ function ManagerUpdateEmpData() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [showImagePreview, setShowImagePreview] = useState(false);
+    const [noDataErrorMessage, setNoDataErrorMessage] = useState();
     const { empId } = useParams();
 
 
@@ -463,7 +464,10 @@ function ManagerUpdateEmpData() {
     }, [selectedItem]);
 
 
-
+    setTimeout(() => 
+    {
+        setNoDataErrorMessage("No data available for the selected User.")
+    },3000 );
 
 
     const fetchData = async () => {
@@ -984,9 +988,7 @@ function ManagerUpdateEmpData() {
                                 </div>
                             </>
                         ) : (
-                            <div className="no-data-messages" style={{ color: '#0d4166' }}>
-                                No Data Found Here.
-                            </div>
+                            <h4>{noDataErrorMessage}</h4>
                         )
                         )}
                     </div>

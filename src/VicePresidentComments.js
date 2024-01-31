@@ -58,6 +58,7 @@ function ManagerUpdateEmpData() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [showImagePreview, setShowImagePreview] = useState(false);
+    const [noDataErrorMessage, setNoDataErrorMessage] = useState();
     const { empId } = useParams();
 
 
@@ -582,7 +583,10 @@ function ManagerUpdateEmpData() {
         navigate('/VPView');
     }
 
-
+    setTimeout(() => 
+    {
+        setNoDataErrorMessage("No data available for the selected User.")
+    },3000 );
 
 
     return (
@@ -783,7 +787,7 @@ function ManagerUpdateEmpData() {
                             </>
                         ) : (
                             <div className="no-data-messages"  style={{ color: '#0d4166' }}>
-                                No Data Found Here.
+                                <h4>{noDataErrorMessage}</h4>
                             </div>
                         )
                         )}

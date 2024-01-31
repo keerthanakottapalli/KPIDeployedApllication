@@ -63,6 +63,7 @@ function DirectorUpdateManagerData() {
 
     const [employeesData, setEmployeesData] = useState([]);
     const [reportingManagers, setReportingManagers] = useState({});
+    const [noDataErrorMessage, setNoDataErrorMessage] = useState();
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -759,6 +760,11 @@ function DirectorUpdateManagerData() {
         setOpenDialog(false);
     };
 
+    setTimeout(() => 
+{
+    setNoDataErrorMessage("No data available for the selected User.")
+},3000 );
+
     return (
         <>
             <AppBar position="fixed">
@@ -1046,7 +1052,7 @@ function DirectorUpdateManagerData() {
                         </>
                     ) : (
                         <div className="no-data-messages" style={{ color: '#0d4166' }}>
-                            No Data Found Here.
+                            <h4>{noDataErrorMessage}</h4>
                         </div>
                     )
                     )}

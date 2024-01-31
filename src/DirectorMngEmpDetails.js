@@ -58,6 +58,7 @@ function DirectorUpdateEmpData() {
     const [registrations, setRegistrations] = useState([]);
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [showImagePreview, setShowImagePreview] = useState(false);
+    const [noDataErrorMessage, setNoDataErrorMessage] = useState();
 
     const { empId } = useParams();
 
@@ -670,6 +671,11 @@ function DirectorUpdateEmpData() {
         setOpenDialog(false);
     };
 
+    setTimeout(() => 
+{
+    setNoDataErrorMessage("No data available for the selected User.")
+},3000 );
+
 
     return (
         <>
@@ -924,7 +930,7 @@ function DirectorUpdateEmpData() {
                         </div>
                     ) : (
                         <div className="no-data-messages" style={{ color: '#0d4166' }}>
-                            No Data Found Here.
+                            <h4>{noDataErrorMessage}</h4>
                         </div>
                     )
                     )}

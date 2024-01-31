@@ -57,6 +57,7 @@ function DirectorUpdateManagerData() {
     const [registrations, setRegistrations] = useState([]);
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [showImagePreview, setShowImagePreview] = useState(false);
+    const [noDataErrorMessage, setNoDataErrorMessage] = useState();
 
 
     const [employeesData, setEmployeesData] = useState([]);
@@ -723,6 +724,11 @@ function DirectorUpdateManagerData() {
         navigate('/directorportal');
     }
 
+    setTimeout(() => 
+{
+    setNoDataErrorMessage("No data available for the selected User.")
+},3000 );
+
     return (
         <>
             <AppBar position="fixed">
@@ -895,9 +901,8 @@ function DirectorUpdateManagerData() {
                     </>
 
                 ) : (
-                    <div className="no-data-messages" style={{ color: '#0d4166' }}>
-                        No data available for the selected User.
-                    </div>
+                   
+                    <h4>{noDataErrorMessage}</h4>
                 )
                 )}
             </div>
