@@ -12,12 +12,6 @@ import ChangePassword from './ChangePassword';
 import { BASE_URL } from './config';
 
 
-const handleLogout = () => {
-
-  localStorage.removeItem('token');
-
-  window.location.href = '/login';
-};
 
 
 
@@ -37,6 +31,14 @@ const Dview = () => {
   const [showImagePreview, setShowImagePreview] = useState(false);
   const [Empmail, setEmpmail] = useState(atob(localStorage.getItem('empmail')));
   const [selectedImage, setSelectedImage] = useState(null);
+
+
+  const handleLogout = () => {
+
+    localStorage.removeItem('token');
+  navigate('/login')
+  };
+  
 
   const handleFillFormClick = async () => {
     const empIdExistsInAPI = empIdExists; // Use the value from state

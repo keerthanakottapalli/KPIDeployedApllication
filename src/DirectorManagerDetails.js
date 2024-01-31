@@ -275,7 +275,7 @@ function DirectorUpdateManagerData() {
         // localStorage.removeItem('form_data');
         localStorage.removeItem('practices');
         // Redirect to the login page (replace '/login' with your login route)
-        window.location.href = '/login';
+        navigate('/login')
     };
 
 

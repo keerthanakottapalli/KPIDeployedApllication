@@ -1170,7 +1170,7 @@ const TabsView = () => {
     );
 
     const handleLogout = () => {
-        window.location.href = '/login';
+        navigate('/login')
     };
 
     const [mainTabRatings, setMainTabRatings] = useState(initialMainTabRatings);

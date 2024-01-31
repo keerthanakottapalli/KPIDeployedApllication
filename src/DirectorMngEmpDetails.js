@@ -264,7 +264,7 @@ function DirectorUpdateEmpData() {
         // localStorage.removeItem('form_data');
         localStorage.removeItem('token');
         // Redirect to the login page (replace '/login' with your login route)
-        window.location.href = '/login';
+        navigate('/login')
     };
 
 

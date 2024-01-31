@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { BASE_URL } from './config';
 import { CameraAlt, Lock } from '@material-ui/icons';
@@ -322,11 +322,13 @@ function DirectorUpdateManagerData() {
     //   const firstname = localStorage.getItem('firstname');
     const lastname = localStorage.getItem('lastname');
     const username = firstname + " " + lastname
+
+    const navigate = useNavigate()
     const handleLogout = () => {
         // localStorage.removeItem('form_data');
         localStorage.removeItem('practices');
         // Redirect to the login page (replace '/login' with your login route)
-        window.location.href = '/login';
+        navigate('/login')
     };
 
 

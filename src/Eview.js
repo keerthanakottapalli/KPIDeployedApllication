@@ -12,16 +12,6 @@ import ChangePassword from './ChangePassword';
 import { BASE_URL } from './config';
 
 
-
-const handleLogout = () => {
-
-  localStorage.removeItem('token');
-
-  window.location.href = '/login';
-};
-
-
-
 const ButtonCenter = () => {
 
   const navigate = useNavigate(); // Initialize useNavigate
@@ -43,6 +33,14 @@ const ButtonCenter = () => {
   const empId = localStorage.getItem('Empid');
   console.log(empId, "44");
 
+
+  const handleLogout = () => {
+
+    localStorage.removeItem('token');
+  
+    navigate('/login')
+  };
+  
 
   const handleMouseEnter = () => {
     setIsHovering(true);

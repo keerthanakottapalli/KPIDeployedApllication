@@ -281,7 +281,7 @@ function ManagerUpdateEmpData() {
     const lastname = localStorage.getItem('lastname');
     const username = firstname + " " + lastname
     const handleLogout = () => {
-        window.location.href = '/login';
+        navigate('/login')
     };
 
 

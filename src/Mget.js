@@ -348,7 +348,7 @@ const goBack = ()=>{
 
     const handleLogout = () => {
 
-        window.location.href = '/login';
+        navigate('/login')
     };
 
     const empId = localStorage.getItem('Empid');

@@ -301,8 +301,10 @@ function ManagerUpdateEmpData() {
     //   const firstname = localStorage.getItem('firstname');
     const lastname = localStorage.getItem('lastname');
     const username = firstname + " " + lastname
+
+    const navigate = useNavigate()
     const handleLogout = () => {
-        window.location.href = `/login`;
+        navigate('/login')
     };
 
 
@@ -697,7 +699,7 @@ function ManagerUpdateEmpData() {
         }
     };
 
-    const navigate = useNavigate()
+    
     const goBack = () => {
         navigate(`/VPComments/${empId}`)
     }

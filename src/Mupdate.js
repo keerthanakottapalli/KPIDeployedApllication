@@ -13,6 +13,7 @@ import FormControl from '@mui/material/FormControl';
 import { BASE_URL } from './config';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Logout } from '@mui/icons-material';
 
 const Sidebar = () => {
     // const tabs = [
@@ -369,8 +370,7 @@ const Sidebar = () => {
 
 
     const handleLogout = () => {
-
-        window.location.href = '/mview';
+        navigate('/login')
     };
 
     const empId = localStorage.getItem('Empid');
@@ -477,9 +477,9 @@ const Sidebar = () => {
 
                                 <MenuItem onClick={handleLogout}>
                                     <ListItemIcon>
-                                        <ArrowBackIcon />
+                                        <Logout />
                                     </ListItemIcon>
-                                    GoBack
+                                    Logout
                                 </MenuItem>
                             </Menu>
                         </Box>

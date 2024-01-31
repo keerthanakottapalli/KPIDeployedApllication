@@ -199,7 +199,7 @@ const DirectorViewMangerDetails = () => {
   }
 
   const handleLogout = () => {
-    window.location.href = '/login';
+    navigate('/login')
   };
 
   const ViewDetails = (employee) => {

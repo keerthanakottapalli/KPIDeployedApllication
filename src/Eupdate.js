@@ -387,7 +387,7 @@ const Sidebar = () => {
     
 
     const handleLogout = () => {
-        window.location.href = '/login';
+       navigate('/login')
     };
 
     

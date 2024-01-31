@@ -191,8 +191,7 @@ const DirectorViewEmpDetails = () => {
 
     localStorage.removeItem('practices');
     localStorage.removeItem('managerempname');
-    // Redirect to the login page (replace '/login' with your login route)
-    window.location.href = '/login';
+    navigate('/login')
   };
 
   const empId = localStorage.getItem('Empid');

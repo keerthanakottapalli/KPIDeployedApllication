@@ -366,8 +366,7 @@ const DirectorUpdateDetails = () => {
 
 
     const handleLogout = () => {
-
-        window.location.href = '/directorview';
+        navigate('/login')
     };
 
     const empId = localStorage.getItem('Empid');

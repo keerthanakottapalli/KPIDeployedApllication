@@ -17,6 +17,8 @@ import { DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'; // Import the close icon
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
+import { Logout } from '@mui/icons-material';
+
 
 const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, tabLabels, subTabsData }) => {
 
@@ -1180,9 +1182,9 @@ const TabsView = () => {
             }))
         )
     );
-
+const navigate = useNavigate()
     const handleLogout = () => {
-        window.location.href = '/directorview';
+        navigate('/login')
     };
 
     const [mainTabRatings, setMainTabRatings] = useState(initialMainTabRatings);
@@ -1283,9 +1285,9 @@ const TabsView = () => {
                             </MenuItem>
                             <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
-                                    <ExitToApp />
+                                    <Logout />
                                 </ListItemIcon>
-                                Goback
+                                Logout
                             </MenuItem>
                         </Menu>
                     </Box>

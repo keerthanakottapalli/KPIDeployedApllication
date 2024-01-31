@@ -19,7 +19,7 @@ const AdminView = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    window.location.href = '/';
+    navigate('/')
   };
 
   const username = localStorage.getItem('adminName');

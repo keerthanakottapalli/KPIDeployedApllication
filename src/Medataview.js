@@ -154,7 +154,7 @@ const ManagerPortal = () => {
 
 
   const handleLogout = () => {
-    window.location.href = '/login';
+    navigate('/login')
   };
 
   const navigate = useNavigate();
