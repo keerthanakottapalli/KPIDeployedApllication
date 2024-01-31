@@ -73,7 +73,7 @@ const Sidebar = () => {
     const [registrations, setRegistrations] = useState([]);
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [showImagePreview, setShowImagePreview] = useState(false);
-
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const [isTableVisible, setTableVisible] = useState(false);
     const [error, setError] = useState(false);
 
@@ -276,9 +276,9 @@ const Sidebar = () => {
             }
             finally {
                 // Delay setting loading to false by 3 seconds
-                setTimeout(() => {
+                
                     setLoading(false);
-                }, 1000);
+                
             }
         }
     };
@@ -408,7 +408,7 @@ const goBack = ()=>{
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
+                               
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -429,7 +429,7 @@ const goBack = ()=>{
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
+                               
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -445,6 +445,7 @@ const goBack = ()=>{
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
+                                style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                             >
 
                                 <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -479,7 +480,7 @@ const goBack = ()=>{
                                     onClick={() => handleTabClick(tab)}
                                 >
                                     <br />
-                                    <span className="star-icon">&#9733;</span>
+                                    {/* <span className="star-icon">&#9733;</span> */}
                                     {tab}
                                 </div>
                             ))}

@@ -64,7 +64,7 @@ const RegistrationForm = () => {
   };
 
   const validateEmpEmail = (empEmail) => {
-    const emailPattern = /^[a-zA-Z]{3,}[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+    const emailPattern = /^[a-zA-Z][\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
     return emailPattern.test(empEmail) && empEmail.endsWith('miraclesoft.com');
   };
 
@@ -93,7 +93,7 @@ const RegistrationForm = () => {
       if (!/^[a-zA-Z][\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value)) {
         setValidationErrors((prevErrors) => ({
           ...prevErrors,
-          [name]: 'Please enter a valid email address. Ex: Abc@miraclesoft.com',
+          [name]: 'Please enter a valid email address. Ex: abc@miraclesoft.com',
         }));
       } else if (!value.endsWith('@miraclesoft.com')) {
         setValidationErrors((prevErrors) => ({
@@ -155,6 +155,20 @@ const RegistrationForm = () => {
       }
     }
 
+    if (name === 'Image' && type === 'file') {
+      if (!value) {
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: 'Profile image is required',
+        }));
+      } else {
+        setValidationErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: '',
+        }));
+      }
+    }
+
   };
 
   const handleImageUpload = (e) => {
@@ -187,6 +201,9 @@ const RegistrationForm = () => {
 
     if (!validateEmpEmail(formData.Empmail)) {
       errors.Empmail = 'Please enter a valid Emp Email';
+    }
+    if (!formData.Image) {
+      errors.Image = 'Profile image is required';
     }
 
     if (Object.keys(errors).length > 0) {
@@ -551,6 +568,8 @@ const RegistrationForm = () => {
               name="Image"
               accept="image/*"
               onChange={handleImageUpload}
+              error={!!validationErrors.Image}
+              helperText={validationErrors.Image}
               style={{ width: inputWidth, height: inputHeight }}
 
             />
@@ -568,7 +587,7 @@ const RegistrationForm = () => {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} color="primary" style={{ color: 'black', backgroundColor: '#00aaee', fontWeight: 'bolder', marginBottom: '15px', marginRight: '15px' }}>
+              <Button onClick={handleClose} color="primary" style={{ color: 'white', backgroundColor: '#00aaee', fontWeight: 'bolder', marginBottom: '15px', marginRight: '15px' }}>
                 OK
               </Button>
             </DialogActions>

@@ -64,13 +64,13 @@ const AdminView = () => {
 
             <h3 className="username-style">{username.toUpperCase()}</h3>
           </div>
-          <Button color="inherit" onClick={handleLogout} className='buttonwrapper'>
-            <span className='gobackeform'
+          <Button onClick={handleLogout} style={{color:'white', fontWeight:'bold', fontSize:'18px'}}>
+            <span 
 
             >
               &#8629;
             </span>&nbsp;
-            <b>GoBack</b>
+            <b>Logout</b>
           </Button>
         </Toolbar>
       </AppBar>

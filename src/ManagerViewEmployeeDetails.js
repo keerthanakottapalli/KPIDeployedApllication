@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ManagerCommentsPost.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { Table, TableHead, TableBody, TableRow, TableCell, Button, Select, MenuItem, TextField, TableContainer } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
@@ -12,7 +12,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { BASE_URL } from './config';
 import CloseIcon from '@mui/icons-material/Close';
-import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
+import { AccountCircle, ArrowBack, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 import { Box, IconButton, ListItem, ListItemIcon, Menu, Paper } from '@material-ui/core';
 import { Logout } from '@mui/icons-material';
@@ -691,6 +691,10 @@ function ManagerUpdateEmpData() {
         }
     };
 
+    const navigate = useNavigate()
+    const goBack = ()=>{
+        navigate(`/mcomments/${empId}`)
+    }
 
     // Function to reset the error message
     const resetError = () => {
@@ -726,7 +730,6 @@ function ManagerUpdateEmpData() {
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -747,7 +750,6 @@ function ManagerUpdateEmpData() {
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -763,6 +765,7 @@ function ManagerUpdateEmpData() {
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
+                                style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                             >
 
                                 <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -799,7 +802,9 @@ function ManagerUpdateEmpData() {
                             />
                         ))}
                     </div>
-                    
+                    <ListItemIcon style={{marginLeft:'18vw', marginTop:'14vh', cursor:'pointer' }} onClick={goBack}>
+                                    <ArrowBack />&nbsp; <span><b>Go Back</b></span>   
+                                </ListItemIcon>
                     <div className="employeetable">
                         {loading ? (
                             <div className="loading-container">
@@ -809,7 +814,7 @@ function ManagerUpdateEmpData() {
 
                         ) : (selectedItem && tableData.length > 0 ? (
                             <>
-                                <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto', marginLeft:'70px', marginTop:'150px' }}>
+                                <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto', marginLeft:'-20vw', marginTop:'150px' }}>
                                     <Table>
                                         <TableHead>
                                             <TableRow style={{ backgroundColor: '#d0e6f5' }}>
@@ -883,7 +888,7 @@ function ManagerUpdateEmpData() {
                                                     </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
-                                                    <Button onClick={() => setError(false)} color="primary">
+                                                    <Button onClick={() => setError(false)} style={{backgroundColor:'#00aaee', color:'white'}}>
                                                       <b>OK</b>  
                                                     </Button>
                                                 </DialogActions>
@@ -898,7 +903,7 @@ function ManagerUpdateEmpData() {
                                                 </DialogContentText>
                                             </DialogContent>
                                             <DialogActions>
-                                                <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
+                                                <Button onClick={() => setIncompleteItemsDialogOpen(false)} style={{backgroundColor:'#00aaee', color:'white'}}>
                                                   <b>OK</b>  
                                                 </Button>
                                             </DialogActions>
@@ -919,7 +924,7 @@ function ManagerUpdateEmpData() {
                                         variant="contained"
 
                                         onClick={openConfirmationDialog}
-                                        style={{ marginLeft: '20px',  color: 'white' }}
+                                        style={{ marginLeft: '20px',  color: 'white', backgroundColor:'#00aaee' }}
                                         disabled={!isSubmitEnabled || isFetchingData}
                                     >
                                        <b>Submit</b> 

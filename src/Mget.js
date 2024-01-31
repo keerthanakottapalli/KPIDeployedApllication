@@ -270,9 +270,9 @@ const goBack = ()=>{
                 console.error('Error fetching data:', error);
             } finally {
                 // Delay setting loading to false by 3 seconds
-                setTimeout(() => {
+                
                     setLoading(false);
-                }, 1000);
+               
             }
         }
     };
@@ -403,7 +403,6 @@ const goBack = ()=>{
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -424,7 +423,6 @@ const goBack = ()=>{
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -440,6 +438,7 @@ const goBack = ()=>{
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
+                                style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                             >
 
                                 <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -473,7 +472,8 @@ const goBack = ()=>{
                                     className={`tab ${activeTab === tab ? 'active' : ''}`}
                                     onClick={() => handleTabClick(tab)}
                                 >
-                                    <br /><span className="star-icon">&#9733;</span>
+                                    <br />
+                                    {/* <span className="star-icon">&#9733;</span> */}
                                     {tab}
                                 </div>
                             ))}
@@ -483,7 +483,7 @@ const goBack = ()=>{
 
                     <div className="sub-tabs" >
                         
-                    <ListItemIcon style={{marginLeft:'15vw', marginTop:'35px'}} onClick={goBack}>
+                    <ListItemIcon style={{marginLeft:'15vw', marginTop:'35px', cursor:'pointer'}} onClick={goBack}>
                                     <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>   
                                 </ListItemIcon>
                                 GoBack

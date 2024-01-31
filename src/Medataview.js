@@ -157,12 +157,12 @@ const ManagerPortal = () => {
     window.location.href = '/login';
   };
 
-const navigate = useNavigate();
-  const goBack = ()=>{
+  const navigate = useNavigate();
+  const goBack = () => {
     navigate('/mview')
-}
+  }
 
-const empId = localStorage.getItem('Empid');
+  const empId = localStorage.getItem('Empid');
   const firstname = localStorage.getItem('firstname');
   const lastname = localStorage.getItem('lastname');
   const username = firstname + "" + " " + lastname
@@ -208,28 +208,26 @@ const empId = localStorage.getItem('Empid');
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              <Tooltip title="Open settings">
 
-                {registrations.map((registration) => (
-                  registration.Empid ==empId && (
-                    <td>
-                      {registration.Image && (
-                        <img
-                          src={registration.Image}
-                          alt="Profile"
-                          style={{
-                            width: '60px',
-                            height: '60px',
-                            borderRadius: '50%',
-                            marginRight: '8px',
-                          }}
+              {registrations.map((registration) => (
+                registration.Empid == empId && (
+                  <td>
+                    {registration.Image && (
+                      <img
+                        src={registration.Image}
+                        alt="Profile"
+                        style={{
+                          width: '60px',
+                          height: '60px',
+                          borderRadius: '50%',
+                          marginRight: '8px',
+                        }}
 
-                        />
-                      )}
-                    </td>
-                  )
-                ))}
-              </Tooltip>
+                      />
+                    )}
+                  </td>
+                )
+              ))}
             </IconButton>
             <Menu
               id="user-menu"
@@ -245,6 +243,7 @@ const empId = localStorage.getItem('Empid');
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
             >
 
               <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -269,10 +268,10 @@ const empId = localStorage.getItem('Empid');
 
       </AppBar>
       <div className='bg-container'>
-        <ListItemIcon style={{ marginLeft: '10vw', marginTop: '90px' }} onClick={goBack}>
+        <ListItemIcon style={{ marginLeft: '10vw', marginTop: '90px', cursor:'pointer' }} onClick={goBack}>
           <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
         </ListItemIcon>
-        
+
         <div style={{ width: '80%', margin: '0 auto' }}>
           {loading ? (
             <div className="loading-container" style={{
@@ -325,7 +324,11 @@ const empId = localStorage.getItem('Empid');
                             <TableCell style={{ color: '#333', textAlign: 'center', }}>
                               {employee.Status === 'Decline' && (
 
-                                <Button variant="contained" style={{ backgroundColor: '#d12a2a', width: "35%", height: '50px', fontWeight: 'bold' }}>Declined</Button>
+                                <Button
+                                  variant="contained"
+                                  style={{ backgroundColor: '#d12a2a', width: "35%", height: '50px', fontWeight: 'bold' }}>
+                                  Declined
+                                </Button>
                               )}
                               {employee.Status !== 'Decline' && (
                                 <div>
@@ -334,7 +337,7 @@ const empId = localStorage.getItem('Empid');
                                     color="primary"
                                     component={Link}
                                     to={`/mcomments/${employee.Empid}`}
-                                    style={{ fontWeight: 'bold', textDecoration: 'none', backgroundColor: '#00aaee', width: "35%", height: '50px' }}
+                                    style={{  backgroundColor: '#00aaee', width: "35%", height: '50px' }}
                                     onClick={() => {
                                       // Store the Empid in local storage
                                       localStorage.setItem('EmployeeId', employee.Empid);
@@ -342,7 +345,7 @@ const empId = localStorage.getItem('Empid');
                                   >
                                     <b>View Details</b>
                                   </Button>
-                                  &nbsp;&nbsp;&nbsp;
+                                  
 
                                 </div>
                               )}
@@ -446,7 +449,7 @@ const empId = localStorage.getItem('Empid');
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-             <b>Close</b> 
+              <b>Close</b>
             </Button>
           </DialogActions>
         </Dialog>

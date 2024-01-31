@@ -17,6 +17,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 import { Box, IconButton, ListItem, ListItemIcon, Menu, Paper } from '@material-ui/core';
+import { Logout } from '@mui/icons-material';
 
 
 function CollapsibleSection({ icon, title, items, isExpanded, onItemClick, redItems, toggleExpanded }) {
@@ -99,6 +100,7 @@ function ManagerUpdateEmpData() {
 
     const handleChangePassword = () => {
         setShowChangePassword(true);
+        handleCloseUserMenu();
     };
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
@@ -288,7 +290,7 @@ function ManagerUpdateEmpData() {
     const lastname = localStorage.getItem('lastname');
     const username = firstname + " " + lastname
     const handleLogout = () => {
-        window.location.href = '/VPView';
+        window.location.href = '/login';
     };
 
 
@@ -602,28 +604,26 @@ function ManagerUpdateEmpData() {
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
 
-                                {registrations.map((registration) => (
-                                    registration.Empid == empId && (
-                                        <td>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile"
-                                                    style={{
-                                                        width: '60px',
-                                                        height: '60px',
-                                                        borderRadius: '50%',
-                                                        marginRight: '8px',
-                                                    }}
+                            {registrations.map((registration) => (
+                                registration.Empid == empId && (
+                                    <td>
+                                        {registration.Image && (
+                                            <img
+                                                src={registration.Image}
+                                                alt="Profile"
+                                                style={{
+                                                    width: '60px',
+                                                    height: '60px',
+                                                    borderRadius: '50%',
+                                                    marginRight: '8px',
+                                                }}
 
-                                                />
-                                            )}
-                                        </td>
-                                    )
-                                ))}
-                            </Tooltip>
+                                            />
+                                        )}
+                                    </td>
+                                )
+                            ))}
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -639,7 +639,7 @@ function ManagerUpdateEmpData() {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            style={{ maxWidth: '300px' }}
+                            style={{ maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -672,9 +672,9 @@ function ManagerUpdateEmpData() {
                             </MenuItem>
                             <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
-                                    <ExitToApp />
+                                    <Logout />
                                 </ListItemIcon>
-                                Goback
+                                Logout
                             </MenuItem>
                         </Menu>
                     </Box>
@@ -745,20 +745,20 @@ function ManagerUpdateEmpData() {
                                 <div className="button-container">
                                     <Button
                                         variant="contained"
-                                        
+
                                         onClick={handleDeclineWithConfirmation}
-                                        style={{ marginRight: '10px', backgroundColor: '#1dbb99'  }}
+                                        style={{ marginRight: '10px', backgroundColor: '#1dbb99' }}
                                     >
                                         <b>Decline</b>
                                     </Button>
                                     <Button
                                         variant="contained"
-                                     
+
                                         component={Link}
                                         to={`/VpDComments/${empId}`}
                                         style={{ backgroundColor: '#1dbb99' }}
                                     >
-                                        <b>Director Ratings</b>
+                                        <b style={{ textAlign: 'center' }}>Vice-President Ratings</b>
                                     </Button>
 
                                 </div>
@@ -771,16 +771,16 @@ function ManagerUpdateEmpData() {
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleCloseDialog} color="primary" variant='contained'>
-                                           <b>Cancel</b> 
+                                            <b>Cancel</b>
                                         </Button>
                                         <Button onClick={handleDeclineClick} color="primary" variant='contained'>
-                                           <b>Confirm</b> 
+                                            <b>Confirm</b>
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
                             </>
                         ) : (
-                            <div style={{ color: '#0d4166' }}>
+                            <div className="no-data-messages"  style={{ color: '#0d4166' }}>
                                 No Data Found Here.
                             </div>
                         )
@@ -857,7 +857,7 @@ function ManagerUpdateEmpData() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white", marginBottom: '15px', marginRight: '15px' }}>
-                       <b>Close</b> 
+                        <b>Close</b>
                     </Button>
                 </DialogActions>
             </Dialog>

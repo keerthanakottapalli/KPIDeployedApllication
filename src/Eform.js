@@ -87,10 +87,14 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
         setDownloadDialogOpen(false);
         navigate('/eview')
     };
+    const cancelDownloadToExcel = () =>
+    {
+        setDownloadDialogOpen(false);
+    }
 
     const selectedTabData = subTabsData[tabLabels[selectedTab]];
-    console.log('selectedTabData:', selectedTabData);
-    console.log('tabLabels-79', tabLabels)
+    // console.log('selectedTabData:', selectedTabData);
+    // console.log('tabLabels-79', tabLabels)
 
     const handleChange = (event, newValue) => {
         updateSelectedTabs(selectedTab, newValue);
@@ -187,7 +191,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
             formattedData[0].data.push(tabData);
         }
         setOpenDialog(true);
-        console.log('Formatted data:', formattedData);
+        // console.log('Formatted data:', formattedData);
 
         try {
             const response = await fetch(`${BASE_URL}/api/emp_insrt`, {
@@ -650,7 +654,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
             </Tabs>
             <Box>
                 <TableContainer component={Paper} className='empformTablecontaner'>
-                    <Table>
+                    <Table style={{maxHeight:'50vh'}}>
                         <TableHead>
                             <TableRow>
                                 <TableCell style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
@@ -670,7 +674,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'quantityAchieved')}
                                             sx={{ minWidth: '120px' }}
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -694,7 +698,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                                 rows={1}
                                                 onChange={(event) => handleCommentChange(event, questionIndex)}
                                                 label="Comments"
-                                                className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                                // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             />
                                         </Tooltip>
                                     </TableCell>
@@ -703,7 +707,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'indexKpi')}
                                             sx={{ minWidth: '120px' }}
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -737,10 +741,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => setSaveDialogOpen(false)} color="primary">
+                            <Button onClick={() => setSaveDialogOpen(false)} variant='contained' style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 <b>Cancel</b>
                             </Button>
-                            <Button onClick={handleSaveData} color="primary">
+                            <Button onClick={handleSaveData} variant='contained' style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 <b>Save</b>
                             </Button>
                         </DialogActions>
@@ -758,10 +762,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleCloseClearConfirmationDialog} color="primary">
+                            <Button onClick={handleCloseClearConfirmationDialog} variant='contained' style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 <b>Cancel</b>
                             </Button>
-                            <Button onClick={clearDataAndCloseDialog} color="primary">
+                            <Button onClick={clearDataAndCloseDialog} variant='contained' style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 <b>Clear</b>
                             </Button>
                         </DialogActions>
@@ -812,7 +816,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                 setIncompleteFields(incompleteFields);
                                 console.log(tabLabels,"subTabData");
                                 // Show the error dialog or take other actions
-                                // setShowErrorDialog(true);
+                                setShowErrorDialog(true);
                             }
                         }}
                         
@@ -823,7 +827,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
 
-                    {/* {incompleteFields.length > 0 && (
+                    {incompleteFields.length > 0 && (
 
                         <Dialog open={showErrorDialog} onClose={() => setShowErrorDialog(false)}>
                             <DialogTitle>
@@ -847,7 +851,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
                     )}
-                    &nbsp;&nbsp;&nbsp; */}
+                    &nbsp;&nbsp;&nbsp;
 
 
                     <Dialog open={isSuccessDialogOpen} onClose={handleClose}>
@@ -873,7 +877,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         <button
                             className={`submit - button ${isFormComplete ? '' : 'disabled-button'}`}
                             onClick={openConfirmationDialog} // Open the confirmation dialog
-                            style={{ marginLeft: '2%', height: '50px', width: '100px', marginTop: '-0.1%', backgroundColor: '#00aaee', border: 'none', borderRadius: '5px', color: 'white' }}
+                            style={{ height: '50px', width: '100px', marginTop: '-0.1%', backgroundColor: '#00aaee', border: 'none', borderRadius: '5px', color: 'white' }}
                         >
                             Submit
                         </button>
@@ -916,7 +920,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={closeDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                            <Button onClick={cancelDownloadToExcel} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                 <b>Cancel</b>
                             </Button>
                             <Button onClick={() => {
@@ -1200,8 +1204,7 @@ const TabsView = () => {
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
-
+                           
                                 {registrations.map((registration) => (
                                     registration.Empid == empId && (
                                         <td>
@@ -1221,7 +1224,7 @@ const TabsView = () => {
                                         </td>
                                     )
                                 ))}
-                            </Tooltip>
+                            
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -1237,7 +1240,7 @@ const TabsView = () => {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            style={{ maxWidth: '300px' }}
+                            style={{  maxWidth: '300px', marginTop:'50px', marginLeft:'-15px'  }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>

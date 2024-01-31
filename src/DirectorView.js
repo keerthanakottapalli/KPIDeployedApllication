@@ -111,6 +111,7 @@ const Dview = () => {
   };
   const handleChangePassword = () => {
     setShowChangePassword(true);
+    handleCloseUserMenu();
   };
 
   const handleCloseNavMenu = () => {
@@ -274,7 +275,6 @@ const Dview = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              <Tooltip title="Open settings">
 
                 {registrations.map((registration) => (
                   registration.Empid == empId && (
@@ -295,7 +295,6 @@ const Dview = () => {
                     </td>
                   )
                 ))}
-              </Tooltip>
             </IconButton>
             <Menu
               id="user-menu"
@@ -311,6 +310,7 @@ const Dview = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
             >
 
               <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -351,16 +351,20 @@ const Dview = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      {showChangePassword ? (
-        <IconButton
-          aria-label="close"
-          onClick={toggleChangePassword}
-          style={{ marginLeft: '56%', marginBottom: '-17%' }}
-        >
-          <CloseIcon style={{ color: 'red', width: '10%', height: '40%' }} />
-        </IconButton>
-      )
-        : (
+      {showChangePassword && (
+                <IconButton
+                    aria-label="close"
+                    onClick={toggleChangePassword}
+                    style={{ marginLeft: '63%', marginBottom: '-22%', }}
+                >
+                    <CloseIcon style={{ color: 'red', }} />
+                </IconButton>
+            )}
+            {showChangePassword ? (
+
+                <ChangePassword />
+
+            ) : (
           <div style={{ display: 'flex' }}>
             <div style={{
               flex: '70%',
@@ -407,7 +411,7 @@ const Dview = () => {
               <div style={{ marginBottom: '25px' }}></div>
               <div style={{marginLeft:'80px'}}>
                 <Button
-                  style={{ backgroundColor: '#1dbb99', marginRight: '50px', flex: 1, width: '40%' }}
+                  style={{ backgroundColor: '#1dbb99', marginRight: '50px', flex: 1, width: '40%', ...(isButtonDisabled && { backgroundColor: '#b4d6cf' }), }}
                   className="view-details"
                   variant="contained"
                   onClick={handleFormUpdateDetailsClick}

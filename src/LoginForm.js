@@ -196,7 +196,7 @@ const LoginForm = () => {
           </div>
 
           <Link to='/resetpwd' className='ForgotPwd' style={{ marginTop: "2%" }}>Forgot Password?</Link>
-          <Button type="submit" variant="contained" >
+          <Button type="submit" variant="contained" style={{fontWeight:'bold'}} >
             Login
           </Button>
           {error && <div className="error">{error}</div>}
@@ -218,7 +218,7 @@ const LoginForm = () => {
         </form>
 
         <footer>
-          <p className="text-center">&copy; 2023 Miracle Software Systems, Inc.</p>
+          <p className="text-center">&copy; 2024 Miracle Software Systems, Inc.</p>
         </footer>
       </fieldset>
     </div>

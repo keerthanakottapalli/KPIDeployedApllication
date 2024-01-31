@@ -345,7 +345,7 @@ const MainTabs = () => {
                       style={{ backgroundColor: '#1dbb99' }}
                       fullWidth
                     >
-                      <b>Add KPI to Existing</b>
+                      <b>Add to Existing Process KPI</b>
                     </Button>
                   </Grid>
                   <Grid item xs={4}>
@@ -356,7 +356,7 @@ const MainTabs = () => {
                       style={{ backgroundColor: '#1dbb99' }}
                       fullWidth
                     >
-                      <b>Add New KPI Metric</b>
+                      <b>Add New Process KPI</b>
                     </Button>
                   </Grid>
                   <Grid item xs={4}>
@@ -405,6 +405,7 @@ const MainTabs = () => {
                   <FormControl fullWidth variant="outlined" margin="normal">
                     <Autocomplete
                       id="process-kpi"
+                      
                       options={tabNames}
                       getOptionLabel={(option) => option}
                       value={selectedProcessKpi}
@@ -431,7 +432,7 @@ const MainTabs = () => {
                       }}
                       freeSolo
                       renderInput={(params) => (
-                        <TextField {...params} label="Metric" fullWidth required />
+                        <TextField {...params} label="Category" fullWidth required />
                       )}
                     />
                   </FormControl>
@@ -447,7 +448,7 @@ const MainTabs = () => {
                       }}
                       freeSolo
                       renderInput={(params) => (
-                        <TextField {...params} label="Question" fullWidth required />
+                        <TextField {...params} label="Metric" fullWidth required />
                       )}
                     />
                   </FormControl>

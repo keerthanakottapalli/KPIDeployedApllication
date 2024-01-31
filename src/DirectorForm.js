@@ -78,7 +78,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
         setDownloadDialogOpen(false);
         // navigate('/directorview')
     };
-
+    const cancelDownloadToExcel = () =>
+    {
+        setDownloadDialogOpen(false);
+    }
 
     const selectedTabData = subTabsData[tabLabels[selectedTab]];
     console.log('selectedTab:', selectedTab);
@@ -672,7 +675,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'quantityAchieved')}
                                             sx={{ minWidth: '120px' }}
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -696,7 +699,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                                 rows={1}
                                                 onChange={(event) => handleCommentChange(event, questionIndex)}
                                                 label="Comments"
-                                                className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                                // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             />
                                         </Tooltip>
                                     </TableCell>
@@ -705,7 +708,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'indexKpi')}
                                             sx={{ minWidth: '120px' }}
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -756,10 +759,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => setSaveDialogOpen(false)} color="primary">
+                            <Button onClick={() => setSaveDialogOpen(false)} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Cancel</b> 
                             </Button>
-                            <Button onClick={handleSaveData} color="primary">
+                            <Button onClick={handleSaveData} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Save</b> 
                             </Button>
                         </DialogActions>
@@ -777,10 +780,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleCloseClearConfirmationDialog} color="primary">
+                            <Button onClick={handleCloseClearConfirmationDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Cancel</b> 
                             </Button>
-                            <Button onClick={clearDataAndCloseDialog} color="primary">
+                            <Button onClick={clearDataAndCloseDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Clear</b> 
                             </Button>
                         </DialogActions>
@@ -828,7 +831,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             } else {
                                 setIncompleteFields(incompleteFields);
                                 // Show the error dialog or take other actions
-                                // setShowErrorDialog(true);
+                                setShowErrorDialog(true);
                             }
                         }}
                         disabled={selectedTab === tabLabels.length - 1 && selectedSubTab === subTabData.length - 1}
@@ -839,7 +842,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
 
-                    {/* {incompleteFields.length > 0 && (
+                    {incompleteFields.length > 0 && (
 
                         <Dialog open={showErrorDialog} onClose={() => setShowErrorDialog(false)}>
                             <DialogTitle>
@@ -862,7 +865,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </Dialog>
 
 
-                    )}&nbsp;&nbsp;&nbsp; */}
+                    )}&nbsp;&nbsp;&nbsp;
 
 
                     <Dialog open={isSuccessDialogOpen} onClose={handleClose}>
@@ -930,7 +933,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={closeDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                            <Button onClick={cancelDownloadToExcel} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Cancel</b> 
                             </Button>
                             <Button onClick={() => {
@@ -1211,7 +1214,7 @@ const TabsView = () => {
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
+                            
 
                                 {registrations.map((registration) => (
                                     registration.Empid == empId && (
@@ -1232,7 +1235,6 @@ const TabsView = () => {
                                         </td>
                                     )
                                 ))}
-                            </Tooltip>
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -1248,7 +1250,7 @@ const TabsView = () => {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            style={{ maxWidth: '300px' }}
+                            style={{ maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>

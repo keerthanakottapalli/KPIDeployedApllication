@@ -30,15 +30,15 @@ const Main = () => {
           <img style={{height:'35vh'}} src={logo} alt='not found'/>
           <CardContent>
             <div className="button-container">
-              <Button variant="contained" color="primary" onClick={handleLogin} className="button" style={{ paddingLeft: '28px', paddingRight: '28px' }}><b>Login</b>
+              <Button variant="contained"onClick={handleLogin} className="button" style={{ paddingLeft: '28px', paddingRight: '28px', width:'130px', backgroundColor:'#005daf', color:'white' }}><b>Login</b>
                 
               </Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button variant="contained" color="secondary" onClick={handleRegister} className="button"><b>Register</b>
+              <Button variant="contained" style={{backgroundColor:'#1dbb99', color:'white', width:'130px', paddingLeft: '28px', paddingRight: '28px', }} onClick={handleRegister} className="button"><b>Register</b>
                 
               </Button>
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button variant="contained" color="secondary" onClick={handleAdmin} className="button" style={{ paddingLeft: '28px', paddingRight: '28px' }}><b>Administrator</b>
+              <Button variant="contained" onClick={handleAdmin} className="button" style={{ backgroundColor:'#eb3b4a', paddingLeft: '28px', paddingRight: '28px', width:'130px', color:'white'  }}><b>Administrator</b>
                 
               </Button>
             </div>

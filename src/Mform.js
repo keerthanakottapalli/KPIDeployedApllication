@@ -77,8 +77,12 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
     const closeDownloadDialog = () => {
         setDownloadDialogOpen(false);
-        
+
     };
+    const cancelDownloadToExcel = () =>
+    {
+        setDownloadDialogOpen(false);
+    }
 
     const selectedTabData = subTabsData[tabLabels[selectedTab]];
     console.log('selectedTab:', selectedTab);
@@ -609,7 +613,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                     style={{ backgroundColor: '#1dbb99' }}
                     onClick={handleSave}
                 >
-                   <b>Save</b> 
+                    <b>Save</b>
                 </Button>&nbsp;
                 <Button
                     className='getClearButton'
@@ -617,7 +621,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                     style={{ backgroundColor: '#1dbb99' }}
                     onClick={handleOpenClearConfirmationDialog}
                 >
-                  <b>Clear</b>  
+                    <b>Clear</b>
                 </Button>
             </div>
             <Tabs
@@ -663,7 +667,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.quantityAchieved}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'quantityAchieved')}
                                             sx={{ minWidth: '120px' }}
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -687,7 +691,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                                 rows={1}
                                                 onChange={(event) => handleCommentChange(event, questionIndex)}
                                                 label="Comments"
-                                                className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                                // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             />
                                         </Tooltip>
                                     </TableCell>
@@ -696,7 +700,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                                             value={mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi === null ? '' : mainTabRatings[selectedTab][selectedSubTab][questionIndex]?.indexKpi}
                                             onChange={(event) => handleRatingChange(event, questionIndex, 'indexKpi')}
                                             sx={{ minWidth: '120px' }}
-                                            className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
+                                            // className={incompleteFields.includes(question) ? 'incomplete-field' : ''}
                                             MenuProps={{
                                                 PaperProps: {
                                                     style: {
@@ -729,11 +733,11 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={() => setSaveDialogOpen(false)} color="primary">
-                               <b>Cancel</b> 
+                            <Button onClick={() => setSaveDialogOpen(false)} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                <b>Cancel</b>
                             </Button>
-                            <Button onClick={handleSaveData} color="primary">
-                               <b>Save</b> 
+                            <Button onClick={handleSaveData} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                <b>Save</b>
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -750,11 +754,11 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleCloseClearConfirmationDialog} color="primary">
-                               <b>Cancel</b> 
+                            <Button onClick={handleCloseClearConfirmationDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                <b>Cancel</b>
                             </Button>
-                            <Button onClick={clearDataAndCloseDialog} color="primary">
-                               <b>Clear</b> 
+                            <Button onClick={clearDataAndCloseDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                <b>Clear</b>
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -803,7 +807,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             } else {
                                 setIncompleteFields(incompleteFields);
                                 // Show the error dialog or take other actions
-                                // setShowErrorDialog(true);
+                                setShowErrorDialog(true);
                             }
                         }}
                         disabled={selectedTab === tabLabels.length - 1 && selectedSubTab === subTabData.length - 1}
@@ -815,7 +819,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 
 
-                    {/* {incompleteFields.length > 0 && (
+                    {incompleteFields.length > 0 && (
 
                         <Dialog open={showErrorDialog} onClose={() => setShowErrorDialog(false)}>
                             <DialogTitle>
@@ -838,7 +842,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </Dialog>
 
 
-                    )}&nbsp;&nbsp;&nbsp; */}
+                    )}&nbsp;&nbsp;&nbsp;
 
 
                     <Dialog open={openDialog} onClose={handleClose}>
@@ -855,7 +859,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleClose} open={openDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                              <b>OK</b>  
+                                <b>OK</b>
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -876,16 +880,16 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={closeConfirmationDialog} color="primary">
-                               <b>Cancel</b> 
+                            <Button onClick={closeConfirmationDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                <b>Cancel</b>
                             </Button>
                             <Button onClick={() => {
                                 handleSubmit();
                                 // exportToExcel();
                                 closeConfirmationDialog()
                                 openSuccessDialog();
-                            }} color="primary">
-                               <b>OK</b> 
+                            }} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                <b>OK</b>
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -904,14 +908,14 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             </DialogContentText>
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={closeDownloadDialog} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                               <b>Cancel</b> 
+                            <Button onClick={cancelDownloadToExcel} style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                <b>Cancel</b>
                             </Button>
                             <Button onClick={() => {
                                 exportToExcel(); // Call exportToExcel directly when the download button is clicked
                                 closeDownloadDialog();
                             }} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                               <b>OK</b> 
+                                <b>OK</b>
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -1047,9 +1051,9 @@ const TabsView = () => {
 
 
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        setSelectedImage(file);
         handleCloseUserMenu();
+        const file = event.target.files[0];
+        setSelectedImage(file);        
         const getBase64 = (file, callback) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
@@ -1071,12 +1075,14 @@ const TabsView = () => {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(formData),
+                    
 
                 })
                     .then((response) => {
                         console.log('Raw Response:', response);
                         window.location.reload();
                         return response.json();
+                        
                     })
                     .then((data) => {
                         console.log('Parsed Response:', data.message);
@@ -1188,28 +1194,27 @@ const TabsView = () => {
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
 
-                                {registrations.map((registration) => (
-                                    registration.Empid == empId && (
-                                        <td>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile"
-                                                    style={{
-                                                        width: '60px',
-                                                        height: '60px',
-                                                        borderRadius: '50%',
-                                                        marginRight: '8px',
-                                                    }}
 
-                                                />
-                                            )}
-                                        </td>
-                                    )
-                                ))}
-                            </Tooltip>
+                            {registrations.map((registration) => (
+                                registration.Empid == empId && (
+                                    <td>
+                                        {registration.Image && (
+                                            <img
+                                                src={registration.Image}
+                                                alt="Profile"
+                                                style={{
+                                                    width: '60px',
+                                                    height: '60px',
+                                                    borderRadius: '50%',
+                                                    marginRight: '8px',
+                                                }}
+
+                                            />
+                                        )}
+                                    </td>
+                                )
+                            ))}
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -1225,7 +1230,7 @@ const TabsView = () => {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            style={{ maxWidth: '300px' }}
+                            style={{ maxWidth: '300px', marginTop:'50px', marginLeft:'-15px'  }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -1380,14 +1385,14 @@ const TabsView = () => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white", marginBottom: '15px', marginRight: '15px' }}>
-                       <b>Close</b> 
+                        <b>Close</b>
                     </Button>
                 </DialogActions>
             </Dialog>
             <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                 <DialogContent>
                     {registrations.map((registration) => (
-                        registration.Empid ==empId && (
+                        registration.Empid == empId && (
                             <div>
                                 {registration.Image && (
                                     <img

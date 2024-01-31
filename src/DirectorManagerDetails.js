@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Logout } from '@mui/icons-material';
 
 
 
@@ -274,7 +275,7 @@ function DirectorUpdateManagerData() {
         // localStorage.removeItem('form_data');
         localStorage.removeItem('practices');
         // Redirect to the login page (replace '/login' with your login route)
-        window.location.href = '/directorportal';
+        window.location.href = '/login';
     };
 
 
@@ -742,7 +743,6 @@ function DirectorUpdateManagerData() {
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
                                     registration.Empid == empId && (
@@ -763,7 +763,6 @@ function DirectorUpdateManagerData() {
                                         </td>
                                     )
                                 ))}
-                            </Tooltip>
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -779,6 +778,7 @@ function DirectorUpdateManagerData() {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
+                            style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -792,9 +792,9 @@ function DirectorUpdateManagerData() {
 
                             <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
-                                    <ArrowBackIcon />
+                                    <Logout />
                                 </ListItemIcon>
-                                GoBack
+                                Logout
                             </MenuItem>
                         </Menu>
                     </Box>
@@ -816,7 +816,7 @@ function DirectorUpdateManagerData() {
                 ))}
             </div>
             <br /><br /><br /><br />
-            <ListItemIcon style={{ marginLeft: '18vw', marginTop: '20px' }} onClick={goBack}>
+            <ListItemIcon style={{ marginLeft: '18vw', marginTop: '20px', cursor:'pointer', color:'black' }} onClick={goBack}>
                 <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
             </ListItemIcon> 
             <div className='employeetable'>
@@ -867,10 +867,10 @@ function DirectorUpdateManagerData() {
                                     variant="contained"
                                     color="primary"
                                     component={Link}
-                                    to={`/mViewEmpDetails/${empId}`}
+                                    to={`/directorManagerUpdateDetails/${empId}`}
                                     style={{ backgroundColor: '#1dbb99' }}
                                 >
-                                   <b>Manager Ratings</b> 
+                                   <b>Director Ratings</b> 
                                 </Button>
                             </div>
 

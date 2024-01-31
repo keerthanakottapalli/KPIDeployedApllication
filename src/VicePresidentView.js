@@ -218,7 +218,6 @@ const ManagerPortal = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              <Tooltip title="Open settings">
                 {registrations.map((registration) => (
                   registration.Empid == empId && (
                     <td>
@@ -238,7 +237,6 @@ const ManagerPortal = () => {
                     </td>
                   )
                 ))}
-              </Tooltip>
             </IconButton>
             <Menu
               id="user-menu"
@@ -254,6 +252,7 @@ const ManagerPortal = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
             >
 
               <MenuItem key="Profile" onClick={handleOpenProfileCard}>

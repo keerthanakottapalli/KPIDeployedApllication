@@ -534,7 +534,6 @@ const goBack = ()=>{
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
                                     registration.Empid == empId && (
@@ -555,7 +554,6 @@ const goBack = ()=>{
                                         </td>
                                     )
                                 ))}
-                            </Tooltip>
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -571,7 +569,7 @@ const goBack = ()=>{
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            style={{ maxWidth: '300px' }}
+                            style={{ maxWidth: '300px', marginTop:'50px', marginLeft:'-15px'  }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -640,7 +638,7 @@ const goBack = ()=>{
                         ))}
                     </div>
                    
-                    <ListItemIcon style={{marginLeft:'16vw', marginTop:'14vh'}} onClick={goBack}>
+                    <ListItemIcon style={{marginLeft:'18vw', marginTop:'14vh', cursor:'pointer'}} onClick={goBack}>
                                     <ArrowBack />&nbsp; <span><b>Go Back</b></span>   
                                 </ListItemIcon><br /><br />
                     <div className='employeetable'>

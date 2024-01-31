@@ -19,6 +19,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import './DirectorPortal.css';
 import { BASE_URL } from './config';
+import { Logout } from '@mui/icons-material';
 
 
 
@@ -193,10 +194,12 @@ const DirectorViewMangerDetails = () => {
       .catch((error) => console.error('Error fetching reporting managers:', error));
   }, []);
 
-
+  const goBack = () => {
+    navigate('/directorview')
+  }
 
   const handleLogout = () => {
-    window.location.href = '/directorview';
+    window.location.href = '/login';
   };
 
   const ViewDetails = (employee) => {
@@ -257,28 +260,26 @@ const DirectorViewMangerDetails = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              <Tooltip title="Open settings">
 
-                {registrations.map((registration) => (
-                  registration.Empid == empId && (
-                    <td>
-                      {registration.Image && (
-                        <img
-                          src={registration.Image}
-                          alt="Profile"
-                          style={{
-                            width: '60px', // Set the desired width
-                            height: '60px', // Set the desired height
-                            borderRadius: '50%',
-                            marginRight: '8px',
-                          }}
+              {registrations.map((registration) => (
+                registration.Empid == empId && (
+                  <td>
+                    {registration.Image && (
+                      <img
+                        src={registration.Image}
+                        alt="Profile"
+                        style={{
+                          width: '60px', // Set the desired width
+                          height: '60px', // Set the desired height
+                          borderRadius: '50%',
+                          marginRight: '8px',
+                        }}
 
-                        />
-                      )}
-                    </td>
-                  )
-                ))}
-              </Tooltip>
+                      />
+                    )}
+                  </td>
+                )
+              ))}
             </IconButton>
             <Menu
               id="user-menu"
@@ -294,6 +295,7 @@ const DirectorViewMangerDetails = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
             >
 
               <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -307,9 +309,9 @@ const DirectorViewMangerDetails = () => {
 
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
-                  <ArrowBackIcon />
+                  <Logout />
                 </ListItemIcon>
-                GoBack
+                Logout
               </MenuItem>
             </Menu>
           </Box>
@@ -317,8 +319,12 @@ const DirectorViewMangerDetails = () => {
         </Toolbar>
 
       </AppBar>
+      <br />
+      <ListItemIcon style={{ marginTop: '10vh', marginLeft: '10vw', cursor: 'pointer', color:'black' }} onClick={goBack}>
+        <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
+      </ListItemIcon><br />
       <div style={{ position: 'relative' }}>
-        <div style={{ width: '80%', marginLeft: '10%', height: '100vh', overflow: 'auto' }}>
+        <div style={{ width: '80%', marginLeft: '10%', height: '83vh', overflow: 'auto' }}>
 
           {loading ? (
             <div className="loading-container" style={{
@@ -332,14 +338,14 @@ const DirectorViewMangerDetails = () => {
               <div className="loading-spinner"></div>
             </div>
           ) : (
-            <TableContainer component={Paper} style={{ marginTop: '120px' }}>
+            <TableContainer component={Paper} >
               {employeesData.some((employee) => reportingManagers[employee.Empid] === username) ? (
                 <Table style={{ minWidth: 850 }}>
                   <TableHead style={{ backgroundColor: 'voilet' }}>
                     <TableRow>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign:'center' }}>Employee ID</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign:'center'}}>Employee Name</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign:'center'}}>Action</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign: 'center' }}>Employee ID</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Employee Name</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Action</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody style={{ marginLeft: '40%' }}>
@@ -347,52 +353,56 @@ const DirectorViewMangerDetails = () => {
                       const empReportingManager = reportingManagers[employee.Empid] || "";
                       if (empReportingManager === username) {
                         return (
-                          <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333'}}>
-                            <TableCell style={{ fontSize: '16px', color: '#333', textAlign:'center' }}>{employee.Empid}</TableCell>
+                          <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333' }}>
+                            <TableCell style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>{employee.Empid}</TableCell>
 
                             {employeesData.map((employees) => {
                               if (employees.Empid === employee.Empid) {
                                 return (
-                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', textAlign:'center'}}>
+                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>
                                     {employees.Empname}
                                   </TableCell>
                                 );
                               }
                             })}
 
-                            <TableCell style={{ color: '#333', paddingLeft: "5%", textAlign: "center",  }}>
+                            <TableCell style={{ color: '#333', paddingLeft: "5%", textAlign: "center", }}>
                               {/* Render the "Declined" button */}
                               {employee.Status === 'Decline' && (
-                                <Button variant="contained" style={{ backgroundColor: '#d12a2a', fontWeight: 'bold' , width: '20%', }}> Declined</Button>
+                                <Button variant="contained" style={{ backgroundColor: '#d12a2a', fontWeight: 'bold', width: '20%', }}> Declined</Button>
                               )}
 
-                              {/* Render the "Manager KPI's Details" button */}
-                              {employee.Status !== 'Decline' && (
-                                <Button
-                                  className="manager-details-button"
-                                  variant="contained"
-                                  onClick={() => handleManagerViewDetailsClick(employee.Empid)}
-                                  style={{ backgroundColor: '#0d416b', fontWeight: 'bolder', width: '20%' }}
-                                >
-                                  Manager KPI's Details
-                                </Button>
-                              )}
 
-                              {/* Render the "Employees Under Manager Details" button */}
-                              {employeesData.map((employees) => {
-                                if (employees.Empid === employee.Empid) {
-                                  return (
-                                    <Button
-                                      className="employee-details-button"
-                                      variant="contained"
-                                      onClick={() => handleEmpViewDetailsClick(employees.Empname)}
-                                      style={{ backgroundColor: '#1dbb99', fontWeight: 'bolder', marginLeft: '20px', width: '28%' }}
-                                    >
-                                      Employees Under Manager Details
-                                    </Button>
-                                  );
-                                }
-                              })}
+                            
+                                {/* Manager KPI's Details Button */}
+                                {employee.Status !== 'Decline' && (
+                                  <Button
+                                    className="manager-details-button"
+                                    variant="contained"
+                                    onClick={() => handleManagerViewDetailsClick(employee.Empid)}
+                                    style={{ backgroundColor: '#0d416b', fontWeight: 'bolder', width: '30%', marginRight: '10px', height: '60px' }}
+                                  >
+                                    Manager KPI's Details
+                                  </Button>
+                                )}
+
+                                {/* Employees Under Manager Details Button */}
+                                {employeesData.map((employees) => {
+                                  if (employees.Empid === employee.Empid) {
+                                    return (
+                                      <Button
+                                        className="employee-details-button"
+                                        variant="contained"
+                                        onClick={() => handleEmpViewDetailsClick(employees.Empname)}
+                                        style={{ backgroundColor: '#1dbb99', fontWeight: 'bolder', width: '30%', height: '60px' }}
+                                      >
+                                        Employees Under Manager Details
+                                      </Button>
+                                    );
+                                  }
+                                })}
+                             
+
                             </TableCell>
 
                           </TableRow>

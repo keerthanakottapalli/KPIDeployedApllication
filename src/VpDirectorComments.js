@@ -14,6 +14,7 @@ import { BASE_URL } from './config';
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 import { Box, IconButton, ListItemIcon, Menu } from '@material-ui/core';
+import { Logout } from '@mui/icons-material';
 
 
 function CollapsibleSection({ icon, title, items, isExpanded, onItemClick, redItems, toggleExpanded }) {
@@ -206,8 +207,6 @@ function ManagerUpdateEmpData() {
         }
     };
 
-
-
     const [selectedSectionIndex, setSelectedSectionIndex] = useState(0); // Initialize with the first section
 
     useEffect(() => {
@@ -303,7 +302,7 @@ function ManagerUpdateEmpData() {
     const lastname = localStorage.getItem('lastname');
     const username = firstname + " " + lastname
     const handleLogout = () => {
-        window.location.href = `/VPComments/${empId}`;
+        window.location.href = `/login`;
     };
 
 
@@ -738,7 +737,6 @@ function ManagerUpdateEmpData() {
                             onClick={handleOpenUserMenu}
                             color="inherit"
                         >
-                            <Tooltip title="Open settings">
 
                                 {registrations.map((registration) => (
                                     registration.Empid == empId && (
@@ -759,7 +757,6 @@ function ManagerUpdateEmpData() {
                                         </td>
                                     )
                                 ))}
-                            </Tooltip>
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -775,7 +772,7 @@ function ManagerUpdateEmpData() {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            style={{ maxWidth: '300px' }}
+                            style={{ maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -808,9 +805,9 @@ function ManagerUpdateEmpData() {
                             </MenuItem>
                             <MenuItem onClick={handleLogout}>
                                 <ListItemIcon>
-                                    <ExitToApp />
+                                    <Logout />
                                 </ListItemIcon>
-                                Goback
+                                Logout
                             </MenuItem>
                         </Menu>
                     </Box>

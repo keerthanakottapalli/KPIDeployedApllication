@@ -411,7 +411,6 @@ const DirectorFormDetails = () => {
                                 onClick={handleOpenUserMenu}
                                 color="inherit"
                             >
-                                <Tooltip title="Open settings">
 
                                     {registrations.map((registration) => (
                                         registration.Empid == empId && (
@@ -432,7 +431,6 @@ const DirectorFormDetails = () => {
                                             </td>
                                         )
                                     ))}
-                                </Tooltip>
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -448,6 +446,7 @@ const DirectorFormDetails = () => {
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
+                                style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                             >
 
                                 <MenuItem key="Profile" onClick={handleOpenProfileCard}>

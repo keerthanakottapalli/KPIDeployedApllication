@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DirectorManagerDetails.css';
 
-import { IconButton, Box, DialogTitle, Dialog, DialogContentText, DialogContent, DialogActions, Menu, Tooltip, MenuItem, ListItemIcon, } from '@mui/material';
+import { IconButton, Box, DialogTitle, Dialog, DialogContentText, DialogContent, DialogActions, Menu, Tooltip, MenuItem, ListItemIcon,Table, TableBody, TableCell, TableRow, TableHead } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Select from '@mui/material/Select';
@@ -11,6 +11,9 @@ import Button from '@mui/material/Button';
 import { useParams } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { BASE_URL } from './config';
+import { CameraAlt, Lock } from '@material-ui/icons';
+import { Logout } from '@mui/icons-material';
+import { Paper, TableContainer } from '@material-ui/core';
 
 
 
@@ -56,7 +59,7 @@ function DirectorUpdateManagerData() {
     const [registrations, setRegistrations] = useState([]);
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [showImagePreview, setShowImagePreview] = useState(false);
-
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const [employeesData, setEmployeesData] = useState([]);
     const [reportingManagers, setReportingManagers] = useState({});
@@ -161,6 +164,36 @@ function DirectorUpdateManagerData() {
         fetchRegistrations();
     }, []);
 
+    const handleImageChange = async (event) => {
+        const file = event.target.files[0];
+        setSelectedImage(file);
+
+        if (file) {
+            // Create a FormData object to send the file and Empmail
+            const formData = new FormData();
+            formData.append('Empmail', Empmail); // Use the key 'Empmail'
+            formData.append('Image', file); // Use the key 'Image'
+
+            try {
+                const response = await fetch(`${BASE_URL}/api/emp_image_upd/${firstname}/${lastname}`, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    // Image uploaded successfully, you can show a success message
+                    console.log('Image uploaded successfully');
+                    window.location.reload();
+                    // You may want to refresh the user's profile image
+                } else {
+                    // Handle the error (show an error message, etc.)
+                    console.error('Image upload failed');
+                }
+            } catch (error) {
+                console.error('Error uploading image:', error);
+            }
+        }
+    };
 
 
 
@@ -293,7 +326,7 @@ function DirectorUpdateManagerData() {
         // localStorage.removeItem('form_data');
         localStorage.removeItem('practices');
         // Redirect to the login page (replace '/login' with your login route)
-        window.location.href = '/directorportal';
+        window.location.href = '/login';
     };
 
 
@@ -737,15 +770,89 @@ function DirectorUpdateManagerData() {
 
                         <h3 className="username-style">{username.toUpperCase()}</h3>
                     </div>
-                    <Button className='logout-button' onClick={handleLogout} >
-                        <span className='logout-icon'
-                            style={{ fontFamily: 'Material Icons' }}
+                    <Box>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenUserMenu}
+                            color="inherit"
                         >
-                            &#8629;
-                        </span>&nbsp;
-                        <b className='logout'> Goback</b>
 
-                    </Button>
+                            {registrations.map((registration) => (
+                                registration.Empid == empId && (
+                                    <td>
+                                        {registration.Image && (
+                                            <img
+                                                src={registration.Image}
+                                                alt="Profile"
+                                                style={{
+                                                    width: '60px', // Set the desired width
+                                                    height: '60px', // Set the desired height
+                                                    borderRadius: '50%',
+                                                    marginRight: '8px',
+                                                }}
+
+                                            />
+                                        )}
+                                    </td>
+                                )
+                            ))}
+                        </IconButton>
+                        <Menu
+                            id="user-menu"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+                            style={{ maxWidth: '300px', marginTop: '50px', marginLeft: '-15px' }}
+                        >
+
+                            <MenuItem key="Profile" onClick={handleOpenProfileCard}>
+                                <ListItemIcon>
+                                    <AccountCircleIcon />
+                                </ListItemIcon>
+                                Profile
+                            </MenuItem>
+                            <MenuItem key="ProfileChange">
+                                <label htmlFor="imageUpload">
+                                    <ListItemIcon>
+                                        <CameraAlt fontSize="small" /> {/* Add the CameraAltIcon */}
+                                    </ListItemIcon>
+                                    Profile Change
+                                </label>
+                                <input
+                                    type="file"
+                                    id="imageUpload"
+                                    accept="image/*"
+                                    style={{ display: 'none' }}
+                                    onChange={handleImageChange}
+                                />
+                            </MenuItem>
+
+                            <MenuItem key="ChangePassword" onClick={handleChangePassword}>
+                                <ListItemIcon>
+                                    <Lock />
+                                </ListItemIcon>
+                                Change Password
+                            </MenuItem>
+                            <MenuItem onClick={handleLogout}>
+                                <ListItemIcon>
+                                    <Logout />
+                                </ListItemIcon>
+                                Logout
+                            </MenuItem>
+                        </Menu>
+                    </Box>
                 </Toolbar>
             </AppBar>
 
@@ -773,31 +880,30 @@ function DirectorUpdateManagerData() {
 
                     ) : (selectedTitle && tableData.length > 0 ? ( // Check if data is available
                         <>
-                            <div style={{ height: '50vh', overflow: 'auto' }}>
-                                <table className="dmanager-metric-table" style={{width:'70vw'}} >
-                                    <thead>
-                                        <tr>
-                                            <th>Metric</th>
-                                            <th>Quantity Target</th>
-                                            <th>Quantity Achieved</th>
-                                            <th>Index KPI</th>
-                                            <th>Comments</th>
-                                            <th>Director-Rating</th>
-                                            <th>Director-Comments</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                            <TableContainer component={Paper} style={{  overflow: 'auto' }}>
+                                <Table className="dmanager-metric-table" style={{ width: '75vw' }}>
+                                    <TableHead>
+                                        <TableRow style={{backgroundColor: '#d0e6f5' }}>
+                                            <TableCell style={{fontWeight:'bold', fontSize:'16px'}}>Metric</TableCell>
+                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Quantity Target</TableCell>
+                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Quantity Achieved</TableCell>
+                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Index KPI</TableCell>
+                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Comments</TableCell>
+                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Director-Rating</TableCell>
+                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Director-Comments</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
                                         {tableData.map((row, index) => (
-                                            <tr key={index}>
-                                                <td>{row.Metric}</td>
-                                                <td>{row.QuantityTarget}</td>
-                                                <td>{row.QuantityAchieved}</td>
-                                                <td>{row.IndexKpi}</td>
-                                                <td>{row.Comments}</td>
-                                                <td>
+                                            <TableRow key={index}>
+                                                <TableCell>{row.Metric}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>{row.QuantityTarget}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>{row.QuantityAchieved}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>{row.IndexKpi}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>{row.Comments}</TableCell>
+                                                <TableCell style={{textAlign:'center'}}>
                                                     <Select
                                                         value={itemMetricInputData[selectedItem]?.[row.Metric]?.DRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.DRating}
-                                                        // value={itemMetricInputData[selectedItem]?.[row.Metric]?.DRating || 0}
                                                         onChange={(e) => {
                                                             handleMRatingChange(selectedItem, row.Metric, e.target.value);
                                                         }}
@@ -805,7 +911,7 @@ function DirectorUpdateManagerData() {
                                                         MenuProps={{
                                                             PaperProps: {
                                                                 style: {
-                                                                    maxHeight: 200, // Set the maximum height for the dropdown
+                                                                    maxHeight: 200,
                                                                 },
                                                             },
                                                         }}
@@ -816,72 +922,68 @@ function DirectorUpdateManagerData() {
                                                             </MenuItem>
                                                         ))}
                                                     </Select>
-                                                </td>
-                                                <td>
-
+                                                </TableCell>
+                                                <TableCell style={{textAlign:'center'}}>
                                                     <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.PrasadKComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
                                                         <TextField
                                                             id="outlined-multiline-static"
                                                             multiline
                                                             rows={1}
                                                             value={itemMetricInputData[selectedItem]?.[row.Metric]?.PrasadKComments || ''}
-                                                            onChange={(e) => handleCommentsChange(selectedItem, row.Metric, e.target.value)
-
-                                                            }
-
+                                                            onChange={(e) => handleCommentsChange(selectedItem, row.Metric, e.target.value)}
                                                         />
                                                     </Tooltip>
-
-
-                                                </td>
-                                            </tr>
+                                                </TableCell>
+                                            </TableRow>
                                         ))}
-                                    </tbody>
-                                    {error && (
-                                        <Dialog open={error} onClose={() => setError(false)}>
-                                            <DialogContent style={{ width: '420px' }}>
-                                                <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
-                                                    {error}
-                                                </DialogContentText>
-                                            </DialogContent>
-                                            <DialogActions>
-                                                <Button onClick={() => setError(false)} color="primary">
-                                                   <b>OK</b> 
-                                                </Button>
-                                            </DialogActions>
-                                        </Dialog>
-                                    )}
-                                    <Dialog open={incompleteItemsDialogOpen} onClose={() => setIncompleteItemsDialogOpen(false)}>
-                                        <DialogContent>
-                                            <DialogContentText>
-                                                Please fill in Director Rating and Director Comments for the following items: {incompleteItems.join(', ')}
+                                    </TableBody>
+                                </Table>
+
+                                {error && (
+                                    <Dialog open={error} onClose={() => setError(false)}>
+                                        <DialogContent style={{ width: '420px' }}>
+                                            <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
+                                                {error}
                                             </DialogContentText>
                                         </DialogContent>
                                         <DialogActions>
-                                            <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
+                                            <Button onClick={() => setError(false)} color="primary">
                                                 <b>OK</b>
                                             </Button>
                                         </DialogActions>
                                     </Dialog>
-                                </table>
-                            </div>
+                                )}
 
-                            <div className="Dmanager-button">
+                                <Dialog open={incompleteItemsDialogOpen} onClose={() => setIncompleteItemsDialogOpen(false)}>
+                                    <DialogContent>
+                                        <DialogContentText>
+                                            Please fill in Director Rating and Director Comments for the following items: {incompleteItems.join(', ')}
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
+                                            <b>OK</b>
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
+                            </TableContainer>
+
+                            <div className="Dmanager-button" style={{marginTop:'20px'}}>
                                 <Button
                                     variant="contained"
                                     onClick={handleUpdateButtonClick}
-                                    style={{ marginRight: '10px', backgroundColor: '#1dbb99' }}
+                                    style={{ backgroundColor: '#1dbb99' }}
                                 >
-                                   <b>Update</b> 
+                                    <b>Update</b>
                                 </Button>
                                 <Button
                                     variant="contained"
                                     color="primary"
                                     onClick={openConfirmationDialog}
-                                    style={{ marginLeft: '20px' }}
+                                    style={{ marginLeft: '20px', color: 'white', }}
                                     disabled={!isSubmitEnabled || isFetchingData}
                                 >
-                                   <b>Submit</b> 
+                                    <b>Submit</b>
                                 </Button>
                                 <Dialog
                                     open={isConfirmationDialogOpen}
@@ -897,10 +999,10 @@ function DirectorUpdateManagerData() {
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={closeConfirmationDialog} color="primary">
-                                           <b>Cancel</b> 
+                                            <b>Cancel</b>
                                         </Button>
                                         <Button onClick={handleSubmit} color="primary" autoFocus>
-                                           <b>Confirm</b> 
+                                            <b>Confirm</b>
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -912,12 +1014,12 @@ function DirectorUpdateManagerData() {
                                         <DialogContentText>
                                             Your form has been successfully submitted!
                                         </DialogContentText>
-                                        
+
                                     </DialogContent>
-                                    
+
                                     <DialogActions>
                                         <Button onClick={closeSuccessDialog} color="primary">
-                                           <b>OK</b> 
+                                            <b>OK</b>
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -934,7 +1036,7 @@ function DirectorUpdateManagerData() {
                                     </DialogContent>
                                     <DialogActions>
                                         <Button onClick={handleClose} color="primary">
-                                          <b>OK</b>  
+                                            <b>OK</b>
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
@@ -1019,7 +1121,7 @@ function DirectorUpdateManagerData() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                           <b>Close</b> 
+                            <b>Close</b>
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -1058,7 +1160,7 @@ function DirectorUpdateManagerData() {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
-                           <b>OK</b> 
+                            <b>OK</b>
                         </Button>
                     </DialogActions>
                 </Dialog>

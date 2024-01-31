@@ -318,7 +318,6 @@ const ButtonCenter = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              <Tooltip title="Open settings">
                 {registrations.map((registration) => (
                   registration.Empid == empId && (
                     <td>
@@ -338,7 +337,6 @@ const ButtonCenter = () => {
                     </td>
                   )
                 ))}
-              </Tooltip>
             </IconButton>
             <Menu
               id="user-menu"
@@ -354,6 +352,7 @@ const ButtonCenter = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
             >
 
               <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -433,7 +432,7 @@ const ButtonCenter = () => {
                 <b>Form Details</b>
               </Button>
               <Button
-                style={{ backgroundColor: '#1dbb99', marginLeft: '20px' }}
+                style={{ backgroundColor: '#1dbb99', marginLeft: '20px', ...(isButtonDisabled && { backgroundColor: '#80d1c0' }), }}
                 className="gradient-button"
                 variant="contained"
                 onClick={handleFormUpdateDetailsClick}
