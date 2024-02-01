@@ -272,7 +272,7 @@ const DirectorFormDetails = () => {
                 // Delay setting loading to false by 3 seconds
                 setTimeout(() => {
                     setLoading(false);
-                }, 1000);
+                });
             }
         }
     };
