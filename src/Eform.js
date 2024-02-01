@@ -24,7 +24,7 @@ import { Logout } from '@mui/icons-material';
 const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, tabLabels, subTabsData }) => {
     const token = localStorage.getItem('token');
 
-    
+    const navigate = useNavigate();
     const initialMainTabRatings = tabLabels.map((tabLabel) =>
         subTabsData[tabLabel].map((subTab) =>
             subTab.questions.map((question) => ({
@@ -38,6 +38,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     const [mainTabRatings, setMainTabRatings] = useState(initialMainTabRatings);
     const [showErrorDialog, setShowErrorDialog] = useState(false);
     const [incompleteFields, setIncompleteFields] = useState([]);
+   
 
 
     // Function to check if there are incomplete fields in the current subtab
@@ -115,7 +116,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     };
 
 
-    const navigate = useNavigate();
+    
     const handleClose = () => {
         setOpenDialog(false);
         setSuccessDialogOpen(false);
@@ -946,6 +947,7 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
 
 const TabsView = () => {
 
+    const navigate = useNavigate();
     const [selectedTab, setSelectedTab] = useState(0);
     const [selectedSubTab, setSelectedSubTab] = useState(0);
     const [registrations, setRegistrations] = useState([]);

@@ -60,7 +60,7 @@ function DirectorUpdateManagerData() {
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [showImagePreview, setShowImagePreview] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-
+    const [Empmail, setEmpmail] = useState(atob(localStorage.getItem('empmail')));
     const [employeesData, setEmployeesData] = useState([]);
     const [reportingManagers, setReportingManagers] = useState({});
     const [noDataErrorMessage, setNoDataErrorMessage] = useState();

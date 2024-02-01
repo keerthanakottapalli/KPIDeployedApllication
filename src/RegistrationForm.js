@@ -74,7 +74,7 @@ const RegistrationForm = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
     setFormData({ ...formData, [name]: value });
 
     if (name === 'Empid' && value.trim() !== '' && !validateInteger(value)) {
