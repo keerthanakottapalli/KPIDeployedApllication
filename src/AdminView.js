@@ -59,7 +59,7 @@ const AdminView = () => {
 
           <div className="userInfo">
             <Typography variant="h6" className="welcome-text">
-              Welcome
+              Hey, Welcome
             </Typography>
 
             <h3 className="username-style">{username.toUpperCase()}</h3>
