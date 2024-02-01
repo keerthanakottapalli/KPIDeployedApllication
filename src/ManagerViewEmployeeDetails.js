@@ -426,7 +426,7 @@ function ManagerUpdateEmpData() {
             // Delay setting loading to false by 3 seconds
             setTimeout(() => {
                 setLoading(false);
-            }, 1000);
+            });
         }
     };
 
@@ -988,7 +988,9 @@ function ManagerUpdateEmpData() {
                                 </div>
                             </>
                         ) : (
-                            <h4>{noDataErrorMessage}</h4>
+                            <div className="no-data-messages" style={{ color: '#0d4166' }}>
+                               {noDataErrorMessage}
+                            </div>
                         )
                         )}
                     </div>

@@ -395,7 +395,7 @@ function DirectorUpdateManagerData() {
             // Delay setting loading to false by 3 seconds
             setTimeout(() => {
                 setLoading(false);
-            }, 1000);
+            });
         }
     };
 
@@ -724,10 +724,9 @@ function DirectorUpdateManagerData() {
         navigate('/directorportal');
     }
 
-    setTimeout(() => 
-{
-    setNoDataErrorMessage("No data available for the selected User.")
-},3000 );
+    setTimeout(() => {
+        setNoDataErrorMessage("No data available for the selected User.")
+    }, 3000);
 
     return (
         <>
@@ -750,25 +749,25 @@ function DirectorUpdateManagerData() {
                             color="inherit"
                         >
 
-                                {registrations.map((registration) => (
-                                    registration.Empid == empId && (
-                                        <td>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile"
-                                                    style={{
-                                                        width: '60px',
-                                                        height: '60px',
-                                                        borderRadius: '50%',
-                                                        marginRight: '8px',
-                                                    }}
+                            {registrations.map((registration) => (
+                                registration.Empid == empId && (
+                                    <td>
+                                        {registration.Image && (
+                                            <img
+                                                src={registration.Image}
+                                                alt="Profile"
+                                                style={{
+                                                    width: '60px',
+                                                    height: '60px',
+                                                    borderRadius: '50%',
+                                                    marginRight: '8px',
+                                                }}
 
-                                                />
-                                            )}
-                                        </td>
-                                    )
-                                ))}
+                                            />
+                                        )}
+                                    </td>
+                                )
+                            ))}
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -784,7 +783,7 @@ function DirectorUpdateManagerData() {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
+                            style={{ maxWidth: '300px', marginTop: '50px', marginLeft: '-15px' }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -822,9 +821,9 @@ function DirectorUpdateManagerData() {
                 ))}
             </div>
             <br /><br /><br /><br />
-            <ListItemIcon style={{ marginLeft: '18vw', marginTop: '20px', cursor:'pointer', color:'black' }} onClick={goBack}>
+            <ListItemIcon style={{ marginLeft: '18vw', marginTop: '20px', cursor: 'pointer', color: 'black' }} onClick={goBack}>
                 <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
-            </ListItemIcon> 
+            </ListItemIcon>
             <div className='employeetable'>
                 {loading ? (
                     <div className="loading-container">
@@ -867,7 +866,7 @@ function DirectorUpdateManagerData() {
                                     onClick={handleDeclineWithConfirmation}
                                     style={{ marginRight: '10px', backgroundColor: '#1dbb99' }}
                                 >
-                                   <b>Decline</b> 
+                                    <b>Decline</b>
                                 </Button>
                                 <Button
                                     variant="contained"
@@ -876,7 +875,7 @@ function DirectorUpdateManagerData() {
                                     to={`/directorManagerUpdateDetails/${empId}`}
                                     style={{ backgroundColor: '#1dbb99' }}
                                 >
-                                   <b>Director Ratings</b> 
+                                    <b>Director Ratings</b>
                                 </Button>
                             </div>
 
@@ -890,10 +889,10 @@ function DirectorUpdateManagerData() {
                             </DialogContent>
                             <DialogActions>
                                 <Button onClick={handleCloseDialog} color="primary" variant="contained">
-                                   <b>Cancel</b> 
+                                    <b>Cancel</b>
                                 </Button>
                                 <Button onClick={handleDeclineClick} color="primary" variant="contained">
-                                   <b>Confirm</b> 
+                                    <b>Confirm</b>
                                 </Button>
                             </DialogActions>
                         </Dialog>
@@ -901,8 +900,9 @@ function DirectorUpdateManagerData() {
                     </>
 
                 ) : (
-                   
-                    <h4>{noDataErrorMessage}</h4>
+                    <div className="no-data-messages" style={{ color: '#0d4166' }}>
+                        {noDataErrorMessage}
+                    </div>
                 )
                 )}
             </div>
@@ -979,7 +979,7 @@ function DirectorUpdateManagerData() {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                       <b>Close</b> 
+                        <b>Close</b>
                     </Button>
                 </DialogActions>
             </Dialog>

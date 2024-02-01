@@ -103,7 +103,6 @@ function App() {
           <Route path="/mViewEmpDetails/:empId" element={<ManagerViewEmployeeDetails />} />
 
 
-
           {/* Director Paths */}
           <Route path="/directorview" element={<DirectorView />} />
           <Route path="/directorportal" element={<DirectorPortal />} />
@@ -114,6 +113,7 @@ function App() {
           <Route path="/directorForm" element={<DirectorForm/>} />
           <Route path="/directorFormDetails/:empId" element={<DirectorFormDetails/>} />
           <Route path="/directorUpdateDetails/:empId" element={<DirectorUpdateDetails/>} />
+          <Route path="/directormanagerview" element={<DirectorManagersView />} />
 
 
          {/* Vice President Paths */}
@@ -121,6 +121,7 @@ function App() {
          <Route path="/VPView" element={<VicePresidentView />} />
          <Route path="/VPComments/:empId" element={<VicePresidentComments />} />
          <Route path='/VpDComments/:empId' element={<VpDirectorComments/>} />
+         
          
 
          
@@ -144,7 +145,7 @@ function App() {
           <Route path="/tab" element={<TabComponent />} />
           <Route path="/sub" element={<SubTabs />} />
           <Route path="/mrating" element={<Mratings />} />
-          <Route path="/directormanagerview" element={<DirectorManagersView />} />
+          
           
              {/* needs to adjust the sidebar and buttons */}
 

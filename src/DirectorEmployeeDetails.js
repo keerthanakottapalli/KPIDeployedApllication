@@ -40,7 +40,7 @@ const DirectorViewEmpDetails = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    });
   }, []); // Empty dependency array means this effect runs once after initial render
 
   const handleOpenNavMenu = (event) => {

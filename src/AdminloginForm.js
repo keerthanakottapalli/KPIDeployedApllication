@@ -155,7 +155,7 @@ const AdminLogin = () => {
           </Button>
         </form>
         <footer>
-          <p className="footer-stmt">&copy; 2023 Miracle Software Systems, Inc.</p>
+          <p className="footer-stmt">&copy; 2024 Miracle Software Systems, Inc.</p>
         </footer>
       </fieldset>
 
