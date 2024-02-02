@@ -18,6 +18,8 @@ import CloseIcon from '@mui/icons-material/Close'; // Import the close icon
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 import { ArrowBack, Logout } from '@mui/icons-material';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 
 const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, tabLabels, subTabsData }) => {
@@ -58,7 +60,8 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     const [isSuccessDialogOpen, setSuccessDialogOpen] = useState(false);
     const [isDownloadDialogOpen, setDownloadDialogOpen] = useState(false);
     const [isDownloadButtonVisible, setDownloadButtonVisible] = useState(false);
-    const [isSubmitButtonVisible, setSubmitButtonVisible] = useState(true);
+    const [isSubmitButtonVisible, setSubmitButtonVisible] = useState(true); 
+    const [open, setOpen] = useState(false);
 
     const openConfirmationDialog = () => {
         setConfirmationDialogOpen(true);
@@ -612,7 +615,17 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
         saveAs(blob, fileName);
     };
 
-    const [selectedTabs, setSelectedTabs] = useState(0);
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleCloseSnack = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     return (
         <div>
@@ -764,12 +777,26 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
                             <Button onClick={() => setSaveDialogOpen(false)} style={{ backgroundColor: "#00aaee", color: "white " }}>
                                <b>Cancel</b> 
                             </Button>
-                            <Button onClick={handleSaveData} style={{ backgroundColor: "#00aaee", color: "white " }}>
-                               <b>Save</b> 
+                            <Button onClick={() => { handleSaveData(), handleClick() }} variant='contained' style={{ backgroundColor: "#00aaee", color: "white " }}>
+                                <b>Save</b>
                             </Button>
                         </DialogActions>
                     </Dialog>
-
+                    <Snackbar
+                        open={open}
+                        autoHideDuration={3000}
+                        onClose={handleCloseSnack}
+                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    >
+                        <Alert
+                            onClose={handleCloseSnack}
+                            severity="success"
+                            variant="filled"
+                            sx={{ width: '100%' }}
+                        >
+                            The data is successfully saved
+                        </Alert>
+                    </Snackbar>
 
                     <Dialog
                         open={isClearConfirmationDialogOpen}
