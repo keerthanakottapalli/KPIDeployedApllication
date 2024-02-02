@@ -51,7 +51,7 @@ const RegistrationForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
-  const [apiError, setApiError] =useState('');
+  const [apiError, setApiError] = useState('');
 
   const handleClose = () => {
     setOpenDialog(false);
@@ -64,7 +64,8 @@ const RegistrationForm = () => {
   };
 
   const validateEmpEmail = (empEmail) => {
-    const emailPattern = /^[a-zA-Z][\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/;
+    const emailPattern = /^[^\s][a-zA-Z][\w-]*(\.[\w-]+)*@[\w-]+(\.[\w-]+)+[^\s]$/;
+
     return emailPattern.test(empEmail) && empEmail.endsWith('miraclesoft.com');
   };
 
@@ -89,29 +90,38 @@ const RegistrationForm = () => {
       }));
     }
 
-    if (name === 'Empmail') {
-      if (!/^[a-zA-Z][\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value)) {
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: 'Please enter a valid email address. Ex: abc@miraclesoft.com',
-        }));
-      } else if (!value.endsWith('@miraclesoft.com')) {
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: 'Email must end with @miraclesoft.com',
-        }));
-      } else if (value.split('@').length - 1 > 1) {
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: "Only one '@' is allowed",
-        }));
-      } else {
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
-          [name]: '', // Clear the error when the format is correct
-        }));
-      }
-    }
+   // Validation logic for email input
+if (name === 'Empmail') {
+  if (/\s/.test(value)) {
+    // If there is any space in the email address
+    setValidationErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: 'Spaces are not allowed in the email address.',
+    }));
+  } else if (!/^[a-zA-Z][\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/.test(value)) {
+    setValidationErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: 'Please enter a valid email address. Ex: abc@miraclesoft.com',
+    }));
+  } else if (!value.endsWith('@miraclesoft.com')) {
+    setValidationErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: 'Email must end with @miraclesoft.com',
+    }));
+  } else if (value.split('@').length - 1 > 1) {
+    setValidationErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "Only one '@' is allowed",
+    }));
+  } else {
+    setValidationErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: '', // Clear the error when the format is correct
+    }));
+  }
+}
+
+
     if (name === 'Password') {
       if (value.length < 8) {
         setValidationErrors((prevErrors) => ({
@@ -262,11 +272,13 @@ const RegistrationForm = () => {
         setApiError('An error occurred while communicating with the server.');
       }
     }
-    {apiError && (
-      <div style={{ color: 'red', marginTop: '10px' }}>
-      {apiError}
-      </div>
-      )} 
+    {
+      apiError && (
+        <div style={{ color: 'red', marginTop: '10px' }}>
+          {apiError}
+        </div>
+      )
+    }
   };
 
   return (

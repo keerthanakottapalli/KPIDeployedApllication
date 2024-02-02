@@ -242,7 +242,7 @@ const DirectorViewMangerDetails = () => {
 
 
   const mainpage = () => {
-    navigate('/')
+    window.location.href = 'http://172.17.15.253:3002';
   }
 
   return (
@@ -346,8 +346,8 @@ const DirectorViewMangerDetails = () => {
             <TableContainer component={Paper} style={{ marginTop: '20px' }}>
               {employeesData.some((employee) => reportingManagers[employee.Empid] === username) ? (
                 <Table style={{ minWidth: 850 }}>
-                  <TableHead style={{ backgroundColor: 'voilet' }}>
-                    <TableRow>
+                  <TableHead >
+                    <TableRow style={{ backgroundColor: '#d0e6f5' }}>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign: 'center' }}>Employee ID</TableCell>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Employee Name</TableCell>
                       <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Action</TableCell>

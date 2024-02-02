@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DirectorManagerDetails.css';
 
-import { IconButton, Box, DialogTitle, Dialog, DialogContentText, DialogContent, DialogActions, Menu, Tooltip, MenuItem, ListItemIcon,Table, TableBody, TableCell, TableRow, TableHead } from '@mui/material';
+import { IconButton, Box, DialogTitle, Dialog, DialogContentText, DialogContent, DialogActions, Menu, Tooltip, MenuItem, ListItemIcon, Table, TableBody, TableCell, TableRow, TableHead } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Select from '@mui/material/Select';
@@ -760,21 +760,22 @@ function DirectorUpdateManagerData() {
         setOpenDialog(false);
     };
 
-    setTimeout(() => 
-{
-    setNoDataErrorMessage("No data available for the selected User.")
-},3000 );
+    setTimeout(() => {
+        setNoDataErrorMessage("No data available for the selected User.")
+    }, 3000);
+    const goBack = () => {
+        navigate('/meview')
+    }
 
-
-const mainpage = () => {
-    navigate('/')
-  }
+    const mainpage = () => {
+        window.location.href = 'http://172.17.15.253:3002';
+      }
 
     return (
         <>
             <AppBar position="fixed">
                 <Toolbar className="navBar-style">
-                    <img style={{ width: '60px', borderRadius: '50%', cursor:'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
+                    <img style={{ width: '60px', borderRadius: '50%', cursor: 'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
 
                     <div className="userInfo">
                         <Typography variant="h6" className="welcome-text">
@@ -870,10 +871,8 @@ const mainpage = () => {
             </AppBar>
 
             <div className="page-container">
-                <button className="nav-toggle-icon" onClick={toggleNav}>
-                    Toggle Nav
-                </button>
-                <div className={`Dmanager-sidenav ${isNavVisible ? '' : 'hidden'}`}>
+               
+                <div className={'Dmanager-sidenav'}>
                     {sections.map((section, index) => (
                         <CollapsibleSection
                             key={index}
@@ -885,6 +884,9 @@ const mainpage = () => {
                     ))}
                 </div>
                 <div className="dmanager-table-container" >
+                    <ListItemIcon style={{ cursor: 'pointer', marginTop:'-40px' }} onClick={goBack}>
+                        <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
+                    </ListItemIcon><br /><br />
                     {loading ? (
                         <div className="loading-container">
                             <div className="loading-text">Loading...</div>
@@ -893,28 +895,28 @@ const mainpage = () => {
 
                     ) : (selectedTitle && tableData.length > 0 ? ( // Check if data is available
                         <>
-                            <TableContainer component={Paper} style={{  overflow: 'auto' }}>
-                                <Table className="dmanager-metric-table" style={{ width: '75vw' }}>
+                            <TableContainer component={Paper} style={{ overflow: 'auto' }}>
+                                <Table style={{ width: '75vw' }}>
                                     <TableHead>
-                                        <TableRow style={{backgroundColor: '#d0e6f5' }}>
-                                            <TableCell style={{fontWeight:'bold', fontSize:'16px'}}>Metric</TableCell>
-                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Quantity Target</TableCell>
-                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Quantity Achieved</TableCell>
-                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Index KPI</TableCell>
-                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Comments</TableCell>
-                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Director-Rating</TableCell>
-                                            <TableCell style={{fontWeight:'bold', textAlign:'center', fontSize:'16px'}}>Director-Comments</TableCell>
+                                        <TableRow style={{ backgroundColor: '#d0e6f5' }}>
+                                            <TableCell style={{ fontWeight: 'bold', fontSize: '16px' }}>Metric</TableCell>
+                                            <TableCell style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '16px' }}>Quantity Target</TableCell>
+                                            <TableCell style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '16px' }}>Quantity Achieved</TableCell>
+                                            <TableCell style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '16px' }}>Index KPI</TableCell>
+                                            <TableCell style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '16px' }}>Comments</TableCell>
+                                            <TableCell style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '16px' }}>Director-Rating</TableCell>
+                                            <TableCell style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '16px' }}>Director-Comments</TableCell>
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
                                         {tableData.map((row, index) => (
                                             <TableRow key={index}>
                                                 <TableCell>{row.Metric}</TableCell>
-                                                <TableCell style={{textAlign:'center'}}>{row.QuantityTarget}</TableCell>
-                                                <TableCell style={{textAlign:'center'}}>{row.QuantityAchieved}</TableCell>
-                                                <TableCell style={{textAlign:'center'}}>{row.IndexKpi}</TableCell>
-                                                <TableCell style={{textAlign:'center'}}>{row.Comments}</TableCell>
-                                                <TableCell style={{textAlign:'center'}}>
+                                                <TableCell style={{ textAlign: 'center' }}>{row.QuantityTarget}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>{row.QuantityAchieved}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>{row.IndexKpi}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>{row.Comments}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>
                                                     <Select
                                                         value={itemMetricInputData[selectedItem]?.[row.Metric]?.DRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.DRating}
                                                         onChange={(e) => {
@@ -936,7 +938,7 @@ const mainpage = () => {
                                                         ))}
                                                     </Select>
                                                 </TableCell>
-                                                <TableCell style={{textAlign:'center'}}>
+                                                <TableCell style={{ textAlign: 'center' }}>
                                                     <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.PrasadKComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
                                                         <TextField
                                                             id="outlined-multiline-static"
@@ -981,7 +983,7 @@ const mainpage = () => {
                                 </Dialog>
                             </TableContainer>
 
-                            <div className="Dmanager-button" style={{marginTop:'20px'}}>
+                            <div className="Dmanager-button" style={{ marginTop: '20px' }}>
                                 <Button
                                     variant="contained"
                                     onClick={handleUpdateButtonClick}

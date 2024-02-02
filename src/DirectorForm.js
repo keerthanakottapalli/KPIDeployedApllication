@@ -17,7 +17,7 @@ import { DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close'; // Import the close icon
 import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
-import { Logout } from '@mui/icons-material';
+import { ArrowBack, Logout } from '@mui/icons-material';
 
 
 const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, tabLabels, subTabsData }) => {
@@ -1196,7 +1196,7 @@ const navigate = useNavigate()
 
 
     const mainpage = () => {
-        navigate('/')
+        window.location.href = 'http://172.17.15.253:3002';
       }
 
 
@@ -1318,7 +1318,7 @@ const navigate = useNavigate()
             ) : (
                 <>
                       <br /><br/><br /><br/>
-                    <div style={{marginTop:'-5px', cursor:'pointer' }}>
+                    <div style={{marginTop:'5px', cursor:'pointer', marginBottom:'5px' }}>
                     <ListItemIcon  onClick={goBack}>
                                     <ArrowBack />&nbsp; <span><b>Go Back</b></span>   
                                 </ListItemIcon>
@@ -1354,7 +1354,7 @@ const navigate = useNavigate()
                 </>
 
             )
-            };
+            }
             <Dialog
                 open={isProfileCardOpen}
                 onClose={handleCloseProfileCard}

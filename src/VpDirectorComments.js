@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './ManagerCommentsPost.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Paper, Toolbar, Typography } from '@mui/material';
 import { Table, TableHead, TableBody, TableRow, TableCell, Button, Select, MenuItem, TextField, TableContainer } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
 import Dialog from '@material-ui/core/Dialog';
@@ -11,7 +11,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { BASE_URL } from './config';
-import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
+import { AccountCircle, ArrowBack, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 import { Box, IconButton, ListItemIcon, Menu } from '@material-ui/core';
 import { Logout } from '@mui/icons-material';
@@ -700,9 +700,9 @@ function ManagerUpdateEmpData() {
         }
     };
 
-    
+
     const goBack = () => {
-        navigate(`/VPComments/${empId}`)
+        navigate(`/VPView/${empId}`)
     }
 
     // Function to reset the error message
@@ -718,20 +718,22 @@ function ManagerUpdateEmpData() {
         setOpenDialog(false);
     };
 
-    setTimeout(() => 
-{
-    setNoDataErrorMessage("No data available for the selected User.")
-},3000 );
+    setTimeout(() => {
+        setNoDataErrorMessage("No data available for the selected User.")
+    }, 3000);
 
-const mainpage = () => {
-    navigate('/')
-  }
+
+    const mainpage = () => {
+        window.location.href = 'http://172.17.15.253:3002';
+      }
+
+
 
     return (
         <>
             <AppBar position="fixed">
                 <Toolbar className="navigation-header">
-                    <img style={{ width: '60px', borderRadius: '50%', cursor:'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
+                    <img style={{ width: '60px', borderRadius: '50%', cursor: 'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
 
                     <div className="userInfo">
                         <Typography variant="h6" className="welcome-text">
@@ -749,25 +751,25 @@ const mainpage = () => {
                             color="inherit"
                         >
 
-                                {registrations.map((registration) => (
-                                    registration.Empid == empId && (
-                                        <td>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile"
-                                                    style={{
-                                                        width: '60px',
-                                                        height: '60px',
-                                                        borderRadius: '50%',
-                                                        marginRight: '8px',
-                                                    }}
+                            {registrations.map((registration) => (
+                                registration.Empid == empId && (
+                                    <td>
+                                        {registration.Image && (
+                                            <img
+                                                src={registration.Image}
+                                                alt="Profile"
+                                                style={{
+                                                    width: '60px',
+                                                    height: '60px',
+                                                    borderRadius: '50%',
+                                                    marginRight: '8px',
+                                                }}
 
-                                                />
-                                            )}
-                                        </td>
-                                    )
-                                ))}
+                                            />
+                                        )}
+                                    </td>
+                                )
+                            ))}
                         </IconButton>
                         <Menu
                             id="user-menu"
@@ -783,7 +785,7 @@ const mainpage = () => {
                             }}
                             open={Boolean(anchorElUser)}
                             onClose={handleCloseUserMenu}
-                            style={{ maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
+                            style={{ maxWidth: '300px', marginTop: '50px', marginLeft: '-15px' }}
                         >
 
                             <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -825,8 +827,8 @@ const mainpage = () => {
                 </Toolbar>
             </AppBar>
 
-            <div className="page-container">
-                <div className="Dmanager-sidenav">
+            <div className="content-container">
+                <div className="sidebar">
                     {sections.map((section, index) => (
                         <CollapsibleSection
                             key={index}
@@ -837,195 +839,198 @@ const mainpage = () => {
                         />
                     ))}
                 </div>
+                <ListItemIcon style={{ marginLeft: '18vw', marginTop: '14vh', cursor: 'pointer' }} onClick={goBack}>
+                    <ArrowBack />&nbsp; <span><b>Go Back</b></span>
+                </ListItemIcon>
+                <div className="employeetable">
+                    {loading ? (
+                        <div className="loading-container">
+                            <div className="loading-text">Loading...</div>
+                            <div className="loading-spinner"></div>
+                        </div>
 
 
-                {loading ? (
-                    <div className="loading-container">
-                        <div className="loading-text">Loading...</div>
-                        <div className="loading-spinner"></div>
-                    </div>
+                    ) : (selectedItem && tableData.length > 0 ? (
+                        <>
+                            <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto', marginTop: '20vh', marginLeft:'-20vw' }}>
 
-
-                ) : (selectedItem && tableData.length > 0 ? (
-                    <div className="dmanager-table-container">
-                        <div style={{ height: '50vh', overflow: 'auto' }}>
-
-                            <Table className="dmanager-metric-table">
-                                <TableHead>
-                                    <TableRow style={{ backgroundColor: '#d0e6f5' }}>
-                                        <TableCell><b>Metric</b></TableCell>
-                                        <TableCell style={{ textAlign: 'center' }}><b>Quantity Target</b></TableCell>
-                                        <TableCell style={{ textAlign: 'center' }}><b>Quantity Achieved</b></TableCell>
-                                        <TableCell style={{ textAlign: 'center' }}><b>Index KPI</b></TableCell>
-                                        <TableCell style={{ textAlign: 'center' }}><b>Comments</b></TableCell>
-                                        <TableCell style={{ textAlign: 'center' }}><b>Vice President-Rating</b></TableCell>
-                                        <TableCell style={{ textAlign: 'center' }}><b>Vice President-Comments</b></TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {tableData.map((row, index) => (
-                                        <TableRow key={index}>
-                                            <TableCell>{row.Metric}</TableCell>
-                                            <TableCell style={{ textAlign: 'center' }}>{row.QuantityTarget}</TableCell>
-                                            <TableCell style={{ textAlign: 'center' }}>{row.QuantityAchieved}</TableCell>
-                                            <TableCell style={{ textAlign: 'center' }}>{row.IndexKpi}</TableCell>
-                                            <TableCell style={{ textAlign: 'center' }}>{row.Comments}</TableCell>
-                                            <TableCell style={{ textAlign: 'center' }}>
-                                                <Select
-                                                    value={itemMetricInputData[selectedItem]?.[row.Metric]?.MRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.MRating}
-
-                                                    // value={
-                                                    //     itemMetricInputData[selectedItem]?.[row.Metric]?.MRating || ''}
-                                                    onChange={(e) => {
-                                                        handleMRatingChange(selectedItem, row.Metric, e.target.value);
-
-                                                    }
-
-                                                    }
-                                                    style={{ width: '100px' }}
-                                                    MenuProps={{
-                                                        PaperProps: {
-                                                            style: {
-                                                                maxHeight: 200, // Set the maximum height for the dropdown
-                                                            },
-                                                        },
-                                                    }}
-                                                >
-                                                    {Array.from({ length: 11 }, (_, i) => i).map((number) => (
-                                                        <MenuItem key={number} value={number}>
-                                                            {number}
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </TableCell>
-                                            <TableCell style={{ textAlign: 'center' }}>
-                                                <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
-                                                    <TextField
-                                                        id="outlined-multiline-static"
-                                                        multiline
-                                                        rows={1}
-                                                        value={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''}
-                                                        onChange={(e) => {
-                                                            handleCommentsChange(selectedItem, row.Metric, e.target.value);
-                                                        }}
-                                                    />
-                                                </Tooltip>
-
-                                            </TableCell>
+                                <Table >
+                                    <TableHead>
+                                        <TableRow style={{ backgroundColor: '#d0e6f5' }}>
+                                            <TableCell style={{ fontSize: "16px", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}><b>Quantity Target</b></TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}><b>Quantity Achieved</b></TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}><b>Index KPI</b></TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}><b>Comments</b></TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}><b>Vice President-Rating</b></TableCell>
+                                            <TableCell style={{ textAlign: 'center' }}><b>Vice President-Comments</b></TableCell>
                                         </TableRow>
-                                    ))}
-                                </TableBody>
-                                {error && (
-                                    <Dialog open={error} onClose={() => setError(false)}>
-                                        <DialogContent style={{ width: '420px' }}>
-                                            <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
-                                                {error}
+                                    </TableHead>
+                                    <TableBody>
+                                        {tableData.map((row, index) => (
+                                            <TableRow key={index}>
+                                                <TableCell>{row.Metric}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>{row.QuantityTarget}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>{row.QuantityAchieved}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>{row.IndexKpi}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>{row.Comments}</TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>
+                                                    <Select
+                                                        value={itemMetricInputData[selectedItem]?.[row.Metric]?.MRating === undefined ? '' : itemMetricInputData[selectedItem]?.[row.Metric]?.MRating}
+
+                                                        // value={
+                                                        //     itemMetricInputData[selectedItem]?.[row.Metric]?.MRating || ''}
+                                                        onChange={(e) => {
+                                                            handleMRatingChange(selectedItem, row.Metric, e.target.value);
+
+                                                        }
+
+                                                        }
+                                                        style={{ width: '100px' }}
+                                                        MenuProps={{
+                                                            PaperProps: {
+                                                                style: {
+                                                                    maxHeight: 200, // Set the maximum height for the dropdown
+                                                                },
+                                                            },
+                                                        }}
+                                                    >
+                                                        {Array.from({ length: 11 }, (_, i) => i).map((number) => (
+                                                            <MenuItem key={number} value={number}>
+                                                                {number}
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Select>
+                                                </TableCell>
+                                                <TableCell style={{ textAlign: 'center' }}>
+                                                    <Tooltip title={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
+                                                        <TextField
+                                                            id="outlined-multiline-static"
+                                                            multiline
+                                                            rows={1}
+                                                            value={itemMetricInputData[selectedItem]?.[row.Metric]?.JohnVesliChComments || ''}
+                                                            onChange={(e) => {
+                                                                handleCommentsChange(selectedItem, row.Metric, e.target.value);
+                                                            }}
+                                                        />
+                                                    </Tooltip>
+
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                    {error && (
+                                        <Dialog open={error} onClose={() => setError(false)}>
+                                            <DialogContent style={{ width: '420px' }}>
+                                                <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
+                                                    {error}
+                                                </DialogContentText>
+                                            </DialogContent>
+                                            <DialogActions>
+                                                <Button onClick={() => setError(false)} color="primary">
+                                                    <b>OK</b>
+                                                </Button>
+                                            </DialogActions>
+                                        </Dialog>
+                                    )}
+
+
+                                    <Dialog open={incompleteItemsDialogOpen} onClose={() => setIncompleteItemsDialogOpen(false)}>
+                                        <DialogContent>
+                                            <DialogContentText>
+                                                Please fill in Manager Rating and Manager Comments for the following items: {incompleteItems.join(', ')}
                                             </DialogContentText>
                                         </DialogContent>
                                         <DialogActions>
-                                            <Button onClick={() => setError(false)} color="primary">
-                                               <b>OK</b> 
+                                            <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
+                                                <b>OK</b>
                                             </Button>
                                         </DialogActions>
                                     </Dialog>
-                                )}
 
+                                </Table>
 
-                                <Dialog open={incompleteItemsDialogOpen} onClose={() => setIncompleteItemsDialogOpen(false)}>
+                            </TableContainer>
+                            <div className="mcomments-buttons">
+                                    <Button
+                                        variant="contained"
+
+                                        onClick={handleUpdateButtonClick}
+                                        style={{ backgroundColor: '#1dbb99' }}
+                                    >
+                                        <b>Update</b>
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+
+                                        onClick={openConfirmationDialog}
+                                        style={{ marginLeft: '20px',  color: 'white', backgroundColor:'#00aaee' }}
+                                        disabled={!isSubmitEnabled || isFetchingData}
+                                    >
+                                       <b>Submit</b> 
+                                    </Button>
+                                <Dialog
+                                    open={isConfirmationDialogOpen}
+                                    onClose={closeConfirmationDialog}
+                                    aria-labelledby="alert-dialog-title"
+                                    aria-describedby="alert-dialog-description"
+                                >
+                                    <DialogTitle id="alert-dialog-title">Confirm Submission</DialogTitle>
                                     <DialogContent>
-                                        <DialogContentText>
-                                            Please fill in Manager Rating and Manager Comments for the following items: {incompleteItems.join(', ')}
+                                        <DialogContentText id="alert-dialog-description">
+                                            Are you sure you want to submit the form?
                                         </DialogContentText>
                                     </DialogContent>
                                     <DialogActions>
-                                        <Button onClick={() => setIncompleteItemsDialogOpen(false)} color="primary">
-                                           <b>OK</b> 
+                                        <Button onClick={closeConfirmationDialog} color="primary">
+                                            <b>Cancel</b>
+                                        </Button>
+                                        <Button onClick={handleSubmit} color="primary" autoFocus>
+                                            <b>Confirm</b>
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
+                                <Dialog
+                                    open={isSuccessDialogOpen}
+                                    onClose={closeSuccessDialog}
+                                >
+                                    <DialogContent>
+                                        <DialogContentText>
+                                            Your form has been successfully submitted!
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={closeSuccessDialog} color="primary">
+                                            <b>OK</b>
                                         </Button>
                                     </DialogActions>
                                 </Dialog>
 
-                            </Table>
+                                <Dialog open={openDialog} onClose={handleClose}>
+                                    <DialogContent style={{ width: '420px' }}>
 
+                                        <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: 'black' }}>
+                                            Fields Updated Successfully.
+                                        </DialogContentText>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Button onClick={handleClose} color="primary">
+                                            <b>OK</b>
+                                        </Button>
+                                    </DialogActions>
+                                </Dialog>
+
+
+                            </div>
+                        </>
+                    ) : (
+                        <div className="no-data-messages" style={{ color: '#0d4166' }}>
+                            {noDataErrorMessage}
                         </div>
-                        <div className="Dmanager-button">
-                            <Button
-
-                                variant="contained"
-                                style={{ backgroundColor: '#1dbb99' }}
-                                onClick={handleUpdateButtonClick}
-
-                            >
-                               <b>Update</b> 
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={openConfirmationDialog}
-                                style={{ marginLeft: '20px' }}
-                                disabled={!isSubmitEnabled || isFetchingData}
-                            >
-                               <b>Submit</b> 
-                            </Button>
-                            <Dialog
-                                open={isConfirmationDialogOpen}
-                                onClose={closeConfirmationDialog}
-                                aria-labelledby="alert-dialog-title"
-                                aria-describedby="alert-dialog-description"
-                            >
-                                <DialogTitle id="alert-dialog-title">Confirm Submission</DialogTitle>
-                                <DialogContent>
-                                    <DialogContentText id="alert-dialog-description">
-                                        Are you sure you want to submit the form?
-                                    </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={closeConfirmationDialog} color="primary">
-                                       <b>Cancel</b> 
-                                    </Button>
-                                    <Button onClick={handleSubmit} color="primary" autoFocus>
-                                       <b>Confirm</b> 
-                                    </Button>
-                                </DialogActions>
-                            </Dialog>
-                            <Dialog
-                                open={isSuccessDialogOpen}
-                                onClose={closeSuccessDialog}
-                            >
-                                <DialogContent>
-                                    <DialogContentText>
-                                        Your form has been successfully submitted!
-                                    </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={closeSuccessDialog} color="primary">
-                                       <b>OK</b> 
-                                    </Button>
-                                </DialogActions>
-                            </Dialog>
-
-                            <Dialog open={openDialog} onClose={handleClose}>
-                                <DialogContent style={{ width: '420px' }}>
-
-                                    <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: 'black' }}>
-                                        Fields Updated Successfully.
-                                    </DialogContentText>
-                                </DialogContent>
-                                <DialogActions>
-                                    <Button onClick={handleClose} color="primary">
-                                       <b>OK</b> 
-                                    </Button>
-                                </DialogActions>
-                            </Dialog>
-
-
-                        </div>
-                    </div>
-                ) : (
-                    <div className="no-data-messages" style={{ color: '#0d4166' }}>
-                    {noDataErrorMessage}
-                 </div>
-                )
-                )}
+                    )
+                    )}
+                </div>
+                </div>
                 <Dialog
                     open={isProfileCardOpen}
                     onClose={handleCloseProfileCard}
@@ -1097,7 +1102,7 @@ const mainpage = () => {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", fontWeight: 'bold', marginBottom: '15px', marginRight: '15px' }}>
-                          <b>Close</b>  
+                            <b>Close</b>
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -1122,7 +1127,7 @@ const mainpage = () => {
                     </DialogContent>
                 </Dialog>
 
-            </div>
+           
         </>
     );
 }

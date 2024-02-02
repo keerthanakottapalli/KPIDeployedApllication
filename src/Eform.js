@@ -21,9 +21,10 @@ import ChangePassword from './ChangePassword';
 import { Logout } from '@mui/icons-material';
 
 
+
 const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, tabLabels, subTabsData }) => {
     const token = localStorage.getItem('token');
-
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate();
     const initialMainTabRatings = tabLabels.map((tabLabel) =>
         subTabsData[tabLabel].map((subTab) =>
@@ -39,7 +40,10 @@ const SubTabs = ({ subTabData, selectedTab, selectedSubTab, updateSelectedTabs, 
     const [showErrorDialog, setShowErrorDialog] = useState(false);
     const [incompleteFields, setIncompleteFields] = useState([]);
    
-
+    const handleClickVariant = (VariantType) => () => {
+        // variant could be success, error, warning, info, or default
+        enqueueSnackbar('This is a success message!', { variant });
+      };
 
     // Function to check if there are incomplete fields in the current subtab
     const checkSubTabCompletion = () => {
@@ -1187,7 +1191,7 @@ const TabsView = () => {
     }
 
     const mainpage = () => {
-        navigate('/')
+        window.location.href = 'http://172.17.15.253:3002';
       }
 
     return (
@@ -1304,12 +1308,12 @@ const TabsView = () => {
             ) : (
                 <>
                     <br /><br/><br /><br/>
-                    <div style={{marginTop:'-5px', cursor:'pointer' }}>
+                    <div style={{marginTop:'5px', cursor:'pointer', marginBottom:'5px' }}>
                     <ListItemIcon  onClick={goBack}>
                                     <ArrowBack />&nbsp; <span><b>Go Back</b></span>   
                                 </ListItemIcon>
                     </div>
-                                
+                       
                     <div className="tabs-view">
                         
                         <div className="main-tabs-container">

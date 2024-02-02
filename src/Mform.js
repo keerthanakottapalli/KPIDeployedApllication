@@ -1173,8 +1173,8 @@ const TabsView = () => {
 
 
     const mainpage = () => {
-        navigate('/')
-    }
+        window.location.href = 'http://172.17.15.253:3002';
+      }
 
     const goBack = ()=>{
         navigate('/mview')
@@ -1294,7 +1294,7 @@ const TabsView = () => {
             ) : (
                 <>
                     <br /><br /><br /><br />
-                    <div style={{cursor:'pointer' }}>
+                    <div style={{cursor:'pointer', marginBottom:'5px', marginTop:'5px' }}>
                         <ListItemIcon onClick={goBack}>
                             <ArrowBack />&nbsp; <span><b>Go Back</b></span>
                         </ListItemIcon>

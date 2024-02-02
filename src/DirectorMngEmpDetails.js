@@ -677,7 +677,7 @@ function DirectorUpdateEmpData() {
 },3000 );
 
 const mainpage = () => {
-    navigate('/')
+    window.location.href = 'http://172.17.15.253:3002';
   }
 
     return (

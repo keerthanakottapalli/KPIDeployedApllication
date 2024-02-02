@@ -14,7 +14,7 @@ import { BASE_URL } from './config';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import { AccountCircle, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
+import { AccountCircle, ArrowBack, CameraAlt, ExitToApp, Lock } from '@material-ui/icons';
 import ChangePassword from './ChangePassword';
 import { Box, IconButton, ListItem, ListItemIcon, Menu, Paper } from '@material-ui/core';
 import { Logout } from '@mui/icons-material';
@@ -587,10 +587,14 @@ function ManagerUpdateEmpData() {
     {
         setNoDataErrorMessage("No data available for the selected User.")
     },3000 );
-
+    
     const mainpage = () => {
-        navigate('/')
+        window.location.href = 'http://172.17.15.253:3002';
       }
+
+      const goBack = ()=>{
+        navigate('/VPView')
+    }
 
     return (
         <>
@@ -716,7 +720,9 @@ function ManagerUpdateEmpData() {
                             />
                         ))}
                     </div>
-                    <br /><br /><br /><br /><br /><br />
+                    <ListItemIcon style={{marginLeft:'18vw', marginTop:'14vh', cursor:'pointer'}} onClick={goBack}>
+                                    <ArrowBack />&nbsp; <span><b>Go Back</b></span>   
+                                </ListItemIcon><br /><br />
                     <div className='employeetable'>
                         {loading ? (
                             <div className="loading-container">

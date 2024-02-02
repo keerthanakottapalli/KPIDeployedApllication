@@ -387,7 +387,7 @@ const DirectorFormDetails = () => {
     };
 
     const mainpage = () => {
-        navigate('/')
+        window.location.href = 'http://172.17.15.253:3002';
       }
 
     return (
@@ -527,17 +527,17 @@ const DirectorFormDetails = () => {
                                             <Table style={{ overflow: "scroll", }}>
                                                 <TableHead>
                                                     <TableRow style={{ backgroundColor: '#d0e6f5' }}>
-                                                        <TableCell className='tablecell-style' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
-                                                        <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Quantity Target</TableCell>
-                                                        <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Quantity Achieved</TableCell>
-                                                        <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Comments</TableCell>
-                                                        <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Index KPI</TableCell>
+                                                        <TableCell className='tablecell-style' style={{ fontSize: "16px", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
+                                                        <TableCell className='tablecell-style1' style={{ fontSize: "16px", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Quantity Target</TableCell>
+                                                        <TableCell className='tablecell-style2' style={{ fontSize: "16px", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Quantity Achieved</TableCell>
+                                                        <TableCell className='tablecell-style3' style={{ fontSize: "16px", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Comments</TableCell>
+                                                        <TableCell className='tablecell-style4' style={{ fontSize: "16px", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', textAlign: 'center' }}>Index KPI</TableCell>
                                                     </TableRow>
                                                 </TableHead>
                                                 <TableBody>
                                                     {tabsData.map((item, index) => (
                                                         <TableRow key={index}>
-                                                            <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important' }}>{item.Metric}</TableCell>
+                                                            <TableCell style={{  fontFamily: 'Open Sans,sans-serif!important' }}>{item.Metric}</TableCell>
                                                             <TableCell style={{ textAlign: 'center' }}>{item.QuantityTarget}</TableCell>
                                                             <TableCell style={{ textAlign: 'center' }}> {item.QuantityAchieved}</TableCell>
                                                             <TableCell style={{ textAlign: 'center' }}> {item.Comments} </TableCell>

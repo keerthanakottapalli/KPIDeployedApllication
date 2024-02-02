@@ -381,16 +381,16 @@ const Sidebar = () => {
 
     };
 
-    const goBack = () => {
+    const goBack = ()=>{
         navigate('/eview')
     }
-
+    
 
     const handleLogout = () => {
-        navigate('/login')
+       navigate('/login')
     };
 
-
+    
     const empId = localStorage.getItem('Empid');
     const firstname = localStorage.getItem('firstname');
     const lastname = localStorage.getItem('lastname');
@@ -426,15 +426,15 @@ const Sidebar = () => {
     };
 
     const mainpage = () => {
-        navigate('/')
-    }
+        window.location.href = 'http://172.17.15.253:3002';
+      }
 
     return (
         <>
             <div className="page-container">
                 <AppBar position="fixed">
                     <Toolbar className="navBar-style">
-                        <img className='images' style={{ cursor: 'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
+                        <img className='images' style={{cursor:'pointer'}} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
                         <div className="userInfo">
                             <Typography variant="h6" className="welcome-text">
                                 Hey, Welcome
@@ -451,25 +451,25 @@ const Sidebar = () => {
                                 color="inherit"
                             >
 
-                                {registrations.map((registration) => (
-                                    registration.Empid == empId && (
-                                        <td>
-                                            {registration.Image && (
-                                                <img
-                                                    src={registration.Image}
-                                                    alt="Profile"
-                                                    style={{
-                                                        width: '60px', // Set the desired width
-                                                        height: '60px', // Set the desired height
-                                                        borderRadius: '50%',
-                                                        marginRight: '8px',
-                                                    }}
+                                    {registrations.map((registration) => (
+                                        registration.Empid == empId && (
+                                            <td>
+                                                {registration.Image && (
+                                                    <img
+                                                        src={registration.Image}
+                                                        alt="Profile"
+                                                        style={{
+                                                            width: '60px', // Set the desired width
+                                                            height: '60px', // Set the desired height
+                                                            borderRadius: '50%',
+                                                            marginRight: '8px',
+                                                        }}
 
-                                                />
-                                            )}
-                                        </td>
-                                    )
-                                ))}
+                                                    />
+                                                )}
+                                            </td>
+                                        )
+                                    ))}
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -485,7 +485,7 @@ const Sidebar = () => {
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
-                                style={{ maxWidth: '300px', marginTop: '50px', marginLeft: '-15px' }}
+                                style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
                             >
 
                                 <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -528,11 +528,11 @@ const Sidebar = () => {
                     </div>
 
 
-                    <div className="sub-tabs">
-                        <ListItemIcon style={{ marginLeft: '15vw', marginTop: '35px' }} onClick={goBack}>
-                            <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
-                        </ListItemIcon>
-                        GoBack
+                    <div className="sub-tabs" >
+                    <ListItemIcon style={{marginLeft:'15vw', marginTop:'35px'}} onClick={goBack}>
+                                    <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>   
+                                </ListItemIcon>
+                                GoBack
                         <Tabs className='subtabs-adjust'
                             value={activeSubTab}
                             onChange={(event, newValue) => handleSubTabClick(newValue)} centered
@@ -549,262 +549,262 @@ const Sidebar = () => {
                                 )
                             ))}
                         </Tabs>
-                    </div>
-                    <div className='employeetable' style={{ marginTop: '60px' }}>
-                        {loading ? (
-                            <div className="loading-container">
-                                <div className="loading-text">Loading...</div>
-                                <div className="loading-spinner"></div>
-                            </div>
-
-                        ) : activeSubTab && tabsData.length > 0 ? (
-                            <>
-                                <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto' }} >
-                                    <Table>
-                                        <TableHead>
-                                            <TableRow style={{ backgroundColor: '#d0e6f5' }}>
-                                                <TableCell className='tablecell-style' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', }}>Metric</TableCell>
-                                                <TableCell className='tablecell-style1' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign: 'center' }}>Quantity Target</TableCell>
-                                                <TableCell className='tablecell-style2' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign: 'center' }}>Quantity Achieved</TableCell>
-                                                <TableCell className='tablecell-style3' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign: 'center' }}>Comments</TableCell>
-                                                <TableCell className='tablecell-style4' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign: 'center' }}>Index KPI</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody >
-                                            {tabsData.map((item, index) => (
-                                                <TableRow key={index}>
-                                                    <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important', }}>{item.Metric}</TableCell>
-                                                    <TableCell style={{ textAlign: 'center' }}>{item.QuantityTarget}</TableCell>
-                                                    <TableCell style={{ textAlign: 'center' }}>
-                                                        <FormControl style={{ width: '70%' }}>
-
-                                                            <Select
-
-                                                                value={item.QuantityAchieved}
-                                                                onChange={(e) => {
-                                                                    handleQuantityAchievedChange(index, e.target.value);
-                                                                    handleFieldChange();
-                                                                }}
-
-                                                                MenuProps={{
-                                                                    PaperProps: {
-                                                                        style: {
-                                                                            maxHeight: 200, // Set the maximum height for the dropdown
-                                                                        },
-                                                                    },
-                                                                }}
-                                                            >
-                                                                {Array.from({ length: 11 }, (_, i) => i).map((number) => (
-                                                                    <MenuItem key={number} value={number} >
-                                                                        {number}
-                                                                    </MenuItem>
-                                                                ))}
-                                                            </Select>
-                                                        </FormControl>
-                                                    </TableCell>
-                                                    <TableCell style={{ textAlign: 'center' }}>
-                                                        <Tooltip title={item.Comments} classes={{ tooltip: 'custom-tooltip' }}>
-                                                            <TextField
-
-                                                                value={item.Comments}
-                                                                multiline
-                                                                rows={1}
-                                                                onChange={(e) => {
-                                                                    handleCommentsChange(index, e.target.value);
-                                                                    handleFieldChange();
-                                                                }}
-
-                                                            />
-                                                        </Tooltip>
-                                                    </TableCell>
-                                                    <TableCell style={{ textAlign: 'center', }}>
-                                                        <FormControl >
-                                                            {/* <InputLabel>Index KPI</InputLabel> */}
-                                                            <Select
-
-                                                                value={item.IndexKpi}
-                                                                onChange={(e) => {
-                                                                    handleIndexKpiChange(index, e.target.value);
-                                                                    handleFieldChange();
-                                                                }}
-                                                                MenuProps={{
-                                                                    PaperProps: {
-                                                                        style: {
-                                                                            maxHeight: 200, // Set the maximum height for the dropdown
-                                                                        },
-                                                                    },
-                                                                }}
-                                                            >
-                                                                {Array.from({ length: 11 }, (_, i) => i).map((number) => (
-                                                                    <MenuItem key={number} value={number}>
-                                                                        {number}
-                                                                    </MenuItem>
-                                                                ))}
-                                                            </Select>
-                                                        </FormControl>
-                                                    </TableCell>
-
-
-                                                </TableRow>
-                                            ))}
-                                        </TableBody>
-
-
-                                    </Table>
-
-                                </TableContainer>
-                                <div className='employeeupdatebutton'>
-                                    {!loading && (
-                                        <Button
-                                            variant="contained"
-                                            style={{ backgroundColor: '#0d416b' }}
-                                            onClick={handleSubTabUpdate}
-                                            disabled={updateClicked}
-                                        >
-                                            <b>Update</b>
-                                        </Button>
-                                    )}
+                     
+                        <div className='employeetable' style={{marginTop:'60px'}}>
+                            {loading ? (
+                                <div className="loading-container">
+                                    <div className="loading-text">Loading...</div>
+                                    <div className="loading-spinner"></div>
                                 </div>
-                            </>
 
-                        ) : (
-                            <div className="message-box">
-                                <div className="no-data-message">
-                                    No data available.
-                                </div>
-                            </div>
-                        )}
-
-
-                        <Dialog open={error} onClose={() => setError(false)}>
-                            <DialogContent style={{ width: '420px' }}>
-                                <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
-                                    Empty fields can't be updated.
-                                </DialogContentText>
-                            </DialogContent>
-                            <DialogActions>
-                                <Button onClick={() => setError(false)} color="primary">
-                                    <b>OK</b>
-                                </Button>
-                            </DialogActions>
-                        </Dialog>
-
-                    </div>
-                    <Dialog
-                        open={isProfileCardOpen}
-                        onClose={handleCloseProfileCard}
-                        fullWidth // Makes the dialog take up the full width of its container
-                        maxWidth="sm" // Sets the maximum width of the dialog
-                    >
-                        <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
-                        <DialogContent style={{ height: '400px' }}>
-                            {/* Display user profile information */}
-                            {registrations.map((registration) => (
-                                registration.Empid == empId && (
-                                    <div onClick={handleToggleImagePreview}>
-                                        {registration.Image && (
-                                            <img
-                                                src={registration.Image}
-                                                alt="Profile"
-                                                style={{
-                                                    borderRadius: "50%",
-                                                    cursor: 'pointer',
-                                                    height: '120px',
-                                                    width: '120px'
-                                                }}
-                                            />
-                                        )}
-                                    </div>
-                                )
-                            ))}<br />
-                            {userData && (
+                            ) : activeSubTab && tabsData.length > 0 ? (
                                 <>
-                                    <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
-                                        <div style={{ marginRight: '20px' }}>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
-                                            </p>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
-                                            </p>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
-                                            </p>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
-                                            </p>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
-                                            </p>
-                                        </div>
-                                        <div>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
-                                            </p>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
-                                            </p>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
-                                            </p>
-                                            <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                                                <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
-                                            </p>
+                                    <TableContainer component={Paper} style={{ width: '1250px',  overflow: 'auto' }} >
+                                        <Table>
+                                            <TableHead>
+                                                <TableRow style={{ backgroundColor: '#d0e6f5' }}>
+                                                    <TableCell className='tablecell-style' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',  }}>Metric</TableCell>
+                                                    <TableCell className='tablecell-style1' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign:'center' }}>Quantity Target</TableCell>
+                                                    <TableCell className='tablecell-style2' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign:'center' }}>Quantity Achieved</TableCell>
+                                                    <TableCell className='tablecell-style3' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',textAlign:'center' }}>Comments</TableCell>
+                                                    <TableCell className='tablecell-style4' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px',textAlign:'center' }}>Index KPI</TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                            <TableBody >
+                                                {tabsData.map((item, index) => (
+                                                    <TableRow key={index}>
+                                                        <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important',  }}>{item.Metric}</TableCell>
+                                                        <TableCell style={{textAlign:'center'}}>{item.QuantityTarget}</TableCell>
+                                                        <TableCell style={{textAlign:'center'}}>
+                                                            <FormControl style={{ width: '70%' }}>
 
-                                        </div>
-                                    </div>
+                                                                <Select
+                                                              
+                                                                    value={item.QuantityAchieved}
+                                                                    onChange={(e) => {
+                                                                        handleQuantityAchievedChange(index, e.target.value);
+                                                                        handleFieldChange();
+                                                                    }}
+                                                                    
+                                                                    MenuProps={{
+                                                                        PaperProps: {
+                                                                            style: {
+                                                                                maxHeight: 200, // Set the maximum height for the dropdown
+                                                                            },
+                                                                        },
+                                                                    }}
+                                                                >
+                                                                    {Array.from({ length: 11 }, (_, i) => i).map((number) => (
+                                                                        <MenuItem key={number} value={number} >
+                                                                            {number}
+                                                                        </MenuItem>
+                                                                    ))}
+                                                                </Select>
+                                                            </FormControl>
+                                                        </TableCell>
+                                                        <TableCell style={{textAlign:'center'}}>
+                                                            <Tooltip title={item.Comments} classes={{ tooltip: 'custom-tooltip' }}>
+                                                                <TextField
+                                                               
+                                                                    value={item.Comments}
+                                                                    multiline
+                                                                    rows={1}
+                                                                    onChange={(e) => {
+                                                                        handleCommentsChange(index, e.target.value);
+                                                                        handleFieldChange();
+                                                                    }}
+
+                                                                />
+                                                            </Tooltip>
+                                                        </TableCell>
+                                                        <TableCell style={{textAlign:'center', }}>
+                                                            <FormControl >
+                                                                {/* <InputLabel>Index KPI</InputLabel> */}
+                                                                <Select
+                                                                style={{width:'100px'}}
+                                                                    value={item.IndexKpi}
+                                                                    onChange={(e) => {
+                                                                        handleIndexKpiChange(index, e.target.value);
+                                                                        handleFieldChange();
+                                                                    }}
+                                                                    MenuProps={{
+                                                                        PaperProps: {
+                                                                            style: {
+                                                                                maxHeight: 200, // Set the maximum height for the dropdown
+                                                                            },
+                                                                        },
+                                                                    }}
+                                                                >
+                                                                    {Array.from({ length: 11 }, (_, i) => i).map((number) => (
+                                                                        <MenuItem key={number} value={number}>
+                                                                            {number}
+                                                                        </MenuItem>
+                                                                    ))}
+                                                                </Select>
+                                                            </FormControl>
+                                                        </TableCell>
 
 
-                                </>
-                            )}
-                        </DialogContent>
-                        <DialogActions>
-                            <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                                <b>Close</b>
-                            </Button>
-                        </DialogActions>
-                    </Dialog>
-                    <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
-                        <DialogContent>
-                            {registrations.map((registration) => (
-                                registration.Empid == empId && (
-                                    <div>
-                                        {registration.Image && (
-                                            <img
-                                                src={registration.Image}
-                                                alt="Profile Preview"
-                                                style={{
-                                                    maxWidth: '100%',
-                                                    maxHeight: '100%',
-                                                }}
-                                            />
+                                                    </TableRow>
+                                                ))}
+                                            </TableBody>
+                                          
+
+                                        </Table>
+
+                                    </TableContainer>
+                                    <div className='employeeupdatebutton'>
+                                        {!loading && (
+                                            <Button
+                                                variant="contained"
+                                                style={{ backgroundColor: '#0d416b' }}
+                                                onClick={handleSubTabUpdate}
+                                                disabled={updateClicked}
+                                            >
+                                               <b>Update</b> 
+                                            </Button>
                                         )}
                                     </div>
-                                )
-                            ))}
-                        </DialogContent>
-                    </Dialog>
-                    <div style={{ marginLeft: "114%", }}>
-                        <Dialog open={openDialog} onClose={handleClose}>
-                            <DialogContent style={{ width: '420px' }}>
-                                <div style={{ textAlign: 'center' }}>
-                                    <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQei9oRhpKFTpI-R1V4z01fnLWzuZRA58w2Xw&usqp=CAU' alt='not found' />
-                                </div>
+                                </>
 
-                                <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: 'black' }}>
-                                    Fields Updated Successfully.
-                                </DialogContentText>
+                            ) : (
+                                <div className="message-box">
+                                    <div className="no-data-message">
+                                        No data available.
+                                    </div>
+                                </div>
+                            )}
+
+
+                            <Dialog open={error} onClose={() => setError(false)}>
+                                <DialogContent style={{ width: '420px' }}>
+                                    <DialogContentText style={{ fontSize: '18px', marginLeft: '10%', fontWeight: 'bold', color: 'black' }}>
+                                        Empty fields can't be updated.
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={() => setError(false)} color="primary">
+                                       <b>OK</b> 
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+
+                        </div>
+                        <Dialog
+                            open={isProfileCardOpen}
+                            onClose={handleCloseProfileCard}
+                            fullWidth // Makes the dialog take up the full width of its container
+                            maxWidth="sm" // Sets the maximum width of the dialog
+                        >
+                            <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
+                            <DialogContent style={{ height: '400px' }}>
+                                {/* Display user profile information */}
+                                {registrations.map((registration) => (
+                                    registration.Empid == empId && (
+                                        <div onClick={handleToggleImagePreview}>
+                                            {registration.Image && (
+                                                <img
+                                                    src={registration.Image}
+                                                    alt="Profile"
+                                                    style={{
+                                                        borderRadius: "50%",
+                                                        cursor: 'pointer',
+                                                        height: '120px',
+                                                        width: '120px'
+                                                    }}
+                                                />
+                                            )}
+                                        </div>
+                                    )
+                                ))}<br />
+                                {userData && (
+                                    <>
+                                        <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
+                                            <div style={{ marginRight: '20px' }}>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
+                                                </p>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
+                                                </p>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
+                                                </p>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
+                                                </p>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
+                                                </p>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
+                                                </p>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
+                                                </p>
+                                                <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                                                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
+                                                </p>
+
+                                            </div>
+                                        </div>
+
+
+                                    </>
+                                )}
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose} color="primary" variant='contained' style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
-                                    <b>OK</b>
+                                <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
+                                   <b>Close</b> 
                                 </Button>
                             </DialogActions>
                         </Dialog>
+                        <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
+                            <DialogContent>
+                                {registrations.map((registration) => (
+                                    registration.Empid == empId && (
+                                        <div>
+                                            {registration.Image && (
+                                                <img
+                                                    src={registration.Image}
+                                                    alt="Profile Preview"
+                                                    style={{
+                                                        maxWidth: '100%',
+                                                        maxHeight: '100%',
+                                                    }}
+                                                />
+                                            )}
+                                        </div>
+                                    )
+                                ))}
+                            </DialogContent>
+                        </Dialog>
+                        <div style={{ marginLeft: "114%", }}>
+                            <Dialog open={openDialog} onClose={handleClose}>
+                                <DialogContent style={{ width: '420px' }}>
+                                    <div style={{ textAlign: 'center' }}>
+                                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQei9oRhpKFTpI-R1V4z01fnLWzuZRA58w2Xw&usqp=CAU' alt='not found' />
+                                    </div>
 
+                                    <DialogContentText style={{ fontSize: '18px', textAlign: 'center', fontWeight: 'bold', color: 'black' }}>
+                                        Fields Updated Successfully.
+                                    </DialogContentText>
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleClose} color="primary" variant='contained' style={{ backgroundColor: '#00aaee', marginBottom: '10px', marginRight: '10px' }}>
+                                        <b>OK</b>
+                                    </Button>
+                                </DialogActions>
+                            </Dialog>
+
+                        </div>
                     </div>
                 </div>
-
             </div>
         </>
 

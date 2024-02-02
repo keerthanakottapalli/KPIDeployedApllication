@@ -697,7 +697,7 @@ function ManagerUpdateEmpData() {
 
     const navigate = useNavigate()
     const goBack = ()=>{
-        navigate(`/mcomments/${empId}`)
+        navigate('/meview')
     }
 
     // Function to reset the error message
@@ -714,7 +714,7 @@ function ManagerUpdateEmpData() {
     };
 
     const mainpage = () => {
-        navigate('/')
+        window.location.href = 'http://172.17.15.253:3002';
       }
 
 
