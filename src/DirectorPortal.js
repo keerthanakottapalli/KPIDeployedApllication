@@ -343,7 +343,7 @@ const DirectorViewMangerDetails = () => {
               <div className="loading-spinner"></div>
             </div>
           ) : (
-            <TableContainer component={Paper} >
+            <TableContainer component={Paper} style={{ marginTop: '20px' }}>
               {employeesData.some((employee) => reportingManagers[employee.Empid] === username) ? (
                 <Table style={{ minWidth: 850 }}>
                   <TableHead style={{ backgroundColor: 'voilet' }}>
@@ -354,11 +354,19 @@ const DirectorViewMangerDetails = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody style={{ marginLeft: '40%' }}>
-                    {ManagerData.map((employee) => {
+                    {ManagerData.map((employee, index) => {
                       const empReportingManager = reportingManagers[employee.Empid] || "";
                       if (empReportingManager === username) {
+                        const isEvenRow = index % 2 === 0;
+                        const rowStyle = {
+                          fontWeight: 'bold',
+                          color: '#333',
+                          paddingLeft: '10%',
+                          backgroundColor: isEvenRow ? '#f5f5f5' : 'white', // Set background color for alternate rows
+                        };
+
                         return (
-                          <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333' }}>
+                          <TableRow key={employee.Empid} style={rowStyle}>
                             <TableCell style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>{employee.Empid}</TableCell>
 
                             {employeesData.map((employees) => {

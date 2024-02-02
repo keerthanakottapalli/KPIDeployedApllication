@@ -84,6 +84,7 @@ const Sidebar = () => {
     const [showImagePreview, setShowImagePreview] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
     const [error, setError] = useState(false);
+    const [updateClicked, setUpdateClicked] = useState(false);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -250,7 +251,7 @@ const Sidebar = () => {
         if (token) {
             const tokenData = parseJWT(token);
             const empId = tokenData.Empid;
-                  localStorage.setItem("Empid", empId);
+            localStorage.setItem("Empid", empId);
             try {
                 const response = await fetch(`${BASE_URL}/api/manager_data/${empId}/${activeTab}/${subTab}`);
                 const data = await response.json();
@@ -279,21 +280,21 @@ const Sidebar = () => {
     const navigate = useNavigate();
     const handleClose = async () => {
         setOpenDialog(false);
-        
-       
+
+
         navigate('/mview');
-     
+
 
         const empid = localStorage.getItem('Empid');
-        
+
         const requestData = {
             Status: "Pass", // Use the relatedEmpmail value obtained from the useEffect
-          };
-        
-          try {
+        };
+
+        try {
             // Send a PUT request to the API endpoint
             const response = await axios.put(`${BASE_URL}/api/manager_status_upd/${empid}/`, requestData);
-    
+
             // Handle a successful response here
             console.log('API response:', response.data);
         } catch (error) {
@@ -318,6 +319,14 @@ const Sidebar = () => {
 
     const handleSubTabUpdate = async () => {
         const token = localStorage.getItem('token');
+
+        if (updateClicked) {
+            // If the button has already been clicked, do nothing.
+            return;
+        }
+
+        // Mark the button as clicked.
+        setUpdateClicked(true);
 
         if (hasEmptyFields()) { // Invoke the function with ()
             setError(true); // Set the error state to true
@@ -404,25 +413,25 @@ const Sidebar = () => {
         setTabsData(updatedTabsData);
     };
 
+    const goBack = () => {
+        navigate('/mview')
+    }
 
     const mainpage = () => {
         navigate('/')
-      }
+    }
 
     return (
-        <div style={{ backgroundColor: '#e9ecef' }}>
+        <>
             <div className="page-containers">
-                <div className="gradient-background"></div>
                 <AppBar position="fixed">
                     <Toolbar className="navBar-style">
-                        <img style={{ width: '60px', borderRadius: '50%',cursor:'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
-
+                        <img className='images' style={{ cursor: 'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
                         <div className="userInfo">
                             <Typography variant="h6" className="welcome-text">
-                            Hey, Welcome
+                                Hey, Welcome
                             </Typography>
-
-                            <h3 className="username-style">{username.toUpperCase()}</h3>
+                            <h3 className="username">{username.toUpperCase()}</h3>
                         </div>
                         <Box>
                             <IconButton
@@ -434,25 +443,25 @@ const Sidebar = () => {
                                 color="inherit"
                             >
 
-                                    {registrations.map((registration) => (
-                                        registration.Empid == empId && (
-                                            <td>
-                                                {registration.Image && (
-                                                    <img
-                                                        src={registration.Image}
-                                                        alt="Profile"
-                                                        style={{
-                                                            width: '60px', // Set the desired width
-                                                            height: '60px', // Set the desired height
-                                                            borderRadius: '50%',
-                                                            marginRight: '8px',
-                                                        }}
+                                {registrations.map((registration) => (
+                                    registration.Empid == empId && (
+                                        <td>
+                                            {registration.Image && (
+                                                <img
+                                                    src={registration.Image}
+                                                    alt="Profile"
+                                                    style={{
+                                                        width: '60px', // Set the desired width
+                                                        height: '60px', // Set the desired height
+                                                        borderRadius: '50%',
+                                                        marginRight: '8px',
+                                                    }}
 
-                                                    />
-                                                )}
-                                            </td>
-                                        )
-                                    ))}
+                                                />
+                                            )}
+                                        </td>
+                                    )
+                                ))}
                             </IconButton>
                             <Menu
                                 id="user-menu"
@@ -468,7 +477,7 @@ const Sidebar = () => {
                                 }}
                                 open={Boolean(anchorElUser)}
                                 onClose={handleCloseUserMenu}
-                                style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
+                                style={{ maxWidth: '300px', marginTop: '50px', marginLeft: '-15px' }}
                             >
 
                                 <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -488,47 +497,51 @@ const Sidebar = () => {
                                 </MenuItem>
                             </Menu>
                         </Box>
+
                     </Toolbar>
                 </AppBar>
-
-                <div >
+                <div className="content-container">
 
                     <div className="sidebar">
-                        <div className="tabss">
+                        <div className="tabs">
                             {tabs.map((tab) => (
                                 <div
                                     key={tab}
                                     className={`tab ${activeTab === tab ? 'active' : ''}`}
                                     onClick={() => handleTabClick(tab)}
-                                    style={{ color: 'white' }}
                                 >
-                                    <br /><span className="star-icon">&#9733;</span>
-                                    <b>{tab}</b>
+                                    <br />
+                                    {/* <span className="star-icon">&#9733;</span> */}
+                                    {tab}
                                 </div>
                             ))}
                         </div>
                     </div>
 
-                    <br />
-                    <div className='manager-subtabs'>
-                        <Tabs className='subtabs-header'
+
+                    <div className="sub-tabs">
+                        <ListItemIcon style={{ marginLeft: '15vw', marginTop: '35px' }} onClick={goBack}>
+                            <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
+                        </ListItemIcon>
+                        GoBack
+                        <Tabs className='subtabs-adjust'
                             value={activeSubTab}
-                            onChange={(event, newValue) => handleSubTabClick(newValue)} // Update this line
-                            variant="scrollable"
-                            scrollButtons="auto"
-                        // style={{ marginLeft: "-4%", marginTop: "2%" }}
+                            onChange={(event, newValue) => handleSubTabClick(newValue)} centered
+                            variant="scrollable" scrollButtons="auto"
                         >
                             {subTabKeys.map((subTab, index) => (
-                                <Tab
-                                    key={index}
-                                    label={subTab}
-                                    value={subTab}
-                                    style={{ fontWeight: 'bold', fontSize: '100%', color: 'black', }}
-                                />
+                                !loading && (
+                                    <Tab className='subtabs-tabs'
+                                        key={index}
+                                        label={subTab}
+                                        value={subTab}
+                                        style={{ fontWeight: 'bold', fontSize: '100%' }} variant="scrollable" scrollButtons="auto"
+                                    />
+                                )
                             ))}
                         </Tabs>
-                    </div><br />
-                    <div className='managertable' style={{}} >
+                    </div>
+                    <div className='employeetable' style={{  }} >
                         {loading ? (
                             <div className="loading-container">
                                 <div className="loading-text">Loading...</div>
@@ -536,27 +549,26 @@ const Sidebar = () => {
                             </div>
 
                         ) :
-                            (activeSubTab && tabsData.length > 0 ? ( // Check if data is available
+                            activeSubTab && tabsData.length > 0 ? ( // Check if data is available
                                 <>
-                                    <TableContainer component={Paper} style={{ height: '45vh', overflow: "auto" }}>
-                                        <Table style={{ overflow: "scroll", }}>
+                                    <TableContainer component={Paper} style={{ width: '1250px', overflow: 'auto', marginLeft:'-20vw',  marginTop: '25vh', }} >
+                                        <Table style={{}}>
                                             <TableHead>
-                                                <TableRow>
-                                                    <TableCell className='tablecell-style' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
-                                                    <TableCell className='tablecell-style1' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
-                                                    <TableCell className='tablecell-style2' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
-                                                    <TableCell className='tablecell-style3' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Comments</TableCell>
-                                                    <TableCell className='tablecell-style4' style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Index KPI</TableCell>
+                                                <TableRow style={{ backgroundColor: '#d0e6f5' }}>
+                                                    <TableCell className='tablecell-style' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', }}>Metric</TableCell>
+                                                    <TableCell className='tablecell-style1' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign: 'center' }}>Quantity Target</TableCell>
+                                                    <TableCell className='tablecell-style2' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign: 'center' }}>Quantity Achieved</TableCell>
+                                                    <TableCell className='tablecell-style3' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign: 'center' }}>Comments</TableCell>
+                                                    <TableCell className='tablecell-style4' style={{ fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', fontSize: '18px', textAlign: 'center' }}>Index KPI</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
                                                 {tabsData.map((item, index) => (
                                                     <TableRow key={index}>
-                                                        <TableCell style={{ fontSize: "100%", fontFamily: "sans-serif" }}>{item.Metric}</TableCell>
+                                                        <TableCell style={{ fontSize: "100%", fontFamily: 'Open Sans,sans-serif!important', }}>{item.Metric}</TableCell>
                                                         <TableCell>{item.QuantityTarget}</TableCell>
-                                                        <TableCell>
-                                                            <FormControl style={{ width: '60%' }}>
-                                                                {/* <InputLabel>Quantity Achieved</InputLabel> */}
+                                                        <TableCell style={{ textAlign: 'center' }}>
+                                                            <FormControl style={{ width: '70%' }}>
                                                                 <Select
                                                                     value={item.QuantityAchieved}
                                                                     onChange={(e) => {
@@ -571,21 +583,21 @@ const Sidebar = () => {
                                                                         },
                                                                     }}
                                                                 >
-                                                                     {Array.from({ length: 11 }, (_, i) => i).map((number) => (
-                                                            <MenuItem key={number} value={number}>
-                                                                {number}
-                                                            </MenuItem>
-                                                        ))}
+                                                                    {Array.from({ length: 11 }, (_, i) => i).map((number) => (
+                                                                        <MenuItem key={number} value={number}>
+                                                                            {number}
+                                                                        </MenuItem>
+                                                                    ))}
                                                                 </Select>
                                                             </FormControl>
                                                         </TableCell>
 
-                                                        <TableCell>
-                                                            <Tooltip title={item.Comments} classes={{ tooltip: 'custom-tooltip' }} style={{ width: '100%' }}>
+                                                        <TableCell style={{ textAlign: 'center' }}>
+                                                            <Tooltip title={item.Comments} classes={{ tooltip: 'custom-tooltip' }}>
                                                                 <TextField
-                                                                    id="outlined-multiline-static"
+
                                                                     multiline
-                                                                    rows={2}
+                                                                    rows={1}
                                                                     value={item.Comments}
                                                                     onChange={(e) => {
                                                                         handleCommentsChange(index, e.target.value);
@@ -595,10 +607,11 @@ const Sidebar = () => {
                                                                 />
                                                             </Tooltip>
                                                         </TableCell>
-                                                        <TableCell>
-                                                            <FormControl style={{ width: '100%' }}>
+                                                        <TableCell style={{ textAlign: 'center', }}>
+                                                            <FormControl >
                                                                 {/* <InputLabel>Index KPI</InputLabel> */}
                                                                 <Select
+                                                                style={{width:'100px'}}
                                                                     value={item.IndexKpi}
                                                                     onChange={(e) => {
                                                                         handleIndexKpiChange(index, e.target.value);
@@ -612,11 +625,11 @@ const Sidebar = () => {
                                                                         },
                                                                     }}
                                                                 >
-                                                                   {Array.from({ length: 11 }, (_, i) => i).map((number) => (
-                                                            <MenuItem key={number} value={number}>
-                                                                {number}
-                                                            </MenuItem>
-                                                        ))}
+                                                                    {Array.from({ length: 11 }, (_, i) => i).map((number) => (
+                                                                        <MenuItem key={number} value={number}>
+                                                                            {number}
+                                                                        </MenuItem>
+                                                                    ))}
                                                                 </Select>
                                                             </FormControl>
                                                         </TableCell>
@@ -626,14 +639,17 @@ const Sidebar = () => {
                                             </TableBody>
                                         </Table>
                                     </TableContainer>
-                                    <div className='managerupdatebutton'>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            onClick={handleSubTabUpdate}
-                                        >
-                                          <b>Update</b>  
-                                        </Button>
+                                    <div className='employeeupdatebutton'>
+                                        {!loading && (
+                                            <Button
+                                                variant="contained"
+                                                style={{ backgroundColor: '#0d416b' }}
+                                                onClick={handleSubTabUpdate}
+                                                disabled={updateClicked}
+                                            >
+                                                <b>Update</b>
+                                            </Button>
+                                        )}
                                     </div>
                                 </>
 
@@ -642,7 +658,7 @@ const Sidebar = () => {
                                     <div className="no-data-message">
                                         No data available.
                                     </div>
-                                </div>)
+                                </div>
 
                             )}
                     </div>
@@ -654,7 +670,7 @@ const Sidebar = () => {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={() => setError(false)} color="primary">
-                               <b>OK</b> 
+                                <b>OK</b>
                             </Button>
                         </DialogActions>
                     </Dialog>
@@ -730,14 +746,14 @@ const Sidebar = () => {
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-                               <b>Close</b> 
+                                <b>Close</b>
                             </Button>
                         </DialogActions>
                     </Dialog>
                     <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
                         <DialogContent>
                             {registrations.map((registration) => (
-                                registration.Empid== empId && (
+                                registration.Empid == empId && (
                                     <div>
                                         {registration.Image && (
                                             <img
@@ -766,8 +782,8 @@ const Sidebar = () => {
                                 </DialogContentText>
                             </DialogContent>
                             <DialogActions>
-                                <Button onClick={handleClose} variant='contained' style={{backgroundColor:'#00aaee'}}>
-                                   <b>OK</b> 
+                                <Button onClick={handleClose} variant='contained' style={{ backgroundColor: '#00aaee' }}>
+                                    <b>OK</b>
                                 </Button>
                             </DialogActions>
                         </Dialog>
@@ -775,10 +791,9 @@ const Sidebar = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
 
     );
 };
 
 export default Sidebar;
- 

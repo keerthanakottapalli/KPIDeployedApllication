@@ -196,20 +196,19 @@ const ManagerPortal = () => {
     navigate('/VPPortal')
   }
 
-  setTimeout(() => 
-{
+  setTimeout(() => {
     setNoDataErrorMessage("No data available for the selected User.")
-},3000 );
+  }, 3000);
 
-const mainpage = () => {
-  navigate('/')
-}
+  const mainpage = () => {
+    navigate('/')
+  }
 
   return (
     <>
       <AppBar position="fixed">
         <Toolbar className="navBar-style">
-          <img className='images' style={{cursor:'pointer'}} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
+          <img className='images' style={{ cursor: 'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
           <div className="userInfo">
             <Typography variant="h6" className="welcome-text">
               Hey, Welcome
@@ -225,25 +224,25 @@ const mainpage = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-                {registrations.map((registration) => (
-                  registration.Empid == empId && (
-                    <td>
-                      {registration.Image && (
-                        <img
-                          src={registration.Image}
-                          alt="Profile"
-                          style={{
-                            width: '60px',
-                            height: '60px',
-                            borderRadius: '50%',
-                            marginRight: '8px',
-                          }}
+              {registrations.map((registration) => (
+                registration.Empid == empId && (
+                  <td>
+                    {registration.Image && (
+                      <img
+                        src={registration.Image}
+                        alt="Profile"
+                        style={{
+                          width: '60px',
+                          height: '60px',
+                          borderRadius: '50%',
+                          marginRight: '8px',
+                        }}
 
-                        />
-                      )}
-                    </td>
-                  )
-                ))}
+                      />
+                    )}
+                  </td>
+                )
+              ))}
             </IconButton>
             <Menu
               id="user-menu"
@@ -259,7 +258,7 @@ const mainpage = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-              style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
+              style={{ maxWidth: '300px', marginTop: '50px', marginLeft: '-15px' }}
             >
 
               <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -284,7 +283,7 @@ const mainpage = () => {
         <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
       </ListItemIcon>
       <div className='bg-container'>
-<br />
+        <br />
         <div style={{ width: '80%', margin: '0 auto' }}>
           {loading ? (
             <div className="loading-container" style={{
@@ -303,23 +302,30 @@ const mainpage = () => {
                 <Table style={{ minWidth: 850 }}>
                   <TableHead>
                     <TableRow style={{ backgroundColor: '#d0e6f5' }}>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', paddingLeft: "10%" }}>Employee ID</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "10%" }}>Employee Name</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "10%" }}>Action</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign:'center' }}>Employee ID</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign:'center' }}>Employee Name</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign:'center' }}>Action</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody style={{ marginLeft: '40%' }}>
-                    {employeeData.map((employee) => {
+                    {employeeData.map((employee, index) => {
                       const empReportingManager = reportingManagers[employee.Empid] || "";
                       console.log(empReportingManager, 'empReportingManager');
                       console.log(username, 'username');
                       console.log(employeeData, 'employeeData');
                       console.log(employee.Empid, '316')
                       if (empReportingManager === username) {
+                        const isEvenRow = index % 2 === 0;
+                        const rowStyle = {
+                          fontWeight: 'bold',
+                          color: '#333',
+                          padding: '10%',
+                          backgroundColor: isEvenRow ? '#f5f5f5' : 'white', // Set background color for alternate rows
+                        };
                         return (
-                          <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333', paddingLeft: '10%' }}>
+                          <TableRow key={employee.Empid} style={rowStyle}>
 
-                            <TableCell style={{ fontSize: '16px', color: '#333', paddingLeft: '10%' }}>{employee.Empid}</TableCell>
+                            <TableCell style={{ fontSize: '16px', color: '#333', textAlign:'center' }}>{employee.Empid}</TableCell>
 
 
                             {employeesData.map((employees) => {
@@ -329,13 +335,13 @@ const mainpage = () => {
                               if (employees.Empid === employee.Empid) {
                                 return (
 
-                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', paddingLeft: '10%' }}>
+                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', textAlign:'center' }}>
                                     {employees.Empname}
                                   </TableCell>
                                 );
                               }
                             })}
-                            <TableCell style={{ color: '#333', paddingLeft: '10%' }}>
+                            <TableCell style={{ color: '#333', textAlign:'center' }}>
                               {employee.Status === 'Decline' && (
                                 <Button style={{ backgroundColor: '#d12a2a', width: "65%", height: '40px', fontWeight: 'bold', color: 'white' }}>Declined</Button>
                               )}
@@ -373,9 +379,9 @@ const mainpage = () => {
                     textAlign: "center",
                   }}
                 >
-                    <div className="no-data-messages"  style={{ color: '#0d4166' }}>
-                                <h4>{noDataErrorMessage}</h4>
-                            </div>
+                  <div className="no-data-messages" style={{ color: '#0d4166' }}>
+                    <h4>{noDataErrorMessage}</h4>
+                  </div>
                 </Typography>
               )}
             </TableContainer>)}

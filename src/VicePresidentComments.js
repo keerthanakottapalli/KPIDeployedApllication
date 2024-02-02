@@ -730,11 +730,11 @@ function ManagerUpdateEmpData() {
                                     <Table >
                                         <TableHead>
                                             <TableRow style={{ backgroundColor: '#d0e6f5' }}>
-                                                <TableCell style={{ fontSize: "100%", fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
-                                                <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
-                                                <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
-                                                <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Index KPI</TableCell>
-                                                <TableCell style={{ fontSize: "100%", textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Comments</TableCell>
+                                                <TableCell style={{ fontSize:'16px', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important' }}>Metric</TableCell>
+                                                <TableCell style={{ fontSize:'16px', textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Target</TableCell>
+                                                <TableCell style={{ fontSize:'16px', textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Quantity Achieved</TableCell>
+                                                <TableCell style={{ fontSize:'16px', textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Index KPI</TableCell>
+                                                <TableCell style={{ fontSize:'16px', textAlign: 'center', fontWeight: "bold", fontFamily: 'Open Sans,sans-serif!important', }}>Comments</TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>

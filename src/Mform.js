@@ -1294,7 +1294,7 @@ const TabsView = () => {
             ) : (
                 <>
                     <br /><br /><br /><br />
-                    <div style={{ marginTop: '-5px', cursor:'pointer' }}>
+                    <div style={{cursor:'pointer' }}>
                         <ListItemIcon onClick={goBack}>
                             <ArrowBack />&nbsp; <span><b>Go Back</b></span>
                         </ListItemIcon>

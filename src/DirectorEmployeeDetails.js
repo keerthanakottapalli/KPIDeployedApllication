@@ -254,13 +254,13 @@ const DirectorViewEmpDetails = () => {
 
   return (
     <>
-      <AppBar position="fixed">
+      <AppBar >
         <Toolbar className="navBar-style">
-          <img style={{ width: '60px', borderRadius: '50%', cursor:'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
+          <img style={{ width: '60px', borderRadius: '50%', cursor: 'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
 
           <div className="userInfo">
             <Typography variant="h6" className="Hey, Welcome-text">
-            Hey, Welcome
+              Hey, Welcome
             </Typography>
 
             <h3 className="username-style">{username.toUpperCase()}</h3>
@@ -274,27 +274,27 @@ const DirectorViewEmpDetails = () => {
               onClick={handleOpenUserMenu}
               color="inherit"
             >
-              
 
-                {registrations.map((registration) => (
-                  registration.Empid == empId && (
-                    <td>
-                      {registration.Image && (
-                        <img
-                          src={registration.Image}
-                          alt="Profile"
-                          style={{
-                            width: '60px', // Set the desired width
-                            height: '60px', // Set the desired height
-                            borderRadius: '50%',
-                            marginRight: '8px',
-                          }}
 
-                        />
-                      )}
-                    </td>
-                  )
-                ))}
+              {registrations.map((registration) => (
+                registration.Empid == empId && (
+                  <td>
+                    {registration.Image && (
+                      <img
+                        src={registration.Image}
+                        alt="Profile"
+                        style={{
+                          width: '60px', // Set the desired width
+                          height: '60px', // Set the desired height
+                          borderRadius: '50%',
+                          marginRight: '8px',
+                        }}
+
+                      />
+                    )}
+                  </td>
+                )
+              ))}
             </IconButton>
             <Menu
               id="user-menu"
@@ -310,7 +310,7 @@ const DirectorViewEmpDetails = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-              style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
+              style={{ maxWidth: '300px', marginTop: '50px', marginLeft: '-15px' }}
             >
 
               <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -332,185 +332,186 @@ const DirectorViewEmpDetails = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      <div className='login-background'>
-        <div style={{ width: '80%', height: '100vh', marginLeft: '10vw' }}>
-          <ListItemIcon style={{ marginTop: '13vh', }} onClick={goBack}>
-            <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
-          </ListItemIcon>
-          <br />
-          {loading ? (
-            <div className="loading-container" style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              textAlign: "center",
-            }}>
-              <div className="loading-text">Loading...</div>
-              <div className="loading-spinner"></div>
-            </div>
-          ) : (
-            <TableContainer component={Paper}>
-              {employeesData.some((employee) => selectedEmployeeName === reportingManagers[employee.Empid]) ? (
-                <Table style={{ minWidth: 850 }}>
-                  <TableHead >
-                    <TableRow style={{ backgroundColor: '#d0e6f5' }}>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', paddingLeft: "10%" }}>Employee ID</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "10%" }}>Employee Name</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', paddingLeft: "18%" }}>Action</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody style={{ marginLeft: '40%' }}>
-                    {employeesData.map((employee) => {
-                      const empReportingManager = reportingManagers[employee.Empid] || '';
-                      if (selectedEmployeeName === empReportingManager) {
-                        return (
-                          <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333', paddingLeft: '10%' }}>
-                            <TableCell style={{ fontSize: '16px', color: '#333', paddingLeft: '10%' }}>{employee.Empid}</TableCell>
-                            <TableCell style={{ fontSize: '16px', color: '#333', paddingLeft: '10%' }}>{employee.Empname}</TableCell>
-                            <TableCell style={{ color: '#333', paddingLeft: '10%' }}>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                component={Link}
-                                to={`/directormngempdetails/${employee.Empid}`}
-                                style={{ fontWeight: 'bold', textDecoration: 'none', backgroundColor: '#00aaee', width: "45%" }}
-                              >
-                                View Details
-                              </Button>&nbsp;&nbsp;&nbsp;
-                              {/* <Button
-                    variant="contained"
-                    color="primary"
-                    component={Link}
-                    to={`/directormngempdetails/${employee.Empid}`}
-                    style={{ fontWeight: 'bold', textDecoration: 'none', backgroundColor: '#00aaee', width:"35%"}}
-                  >
-                    Decline
-                  </Button> */}
-                            </TableCell>
-                          </TableRow>
-                        );
-                      } else {
-                        return null;
-                      }
-                    })}
-                  </TableBody>
-                </Table>
-              ) : (
-                <Typography
-                  variant="h6"
-                  style={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    textAlign: "center"
-                  }}
-                >
-                  No Employee Found Here.
-                </Typography>
 
-              )}
-            </TableContainer>)}
 
+
+      <ListItemIcon style={{ marginTop: '13vh', marginLeft: '10vw' }} onClick={goBack}>
+        <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
+      </ListItemIcon>
+      <br />
+      {loading ? (
+        <div className="loading-container" style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textAlign: "center",
+        }}>
+          <div className="loading-text">Loading...</div>
+          <div className="loading-spinner"></div>
         </div>
-        <Dialog
-          open={isProfileCardOpen}
-          onClose={handleCloseProfileCard}
-          fullWidth // Makes the dialog take up the full width of its container
-          maxWidth="sm" // Sets the maximum width of the dialog
-        >
-          <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
-          <DialogContent style={{ height: '400px' }}>
-            {/* Display user profile information */}
-            {registrations.map((registration) => (
-              registration.Empid == empId && (
-                <div onClick={handleToggleImagePreview}>
-                  {registration.Image && (
-                    <img
-                      src={registration.Image}
-                      alt="Profile"
-                      style={{
-                        borderRadius: "50%",
-                        cursor: 'pointer',
-                        height: '120px',
-                        width: '120px'
-                      }}
-                    />
-                  )}
+      ) : (
+
+        <TableContainer component={Paper} style={{ marginTop: '20px', width: '80%', marginLeft: '10vw', maxHeight:'80vh' }}>
+          {employeesData.some((employee) => selectedEmployeeName === reportingManagers[employee.Empid]) ? (
+            <Table>
+              <TableHead>
+                <TableRow style={{ backgroundColor: '#d0e6f5' }}>
+                  <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign: 'center' }}>Employee ID</TableCell>
+                  <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Employee Name</TableCell>
+                  <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody style={{ maxHeight: '400px', overflowY: 'auto' }}>
+                {employeesData.map((employee, index) => {
+                  const empReportingManager = reportingManagers[employee.Empid] || '';
+                  if (selectedEmployeeName === empReportingManager) {
+                    const isEvenRow = index % 2 === 0;
+                    const rowStyle = {
+                      fontWeight: 'bold',
+                      color: '#333',
+                      padding: '10%',
+                      backgroundColor: isEvenRow ? '#f5f5f5' : 'white', // Set background color for alternate rows
+                    };
+
+                    return (
+                      <TableRow key={employee.Empid} style={rowStyle}>
+                        <TableCell style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>{employee.Empid}</TableCell>
+                        <TableCell style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>{employee.Empname}</TableCell>
+                        <TableCell style={{ color: '#333', textAlign: 'center' }}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            component={Link}
+                            to={`/directormngempdetails/${employee.Empid}`}
+                            style={{ fontWeight: 'bold', textDecoration: 'none', backgroundColor: '#00aaee', width: '35%' }}
+                          >
+                            View Details
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
+              </TableBody>
+            </Table>
+          ) : (
+            <Typography
+              variant="h6"
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                textAlign: "center"
+              }}
+            >
+              No Employee Found Here.
+            </Typography>
+
+          )}
+        </TableContainer>)}
+
+
+      <Dialog
+        open={isProfileCardOpen}
+        onClose={handleCloseProfileCard}
+        fullWidth // Makes the dialog take up the full width of its container
+        maxWidth="sm" // Sets the maximum width of the dialog
+      >
+        <DialogTitle style={{ marginLeft: '33%', fontSize: '24px', fontWeight: 'bolder' }}>Profile Details</DialogTitle>
+        <DialogContent style={{ height: '400px' }}>
+          {/* Display user profile information */}
+          {registrations.map((registration) => (
+            registration.Empid == empId && (
+              <div onClick={handleToggleImagePreview}>
+                {registration.Image && (
+                  <img
+                    src={registration.Image}
+                    alt="Profile"
+                    style={{
+                      borderRadius: "50%",
+                      cursor: 'pointer',
+                      height: '120px',
+                      width: '120px'
+                    }}
+                  />
+                )}
+              </div>
+            )
+          ))}<br />
+          {userData && (
+            <>
+
+
+              <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
+                <div style={{ marginRight: '20px' }}>
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
+                  </p>
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
+                  </p>
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
+                  </p>
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
+                  </p>
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
+                  </p>
                 </div>
-              )
-            ))}<br />
-            {userData && (
-              <>
-
-
-                <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '5%' }}>
-                  <div style={{ marginRight: '20px' }}>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Empid:</span> {userData.Empid}
-                    </p>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>First Name:</span> {userData.Firstname}
-                    </p>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Last Name:</span> {userData.Lastname}
-                    </p>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Email:</span> {atob(userData.Empmail)}
-                    </p>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Role:</span> {userData.Role}
-                    </p>
-                  </div>
-                  <div>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
-                    </p>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
-                    </p>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
-                    </p>
-                    <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
-                      <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
-                    </p>
-
-                  </div>
-                </div>
-
-
-              </>
-            )}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
-             <b>Close</b> Close
-            </Button>
-          </DialogActions>
-        </Dialog>
-        <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
-          <DialogContent>
-            {registrations.map((registration) => (
-              registration.Empid == empId && (
                 <div>
-                  {registration.Image && (
-                    <img
-                      src={registration.Image}
-                      alt="Profile Preview"
-                      style={{
-                        maxWidth: '100%',
-                        maxHeight: '100%',
-                      }}
-                    />
-                  )}
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Practice:</span> {userData.Practies}
+                  </p>
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting Manager:</span> {userData.Reportingmanager}
+                  </p>
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Reporting HR:</span> {userData.Reportinghr}
+                  </p>
+                  <p style={{ fontSize: '18px', fontFamily: 'sans-serif', fontStyle: 'initial' }}>
+                    <span style={{ fontWeight: 'bold', color: 'Black' }}>Location:</span> {userData.Location}
+                  </p>
+
                 </div>
-              )
-            ))}
-          </DialogContent>
-        </Dialog>
-      </div>
+              </div>
+
+
+            </>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseProfileCard} style={{ backgroundColor: "#00aaee", color: "white ", marginBottom: '15px', marginRight: '15px' }}>
+            <b>Close</b> Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog open={showImagePreview} onClose={handleToggleImagePreview}>
+        <DialogContent>
+          {registrations.map((registration) => (
+            registration.Empid == empId && (
+              <div>
+                {registration.Image && (
+                  <img
+                    src={registration.Image}
+                    alt="Profile Preview"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: '100%',
+                    }}
+                  />
+                )}
+              </div>
+            )
+          ))}
+        </DialogContent>
+      </Dialog>
+
     </>
   );
 };

@@ -33,6 +33,7 @@ const ManagerPortal = () => {
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showImagePreview, setShowImagePreview] = useState(false);
   const [loading, setLoading] = useState(true);
+  
 
 
   const handleOpenUserMenu = (event) => {
@@ -192,12 +193,15 @@ const ManagerPortal = () => {
     navigate('/')
   }
 
+
+
+
   return (
     <>
 
       <AppBar position="fixed">
         <Toolbar className="navBar-style">
-          <img className='images' style={{cursor:'pointer'}} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
+          <img className='images' style={{ cursor: 'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
           <div className="userInfo">
             <Typography variant="h6" className="welcome-text">
               Hey, Welcome
@@ -248,7 +252,7 @@ const ManagerPortal = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
-              style={{maxWidth: '300px', marginTop:'50px', marginLeft:'-15px' }}
+              style={{ maxWidth: '300px', marginTop: '50px', marginLeft: '-15px' }}
             >
 
               <MenuItem key="Profile" onClick={handleOpenProfileCard}>
@@ -272,12 +276,11 @@ const ManagerPortal = () => {
         </Toolbar>
 
       </AppBar>
-      <div className='bg-container'>
-        <ListItemIcon style={{ marginLeft: '10vw', marginTop: '90px', cursor:'pointer' }} onClick={goBack}>
+      
+        <ListItemIcon style={{ marginLeft: '10vw', marginTop: '90px', cursor: 'pointer' }} onClick={goBack}>
           <ArrowBackIcon />&nbsp; <span><b>Go Back</b></span>
         </ListItemIcon>
 
-        <div style={{ width: '80%', margin: '0 auto' }}>
           {loading ? (
             <div className="loading-container" style={{
               position: "absolute",
@@ -290,48 +293,48 @@ const ManagerPortal = () => {
               <div className="loading-spinner"></div>
             </div>
           ) : (
-            <TableContainer component={Paper} style={{ marginTop: '20px' }}>
+            <TableContainer component={Paper} style={{ marginTop: '20px', width: '80%',marginLeft: '10vw', maxHeight:'80vh' }} >
               {employeesData.some((employee) => reportingManagers[employee.Empid] === username) ? (
                 <Table>
-                  <TableHead >
+                  <TableHead>
                     <TableRow style={{ backgroundColor: '#d0e6f5' }}>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#222', textAlign: 'center' }}>Employee ID</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Employee Name</TableCell>
-                      <TableCell style={{ fontWeight: 'bold', fontSize: '16px', color: '#333', textAlign: 'center' }}>Action</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '18px', color: '#222', textAlign: 'center' }}>Employee ID</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '18px', color: '#333', textAlign: 'center' }}>Employee Name</TableCell>
+                      <TableCell style={{ fontWeight: 'bold', fontSize: '18px', color: '#333', textAlign: 'center' }}>Action</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody style={{ marginLeft: '40%' }}>
-                    {employeeData.map((employee) => {
+                    {employeeData.map((employee, index) => {
                       const empReportingManager = reportingManagers[employee.Empid] || "";
-                      console.log(empReportingManager, 'empReportingManager');
-                      console.log(username, 'username');
-                      console.log(employeeData, 'employeeData');
-                      console.log(employee, '316')
+
                       if (empReportingManager === username) {
+                        const isEvenRow = index % 2 === 0;
+                        const rowStyle = {
+                          fontWeight: 'bold',
+                          color: '#333',
+                          paddingLeft: '10%',
+                          backgroundColor: isEvenRow ? '#f5f5f5' : 'white', // Set background color for alternate rows
+                        };
+
                         return (
-                          <TableRow key={employee.Empid} style={{ fontWeight: 'bold', color: '#333', paddingLeft: '10%' }}>
+                          <TableRow key={employee.Empid} style={rowStyle}>
                             <TableCell style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>{employee.Empid}</TableCell>
 
                             {employeesData.map((employees) => {
-                              // Find the corresponding employee data based on EmpId
-                              console.log(employees, '318');
-                              console.log(employee.Empid, '319');
                               if (employees.Empid === employee.Empid) {
                                 return (
-
-                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', textAlign: 'center' }}>
+                                  <TableCell key={employee.EmployeeID} style={{ fontSize: '16px', color: '#333', textAlign: 'center',  }}>
                                     {employees.Empname}
                                   </TableCell>
-
                                 );
                               }
                             })}
-                            <TableCell style={{ color: '#333', textAlign: 'center', }}>
+                            <TableCell style={{ color: '#333', textAlign: 'center' }}>
                               {employee.Status === 'Decline' && (
-
                                 <Button
                                   variant="contained"
-                                  style={{ backgroundColor: '#d12a2a', width: "35%", height: '50px', fontWeight: 'bold' }}>
+                                  style={{ backgroundColor: '#eb4b4b', width: '30%', height: '50px', fontWeight: 'bold' }}
+                                >
                                   Declined
                                 </Button>
                               )}
@@ -342,16 +345,13 @@ const ManagerPortal = () => {
                                     color="primary"
                                     component={Link}
                                     to={`/mcomments/${employee.Empid}`}
-                                    style={{  backgroundColor: '#00aaee', width: "35%", height: '50px' }}
+                                    style={{ backgroundColor: '#32b0e3', width: '30%', height: '50px' }}
                                     onClick={() => {
-                                      // Store the Empid in local storage
                                       localStorage.setItem('EmployeeId', employee.Empid);
                                     }}
                                   >
                                     <b>View Details</b>
                                   </Button>
-                                  
-
                                 </div>
                               )}
                             </TableCell>
@@ -363,6 +363,7 @@ const ManagerPortal = () => {
                     })}
                   </TableBody>
                 </Table>
+
               ) : (
                 <Typography
                   variant="h6"
@@ -381,7 +382,7 @@ const ManagerPortal = () => {
 
 
 
-        </div>
+       
         <Dialog
           open={isProfileCardOpen}
           onClose={handleCloseProfileCard}
@@ -478,7 +479,7 @@ const ManagerPortal = () => {
             ))}
           </DialogContent>
         </Dialog>
-      </div>
+    
     </>
   );
 };
