@@ -1,28 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
-import EmployeePortal from './EmployeePortal'
-import ManagerPortal from './ManagerPortal'
-import ReviewTable from './ReviewTable';
-import HrPortal from './HrPortal'
-import HrView from './HrView';
+
 import Main from './Main';
-import EmployeeView from './EmployeeView';
-import EmployeegetData from './EmloyeegetData'
-import HrReviewTable from './HrReviewTable';
-import Practice from './Practice'
-import Performance from './Performance';
-import DataTable from './DataTable';
-import Question from './Question'
-import Pdquestion from './Pdquestion'
-import Boquestion from './Boquestion'
-import Dpquestions from './Dpquestions'
-import Maquestions from './Maquestions'
 
-
-import NavigationComponent from './NavigationComponent';
-import TabComponent from './TabComponent'
-import SubTabs from './SubTabs';
 import Mform from './Mform';
 import Eform from './Eform';
 import Mview from './Mview';
@@ -31,7 +12,6 @@ import Eview from './Eview';
 import Mget from './Mget';
 import Medataview from './Medataview';
 import Eget from './Eget';
-import Mratings from './Mratings';
 import ManagerCommentsPost from './ManagerCommentsPost';
 import AdminloginForm from './AdminloginForm';
 import AdminView from './AdminView';
@@ -124,32 +104,6 @@ function App() {
          
          
 
-         
-          <Route path="/employee" element={<EmployeePortal />} />
-          <Route path="/manager" element={<ManagerPortal />} />
-          <Route path="/review/:empid" element={<ReviewTable />} />
-          <Route path="/hr/:empId" element={<HrPortal />} />
-          <Route path="/hrview" element={<HrView />} />
-          <Route path="/employeeview" element={<EmployeeView />} />
-          <Route path="/empget" element={<EmployeegetData />} />
-          <Route path="/hrreview/:empid" element={<HrReviewTable />} />
-          <Route path="/practice" element={<Practice />} />
-          <Route path="/performance" element={<Performance />} />
-          <Route path="/datatable" element={<DataTable />} />
-          <Route path="/question" element={<Question />} />
-          <Route path="/pdquestion" element={<Pdquestion />} />
-          <Route path="/boquestion" element={<Boquestion />} />
-          <Route path="/dpquestion" element={<Dpquestions />} />
-          <Route path="/maquestion" element={<Maquestions />} />
-          <Route path="/navigation" element={<NavigationComponent />} />
-          <Route path="/tab" element={<TabComponent />} />
-          <Route path="/sub" element={<SubTabs />} />
-          <Route path="/mrating" element={<Mratings />} />
-          
-          
-             {/* needs to adjust the sidebar and buttons */}
-
-         
     
         </Routes>
       </Router>

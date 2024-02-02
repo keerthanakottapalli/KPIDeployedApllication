@@ -206,10 +206,6 @@ const LoginForm = () => {
 
           <p style={{ color: 'white' }} className="registering">
             Don't have an account please{' '}
-       
-        
-             
-             
 
               <Link  style={{ color: 'white', cursor: 'pointer' }} to="/register"  onClick={handleRegisterClick}>  REGISTER!</Link>
        

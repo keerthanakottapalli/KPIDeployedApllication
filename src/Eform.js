@@ -1194,7 +1194,7 @@ const TabsView = () => {
         <>
             <AppBar position="fixed">
                 <Toolbar className="navigation-header">
-                    <img style={{ width: '60px', borderRadius: '50%' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
+                    <img style={{ width: '60px', borderRadius: '50%', cursor:'pointer' }} onClick={mainpage} src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ53srYmkaJxsUelVmnAHahYnnqjJ_dT-TiUA&usqp=CAU' alt='not found' />
 
                     <div className="userInfo">
                         <Typography variant="h6" className="welcome-text">
